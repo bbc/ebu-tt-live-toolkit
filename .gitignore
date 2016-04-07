@@ -96,3 +96,6 @@ ENV/
 *.iml
 out
 gen
+
+Oxygen XML project files
+*.xpr

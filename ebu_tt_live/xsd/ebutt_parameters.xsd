@@ -5,5 +5,25 @@
     targetNamespace="urn:ebu:tt:parameters">
     <xs:import namespace="http://www.w3.org/ns/ttml#parameter" schemaLocation="parameter.xsd"/>
     
+    <xs:attribute name="sequenceIdentifier">
+        <xs:annotation>
+            <xs:documentation>Every document with the same ebuttp:sequenceIdentifier
+                shall be uniquely numbered using the ebuttp:sequenceNumber attribute.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:minLength value="1"></xs:minLength>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
     
+    <xs:attribute name="sequenceNumber">
+        <xs:annotation>
+            <xs:documentation>Every document with the same ebuttp:sequenceIdentifier
+                shall be uniquely numbered using the ebuttp:sequenceNumber attribute.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger"/>
+        </xs:simpleType>
+    </xs:attribute>
 </xs:schema>

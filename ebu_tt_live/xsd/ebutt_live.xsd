@@ -38,6 +38,8 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		<xs:attribute ref="ttp:dropMode"/>
 		<xs:attribute ref="ttp:clockMode"/>
 		<xs:attribute ref="ttp:cellResolution"/>
+		<xs:attribute ref="ebuttp:sequenceIdentifier" use="required"/>
+		<xs:attribute ref="ebuttp:sequenceNumber" use="required"/>
 		<xs:attribute ref="tts:extent">
 			<xs:annotation>
 				<xs:documentation>Defines the width and height of the active video the subtitles

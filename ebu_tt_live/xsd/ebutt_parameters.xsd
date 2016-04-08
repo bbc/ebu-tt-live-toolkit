@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:ttp="http://www.w3.org/ns/ttml#parameter" 
+    elementFormDefault="qualified"
+    targetNamespace="urn:ebu:tt:parameters">
+    <xs:import namespace="http://www.w3.org/ns/ttml#parameter" schemaLocation="parameter.xsd"/>
+    
+    
+</xs:schema>

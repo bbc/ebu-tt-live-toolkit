@@ -8,12 +8,11 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 	xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebuttdt="urn:ebu:tt:datatypes"
 	targetNamespace="urn:ebu:tt:metadata" elementFormDefault="qualified">
 	<xs:import namespace="urn:ebu:tt:datatypes" schemaLocation="ebutt_datatypes.xsd"/>
-	<xs:element name="binaryData">
+	<xs:complexType name="binaryData">
 		<xs:annotation>
 			<xs:documentation>Binary data of the input formats or associated documents used to
 				generate an EBU-TT document.</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
 					<xs:attribute name="textEncoding" use="required">
@@ -54,14 +53,13 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					</xs:attribute>
 				</xs:extension>
 			</xs:simpleContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="documentMetadata">
+		
+	</xs:complexType>
+	<xs:complexType name="documentMetadata">
 		<xs:annotation>
 			<xs:documentation>EBU-TT specific metadata that applies to the whole EBU-TT
 				document.</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="conformsToStandard" type="xs:anyURI" minOccurs="0"
 					maxOccurs="unbounded">
@@ -406,10 +404,9 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="authoringTechnique">
-		<xs:complexType>
+		
+	</xs:complexType>
+	<xs:complexType name="authoringTechnique">
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
 					<xs:attribute name="link" type="xs:anyURI">
@@ -420,10 +417,9 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					</xs:attribute>
 				</xs:extension>
 			</xs:simpleContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="fontFace">
-		<xs:complexType>
+		
+	</xs:complexType>
+	<xs:complexType name="fontFace">
 			<xs:sequence>
 				<xs:element name="fontFaceSource" maxOccurs="unbounded">
 					<xs:complexType>
@@ -432,6 +428,6 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 				</xs:element>
 			</xs:sequence>
 			<xs:attribute name="fontFamilyName"/>
-		</xs:complexType>
-	</xs:element>
+		
+	</xs:complexType>
 </xs:schema>

@@ -7,7 +7,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tt="http://www.w3.org/ns/ttml"
 	xmlns:ebuttdt="urn:ebu:tt:datatypes" xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
 	xmlns:tts="http://www.w3.org/ns/ttml#styling" xmlns:ttm="http://www.w3.org/ns/ttml#metadata"
-	xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebutts="urn:ebu:tt:style"
+	xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebutts="urn:ebu:tt:style" xmlns:ebuttp="urn:ebu:tt:parameters"
 	targetNamespace="http://www.w3.org/ns/ttml">
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
 	<xs:import namespace="http://www.w3.org/ns/ttml#styling" schemaLocation="styling.xsd"/>
@@ -15,6 +15,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 	<xs:import namespace="urn:ebu:tt:metadata" schemaLocation="ebutt_metadata.xsd"/>
 	<xs:import namespace="urn:ebu:tt:style" schemaLocation="ebutt_styling.xsd"/>
 	<xs:import namespace="urn:ebu:tt:datatypes" schemaLocation="ebutt_datatypes.xsd"/>
+	<xs:import namespace="urn:ebu:tt:parameters" schemaLocation="ebutt_parameters.xsd"/>
 	<xs:import namespace="http://www.w3.org/ns/ttml#metadata" schemaLocation="metadata.xsd"/>
 	<xs:complexType name="Tt">
 		<xs:annotation>

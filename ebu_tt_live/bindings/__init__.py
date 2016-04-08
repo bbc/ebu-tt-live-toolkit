@@ -1,7 +1,7 @@
-# ./ebu_tt_live/bindings/binding.py
+# ./ebu_tt_live/bindings/__init__.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e3bbecc10c61338063ee2c070f5c7ba59a7cf71e
-# Generated 2016-04-07 17:03:00.125044 by PyXB version 1.2.4 using Python 2.7.9.final.0
+# Generated 2016-04-08 12:13:18.851907 by PyXB version 1.2.4 using Python 2.7.9.final.0
 # Namespace http://www.w3.org/ns/ttml
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:335fe6ae-fcda-11e5-890b-6c40089ad95e')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:e5be8dbd-fd7a-11e5-adc0-6c40089ad95e')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -25,12 +25,12 @@ if pyxb.__version__ != _PyXBVersion:
 
 # Import bindings for namespaces imported into schema
 import _ebuttdt as _ImportedBinding__ebuttdt
+import pyxb.binding.xml_
 import _ttp as _ImportedBinding__ttp
 import _tts as _ImportedBinding__tts
 import pyxb.binding.datatypes
 import _ebutts as _ImportedBinding__ebutts
 import _ttm as _ImportedBinding__ttm
-import pyxb.binding.xml_
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://www.w3.org/ns/ttml', create_if_missing=True)
@@ -841,20 +841,20 @@ class P (pyxb.binding.basis.complexTypeDefinition):
     span = property(__span.value, __span.set, None, None)
 
     
-    # Attribute {http://www.w3.org/XML/1998/namespace}lang uses Python identifier lang
-    __lang = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'lang'), 'lang', '__httpwww_w3_orgnsttml_P_httpwww_w3_orgXML1998namespacelang', pyxb.binding.xml_.STD_ANON_lang)
-    __lang._DeclarationLocation = None
-    __lang._UseLocation = pyxb.utils.utility.Location('/Users/kozmaz01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_live.xsd', 250, 2)
-    
-    lang = property(__lang.value, __lang.set, None, None)
-
-    
     # Attribute {http://www.w3.org/XML/1998/namespace}space uses Python identifier space
     __space = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'space'), 'space', '__httpwww_w3_orgnsttml_P_httpwww_w3_orgXML1998namespacespace', pyxb.binding.xml_.STD_ANON_space)
     __space._DeclarationLocation = None
     __space._UseLocation = pyxb.utils.utility.Location('/Users/kozmaz01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_live.xsd', 244, 2)
     
     space = property(__space.value, __space.set, None, None)
+
+    
+    # Attribute {http://www.w3.org/XML/1998/namespace}lang uses Python identifier lang
+    __lang = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'lang'), 'lang', '__httpwww_w3_orgnsttml_P_httpwww_w3_orgXML1998namespacelang', pyxb.binding.xml_.STD_ANON_lang)
+    __lang._DeclarationLocation = None
+    __lang._UseLocation = pyxb.utils.utility.Location('/Users/kozmaz01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_live.xsd', 250, 2)
+    
+    lang = property(__lang.value, __lang.set, None, None)
 
     
     # Attribute {http://www.w3.org/XML/1998/namespace}id uses Python identifier id
@@ -918,8 +918,8 @@ class P (pyxb.binding.basis.complexTypeDefinition):
         __span.name() : __span
     })
     _AttributeMap.update({
-        __lang.name() : __lang,
         __space.name() : __space,
+        __lang.name() : __lang,
         __id.name() : __id,
         __region.name() : __region,
         __style.name() : __style,
@@ -965,14 +965,6 @@ class Span (pyxb.binding.basis.complexTypeDefinition):
     span = property(__span.value, __span.set, None, None)
 
     
-    # Attribute {http://www.w3.org/XML/1998/namespace}lang uses Python identifier lang
-    __lang = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'lang'), 'lang', '__httpwww_w3_orgnsttml_Span_httpwww_w3_orgXML1998namespacelang', pyxb.binding.xml_.STD_ANON_lang)
-    __lang._DeclarationLocation = None
-    __lang._UseLocation = pyxb.utils.utility.Location('/Users/kozmaz01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_live.xsd', 301, 2)
-    
-    lang = property(__lang.value, __lang.set, None, None)
-
-    
     # Attribute {http://www.w3.org/XML/1998/namespace}id uses Python identifier id
     __id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'id'), 'id', '__httpwww_w3_orgnsttml_Span_httpwww_w3_orgXML1998namespaceid', pyxb.binding.datatypes.ID)
     __id._DeclarationLocation = None
@@ -987,6 +979,14 @@ class Span (pyxb.binding.basis.complexTypeDefinition):
     __space._UseLocation = pyxb.utils.utility.Location('/Users/kozmaz01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_live.xsd', 295, 2)
     
     space = property(__space.value, __space.set, None, None)
+
+    
+    # Attribute {http://www.w3.org/XML/1998/namespace}lang uses Python identifier lang
+    __lang = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'lang'), 'lang', '__httpwww_w3_orgnsttml_Span_httpwww_w3_orgXML1998namespacelang', pyxb.binding.xml_.STD_ANON_lang)
+    __lang._DeclarationLocation = None
+    __lang._UseLocation = pyxb.utils.utility.Location('/Users/kozmaz01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_live.xsd', 301, 2)
+    
+    lang = property(__lang.value, __lang.set, None, None)
 
     
     # Attribute style uses Python identifier style
@@ -1034,9 +1034,9 @@ class Span (pyxb.binding.basis.complexTypeDefinition):
         __span.name() : __span
     })
     _AttributeMap.update({
-        __lang.name() : __lang,
         __id.name() : __id,
         __space.name() : __space,
+        __lang.name() : __lang,
         __style.name() : __style,
         __begin.name() : __begin,
         __end.name() : __end,

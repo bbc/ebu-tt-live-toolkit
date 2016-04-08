@@ -1,7 +1,7 @@
 # ./ebu_tt_live/bindings/_tts.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:a2d910a114a33d4de15f8fc406e6fadc3e499c20
-# Generated 2016-04-07 17:03:00.124290 by PyXB version 1.2.4 using Python 2.7.9.final.0
+# Generated 2016-04-08 12:13:18.851612 by PyXB version 1.2.4 using Python 2.7.9.final.0
 # Namespace http://www.w3.org/ns/ttml#styling [xmlns:tts]
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:335fe6ae-fcda-11e5-890b-6c40089ad95e')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:e5be8dbd-fd7a-11e5-adc0-6c40089ad95e')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'

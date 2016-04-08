@@ -22,7 +22,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="head" type="tt:Head"/>
-			<xs:element name="body" type="tt:Body"/>
+			<xs:element name="body" type="tt:Body" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute ref="xml:space">
 			<xs:annotation>
@@ -64,8 +64,8 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 						whole document.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="styling" type="tt:Styling"/>
-			<xs:element name="layout" type="tt:Layout"/>
+			<xs:element name="styling" type="tt:Styling" minOccurs="0"/>
+			<xs:element name="layout" type="tt:Layout" minOccurs="0"/>
 		</xs:sequence>
 
 	</xs:complexType>
@@ -188,6 +188,18 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		</xs:sequence>
 		<xs:attribute ref="ttm:agent"/>
 		<xs:attribute ref="ttm:role"/>
+		<xs:attribute name="begin" type="ebuttdt:timingType">
+			<xs:annotation>
+				<xs:documentation>Start point of a temporal interval associated with a tt:body
+					element.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="end" type="ebuttdt:timingType">
+			<xs:annotation>
+				<xs:documentation>End point of a temporal interval associated with a tt:body
+					element.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 
 	</xs:complexType>
 
@@ -222,6 +234,18 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		</xs:attribute>
 		<xs:attribute ref="ttm:agent"/>
 		<xs:attribute ref="ttm:role"/>
+		<xs:attribute name="begin" type="ebuttdt:timingType">
+			<xs:annotation>
+				<xs:documentation>Start point of a temporal interval associated with a tt:div
+					element.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="end" type="ebuttdt:timingType">
+			<xs:annotation>
+				<xs:documentation>End point of a temporal interval associated with a tt:div
+					element.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 
 	</xs:complexType>
 
@@ -265,13 +289,13 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					be applied to the enclosed content of the tt:p element.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="begin" type="ebuttdt:timingType" use="required">
+		<xs:attribute name="begin" type="ebuttdt:timingType">
 			<xs:annotation>
 				<xs:documentation>Start point of a temporal interval associated with a tt:p
 					element.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="end" type="ebuttdt:timingType" use="required">
+		<xs:attribute name="end" type="ebuttdt:timingType">
 			<xs:annotation>
 				<xs:documentation>End point of a temporal interval associated with a tt:p
 					element.</xs:documentation>

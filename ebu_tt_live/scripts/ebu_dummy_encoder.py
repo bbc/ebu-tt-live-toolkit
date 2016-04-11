@@ -10,13 +10,9 @@ def main():
     create_loggers()
     log.info('Dummy XML Encoder')
 
-    region = bindings.Region(
-        id='ID003',
-        origin='0px 0px',
-        extent='1px 1px'
-    )
-
     tt = bindings.tt(
+        sequenceIdentifier='testSequence001',
+        sequenceNumber='1',
         timeBase='smpte',
         lang='en-GB',
         head=bindings.Head(
@@ -26,16 +22,21 @@ def main():
                     id='ID001'
                 )
             ),
-            bindings.Layout(
-                region
-            )
+            bindings.Layout()
         ),
         body=BIND(
             bindings.Div(
                 bindings.P(
+                    bindings.Span(
+                        'Some example text...'
+                    ),
+                    bindings.Br(),
+                    bindings.Span(
+                        'And another line'
+                    ),
                     id='ID005',
-                    begin='00:00:00:00',
-                    end='00:00:00:00'
+                    begin='00:00:00:50',
+                    end='00:00:03:24',
                 )
             )
         )
@@ -46,3 +47,4 @@ def main():
             indent='  '
         )
     )
+    log.info('XML output printed')

@@ -26,4 +26,31 @@
             <xs:restriction base="xs:positiveInteger"/>
         </xs:simpleType>
     </xs:attribute>
+    
+    <xs:attribute name="authorsGroupIdentifier" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>
+                Identifies the group of authors whose sequences relate to the same content and amongst which a Handover Manager
+                should select documents when generating its output sequence.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+    
+    <xs:attribute name="authorsGroupControlToken" type="xs:positiveInteger">
+        <xs:annotation>
+            <xs:documentation>
+                The control token used to direct a Handover Manager to select an input sequence from a particular authors group.
+                The input sequence whose document has the greatest ebuttp:authorsGroupControlToken value is selected for output.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+    
+    <xs:attribute name="referenceClockIdentifier" type="xs:anyURI">
+        <xs:annotation>
+            <xs:documentation>
+                Allows the reference clock source to be identified. Permitted only when ttp:timebase="clock" AND ttp:clockMode="local"
+                OR when ttp:timeBase="smpte".
+            </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
 </xs:schema>

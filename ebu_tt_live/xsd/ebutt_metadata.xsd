@@ -55,7 +55,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			</xs:simpleContent>
 		
 	</xs:complexType>
-	<xs:complexType name="documentMetadata">
+	<xs:complexType name="DocumentMetadata">
 		<xs:annotation>
 			<xs:documentation>EBU-TT specific metadata that applies to the whole EBU-TT
 				document.</xs:documentation>
@@ -108,8 +108,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 							authored for, in width by height.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="documentTargetActiveFormatDescriptor" type="xs:string"
-					minOccurs="0">
+				<xs:element name="documentTargetActiveFormatDescriptor" type="xs:string" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>The code for the Active Format Descriptor (AFD) that
 							specifies the active image in the active video (see “Definitions of
@@ -246,7 +245,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 						<xs:attribute name="type" type="xs:string"/>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="appliedProcessing">
+				<xs:element name="appliedProcessing" minOccurs="0">
 					<xs:complexType mixed="true">
 						<xs:sequence>
 							<xs:any namespace="##other" processContents="lax" minOccurs="0"
@@ -329,15 +328,13 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 							specify a particular version of the subtitle list. </xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="documentTotalNumberOfSubtitles" type="xs:nonNegativeInteger"
-					minOccurs="0">
+				<xs:element name="documentTotalNumberOfSubtitles" type="xs:nonNegativeInteger" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>The number of subtitles. STL mapping: Total Number of
 							Subtitles (TNS).</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="documentMaximumNumberOfDisplayableCharacterInAnyRow"
-					type="xs:nonNegativeInteger" minOccurs="0">
+				<xs:element name="documentMaximumNumberOfDisplayableCharacterInAnyRow" type="xs:nonNegativeInteger" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>Maximum number of displayable rows per television frame
 							which could be occupied at any one time by the subtitles defined in the
@@ -345,8 +342,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 							text row (MNC). </xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="documentStartOfProgramme" type="ebuttdt:smpteTimingType"
-					minOccurs="0">
+				<xs:element name="documentStartOfProgramme" type="ebuttdt:smpteTimingType" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>The time code of the first frame of the recorded video
 							signal which is intended for transmission. Note: When the referenced
@@ -403,6 +399,38 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 						<xs:documentation/>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="originalSourceServiceIdentifier" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+							The ebuttm:originalSourceServiceIdentifier may be used to identify the stream of
+							audio-visual content that was used as the source for authoring the document.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="intendedDestinationServiceIdentifier" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+							The ebuttm:intendedDestinationServiceIdentifier may be used to identify the streams of destination audio-visual
+							content for which the document is intended to apply.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="documentFacet" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>
+							The documentFacet element indicates a document level summary of a facet that applies to the document's content 
+							as defined by the facet element. The value may be the name of a term in a classification scheme, 
+							whose term should be identified by the link attribute. Each distinctly identified facet that is summarised 
+							shall have a separate documentFacet element. Empty documentFacet elements should have a link attribute.
+							Documents shall NOT contain more than one documentFacet element referring to the same term,
+							where the term is identified by the combination of the element contents and the value of the link attribute.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:unique name="unique-documentFacet">
+						<xs:selector xpath="documentFacet"></xs:selector>
+						<xs:field xpath="*"></xs:field>
+					</xs:unique>
+				</xs:element>
 			</xs:sequence>
 		
 	</xs:complexType>
@@ -430,4 +458,22 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			<xs:attribute name="fontFamilyName"/>
 		
 	</xs:complexType>
+	<xs:attribute name="authoringDelay" type="ebuttdt:delayTimingType">
+		<xs:annotation>
+			<xs:documentation>
+				The authoring delay associated with the timed content within this document may be indicated using the ebuttm:authoringDelay attribute. 
+				NOTE: This delay may be estimated or measured, and is intended to represent the duration between when the subitle authoring tool
+				received the instantaneous media for which subtitles were authored and the moment that the authoring tool emitted those subtitles.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	
+	<xs:attribute name="authorsGroupControlRequest" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>
+				Allows an author to signal their intent to continue providing a stream, or to request that another author begins creating
+				output with a higher ebuttp:authorsGroupControlToken value.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
 </xs:schema>

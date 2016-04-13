@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 <!-- Copyright 2012, EBU, www.ebu.ch -->
 <!-- Version of XML Schema: 1.x -->
 <!-- Creation: Current draft for EBU-TT Part 3 Update -->
@@ -7,8 +7,9 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tt="http://www.w3.org/ns/ttml"
 	xmlns:ebuttdt="urn:ebu:tt:datatypes" xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
 	xmlns:tts="http://www.w3.org/ns/ttml#styling" xmlns:ttm="http://www.w3.org/ns/ttml#metadata"
-	xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebutts="urn:ebu:tt:style" xmlns:ebuttp="urn:ebu:tt:parameters"
-	targetNamespace="http://www.w3.org/ns/ttml">
+	xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebutts="urn:ebu:tt:style"
+	xmlns:ebuttp="urn:ebu:tt:parameters" targetNamespace="http://www.w3.org/ns/ttml"
+	xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
 	<xs:import namespace="http://www.w3.org/ns/ttml#styling" schemaLocation="styling.xsd"/>
 	<xs:import namespace="http://www.w3.org/ns/ttml#parameter" schemaLocation="parameter.xsd"/>
@@ -40,6 +41,11 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		<xs:attribute ref="ttp:cellResolution"/>
 		<xs:attribute ref="ebuttp:sequenceIdentifier" use="required"/>
 		<xs:attribute ref="ebuttp:sequenceNumber" use="required"/>
+		<xs:attribute ref="ebuttm:authoringDelay" use="optional"/>
+		<xs:attribute ref="ebuttp:authorsGroupIdentifier" use="optional"/>
+		<xs:attribute ref="ebuttp:authorsGroupControlToken" use="optional"/>
+		<xs:attribute ref="ebuttm:authorsGroupControlRequest" use="optional"/>
+		<xs:attribute ref="ebuttp:referenceClockIdentifier" use="optional"/>
 		<xs:attribute ref="tts:extent">
 			<xs:annotation>
 				<xs:documentation>Defines the width and height of the active video the subtitles
@@ -53,6 +59,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					mapping: Language Code (LC))</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:assert test="@*[local-name() = 'timeBase'] = 'smpte' and exists(@*[local-name() = 'referenceClockIdentifier']) or @*[local-name() = 'timeBase'] = 'clock' and @*[local-name() = 'clockMode'] = 'local' and exists(@*[local-name() = 'referenceClockIdentifier']) or not(exists(@*[local-name() = 'referenceClockIdentifier']))"/>
 
 	</xs:complexType>
 	<xs:complexType name="Head">
@@ -61,7 +68,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 				referenced by the subtitle blocks in the body.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata">
+			<xs:element name="metadata" type="tt:HeadMetadata">
 				<xs:annotation>
 					<xs:documentation>Generic container for metadata information that applies to the
 						whole document.</xs:documentation>
@@ -71,6 +78,12 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			<xs:element name="layout" type="tt:Layout" minOccurs="0"/>
 		</xs:sequence>
 
+	</xs:complexType>
+	
+	<xs:complexType name="HeadMetadata">
+		<xs:sequence>
+			<xs:element name="documentMetadata" type="ebuttm:documentMetadata" minOccurs="0"/>
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Metadata">
 		<xs:annotation>

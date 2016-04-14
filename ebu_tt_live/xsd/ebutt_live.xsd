@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2012, EBU, www.ebu.ch -->
 <!-- Version of XML Schema: 1.x -->
 <!-- Creation: Current draft for EBU-TT Part 3 Update -->
@@ -82,7 +82,12 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 	
 	<xs:complexType name="HeadMetadata">
 		<xs:sequence>
-			<xs:element name="documentMetadata" type="ebuttm:documentMetadata" minOccurs="0"/>
+			<xs:element name="documentMetadata" type="ebuttm:DocumentMetadata" minOccurs="0">
+				<xs:unique name="unique-documentFacet">
+					<xs:selector xpath="ebuttm:documentFacet"></xs:selector>
+					<xs:field xpath="."></xs:field>
+				</xs:unique>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Metadata">

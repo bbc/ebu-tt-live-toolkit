@@ -427,14 +427,13 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 							where the term is identified by the combination of the element contents and the value of the link attribute.
 						</xs:documentation>
 					</xs:annotation>
-					<xs:unique name="unique-documentFacet">
-						<xs:selector xpath="documentFacet"></xs:selector>
-						<xs:field xpath="*"></xs:field>
-					</xs:unique>
+						
 				</xs:element>
+				
 			</xs:sequence>
 		
 	</xs:complexType>
+	
 	<xs:complexType name="authoringTechnique">
 			<xs:simpleContent>
 				<xs:extension base="xs:string">

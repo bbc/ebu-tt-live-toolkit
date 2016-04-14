@@ -59,7 +59,9 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					mapping: Language Code (LC))</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:assert test="@*[local-name() = 'timeBase'] = 'smpte' and exists(@*[local-name() = 'referenceClockIdentifier']) or @*[local-name() = 'timeBase'] = 'clock' and @*[local-name() = 'clockMode'] = 'local' and exists(@*[local-name() = 'referenceClockIdentifier']) or not(exists(@*[local-name() = 'referenceClockIdentifier']))"/>
+		<xs:assert test=".[@ttp:timeBase = 'smpte' and exists(.[@ebuttp:referenceClockIdentifier])]
+			or (.[@ttp:timeBase = 'clock' and @ttp:clockMode = 'local' and exists(@ebuttp:referenceClockIdentifier)])
+			or not(exists(@ebuttp:referenceClockIdentifier))"/>
 
 	</xs:complexType>
 	<xs:complexType name="Head">

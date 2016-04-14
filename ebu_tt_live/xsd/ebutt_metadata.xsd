@@ -55,7 +55,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			</xs:simpleContent>
 		
 	</xs:complexType>
-	<xs:complexType name="DocumentMetadata">
+	<xs:complexType name="documentMetadata">
 		<xs:annotation>
 			<xs:documentation>EBU-TT specific metadata that applies to the whole EBU-TT
 				document.</xs:documentation>
@@ -416,14 +416,14 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 						</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="documentFacet" type="ebuttm:DocumentFacet" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element name="trace" type="ebuttm:Trace" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="documentFacet" type="ebuttm:documentFacet" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="trace" type="ebuttm:trace" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		
 		
 	</xs:complexType>
 	
-	<xs:complexType name="DocumentFacet">
+	<xs:complexType name="documentFacet">
 		<xs:annotation>
 			<xs:documentation>
 				The documentFacet element indicates a document level summary of a facet that applies to the document's content 
@@ -453,7 +453,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		
 	</xs:complexType>
 	
-	<xs:complexType name="Trace">
+	<xs:complexType name="trace">
 		<xs:annotation>
 			<xs:documentation>
 				The trace element may be used to indicate processing that has been applied during the creation process of a document; 

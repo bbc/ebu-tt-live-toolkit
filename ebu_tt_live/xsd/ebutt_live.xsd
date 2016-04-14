@@ -18,13 +18,13 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 	<xs:import namespace="urn:ebu:tt:datatypes" schemaLocation="ebutt_datatypes.xsd"/>
 	<xs:import namespace="urn:ebu:tt:parameters" schemaLocation="ebutt_parameters.xsd"/>
 	<xs:import namespace="http://www.w3.org/ns/ttml#metadata" schemaLocation="metadata.xsd"/>
-	<xs:complexType name="Tt">
+	<xs:complexType name="tt">
 		<xs:annotation>
 			<xs:documentation>Root element of an EBU-TT XML document.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="head" type="tt:Head"/>
-			<xs:element name="body" type="tt:Body" minOccurs="0"/>
+			<xs:element name="body" type="tt:body" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute ref="xml:space">
 			<xs:annotation>
@@ -70,21 +70,21 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 				referenced by the subtitle blocks in the body.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:HeadMetadata">
+			<xs:element name="metadata" type="tt:headMetadata">
 				<xs:annotation>
 					<xs:documentation>Generic container for metadata information that applies to the
 						whole document.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="styling" type="tt:Styling" minOccurs="0"/>
-			<xs:element name="layout" type="tt:Layout" minOccurs="0"/>
+			<xs:element name="styling" type="tt:styling" minOccurs="0"/>
+			<xs:element name="layout" type="tt:layout" minOccurs="0"/>
 		</xs:sequence>
 
 	</xs:complexType>
 	
-	<xs:complexType name="HeadMetadata">
+	<xs:complexType name="headMetadata">
 		<xs:sequence>
-			<xs:element name="documentMetadata" type="ebuttm:DocumentMetadata" minOccurs="0">
+			<xs:element name="documentMetadata" type="ebuttm:documentMetadata" minOccurs="0">
 				<xs:unique name="unique-documentFacet">
 					<xs:selector xpath="ebuttm:documentFacet"></xs:selector>
 					<xs:field xpath="."></xs:field>
@@ -92,7 +92,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="Metadata">
+	<xs:complexType name="metadata">
 		<xs:annotation>
 			<xs:documentation>Container for metadata information.</xs:documentation>
 		</xs:annotation>
@@ -101,22 +101,22 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		</xs:sequence>
 
 	</xs:complexType>
-	<xs:complexType name="Styling">
+	<xs:complexType name="styling">
 		<xs:annotation>
 			<xs:documentation>Container for styling information.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0"/>
-			<xs:element name="style" type="tt:Style" maxOccurs="unbounded"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0"/>
+			<xs:element name="style" type="tt:style" maxOccurs="unbounded"/>
 		</xs:sequence>
 
 	</xs:complexType>
-	<xs:complexType name="Style">
+	<xs:complexType name="style">
 		<xs:annotation>
 			<xs:documentation>Set of style information.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute ref="xml:id" use="required">
 			<xs:annotation>
@@ -153,23 +153,23 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		<xs:attribute ref="ebutts:linePadding"/>
 
 	</xs:complexType>
-	<xs:complexType name="Layout">
+	<xs:complexType name="layout">
 		<xs:annotation>
 			<xs:documentation>Container element for layout information.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0"/>
-			<xs:element name="region" type="tt:Region" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0"/>
+			<xs:element name="region" type="tt:region" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 
 	</xs:complexType>
-	<xs:complexType name="Region">
+	<xs:complexType name="region">
 		<xs:annotation>
 			<xs:documentation>Defines a space or area for the display of subtitle
 				content.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute ref="xml:id" use="required">
 			<xs:annotation>
@@ -200,41 +200,48 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		<xs:attribute ref="tts:overflow"/>
 
 	</xs:complexType>
-	<xs:complexType name="Body">
+	<xs:complexType name="body">
 		<xs:annotation>
 			<xs:documentation>Container of the subtitle and the timing
 				information.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0"/>
-			<xs:element name="div" type="tt:Div" maxOccurs="unbounded"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0"/>
+			<xs:element name="div" type="tt:div" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute ref="ttm:agent"/>
 		<xs:attribute ref="ttm:role"/>
-		<xs:attribute name="begin" type="ebuttdt:timingType">
+		<xs:attribute name="begin" type="ebuttdt:timingType" use="optional">
 			<xs:annotation>
 				<xs:documentation>Start point of a temporal interval associated with a tt:body
 					element.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="end" type="ebuttdt:timingType">
+		<xs:attribute name="end" type="ebuttdt:timingType" use="optional">
 			<xs:annotation>
 				<xs:documentation>End point of a temporal interval associated with a tt:body
 					element.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="dur" type="ebuttdt:clockTimingType" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					The maximum duration of the document relative to the resolved begin time, as defined in TTML 1.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 
 	</xs:complexType>
 
-	<xs:complexType name="Div">
+	<xs:complexType name="div">
 		<xs:annotation>
 			<xs:documentation>Logical container of textual content.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0"/>
 			<xs:choice maxOccurs="unbounded">
-				<xs:element name="div" type="tt:Div"/>
-				<xs:element name="p" type="tt:P"/>
+				<xs:element name="div" type="tt:div"/>
+				<xs:element name="p" type="tt:p"/>
 			</xs:choice>
 		</xs:sequence>
 		<xs:attribute ref="xml:id">
@@ -257,13 +264,13 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		</xs:attribute>
 		<xs:attribute ref="ttm:agent"/>
 		<xs:attribute ref="ttm:role"/>
-		<xs:attribute name="begin" type="ebuttdt:timingType">
+		<xs:attribute name="begin" type="ebuttdt:timingType" use="optional">
 			<xs:annotation>
 				<xs:documentation>Start point of a temporal interval associated with a tt:div
 					element.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="end" type="ebuttdt:timingType">
+		<xs:attribute name="end" type="ebuttdt:timingType" use="optional">
 			<xs:annotation>
 				<xs:documentation>End point of a temporal interval associated with a tt:div
 					element.</xs:documentation>
@@ -272,15 +279,15 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 
 	</xs:complexType>
 
-	<xs:complexType name="P" mixed="true">
+	<xs:complexType name="p" mixed="true">
 		<xs:annotation>
 			<xs:documentation>Logical paragraph.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0"/>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element name="br" type="tt:Br"/>
-				<xs:element name="span" type="tt:Span"/>
+				<xs:element name="br" type="tt:br"/>
+				<xs:element name="span" type="tt:span"/>
 			</xs:choice>
 		</xs:sequence>
 		<xs:attribute ref="xml:id" use="required">
@@ -327,16 +334,16 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		<xs:attribute ref="ttm:agent"/>
 		<xs:attribute ref="ttm:role"/>
 	</xs:complexType>
-	<xs:complexType name="Span" mixed="true">
+	<xs:complexType name="span" mixed="true">
 		<xs:annotation>
 			<xs:documentation>Inline element to allow the application of local style information,
 				annotation or metadata.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0"/>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element name="br" type="tt:Br"/>
-				<xs:element name="span" type="tt:Span"/>
+				<xs:element name="br" type="tt:br"/>
+				<xs:element name="span" type="tt:span"/>
 			</xs:choice>
 		</xs:sequence>
 		<xs:attribute ref="xml:space">
@@ -379,17 +386,17 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		<xs:attribute ref="ttm:role"/>
 
 	</xs:complexType>
-	<xs:complexType name="Br">
+	<xs:complexType name="br">
 		<xs:annotation>
 			<xs:documentation>Forced line break.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="metadata" type="tt:Metadata" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="metadata" type="tt:metadata" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute ref="ttm:role"/>
 
 	</xs:complexType>
 
-	<xs:element name="tt" type="tt:Tt"/>
+	<xs:element name="tt" type="tt:tt"/>
 
 </xs:schema>

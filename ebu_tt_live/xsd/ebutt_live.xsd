@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2012, EBU, www.ebu.ch -->
-<!-- Version of XML Schema: 1.x -->
+<!-- Copyright 2016, EBU, www.ebu.ch -->
+<!-- Version of XML Schema: 0.9 -->
 <!-- Creation: Current draft for EBU-TT Part 3 Update -->
-<!--  The publication of the EBU-TT XML Schema for EBU-Part 3 is intended to support the implementation of the specification in EBU-Tech 3370 version 1.0. 
+<!--  The publication of the EBU-TT XML Schema for EBU-Part 3 is intended to support the implementation of the specification in EBU-Tech 3370 version 0.9. 
 Please note that the EBU-TT XML Schema is a helping document and NOT normative but informative.-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tt="http://www.w3.org/ns/ttml"
 	xmlns:ebuttdt="urn:ebu:tt:datatypes" xmlns:ttp="http://www.w3.org/ns/ttml#parameter"

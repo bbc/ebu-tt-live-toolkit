@@ -1,5 +1,5 @@
 import logging
-from common import create_loggers
+from .common import create_loggers
 from ebu_tt_live import bindings
 from pyxb import BIND
 

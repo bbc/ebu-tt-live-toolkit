@@ -12,6 +12,21 @@ Preparing the build environment
 ===============================
 
 Make sure you have python 2.7+. Make sure you have python virtual environment capability.
+
+If not you can install virtualenv systemwide from your operating system's package repository
+or by pip:
+
+    sudo pip install virtualenv
+
+After that creating a virtual environment should be as simple as:
+
+    virtualenv env
+
+Let's activate it (source makes sure the current shell executes the script
+and assumes the environment variables that the activation script sets):
+
+    source ./env/bin/activate
+
 After having created the python virtual environment and having activated it the package
 can be built by typing make if you have GNU build tooling on your system.
 

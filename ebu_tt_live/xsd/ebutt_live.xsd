@@ -23,7 +23,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			<xs:documentation>Root element of an EBU-TT XML document.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="head" type="tt:Head"/>
+			<xs:element name="head" type="tt:head"/>
 			<xs:element name="body" type="tt:body" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute ref="xml:space">
@@ -64,7 +64,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			or not(exists(@ebuttp:referenceClockIdentifier))"/>
 
 	</xs:complexType>
-	<xs:complexType name="Head">
+	<xs:complexType name="head">
 		<xs:annotation>
 			<xs:documentation>Contains metadata as well as layout and styling information that are
 				referenced by the subtitle blocks in the body.</xs:documentation>
@@ -223,7 +223,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					element.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="dur" type="ebuttdt:clockTimingType" use="optional">
+		<xs:attribute name="dur" type="ebuttdt:timingType" use="optional">
 			<xs:annotation>
 				<xs:documentation>
 					The maximum duration of the document relative to the resolved begin time, as defined in TTML 1.

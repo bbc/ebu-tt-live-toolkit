@@ -223,7 +223,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					element.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="dur" type="ebuttdt:timingType" use="optional">
+		<xs:attribute name="dur" type="ebuttdt:durationTimingType" use="optional">
 			<xs:annotation>
 				<xs:documentation>
 					The maximum duration of the document relative to the resolved begin time, as defined in TTML 1.

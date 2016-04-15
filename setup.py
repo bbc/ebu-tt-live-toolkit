@@ -17,7 +17,8 @@ setup(
     version="0.0.1",
     description="EBU-TT Part 3 library implementing Specification EBU-3370",
     install_requires=[
-        "PyXB"
+        "PyXB",
+        "ipdb"  # This will eventually be removed from here
     ],
     license="MIT",
     packages=packages,

@@ -15,23 +15,23 @@ def main():
         sequenceNumber='1',
         timeBase='smpte',
         lang='en-GB',
-        head=bindings.Head(
-            bindings.Metadata(),
-            bindings.Styling(
-                bindings.Style(
+        head=bindings.head(
+            bindings.headMetadata(),
+            bindings.styling(
+                bindings.style(
                     id='ID001'
                 )
             ),
-            bindings.Layout()
+            bindings.layout()
         ),
         body=BIND(
-            bindings.Div(
-                bindings.P(
-                    bindings.Span(
+            bindings.div(
+                bindings.p(
+                    bindings.span(
                         'Some example text...'
                     ),
-                    bindings.Br(),
-                    bindings.Span(
+                    bindings.br(),
+                    bindings.span(
                         'And another line'
                     ),
                     id='ID005',

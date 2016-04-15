@@ -7,6 +7,3 @@ init:
 test:
 	pip install -r requirements-test.txt
 	py.test tests
-
-docs:
-	cd docs && make html

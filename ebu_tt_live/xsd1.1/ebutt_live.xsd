@@ -5,7 +5,6 @@
 <!--  The publication of the EBU-TT XML Schema for EBU-Part 3 is intended to support the implementation of the specification in EBU-Tech 3370 version 0.9. 
 Please note that the EBU-TT XML Schema is a helping document and NOT normative but informative.-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tt="http://www.w3.org/ns/ttml"
-	
 	xmlns:ebuttdt="urn:ebu:tt:datatypes" xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
 	xmlns:tts="http://www.w3.org/ns/ttml#styling" xmlns:ttm="http://www.w3.org/ns/ttml#metadata"
 	xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebutts="urn:ebu:tt:style"
@@ -60,9 +59,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					mapping: Language Code (LC))</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:assert test="@ttp:timeBase = 'smpte' and exists(@ebuttp:referenceClockIdentifier)
-			or (@ttp:timeBase = 'clock' and @ttp:clockMode = 'local' and exists(@ebuttp:referenceClockIdentifier))
-			or not(exists(@ebuttp:referenceClockIdentifier))"/>
+		
 
 	</xs:complexType>
 	<xs:complexType name="head">

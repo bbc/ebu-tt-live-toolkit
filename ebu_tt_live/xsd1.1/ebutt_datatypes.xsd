@@ -31,6 +31,18 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="fontStyleType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="normal"/>
+			<xs:enumeration value="italic"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fontWeightType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="normal"/>
+			<xs:enumeration value="bold"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="lineHeightType">
 		<xs:union memberTypes="ebuttdt:lengthType">
 			<xs:simpleType>

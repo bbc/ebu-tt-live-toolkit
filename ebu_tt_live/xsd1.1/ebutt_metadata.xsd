@@ -425,6 +425,23 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		
 	</xs:complexType>
 	
+	<xs:complexType name="facet">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="link" type="xs:anyURI" use="optional"/>
+				<xs:attribute name="expresses" use="optional">
+					<xs:simpleType>
+						<xs:restriction base="xs:token">
+							<xs:enumeration value="has"/>
+							<xs:enumeration value="unknown"/>
+							<xs:enumeration value="has_not"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
 	<xs:complexType name="documentFacet">
 		<xs:annotation>
 			<xs:documentation>
@@ -472,6 +489,18 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		</xs:simpleContent>
 	</xs:complexType>
 	
+	<xs:complexType name="font">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="fontFamilyName" type="ebuttdt:fontFamilyType" use="required"/>
+				<xs:attribute name="src" type="xs:anyURI" use="required"/>
+				<xs:attribute name="fontStyle" type="ebuttdt:fontStyleType" use="optional"/>
+				<xs:attribute name="fontWeight" type="ebuttdt:fontWeightType" use="optional"/>
+				<xs:attribute name="fontSize" type="ebuttdt:fontSizeType" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
 	<xs:complexType name="authoringTechnique">
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
@@ -483,19 +512,8 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					</xs:attribute>
 				</xs:extension>
 			</xs:simpleContent>
-		
 	</xs:complexType>
-	<xs:complexType name="fontFace">
-			<xs:sequence>
-				<xs:element name="fontFaceSource" maxOccurs="unbounded">
-					<xs:complexType>
-						<xs:attribute name="url" type="xs:anyURI"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-			<xs:attribute name="fontFamilyName"/>
 		
-	</xs:complexType>
 	<xs:attribute name="authoringDelay" type="ebuttdt:authoringDelayType">
 		<xs:annotation>
 			<xs:documentation>
@@ -531,4 +549,73 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
+	
+	<xs:complexType name="anyMetadata">
+		<xs:annotation>
+			<xs:documentation>Container for metadata information.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="metadataBase">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string"/>
+			<xs:element name="desc" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="headMetadata">
+		<xs:complexContent>
+			<xs:extension base="ebuttm:metadataBase">
+				<xs:sequence>
+					<xs:element name="documentMetadata" type="ebuttm:documentMetadata">
+						<xs:unique name="unique-documentFacet">
+							<xs:selector xpath="ebuttm:documentFacet"></xs:selector>
+							<xs:field xpath="."></xs:field>
+						</xs:unique>
+					</xs:element>
+					<xs:element name="agent" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="binaryData" type="binaryData" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="divMetadata">
+		<xs:complexContent>
+			<xs:extension base="ebuttm:metadataBase">
+				<xs:sequence>
+					<xs:element name="authoringTechnique" type="authoringTechnique" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="binaryData" type="binaryData" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="transitionStyle" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="facet" type="facet" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="pMetadata">
+		<xs:complexContent>
+			<xs:extension base="ebuttm:metadataBase">
+				<xs:sequence>
+					<xs:element name="authoringTechnique" type="authoringTechnique" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="transitionStyle" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="facet" type="facet" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="stylingMetadata">
+		<xs:complexContent>
+			<xs:extension base="ebuttm:metadataBase">
+				<xs:sequence>
+					<xs:element name="font" type="font" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
 </xs:schema>

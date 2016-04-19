@@ -258,13 +258,14 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 				<xs:element name="relatedMediaDuration" type="ebuttdt:mediaTimingType" minOccurs="0"/>
 				<xs:element name="documentBeginDate" type="xs:date" minOccurs="0"/>
 				<xs:element name="localTimeOffset" minOccurs="0"/>
-				<xs:element name="clockIdentifier" minOccurs="0"/>
+				<xs:element name="referenceClockIdentifier" minOccurs="0"/>
 				<xs:element name="broadcastServiceIdentifier" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
 						<xs:attribute name="serviceBegin" type="xs:dateTime" use="required"/>
 						<xs:attribute name="serviceEnd" type="xs:dateTime" use="required"/>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="documentTransitionStyle" type="ebuttm:documentTransitionStyle" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element name="documentOriginalProgrammeTitle" type="xs:string" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>The programme title in the original language. STL mapping:
@@ -400,6 +401,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 						<xs:documentation/>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="subtitleZero" type="xs:string" minOccurs="0"/>
 				<xs:element name="originalSourceServiceIdentifier" type="xs:string" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>
@@ -516,7 +518,16 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 	<xs:complexType name="sourceMediaIdentifier">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
-				<xs:attribute name="type" type="xs:string"></xs:attribute>
+				<xs:attribute name="type" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="documentTransitionStyle">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="inUnit" type="ebuttdt:transitionStyleAttributeType" use="required"/>
+				<xs:attribute name="outUnit" type="ebuttdt:transitionStyleAttributeType" use="required"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>

@@ -496,7 +496,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			<xs:attribute name="fontFamilyName"/>
 		
 	</xs:complexType>
-	<xs:attribute name="authoringDelay" type="ebuttdt:timecountTimingType">
+	<xs:attribute name="authoringDelay" type="ebuttdt:authoringDelayType">
 		<xs:annotation>
 			<xs:documentation>
 				The authoring delay associated with the timed content within this document may be indicated using the ebuttm:authoringDelay attribute. 

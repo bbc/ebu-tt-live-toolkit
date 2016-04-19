@@ -240,7 +240,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="sourceMediaIdentifier" type="ebuttm:sourceMediaIdentifier" minOccurs="0"/>
-				<xs:element name="relatedMediaIdentifier " minOccurs="0" maxOccurs="1"/>
+				<xs:element name="relatedMediaIdentifier" type="xs:string" minOccurs="0" maxOccurs="1"/>
 				<xs:element name="relatedObjectIdentifier" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
 						<xs:attribute name="type" type="xs:string"/>
@@ -561,8 +561,8 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 	
 	<xs:complexType name="metadataBase">
 		<xs:sequence>
-			<xs:element name="title" type="xs:string"/>
-			<xs:element name="desc" type="xs:string"/>
+			<xs:element name="title" type="xs:string" minOccurs="0"/>
+			<xs:element name="desc" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	

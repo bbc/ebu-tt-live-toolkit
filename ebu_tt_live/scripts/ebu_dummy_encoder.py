@@ -1,6 +1,7 @@
 import logging
 from .common import create_loggers
 from ebu_tt_live import bindings
+from ebu_tt_live.bindings import _ebuttm as metadata
 from pyxb import BIND
 
 log = logging.getLogger('ebu_dummy_encoder')
@@ -16,7 +17,9 @@ def main():
         timeBase='smpte',
         lang='en-GB',
         head=bindings.head(
-            bindings.headMetadata(),
+            metadata.headMetadata(
+                metadata.documentMetadata()
+            ),
             bindings.styling(
                 bindings.style(
                     id='ID001'

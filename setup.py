@@ -8,7 +8,10 @@ except ImportError:
 
 
 packages=[
-    "ebu_tt_live"
+    "ebu_tt_live",
+    "ebu_tt_live.bindings",
+    "ebu_tt_live.clocks",
+    "ebu_tt_live.scripts"
 ]
 
 

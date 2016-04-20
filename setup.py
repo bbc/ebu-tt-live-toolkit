@@ -20,7 +20,7 @@ setup(
         "PyXB",
         "ipdb"  # This will eventually be removed from here
     ],
-    license="MIT",
+    license="BSD3",
     packages=packages,
     entry_points={
         'console_scripts': [

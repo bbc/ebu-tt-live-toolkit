@@ -28,7 +28,7 @@ and assumes the environment variables that the activation script sets):
     source ./env/bin/activate
 
 After having created the python virtual environment and having activated it the package
-can be built by typing make if you have GNU build tooling on your system.
+can be built by going to the directory typing 'make' if you have GNU build tooling on your system.
 
     make
 

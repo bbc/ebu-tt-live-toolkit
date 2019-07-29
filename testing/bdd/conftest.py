@@ -1,6 +1,7 @@
 from pytest_bdd import when, given, then
 from jinja2 import Environment, FileSystemLoader
 from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence, EBUTTDDocument
+from ebu_tt_live.documents.converters import EBUTT3EBUTTDConverter
 from ebu_tt_live.clocks.local import LocalMachineClock
 from ebu_tt_live.clocks.media import MediaClock
 from ebu_tt_live.bindings._ebuttdt import FullClockTimingType, LimitedClockTimingType, CellFontSizeType, lineHeightType
@@ -104,6 +105,14 @@ def gen_second_document(test_context, template_dict, template_file_two):
     test_context['document2'] = document2
     document2.validate()
     return document2
+
+
+@when('the EBU-TT-Live document is converted to EBU-TT-D')
+def convert_to_ebuttd(test_context):
+    ebuttd_converter = EBUTT3EBUTTDConverter(None)
+    converted_bindings = ebuttd_converter.convert_document(test_context['document'].binding)
+    ebuttd_document = EBUTTDDocument.create_from_raw_binding(converted_bindings)
+    test_context['ebuttd_document'] = ebuttd_document
 
 
 @then('EBUTTD document is valid')

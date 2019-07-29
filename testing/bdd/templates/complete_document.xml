@@ -2,8 +2,7 @@
 <tt:tt
         ebuttp:sequenceIdentifier="TestSequence"
         ebuttp:sequenceNumber="1"
-        ttp:clockMode="local"
-        ttp:timeBase="clock"
+        ttp:timeBase="media"
         xml:lang="en-GB"
         xmlns:ebuttm="urn:ebu:tt:metadata"
         xmlns:ebuttp="urn:ebu:tt:parameters"

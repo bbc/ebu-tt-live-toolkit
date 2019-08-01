@@ -157,8 +157,10 @@ class EBUTT3EBUTTDConverter(object):
                 new_elem.append(item)
 
         metadata = headMetadata_type()
-        metadata.documentMetadata = documentMetadata()
-        metadata.documentMetadata.conformsToStandard = ['http://www.w3.org/ns/ttml/profile/imsc1/text', 'urn:ebu:tt:distribution:2018-04']
+        metadata.documentMetadata = documentMetadata(conformsToStandard = [
+            'http://www.w3.org/ns/ttml/profile/imsc1/text', 
+            'urn:ebu:tt:distribution:2018-04'
+        ])
         new_elem.metadata = metadata
 
         # We need default values here in case styling or layout is omitted from the source document.

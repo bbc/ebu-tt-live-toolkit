@@ -6,6 +6,7 @@ from ebu_tt_live.twisted.websocket import BroadcastServerFactory, BroadcastServe
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
 from mock import MagicMock
 from ebu_tt_live.node.interface import IProducerNode, IConsumerNode
+import pytest
 
 from twisted.internet import task
 import twisted.internet.base
@@ -188,6 +189,7 @@ class TestProdServerToConsClientProtocols(_NewWSCommon, TestCase):
         self.assertEqual(self.sproto.state, self.sproto.STATE_CLOSED)
         self.assertFalse(self.sproto.wasClean)
 
+    @pytest.mark.xfail(reason="Twisted deferred testing needs to be reworked.")
     def test_producer_to_producer_error(self):
         self._create_server(url='ws://localhost:9005', producer=self.prod)
         self._create_client(
@@ -228,6 +230,7 @@ class TestConsServerToProdClientProtocols(_NewWSCommon, TestCase):
         self.cons = MagicMock()
         self.sequence_identifier = 'TestSeq01'
 
+    @pytest.mark.xfail(reason="Twisted deferred testing needs to be reworked.")
     def test_serv_cons_client_prod_success(self):
 
         self._create_server(

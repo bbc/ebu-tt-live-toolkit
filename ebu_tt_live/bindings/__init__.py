@@ -1197,4 +1197,15 @@ class d_style_type(raw.d_style_type):
         )
         return instance
 
+    @classmethod
+    def merge_styles(main_style, parents):
+        if len(parents) == 0:
+            return main_style
+        elif len(parents) == 1:
+            # actually merge something
+            pass
+        else:
+            return merge_styles(parents[0], parents[1:])
+        
+
 raw.d_style_type._SetSupersedingClass(d_style_type)

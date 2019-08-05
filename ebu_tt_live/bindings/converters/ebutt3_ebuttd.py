@@ -207,6 +207,7 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_styling(self, styling_in, dataset):
+        dataset['styles'] = styling_in.style
         new_elem = d_styling_type(
             *self.convert_children(styling_in, dataset)
         )
@@ -216,6 +217,9 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_style(self, style_in, dataset):
+        parent_styles = []
+        if style_in.style:
+            parent_styles = [s for s in dataset['styles'] if s.id in style_in.style]
         color = style_in.color
         if color is not None:
             if isinstance(color, ebuttdt.namedColorType):

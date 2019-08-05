@@ -13,8 +13,8 @@ Feature: Remove style elements that refer to other style elements
     When  the document is generated
     And   the EBU-TT-Live document is converted to EBU-TT-D
     Then  the ebu_tt_d document contains style "s2" with attribute "fontFamily" set to "Reith"
-    And   the ebu_tt_d document contains style "s2" with attribute "color" set to "yellow"
-    And   the ebu_tt_d document contains style "s2" with attribute "backgroundColor" set to "black"
+    And   the ebu_tt_d document contains style "s2" with attribute "color" set to "#ffff00ff"
+    And   the ebu_tt_d document contains style "s2" with attribute "backgroundColor" set to "#000000ff"
 
     Examples:
       | xml_file                     |

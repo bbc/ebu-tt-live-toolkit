@@ -220,6 +220,8 @@ class EBUTT3EBUTTDConverter(object):
         parent_styles = []
         if style_in.style:
             parent_styles = [s for s in dataset['styles'] if s.id in style_in.style]
+            for style in parent_styles:
+                style_in.add(style)
         color = style_in.color
         if color is not None:
             if isinstance(color, ebuttdt.namedColorType):

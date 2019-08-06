@@ -20,7 +20,6 @@ def when_style_has_attribute(test_context, style_name, attribute, value):
 
 @then(parsers.parse('the ebu_tt_d document contains style "{style_name}" with attribute "{attribute}" set to "{value}"'))
 def then_converted_document_has_style(test_context, style_name, attribute, value):
-    print(test_context['document'].get_xml())
     print(test_context['ebuttd_document'].get_xml())
     ebuttd_document = test_context['ebuttd_document']
     tree = ET.fromstring(ebuttd_document.get_xml())

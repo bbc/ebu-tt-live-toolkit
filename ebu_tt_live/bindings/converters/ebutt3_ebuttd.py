@@ -131,6 +131,7 @@ class EBUTT3EBUTTDConverter(object):
     def convert_tt(self, tt_in, dataset):
         dataset['timeBase'] = tt_in.timeBase
         dataset['cellResolution'] = tt_in.cellResolution
+        dataset['tt_element'] = tt_in
         new_elem = ttd(
             head=self.convert_element(tt_in.head, dataset),
             body=self.convert_element(tt_in.body, dataset),
@@ -207,7 +208,6 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_styling(self, styling_in, dataset):
-        dataset['styles'] = styling_in.style
         new_elem = d_styling_type(
             *self.convert_children(styling_in, dataset)
         )
@@ -217,37 +217,36 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_style(self, style_in, dataset):
-        parent_styles = []
-        if style_in.style:
-            parent_styles = [s for s in dataset['styles'] if s.id in style_in.style]
-            for style in parent_styles:
-                style_in.add(style)
-        color = style_in.color
+        ordered_styles = style_in.ordered_styles(dataset)
+        computed_style = style_in._semantic_copy(None)
+        for s in ordered_styles:
+            computed_style.add(s)
+        color = computed_style.color
         if color is not None:
             if isinstance(color, ebuttdt.namedColorType):
                 color = ebuttdt.named_color_to_rgba(color)
-        backgroundColor = style_in.backgroundColor
+        backgroundColor = computed_style.backgroundColor
         if backgroundColor is not None:
             if isinstance(backgroundColor, ebuttdt.namedColorType):
                 backgroundColor = ebuttdt.named_color_to_rgba(backgroundColor)
         new_elem = d_style_type(
-            *self.convert_children(style_in, dataset),
-            id=style_in.id,
-            style=style_in.style,  # there is no ordering requirement in styling so too soon to deconflict here
-            direction=style_in.direction,
-            fontFamily=style_in.fontFamily,
+            *self.convert_children(computed_style, dataset),
+            id=computed_style.id,
+            style=computed_style.style,  # there is no ordering requirement in styling so too soon to deconflict here
+            direction=computed_style.direction,
+            fontFamily=computed_style.fontFamily,
             fontSize=None,  # This will be regenerated in separate style. This is necessary due to % fontSize conversions
             lineHeight=None,  # lineHeight also receives the fontSize treatment
-            textAlign=style_in.textAlign,
+            textAlign=computed_style.textAlign,
             color=color,
             backgroundColor=backgroundColor,
-            fontStyle=style_in.fontStyle,
-            fontWeight=style_in.fontWeight,
-            textDecoration=style_in.textDecoration,
-            unicodeBidi=style_in.unicodeBidi,
-            wrapOption=style_in.wrapOption,
-            padding=style_in.padding,
-            linePadding=style_in.linePadding,
+            fontStyle=computed_style.fontStyle,
+            fontWeight=computed_style.fontWeight,
+            textDecoration=computed_style.textDecoration,
+            unicodeBidi=computed_style.unicodeBidi,
+            wrapOption=computed_style.wrapOption,
+            padding=computed_style.padding,
+            linePadding=computed_style.linePadding,
             _strict_keywords=False
         )
         return new_elem

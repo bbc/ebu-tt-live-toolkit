@@ -26,3 +26,23 @@ def then_converted_document_has_style(test_context, style_name, attribute, value
     elements = tree.findall('{http://www.w3.org/ns/ttml}head/{http://www.w3.org/ns/ttml}styling/{http://www.w3.org/ns/ttml}style[@{http://www.w3.org/XML/1998/namespace}id="%s"]' %style_name)
     assert len(elements) == 1
     assert elements[0].get('{http://www.w3.org/ns/ttml#styling}%s' % attribute) == value
+
+@then(parsers.parse('the ebu_tt_d document contains region "{region_id}" with attribute "{attribute}" set to "{value}"'))
+def then_converted_document_has_style(test_context, region_id, attribute, value):
+    ebuttd_document = test_context['ebuttd_document']
+    tree = ET.fromstring(ebuttd_document.get_xml())
+    element = tree.find('{http://www.w3.org/ns/ttml}head/{http://www.w3.org/ns/ttml}layout/{http://www.w3.org/ns/ttml}region[@{http://www.w3.org/XML/1998/namespace}id="%s"]' %region_id)
+    assert value == element.get('{http://www.w3.org/ns/ttml#styling}%s' % attribute) 
+
+@when(parsers.parse('it contains region "{region_id}"'))
+def when_it_contains_region(test_context, template_dict, region_id):
+    if 'regions' not in template_dict:
+        template_dict['regions'] = list()
+    region = {"id": region_id}    
+    template_dict['regions'].append(region)
+    test_context[region_id] = region
+
+
+@when(parsers.parse('region "{region_id}" has attribute "{attribute}" set to "{value}"'))
+def when_region_has_attribute(test_context, region_id, attribute, value):
+    test_context[region_id][attribute] = value

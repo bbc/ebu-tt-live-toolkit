@@ -193,6 +193,11 @@ class EBUTT3EBUTTDConverter(object):
         if extent is not None:
             if isinstance(extent, ebuttdt.cellExtentType):
                 extent = ebuttdt.convert_cell_region_to_percentage(extent, dataset['cellResolution'])
+        if region_in.padding == None:
+            region_styles = [style for style in region_in.validated_styles if style.id in region_in.style]
+            for region_style in region_styles:
+                 if region_style.padding:
+                    region_in.padding = region_style.padding
         new_elem = d_region_type(
             *self.convert_children(region_in, dataset),
             id=region_in.id,

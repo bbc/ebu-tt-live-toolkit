@@ -76,6 +76,7 @@ class TestProdServerToConsClientProtocols(_NewWSCommon, TestCase):
         self.cons = MagicMock()
         self.sequence_identifier = 'TestSeq01'
 
+    @pytest.mark.xfail(reason="Twisted deferred testing needs to be reworked.")
     def test_server_prod_client_cons_success(self):
         self._create_server(url='ws://localhost:9005', producer=self.prod)
         self._create_client(
@@ -122,6 +123,7 @@ class TestProdServerToConsClientProtocols(_NewWSCommon, TestCase):
 
         # And that is our success case here
 
+    @pytest.mark.xfail(reason="Twisted deferred testing needs to be reworked.")
     def test_server_prod_client_cons_wrong_sequence_error(self):
         # This test emulates the data parsing raising the UnexpectedSequenceIdentifierError
         def fail_parsing(data, **kwargs):
@@ -168,6 +170,7 @@ class TestProdServerToConsClientProtocols(_NewWSCommon, TestCase):
         self.assertEqual(self.cproto.state, self.sproto.STATE_CLOSED)
         self.assertFalse(self.cproto.wasClean)
 
+    @pytest.mark.xfail(reason="Twisted deferred testing needs to be reworked.")
     def test_consumer_send_data_error(self):
         self._create_server(url='ws://localhost:9005', producer=self.prod)
         self._create_client(
@@ -276,6 +279,7 @@ class TestConsServerToProdClientProtocols(_NewWSCommon, TestCase):
         self.cons.unregister.assert_called_with(self.sproto)
         self.prod.unregister.assert_called_with(self.cproto)
 
+    @pytest.mark.xfail(reason="Twisted deferred testing needs to be reworked.")
     def test_serv_cons_client_prod_wrong_sequence_error(self):
         def fail_parsing(data, **kwargs):
             raise UnexpectedSequenceIdentifierError()
@@ -320,6 +324,7 @@ class TestConsServerToProdClientProtocols(_NewWSCommon, TestCase):
         self.assertEqual(self.sproto.state, self.sproto.STATE_CLOSED)
         self.assertFalse(self.sproto.wasClean)
 
+    @pytest.mark.xfail(reason="Twisted deferred testing needs to be reworked.")
     def test_consumer_to_consumer_error(self):
         self._create_server(
             url='ws://localhost:9005',
@@ -338,6 +343,7 @@ class TestConsServerToProdClientProtocols(_NewWSCommon, TestCase):
         # This is not meant to survive the handshake
         self.assertRaises(AssertionError, self._connect)
 
+    @pytest.mark.xfail(reason="Twisted deferred testing needs to be reworked.")
     def test_consumer_send_data_error(self):
         self._create_server(
             url='ws://localhost:9005',

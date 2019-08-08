@@ -152,7 +152,7 @@ class style_type(StyledElementMixin, IDMixin, SizingValidationMixin, SemanticVal
                 return self._ordered_styles
             ordered_styles = [self]
             if self.style is not None:
-                for style_id in self.style:
+                for style_id in self.style[::-1]: # Reverse style references: last reference should take precedence
                     try:
                         style_elem = dataset['tt_element'].get_element_by_id(elem_id=style_id, elem_type=style_type)
                         cascading_styles = style_elem.ordered_styles(dataset=dataset)

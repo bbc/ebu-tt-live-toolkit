@@ -92,8 +92,10 @@ def gen_document(template_file, template_dict):
 def when_doc_generated(test_context, template_dict, template_file):
     # This is a more standard-compliant way to do this
     xml_file = template_file.render(template_dict)
+    print(xml_file)
     document = EBUTT3Document.create_from_xml(xml_file)
     test_context['document'] = document
+    print(test_context['document'].get_xml())
 
 
 @given('the first document is generated')
@@ -126,6 +128,7 @@ def convert_to_ebuttd(test_context):
     converted_bindings = ebuttd_converter.convert_document(test_context['document'].binding)
     ebuttd_document = EBUTTDDocument.create_from_raw_binding(converted_bindings)
     test_context['ebuttd_document'] = ebuttd_document
+    print(ebuttd_document.get_xml())
 
 
 @then('EBUTTD document is valid')

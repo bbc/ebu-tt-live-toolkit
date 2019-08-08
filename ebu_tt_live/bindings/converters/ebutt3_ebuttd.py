@@ -131,7 +131,6 @@ class EBUTT3EBUTTDConverter(object):
     def convert_tt(self, tt_in, dataset):
         dataset['timeBase'] = tt_in.timeBase
         dataset['cellResolution'] = tt_in.cellResolution
-        dataset['tt_element'] = tt_in
         new_elem = ttd(
             head=self.convert_element(tt_in.head, dataset),
             body=self.convert_element(tt_in.body, dataset),

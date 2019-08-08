@@ -17,10 +17,13 @@ def when_it_contains_style(test_context, template_dict, style_name):
 def when_style_has_attribute(test_context, style_name, attribute, value):
     test_context[style_name][attribute] = value
 
+@when(parsers.parse('it contains some text with style "{style_name}"'))
+def when_style_has_attribute(template_dict, style_name):
+    template_dict['text_style'] = style_name
+
 
 @then(parsers.parse('the ebu_tt_d document contains style "{style_name}" with attribute "{attribute}" set to "{value}"'))
 def then_converted_document_has_style(test_context, style_name, attribute, value):
-    print(test_context['ebuttd_document'].get_xml())
     ebuttd_document = test_context['ebuttd_document']
     tree = ET.fromstring(ebuttd_document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}head/{http://www.w3.org/ns/ttml}styling/{http://www.w3.org/ns/ttml}style[@{http://www.w3.org/XML/1998/namespace}id="%s"]' %style_name)
@@ -32,7 +35,7 @@ def then_converted_document_has_style(test_context, region_id, attribute, value)
     ebuttd_document = test_context['ebuttd_document']
     tree = ET.fromstring(ebuttd_document.get_xml())
     element = tree.find('{http://www.w3.org/ns/ttml}head/{http://www.w3.org/ns/ttml}layout/{http://www.w3.org/ns/ttml}region[@{http://www.w3.org/XML/1998/namespace}id="%s"]' %region_id)
-    assert value == element.get('{http://www.w3.org/ns/ttml#styling}%s' % attribute) 
+    assert value == element.get('{http://www.w3.org/ns/ttml#styling}%s' % attribute)
 
 @when(parsers.parse('it contains region "{region_id}"'))
 def when_it_contains_region(test_context, template_dict, region_id):

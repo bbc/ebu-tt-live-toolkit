@@ -201,8 +201,8 @@ class EBUTT3EBUTTDConverter(object):
                         if parent_style.padding:
                             region_in.padding = parent_style.padding
                 else:
-                    if region_style.padding:
-                        region_in.padding = region_style.padding
+                 if region_style.padding:
+                    region_in.padding = region_style.padding
         new_elem = d_region_type(
             *self.convert_children(region_in, dataset),
             id=region_in.id,
@@ -228,7 +228,7 @@ class EBUTT3EBUTTDConverter(object):
 
     def convert_style(self, style_in, dataset):
         ordered_styles = style_in.ordered_styles(dataset)
-        computed_style = style_in._semantic_copy(None)
+        computed_style = style_type(id = style_in.id)
         for s in ordered_styles:
             computed_style.add(s)
         color = computed_style.color

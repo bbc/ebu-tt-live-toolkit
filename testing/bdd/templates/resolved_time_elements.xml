@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<!-- # Note: contains SMPTE time base. SMPTE was removed from the specification in version 1.0. -->
+
+<tt:tt
+  ebuttp:sequenceIdentifier="testSequence1"
+        ebuttp:sequenceNumber="1"
+        ttp:timeBase="media"
+        xml:lang="en-GB"
+        xmlns:ebuttm="urn:ebu:tt:metadata"
+        xmlns:ebuttp="urn:ebu:tt:parameters"
+        xmlns:tt="http://www.w3.org/ns/ttml"
+        xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
+        xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <tt:head>
+    <tt:metadata>
+      <ebuttm:documentMetadata/>
+    </tt:metadata>
+    <tt:styling>
+      <tt:style xml:id="ID001"/>
+    </tt:styling>
+    <tt:layout/>
+  </tt:head>
+    <tt:body>        
+    <tt:div begin="5s" end="7s">
+        <tt:p xml:id="ID005" begin="{{p_begin}}" end="{{p_end}}">
+            <tt:span begin="{{span_begin}}" end="{{span_end}}">This appears at 13s and disappears at 15s</tt:span>
+        </tt:p>
+    </tt:div >
+    </tt:body>
+</tt:tt>

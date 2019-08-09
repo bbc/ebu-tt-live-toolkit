@@ -267,6 +267,10 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_p(self, p_in, dataset):
+        #added to remove timings when timings are present on child elements
+        if p_in.is_timed_leaf() == False:
+            p_in.begin = None
+            p_in.end = None
         new_elem = d_p_type(
             *self.convert_children(p_in, dataset),
             space=p_in.space,

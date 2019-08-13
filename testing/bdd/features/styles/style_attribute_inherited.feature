@@ -42,3 +42,14 @@ Feature: Compute style attribute on a single EBU-TT Live element
     |           |          |                |          | tts:wrapOption       | span1   | wrap           |
 
 
+  Scenario: Circular style references should fail
+    Given an xml file <xml_file>
+    When it has a cell resolution of <cell_resolution>
+    And it has extent of <extent>
+    And it contains style S1 with <style_attribute> value <S1_value>
+    And it contains style S2 with <style_attribute> value <S2_value>
+    Then document is invalid
+
+    Examples:
+    | S1_value | S2_value | style_attribute |
+    | S2       | S1       | style           |

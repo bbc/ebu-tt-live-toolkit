@@ -4,7 +4,8 @@ Feature: Remove style elements that refer to other style elements
     | xml_file                     |
     | style_element_references.xml |
 
-  Scenario: Convert style element with reference to another style to a presentationally equivalent
+
+  Scenario: Convert style element with reference to another style to a presentationally equivalent one
     Given an xml file <xml_file>
     When  it contains style "s1"
     And   style "s1" has attribute "color" set to "white"
@@ -24,6 +25,7 @@ Feature: Remove style elements that refer to other style elements
     And   the ebu_tt_d document contains style "s4" with attribute "color" set to "#ffff00ff"
     And   the ebu_tt_d document contains style "s4" with attribute "backgroundColor" set to "#000000ff"
 
+
   Scenario: Convert padding specifed on style applied to region to padding specified only on region when padding is on both style and region
     Given an xml file <xml_file>
     When  it contains style "s1"
@@ -35,6 +37,7 @@ Feature: Remove style elements that refer to other style elements
     When  the document is generated
     And   the EBU-TT-Live document is converted to EBU-TT-D
     Then  EBUTTD document is valid
+
 
   Scenario: Convert padding specifed on style applied to region to padding specified only on region when padding is only on style
     Given an xml file <xml_file>

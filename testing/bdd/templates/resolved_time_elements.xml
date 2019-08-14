@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<!-- # Note: contains SMPTE time base. SMPTE was removed from the specification in version 1.0. -->
+<!--  Note: contains SMPTE time base. SMPTE was removed from the specification in version 1.0. -->
 
 <tt:tt
   ebuttp:sequenceIdentifier="testSequence1"
@@ -21,11 +21,133 @@
     </tt:styling>
     <tt:layout/>
   </tt:head>
-    <tt:body>        
-    <tt:div begin="5s" end="7s">
-        <tt:p xml:id="ID005" begin="{{p_begin}}" end="{{p_end}}">
-            <tt:span begin="{{span_begin}}" end="{{span_end}}">This appears at 13s and disappears at 15s</tt:span>
-        </tt:p>
-    </tt:div >
-    </tt:body>
+  <tt:body
+{% if body_begin %}
+  {% if body_begin == "*?Empty?*" %}
+      begin=""
+  {% else %}
+      begin="{{ body_begin }}"
+  {% endif %}
+{% endif %}
+{% if body_end %}
+  {% if body_end == "*?Empty?*" %}
+      end=""
+  {% else %}
+      end="{{ body_end }}"
+  {% endif%}
+{% endif %}
+{% if body_dur %}
+  {% if body_dur == "*?Empty?*" %}
+      dur=""
+  {% else %}
+      dur="{{ body_dur }}"
+  {% endif %}
+{% endif %}
+    >
+    <tt:div
+{% if div_begin %}
+  {% if div_begin == "*?Empty?*" %}
+        begin=""
+  {% else %}
+        begin="{{ div_begin }}"
+  {% endif %}
+{% endif %}
+{% if div_end %}
+  {% if div_end == "*?Empty?*" %}
+        end=""
+  {% else %}
+        end="{{ div_end }}"
+  {% endif%}
+{% endif %}
+      >
+      <tt:p
+{% if p_begin %}
+  {% if p_begin == "*?Empty?*" %}
+        begin=""
+  {% else %}
+        begin="{{ p_begin }}"
+  {% endif %}
+{% endif %}
+{% if p_end %}
+  {% if p_end == "*?Empty?*" %}
+        end=""
+  {% else %}
+        end="{{ p_end }}"
+  {% endif%}
+{% endif %}
+        xml:id="ID005">
+            <tt:span
+{% if span1_begin %}
+  {% if span1_begin == "*?Empty?*" %}
+                begin=""
+  {% else %}
+                begin="{{ span1_begin }}"
+  {% endif %}
+{% endif %}
+{% if span1_end %}
+  {% if span1_end == "*?Empty?*" %}
+                end=""
+  {% else %}
+                end="{{ span1_end }}"
+  {% endif%}
+{% endif %}
+              >
+              Some example text...
+            </tt:span>
+            <tt:span
+{% if span2_begin %}
+  {% if span2_begin == "*?Empty?*" %}
+                begin=""
+  {% else %}
+                begin="{{ span2_begin }}"
+  {% endif %}
+{% endif %}
+{% if span2_end %}
+  {% if span2_end == "*?Empty?*" %}
+                end=""
+  {% else %}
+                end="{{ span2_end }}"
+  {% endif%}
+{% endif %}
+              >
+              Some example text 2...
+            </tt:span>
+      </tt:p>
+      <tt:p
+{% if p1_begin %}
+  {% if p1_begin == "*?Empty?*" %}
+        begin=""
+  {% else %}
+        begin="{{ p1_begin }}"
+  {% endif %}
+{% endif %}
+{% if p1_end %}
+  {% if p1_end == "*?Empty?*" %}
+        end=""
+  {% else %}
+        end="{{ p1_end }}"
+  {% endif%}
+{% endif %}
+        xml:id="ID111">
+            <tt:span
+{% if span3_begin %}
+  {% if span3_begin == "*?Empty?*" %}
+                begin=""
+  {% else %}
+                begin="{{ span3_begin }}"
+  {% endif %}
+{% endif %}
+{% if span3_end %}
+  {% if span3_end == "*?Empty?*" %}
+                end=""
+  {% else %}
+                end="{{ span3_end }}"
+  {% endif%}
+{% endif %}
+              >
+              Some example text...
+            </tt:span>
+      </tt:p>
+    </tt:div>
+  </tt:body>
 </tt:tt>

@@ -127,13 +127,11 @@ def convert_to_ebuttd(test_context):
     ebuttd_document = EBUTTDDocument.create_from_raw_binding(converted_bindings)
     test_context['ebuttd_document'] = ebuttd_document
 
-
 @then('EBUTTD document is valid')
 def then_ebuttd_document_valid(test_context):
     ebuttd_document = test_context['ebuttd_document']
     ebuttd_document.validate()
     assert isinstance(ebuttd_document, EBUTTDDocument)
-
 
 def timestr_to_timedelta(time_str, time_base):
     if time_base == 'clock':
@@ -149,6 +147,65 @@ def valid_computed_begin_time(computed_begin, gen_document):
     computed_begin_timedelta = timestr_to_timedelta(computed_begin, gen_document.time_base)
     assert gen_document.computed_begin_time == computed_begin_timedelta
 
+@when('it has body begin time <body_begin>')
+def when_body_begin(body_begin, template_dict):
+    template_dict['body_begin'] = body_begin
+
+@when('it has body duration <body_dur>')
+def when_body_dur(body_dur, template_dict):
+    template_dict['body_dur'] = body_dur
+
+@when('it has body end time <body_end>')
+def when_body_end(body_end, template_dict):
+    template_dict['body_end'] = body_end
+
+@when('it has div begin time <div_begin>')
+def when_div_begin(div_begin, template_dict):
+    template_dict['div_begin'] = div_begin
+
+@when('it has div end time <div_end>')
+def when_div_end(div_end, template_dict):
+    template_dict['div_end'] = div_end
+
+@when('it has p begin time <p_begin>')
+def when_p_begin(p_begin, template_dict):
+    template_dict['p_begin'] = p_begin
+
+@when('it has p end time <p_end>')
+def when_p_end(p_end, template_dict):
+    template_dict['p_end'] = p_end
+
+@when('it has p1 begin time <p1_begin>')
+def when_p_begin(p1_begin, template_dict):
+    template_dict['p1_begin'] = p1_begin
+
+@when('it has p1 end time <p1_end>')
+def when_p_end(p1_end, template_dict):
+    template_dict['p1_end'] = p1_end
+
+@when('it has span1 begin time <span1_begin>')
+def when_span1_begin(span1_begin, template_dict):
+    template_dict['span1_begin'] = span1_begin
+
+@when('it has span1 end time <span1_end>')
+def when_span1_end(span1_end, template_dict):
+    template_dict['span1_end'] = span1_end
+
+@when('it has span2 begin time <span2_begin>')
+def when_span2_begin(span2_begin, template_dict):
+    template_dict['span2_begin'] = span2_begin
+
+@when('it has span2 end time <span2_end>')
+def when_span2_end(span2_end, template_dict):
+    template_dict['span2_end'] = span2_end
+
+@when('it has span3 begin time <span3_begin>')
+def when_span2_begin(span3_begin, template_dict):
+    template_dict['span3_begin'] = span3_begin
+
+@when('it has span3 end time <span3_end>')
+def when_span3_end(span3_end, template_dict):
+    template_dict['span3_end'] = span3_end
 
 @then('it has computed end time <computed_end>')
 def valid_computed_end_time(computed_end, gen_document):

@@ -252,7 +252,8 @@ class EBUTT3EBUTTDConverter(object):
         new_elem = d_body_type(
             *self.convert_children(body_in, dataset),
             agent=body_in.agent,
-            role=body_in.role
+            role=body_in.role,
+            style = body_in.style
         )
         return new_elem
 
@@ -269,8 +270,10 @@ class EBUTT3EBUTTDConverter(object):
     def convert_p(self, p_in, dataset):
         #added to remove timings when timings are present on child elements
         if p_in.is_timed_leaf() == False:
-            p_in.begin = None
-            p_in.end = None
+            for span in p_in.span:
+                if span.begin and span.end:
+                    p_in.begin = None
+                    p_in.end = None  
         new_elem = d_p_type(
             *self.convert_children(p_in, dataset),
             space=p_in.space,

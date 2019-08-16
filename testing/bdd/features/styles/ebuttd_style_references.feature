@@ -1,3 +1,4 @@
+@styles @document @ebuttd_conversion 
 Feature: Remove style elements that refer to other style elements
 
   Examples:

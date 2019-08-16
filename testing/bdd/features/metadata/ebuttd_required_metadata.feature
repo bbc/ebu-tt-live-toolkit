@@ -1,3 +1,4 @@
+@metadata @document @ebuttd_conversion 
 Feature: Converted EBUTTD file contains required metadata elements
 
   Scenario: It adds two conformsToStandard elements to the EBU-TT-D metadata

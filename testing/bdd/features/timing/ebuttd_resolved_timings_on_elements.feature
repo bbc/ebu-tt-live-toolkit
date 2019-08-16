@@ -1,10 +1,10 @@
-sFeature: Resolving timings on elements
+Feature: Resolving timings on elements
 
-Examples:
-  | xml_file                   | 
-  | resolved_time_elements.xml | 
+  Examples:
+    | xml_file                   |
+    | resolved_time_elements.xml |
 
-Scenario: Timings present on both p and span elements
+  Scenario: Timings present on both p and span elements
     Given an xml file <xml_file>
     When  it has p begin time <p_begin>
     And   it has p end time <p_end>
@@ -20,33 +20,32 @@ Scenario: Timings present on both p and span elements
     And   the EBU-TT-Live document is converted to EBU-TT-D
     Then  EBUTTD document is valid
 
-  Examples:
-  | p_begin  | p_end    | span1_begin | span1_end | span2_begin | span2_end | p1_begin | p1_end   | span3_begin | span3_end |
-  | 00:01:00 | 00:01:11 |  00:00:08   | 00:00:10  | 00:00:11    | 00:00:12  | 00:01:13 | 00:01:16 | 00:01:14    | 00:01:15  |
-  | 00:01:00 | 00:01:11 |             |           |             |           | 00:01:13 | 00:01:16 |             |           |
-  | 00:01:00 | 00:01:11 |  00:00:08   | 00:00:10  |             |           | 00:01:13 | 00:01:16 | 00:01:13    | 00:01:15  |
+    Examples:
+      | p_begin  | p_end    | span1_begin | span1_end | span2_begin | span2_end | p1_begin | p1_end   | span3_begin | span3_end |
+      | 00:01:00 | 00:01:11 | 00:00:08    | 00:00:10  | 00:00:11    | 00:00:12  | 00:01:13 | 00:01:16 | 00:01:14    | 00:01:15  |
+      | 00:01:00 | 00:01:11 |             |           |             |           | 00:01:13 | 00:01:16 |             |           |
+      | 00:01:00 | 00:01:11 | 00:00:08    | 00:00:10  |             |           | 00:01:13 | 00:01:16 | 00:01:13    | 00:01:15  |
 
-Scenario: Timings specified on div shall be removed
-     Given an xml file <xml_file> 
-     When  it has div begin time <div_begin> 
-     And   it has div end time <div_end>
-     And   it has body begin time <body_begin>
-     And   it has body end time <body_end>
-     And   it has p begin time <p_begin>
-     And   it has p end time <p_end>
-     And   it has p1 begin time <p1_begin>
-     And   it has p1 end time <p1_end>
-     And   it has span1 begin time <span1_begin>
-     And   it has span1 end time <span1_end>
-     When  the document is generated
-     And   the EBU-TT-Live document is converted to EBU-TT-D
-     Then  EBUTTD document is valid
+  Scenario: Timings specified on div shall be removed
+    Given an xml file <xml_file>
+    When  it has div begin time <div_begin>
+    And   it has div end time <div_end>
+    And   it has body begin time <body_begin>
+    And   it has body end time <body_end>
+    And   it has p begin time <p_begin>
+    And   it has p end time <p_end>
+    And   it has p1 begin time <p1_begin>
+    And   it has p1 end time <p1_end>
+    And   it has span1 begin time <span1_begin>
+    And   it has span1 end time <span1_end>
+    When  the document is generated
+    And   the EBU-TT-Live document is converted to EBU-TT-D
+    Then  EBUTTD document is valid
 
-   Examples:
-    | body_begin| body_end | div_begin  | div_end  | p_begin  | p_end    | span1_begin | span1_end  | p1_begin | p1_end   |
-    | 00:01:10  | 00:01:30 | 00:01:00   | 00:01:30 | 00:01:00 | 00:01:30 | 00:00:08    |  00:00:20  | 00:01:13 | 00:01:15 |
-    |           |          | 00:01:00   | 00:01:30 | 00:01:00 | 00:01:30 | 00:00:08    |  00:00:20  |          |          |
-    | 00:01:10  | 00:01:30 |            |          | 00:01:00 | 00:01:30 | 00:00:08    |  00:00:20  |          |          |
-    | 00:01:10  | 00:01:30 | 00:01:00   | 00:01:30 |          |          | 00:00:08    |  00:00:20  |          |          |
-    | 00:01:10  | 00:01:30 | 00:01:00   | 00:01:30 | 00:01:00 | 00:01:30 |             |            | 00:01:13 | 00:01:15 |
-   
+    Examples:
+      | body_begin | body_end | div_begin | div_end  | p_begin  | p_end    | span1_begin | span1_end | p1_begin | p1_end   |
+      | 00:01:10   | 00:01:30 | 00:01:00  | 00:01:30 | 00:01:00 | 00:01:30 | 00:00:08    | 00:00:20  | 00:01:13 | 00:01:15 |
+      |            |          | 00:01:00  | 00:01:30 | 00:01:00 | 00:01:30 | 00:00:08    | 00:00:20  |          |          |
+      | 00:01:10   | 00:01:30 |           |          | 00:01:00 | 00:01:30 | 00:00:08    | 00:00:20  |          |          |
+      | 00:01:10   | 00:01:30 | 00:01:00  | 00:01:30 |          |          | 00:00:08    | 00:00:20  |          |          |
+      | 00:01:10   | 00:01:30 | 00:01:00  | 00:01:30 | 00:01:00 | 00:01:30 |             |           | 00:01:13 | 00:01:15 |

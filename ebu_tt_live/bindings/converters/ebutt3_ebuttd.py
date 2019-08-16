@@ -157,8 +157,8 @@ class EBUTT3EBUTTDConverter(object):
                 new_elem.append(item)
 
         metadata = headMetadata_type()
-        metadata.documentMetadata = documentMetadata(conformsToStandard = [
-            'http://www.w3.org/ns/ttml/profile/imsc1/text', 
+        metadata.documentMetadata = documentMetadata(conformsToStandard=[
+            'http://www.w3.org/ns/ttml/profile/imsc1/text',
             'urn:ebu:tt:distribution:2018-04'
         ])
         new_elem.metadata = metadata
@@ -253,7 +253,7 @@ class EBUTT3EBUTTDConverter(object):
             *self.convert_children(body_in, dataset),
             agent=body_in.agent,
             role=body_in.role,
-            style = body_in.style
+            style=body_in.style
         )
         return new_elem
 

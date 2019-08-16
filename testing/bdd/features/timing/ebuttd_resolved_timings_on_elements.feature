@@ -1,3 +1,4 @@
+@timing @document @ebuttd_conversion 
 Feature: Resolving timings on elements
 
   Examples:

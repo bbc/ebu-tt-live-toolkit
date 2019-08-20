@@ -1,8 +1,7 @@
-from ebu_tt_live.errors import SemanticValidationError
+from ebu_tt_live.errors import SemanticValidationError, RegionExtendingOutsideDocumentError
 from ebu_tt_live.strings import ERR_SEMANTIC_STYLE_MISSING, ERR_SEMANTIC_VALIDATION_EXPECTED, \
     ERR_SEMANTIC_REGION_MISSING
-
-
+import re
 class SizingValidationMixin(object):
     """
     This is meant to validate that the sizing types correspond to the tt element and head region definitions.
@@ -193,3 +192,14 @@ class RegionedElementMixin(object):
         if self._validated_region is not None:
             if self._validated_region in orphans:
                 orphans.remove(self._validated_region)
+
+    def _semantic_validate_region_extent(self, dataset):
+        if 'region'in dataset:
+            region = dataset['region']
+            if region is not None:
+                if "%" in self.inherited_region.origin: # checks if it is percentage based origin/extent as pixels can be > 100
+                    digits = re.compile('\d+(?:\.\d+)?')       
+                    l1 =  [float(origin) for origin in digits.findall(region.origin)] #l1
+                    r1 =  [float(extent) for extent in digits.findall(region.extent)] #r1 
+                    if l1[0] < 0 or (l1[0]+r1[0]) > 100 or l1[1] < 0 or (l1[1]+ r1[1]) > 100:
+                        raise RegionExtendingOutsideDocumentError(self)

@@ -1,9 +1,10 @@
 from datetime import timedelta
 
 from ebu_tt_live.bindings import get_xml_parsing_context
-from ebu_tt_live.errors import LogicError, SemanticValidationError, OutsideSegmentError
+from ebu_tt_live.errors import LogicError, SemanticValidationError, OutsideSegmentError, OverlappingActiveElementsError
 from ebu_tt_live.strings import ERR_SEMANTIC_VALIDATION_TIMING_TYPE
-
+import itertools
+import re
 
 class TimingValidationMixin(object):
     """
@@ -277,6 +278,24 @@ class TimingValidationMixin(object):
 
 
     # This section covers the copying operations of timed containers.
+
+    def _semantic_validate_active_areas(self, dataset):
+        # Get the document instance
+        doc = dataset['document']
+        if self.begin is not None and self.end is not None:
+            affected_elements = doc.lookup_range_on_timeline(self.begin.timedelta, self.end.timedelta)
+            if len(affected_elements) > 1:
+                for elem1, elem2 in itertools.combinations(affected_elements, 2):
+                    if hasattr(elem1, 'region') and hasattr(elem2, 'region'): #checking if the elements have regions
+                        # Getting coordinates from the attribute eg ["14% 16%"]
+                        digits = re.compile('\d+(?:\.\d+)?')
+                        l1 =  [float(origin) for origin in digits.findall(elem1.inherited_region.origin)] #l1
+                        l2 =  [float(origin) for origin in digits.findall(elem2.inherited_region.origin)] #l2
+                        r1 =  [float(extent) for extent in digits.findall(elem1.inherited_region.extent)] #r1
+                        r2 =  [float(extent) for extent in digits.findall(elem2.inherited_region.extent)] #r2
+                        # Checking for overlapping rectangles
+                        if l1[0] < r2[0] and r1[0] > l2[0] and l1[1] > r2[1] and r1[1] < l2[1]:
+                            raise OverlappingActiveElementsError(self)
 
     def is_in_segment(self, begin=None, end=None):
         if begin is not None:

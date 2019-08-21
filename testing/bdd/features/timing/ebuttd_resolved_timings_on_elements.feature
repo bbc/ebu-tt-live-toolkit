@@ -1,13 +1,15 @@
-@timing @document @ebuttd_conversion 
+@timing @document @ebuttd_conversion
 Feature: Resolving timings on elements
 
-  Examples:
-    | xml_file                   |
-    | resolved_time_elements.xml |
+    Examples:
+      | xml_file                   |
+      | resolved_time_elements.xml |
 
   Scenario: Timings present on both p and span elements
     Given an xml file <xml_file>
-    When  it has p begin time <p_begin>
+    When   it has body begin time <body_begin>
+    And   it has body end time <body_end>
+    And  it has p begin time <p_begin>
     And   it has p end time <p_end>
     And   it has span1 begin time <span1_begin>
     And   it has span1 end time <span1_end>
@@ -20,12 +22,14 @@ Feature: Resolving timings on elements
     When  the document is generated
     And   the EBU-TT-Live document is converted to EBU-TT-D
     Then  EBUTTD document is valid
+    Then  it has computed begin time <computed_begin>
+    And   it has computed end time <computed_end>
 
     Examples:
-      | p_begin  | p_end    | span1_begin | span1_end | span2_begin | span2_end | p1_begin | p1_end   | span3_begin | span3_end |
-      | 00:01:00 | 00:01:11 | 00:00:08    | 00:00:10  | 00:00:11    | 00:00:12  | 00:01:13 | 00:01:16 | 00:01:14    | 00:01:15  |
-      | 00:01:00 | 00:01:11 |             |           |             |           | 00:01:13 | 00:01:16 |             |           |
-      | 00:01:00 | 00:01:11 | 00:00:08    | 00:00:10  |             |           | 00:01:13 | 00:01:16 | 00:01:13    | 00:01:15  |
+      | body_begin | body_end | p_begin    | p_end      | span1_begin | span1_end  | span2_begin | span2_end | p1_begin | p1_end   | span3_begin | span3_end | computed_begin | computed_end |
+      | 00:00:10.0 |          | 00:00:11.0 |            | 00:00:01.0  | 00:00:20.0 |             |           |          |          |             |           | 00:00:10.0     | 00:00:41.0   |
+      |            |          |            |            |             |            |             |           | 00:01:13 |          | 00:00:01.0  | 00:00:20  | 00:01:13.0     | 00:01:33.0   |
+      |            |          | 00:00:10.0 | 00:00:11.0 | 00:00:08    | 00:00:10   |             |           | 00:00:13 |          | 00:00:13.0  | 00:00:15  | 00:00:10.0     | 00:00:28.0   |
 
   Scenario: Timings specified on div shall be removed
     Given an xml file <xml_file>

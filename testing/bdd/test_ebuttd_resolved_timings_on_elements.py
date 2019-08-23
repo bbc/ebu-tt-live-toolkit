@@ -3,21 +3,22 @@ import xml.etree.ElementTree as ET
 
 scenarios('features/timing/ebuttd_resolved_timings_on_elements.feature')
 
-@then('element p has begin time <p_computed_begin_time>')
+@then('p computed begin time is <p_computed_begin_time>')
 def then_it_has_p_computed_time(test_context, p_computed_begin_time):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/')
     document_generated_p_begin_time = elements[0].get('begin')
-    assert '' == document_generated_p_begin_time
+    print(document.get_xml())
+    assert p_computed_begin_time == document_generated_p_begin_time
 
-@then('element p has end time <p_computed_end_time>')
+@then('p computed end time is <p_computed_end_time>')
 def then_it_has_p_computed_time(test_context, p_computed_end_time):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/')
     document_generated_p_end_time = elements[0].get('end')
-    assert None == document_generated_p_end_time
+    assert p_computed_end_time == document_generated_p_end_time
 
 
 @then('span1 computed begin time is <span1_computed_begin_time>')
@@ -65,3 +66,4 @@ def then_no_timings_present_on_p(test_context):
     for p_element in p_elements:
         assert 'begin' not in p_element.keys()
         assert 'end' not in p_element.keys()
+

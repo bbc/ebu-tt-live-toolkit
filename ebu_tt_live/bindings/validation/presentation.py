@@ -194,7 +194,7 @@ class RegionedElementMixin(object):
                 orphans.remove(self._validated_region)
 
     def _semantic_validate_region_extent(self, dataset):
-        if 'region'in dataset:
+        if 'region' in dataset:
             region = dataset['region']
             if region is not None:
                 if "%" in self.inherited_region.origin: # checks if it is percentage based origin/extent as pixels can be > 100
@@ -203,3 +203,4 @@ class RegionedElementMixin(object):
                     r1 =  [float(extent) for extent in digits.findall(region.extent)] #r1 
                     if l1[0] < 0 or (l1[0]+r1[0]) > 100 or l1[1] < 0 or (l1[1]+ r1[1]) > 100:
                         raise RegionExtendingOutsideDocumentError(self)
+                        

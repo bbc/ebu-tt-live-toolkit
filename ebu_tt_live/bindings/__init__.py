@@ -724,7 +724,7 @@ class p_type(RegionedElementMixin, LiveStyledElementMixin, SubtitleContentContai
     def _semantic_after_traversal(self, dataset, element_content=None, parent_binding=None):
         self._semantic_postprocess_timing(dataset=dataset, element_content=element_content)
         self._semantic_manage_timeline(dataset=dataset, element_content=element_content)
-        self._semantic_validate_region_extent(dataset)
+        self._semantic_validate_region_extent(dataset=dataset)
         self._semantic_validate_active_areas(dataset=dataset)
         self._semantic_unset_region(dataset=dataset)
         self._semantic_pop_styles(dataset=dataset)
@@ -872,7 +872,7 @@ class div_type(ContentContainerMixin, IDMixin, RegionedElementMixin, LiveStyledE
 
     def _semantic_after_traversal(self, dataset, element_content=None, parent_binding=None):
         self._semantic_postprocess_timing(dataset=dataset, element_content=element_content)
-        self._semantic_validate_region_extent(dataset)
+        self._semantic_validate_region_extent(dataset=dataset)
         self._semantic_unset_region(dataset=dataset)
 
     def _semantic_before_copy(self, dataset, element_content=None):

@@ -38,6 +38,11 @@ class EBUTT3EBUTTDConverter(object):
         if time_base == 'smpte':
             raise NotImplementedError()
 
+    def _process_timing_from_timedelta(self, timing_type):
+        if timing_type is None:
+            return None
+        return ebuttdt.FullClockTimingType.from_timedelta(timing_type)
+
     def _adjusted_font_style_map(self):
         return self._semantic_dataset.setdefault(self._dataset_key_for_font_styles, {})
 
@@ -268,12 +273,13 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_p(self, p_in, dataset):
-        #added to remove timings when timings are present on child elements
+        if p_in.pushed_computed_begin_time:
+            p_in.begin = self._process_timing_from_timedelta(p_in.pushed_computed_begin_time)
+        if p_in.pushed_computed_end_time:
+            p_in.end = self._process_timing_from_timedelta(p_in.pushed_computed_end_time)
         if p_in.is_timed_leaf() == False:
-            for span in p_in.span:
-                if span.begin and span.end:
-                    p_in.begin = None
-                    p_in.end = None  
+            p_in.begin = None
+            p_in.end = None
         new_elem = d_p_type(
             *self.convert_children(p_in, dataset),
             space=p_in.space,
@@ -289,6 +295,10 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_span(self, span_in, dataset):
+        if span_in.pushed_computed_begin_time:
+             span_in.begin = self._process_timing_from_timedelta(span_in.pushed_computed_begin_time)
+        if span_in.pushed_computed_end_time:
+             span_in.end = self._process_timing_from_timedelta(span_in.pushed_computed_end_time)
         new_elem = d_span_type(
             *self.convert_children(span_in, dataset),
             space=span_in.space,

@@ -13,6 +13,8 @@ class TimingValidationMixin(object):
 
     _computed_begin_time = None
     _computed_end_time = None
+    _pushed_computed_begin_time = None
+    _pushed_computed_end_time = None
 
     @property
     def computed_begin_time(self):
@@ -21,6 +23,14 @@ class TimingValidationMixin(object):
     @property
     def computed_end_time(self):
         return self._computed_end_time
+
+    @property
+    def pushed_computed_begin_time(self):
+        return self._pushed_computed_begin_time
+
+    @property
+    def pushed_computed_end_time(self):
+        return self._pushed_computed_end_time
 
     def _pre_timing_set_attribute(self, attr_en, attr_use):
         # Pass in the timing_attribute_name to the context to help the timing type constructor refuse creation
@@ -264,6 +274,17 @@ class TimingValidationMixin(object):
 
         # Register on timeline
         doc.add_to_timeline(self)
+
+    def _semantic_pushing_computed_time(self, dataset):
+        if dataset['timing_syncbase'] is not None and dataset['timing_syncbase'] > timedelta(0):
+            if self.begin is not None and self.end is not None:
+                self._pushed_computed_begin_time = self.computed_begin_time
+                self._pushed_computed_end_time = self.computed_end_time
+            elif self.begin is None or self.end is None:
+                if self.computed_begin_time is not None:
+                    self._pushed_computed_begin_time = self.computed_begin_time
+                if self.computed_end_time is not None:
+                    self._pushed_computed_end_time = self.computed_end_time
 
     # This section covers the copying operations of timed containers.
 

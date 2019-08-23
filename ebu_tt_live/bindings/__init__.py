@@ -791,6 +791,7 @@ class span_type(LiveStyledElementMixin, SubtitleContentContainer, raw.span_type)
 
     def _semantic_after_traversal(self, dataset, element_content=None, parent_binding=None):
         self._semantic_postprocess_timing(dataset=dataset, element_content=element_content)
+        self._semantic_pushing_computed_time(dataset=dataset)
         self._semantic_manage_timeline(dataset=dataset, element_content=element_content)
         self._semantic_pop_styles(dataset=dataset)
 

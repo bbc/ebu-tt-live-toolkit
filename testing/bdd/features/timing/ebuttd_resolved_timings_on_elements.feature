@@ -16,6 +16,7 @@ Feature: Resolving timings on elements
     Then  EBUTTD document is valid
     And   span1 computed begin time is <span1_computed_begin_time>
     And   span1 computed end time is <span1_computed_end_time>
+    And   no timings present on p
 
 
     Examples:

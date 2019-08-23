@@ -55,3 +55,13 @@ def then_it_has_span2_computed_end_time(test_context, span2_computed_end_time):
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/')
     document_generated_span_end_time = elements[1].get('end')
     assert span2_computed_end_time == document_generated_span_end_time
+
+
+@then('no timings present on p')
+def then_no_timings_present_on_p(test_context):
+    document = test_context['ebuttd_document']
+    tree = ET.fromstring(document.get_xml())
+    p_elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/')
+    for p_element in p_elements:
+        assert 'begin' not in p_element.keys()
+        assert 'end' not in p_element.keys()

@@ -35,8 +35,8 @@
   </tt:head>
   <tt:body begin="500ms" dur="00:00:05">
       <tt:div>
-        <tt:p begin="500ms" end="3420ms" xml:id="ID006">
-          <tt:span  style="{{text_style}}" >Some example text...</tt:span>
+        <tt:p begin="500ms" end="3420ms" xml:id="ID006" {% if text_region %} region="{{text_region}}" {% endif %}>
+          <tt:span {% if text_style %} style="{{text_style}}" {% endif %} >Some example text...</tt:span>
           <tt:br/>
           <tt:span>And another line</tt:span>
         </tt:p>

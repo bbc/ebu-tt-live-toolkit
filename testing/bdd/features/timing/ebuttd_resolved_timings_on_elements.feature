@@ -14,13 +14,13 @@ Feature: Resolving timings on elements
     When  the document is generated
     And   the EBU-TT-Live document is converted to EBU-TT-D
     Then  EBUTTD document is valid
-    And   span1 computed begin time is <span1_computed_begin_time>
-    And   span1 computed end time is <span1_computed_end_time>
+    And   span1 resulted begin time is <span1_resulted_begin_time>
+    And   span1 resulted end time is <span1_resulted_end_time>
     And   no timings present on p
 
 
     Examples:
-      | p_begin  | p_end    | span1_begin | span1_end | span1_computed_begin_time | span1_computed_end_time |
+      | p_begin  | p_end    | span1_begin | span1_end | span1_resulted_begin_time | span1_resulted_end_time |
       | 00:00:05 |          | 00:00:02    | 00:00:08  | 00:00:07                  | 00:00:13                |
       | 00:00:10 | 00:00:15 | 00:00:01    | 00:00:02  | 00:00:11                  | 00:00:12                |
       | 00:00:10 | 00:00:13 |             | 00:00:04  | 00:00:10                  | 00:00:13                |
@@ -38,14 +38,17 @@ Feature: Resolving timings on elements
     When  the document is generated
     And   the EBU-TT-Live document is converted to EBU-TT-D
     Then  EBUTTD document is valid
-    And   span1 computed begin time is <span1_computed_begin_time>
-    And   span1 computed end time is <span1_computed_end_time>
+    And   span1 resulted begin time is <span1_resulted_begin_time>
+    And   span1 resulted end time is <span1_resulted_end_time>
     And   no timings present on p
+    And   no timings present on div
+    And   no timings present on body
+
 
     Examples:
-      | body_begin | body_end | div_begin | div_end  | p_begin  | p_end    | span1_begin | span1_end | span1_computed_begin_time | span1_computed_end_time |
-      | 00:01:10   |          | 00:00:01  | 00:00:04 | 00:00:02 | 00:00:03 | 00:00:08    | 00:00:10  | 00:01:21                  | 00:01:14                |
-      | 00:01:00   |          | 00:00:02  | 00:00:04 | 00:00:10 | 00:00:11 | 00:00:08    | 00:00:10  | 00:01:20                  | 00:01:04                |
+      | body_begin | body_end | div_begin | div_end  | p_begin  | p_end    | span1_begin | span1_end | span1_resulted_begin_time | span1_resulted_end_time |
+      | 00:01:30   |          | 00:00:01  | 00:00:20 | 00:00:02 | 00:00:13 | 00:00:05    | 00:00:07  | 00:01:38                  | 00:01:40                |
+      | 00:01:00   |          | 00:00:02  | 00:00:24 | 00:00:01 | 00:00:12 | 00:00:01    | 00:00:04  | 00:01:04                  | 00:01:07                |
       | 00:01:00   | 00:01:40 | 00:00:02  |          |          |          | 00:00:08    | 00:00:20  | 00:01:10                  | 00:01:22                |
 
   Scenario: Timings specified on div, body shall be removed
@@ -58,11 +61,13 @@ Feature: Resolving timings on elements
     And   it has p end time <p_end>
     When  the document is generated
     And   the EBU-TT-Live document is converted to EBU-TT-D
-    Then  p computed begin time is <p_computed_begin_time>
-    And   p computed end time is <p_computed_end_time>
+    Then  p resulted begin time is <p_resulted_begin_time>
+    And   p resulted end time is <p_resulted_end_time>
+    And   no timings present on div
+    And   no timings present on body
 
     Examples:
-      | body_begin | body_end | div_begin | div_end  | p_begin  | p_end    | p_computed_begin_time | p_computed_end_time |
+      | body_begin | body_end | div_begin | div_end  | p_begin  | p_end    | p_resulted_begin_time | p_resulted_end_time |
       | 00:01:10   |          | 00:00:01  | 00:00:04 | 00:00:02 | 00:00:03 | 00:01:13              | 00:01:14            |
       | 00:01:00   |          | 00:00:02  | 00:00:04 | 00:00:10 | 00:00:11 | 00:01:12              | 00:01:04            |
       

@@ -273,18 +273,11 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_p(self, p_in, dataset):
-        if p_in.pushed_computed_begin_time:
-            p_in.begin = self._process_timing_from_timedelta(p_in.pushed_computed_begin_time)
-        if p_in.pushed_computed_end_time:
-            p_in.end = self._process_timing_from_timedelta(p_in.pushed_computed_end_time)
-        if p_in.is_timed_leaf() == False:
-            p_in.begin = None
-            p_in.end = None
         new_elem = d_p_type(
             *self.convert_children(p_in, dataset),
             space=p_in.space,
-            begin=self._process_timing_type(p_in.begin, dataset=dataset),
-            end=self._process_timing_type(p_in.end, dataset=dataset),
+            begin=self._process_timing_from_timedelta(p_in.computed_begin_time) if p_in.is_timed_leaf() else None  ,
+            end=self._process_timing_from_timedelta(p_in.computed_end_time) if p_in.is_timed_leaf() else None,
             lang=p_in.lang,
             id=p_in.id,
             region=p_in.region,
@@ -295,15 +288,11 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_span(self, span_in, dataset):
-        if span_in.pushed_computed_begin_time:
-             span_in.begin = self._process_timing_from_timedelta(span_in.pushed_computed_begin_time)
-        if span_in.pushed_computed_end_time:
-             span_in.end = self._process_timing_from_timedelta(span_in.pushed_computed_end_time)
         new_elem = d_span_type(
             *self.convert_children(span_in, dataset),
             space=span_in.space,
-            begin=self._process_timing_type(span_in.begin, dataset=dataset),
-            end=self._process_timing_type(span_in.end, dataset=dataset),
+            begin=self._process_timing_from_timedelta(span_in.computed_begin_time),
+            end=self._process_timing_from_timedelta(span_in.computed_end_time),
             lang=span_in.lang,
             id=span_in.id,
             style=span_in.style,

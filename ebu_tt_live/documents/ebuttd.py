@@ -1,6 +1,6 @@
 import logging
 from xml.dom import minidom
-from .base import SubtitleDocument, TimeBase, EBUTTDValidationMixin
+from .base import SubtitleDocument, TimeBase
 from ebu_tt_live import bindings
 from ebu_tt_live.bindings.converters.ebutt3_ebuttd import EBUTT3EBUTTDConverter
 from ebu_tt_live.documents.ebutt3 import TimelineUtilMixin
@@ -33,7 +33,7 @@ class EBUTTDDocument(SubtitleDocument, TimelineUtilMixin):
         self._ebuttd_content.validateBinding(
             document=self
         )
-        
+
     @classmethod
     def create_from_xml(cls, xml):
         # NOTE: This is a workaround to make the bindings accept separate root element identities

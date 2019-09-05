@@ -183,6 +183,17 @@ class RegionedElementMixin(object):
                     region=self.region
                 ))
 
+    def _semantic_set_d_region(self, dataset, region_type):
+        if self.region is not None:
+            try:
+                region = dataset['ttd_element'].get_element_by_id(self.region, region_type)
+                dataset['region'] = region
+                self._validated_region = region
+            except LookupError:
+                raise SemanticValidationError(ERR_SEMANTIC_REGION_MISSING.format(
+                    region=self.region
+                ))
+
     def _semantic_unset_region(self, dataset):
         if self.region is not None:
             dataset['region'] = None
@@ -193,14 +204,5 @@ class RegionedElementMixin(object):
             if self._validated_region in orphans:
                 orphans.remove(self._validated_region)
 
-    def _semantic_validate_region_extent(self, dataset):
-        if 'region' in dataset:
-            region = dataset['region']
-            if region is not None:
-                if "%" in self.inherited_region.origin: # checks if it is percentage based origin/extent as pixels can be > 100
-                    digits = re.compile('\d+(?:\.\d+)?')       
-                    l1 =  [float(origin) for origin in digits.findall(region.origin)] #l1
-                    r1 =  [float(extent) for extent in digits.findall(region.extent)] #r1 
-                    if l1[0] < 0 or (l1[0]+r1[0]) > 100 or l1[1] < 0 or (l1[1]+ r1[1]) > 100:
-                        raise RegionExtendingOutsideDocumentError(self)
+
                         

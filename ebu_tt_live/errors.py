@@ -1,5 +1,5 @@
 
-from .strings import ERR_DOCUMENT_EXTENT_MISSING, ERR_EBUTTD_OVERLAPPING_ACTIVE_AREAS, ERR_EBUTTD_REGION_EXTENDING_OUTSIDE_DOCUMENT
+from .strings import ERR_DOCUMENT_EXTENT_MISSING, ERR_EBUTTD_OVERLAPPING_ACTIVE_AREAS, ERR_EBUTTD_REGION_EXTENDING_OUTSIDE_DOCUMENT, ERR_REGION_ORIGIN_TYPE, ERR_REGION_EXTENT_TYPE
 
 
 class ComponentCompatError(TypeError):
@@ -118,3 +118,22 @@ class RegionExtendingOutsideDocumentError(Exception):
 
     def __str__(self):
         return ERR_EBUTTD_REGION_EXTENDING_OUTSIDE_DOCUMENT.format(type=type(self._attribute), value=self._attribute)
+
+
+class InvalidRegionOriginType(Exception):#
+    _attribute = None
+
+    def __init__(self, attribute):
+        self._attribute = attribute
+
+    def __str__(self):
+        return ERR_REGION_ORIGIN_TYPE.format(type=type(self._attribute), value=self._attribute)
+
+class InvalidRegionExtentType(Exception):#
+    _attribute = None
+
+    def __init__(self, attribute):
+        self._attribute = attribute
+
+    def __str__(self):
+        return ERR_REGION_EXTENT_TYPE.format(type=type(self._attribute), value=self._attribute)

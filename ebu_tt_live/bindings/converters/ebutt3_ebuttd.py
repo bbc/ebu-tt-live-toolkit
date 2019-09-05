@@ -136,6 +136,7 @@ class EBUTT3EBUTTDConverter(object):
     def convert_tt(self, tt_in, dataset):
         dataset['timeBase'] = tt_in.timeBase
         dataset['cellResolution'] = tt_in.cellResolution
+        dataset['extent'] = tt_in.extent
         new_elem = ttd(
             head=self.convert_element(tt_in.head, dataset),
             body=self.convert_element(tt_in.body, dataset),
@@ -193,10 +194,14 @@ class EBUTT3EBUTTDConverter(object):
         if origin is not None:
             if isinstance(origin, ebuttdt.cellOriginType):
                 origin = ebuttdt.convert_cell_region_to_percentage(origin, dataset['cellResolution'])
+            elif isinstance(origin, ebuttdt.pixelOriginType):
+                origin = ebuttdt.convert_pixel_region_to_percentage(origin, dataset['extent'])
         extent = region_in.extent
         if extent is not None:
             if isinstance(extent, ebuttdt.cellExtentType):
                 extent = ebuttdt.convert_cell_region_to_percentage(extent, dataset['cellResolution'])
+            elif isinstance(extent, ebuttdt.pixelExtentType):
+                extent = ebuttdt.convert_pixel_region_to_percentage(extent, dataset['extent'])
         new_elem = d_region_type(
             *self.convert_children(region_in, dataset),
             id=region_in.id,

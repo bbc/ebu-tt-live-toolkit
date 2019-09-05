@@ -39,6 +39,8 @@ ERR_WS_NOT_PRODUCER = gettext('This socket does not belong to a producer.')
 ERR_WS_NOT_CONSUMER = gettext('This socket does not belong to a consumer')
 ERR_WS_SEND_VIA_CONSUMER = gettext('Consumer socket cannot be used to send data')
 ERR_WS_RECEIVE_VIA_PRODUCER = gettext('Producer socket cannot be used to receive data')
+ERR_REGION_ORIGIN_TYPE = gettext('EBUTTD origin in region must be in percentages')
+ERR_REGION_EXTENT_TYPE = gettext('EBUTTD extent in region must be in percentages')
 
 ERR_CONF_ONE_BACKEND_ONLY = gettext('There is only one backend allowed. Already created: {backend1}, New: {backend2}')
 ERR_CONF_NO_SUCH_NODE = gettext('No such node type found: {node_type}')

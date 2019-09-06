@@ -25,23 +25,23 @@ def when_it_contains_p_element(test_context, template_dict, p_id):
     test_context[p_id] = p_element
 
 @when(parsers.parse('p_element "{p_id}" has attribute "{attribute}" set to <p1_begin>'))
-def when_p1_has_attribute_extent(test_context, p_id, attribute ,p1_begin):
+def when_p1_has_attribute_begin(test_context, p_id, attribute ,p1_begin):
     test_context[p_id][attribute] = p1_begin
 
 @when(parsers.parse('p_element "{p_id}" has attribute "{attribute}" set to <p1_end>'))
-def when_p1_has_attribute_extent(test_context, p_id, attribute ,p1_end):
+def when_p1_has_attribute_end(test_context, p_id, attribute ,p1_end):
     test_context[p_id][attribute] = p1_end
 
 @when(parsers.parse('p_element "{p_id}" has attribute "{attribute}" set to <p2_begin>'))
-def when_p2_has_attribute_extent(test_context, p_id, attribute ,p2_begin):
+def when_p2_has_attribute_begin(test_context, p_id, attribute ,p2_begin):
     test_context[p_id][attribute] = p2_begin
 
 @when(parsers.parse('p_element "{p_id}" has attribute "{attribute}" set to <p2_end>'))
-def when_p2_has_attribute_extent(test_context, p_id, attribute ,p2_end):
+def when_p2_has_attribute_end(test_context, p_id, attribute ,p2_end):
     test_context[p_id][attribute] = p2_end
 
 @when(parsers.parse('p_element "{p_id}" has attribute "{attribute}" set to "{value}"'))
-def when_region1_has_attribute_origin(test_context, p_id, attribute ,value):
+def when_p_element_has_attribute(test_context, p_id, attribute ,value):
     test_context[p_id][attribute] = value
 
 @when(parsers.parse('region "{region_id}" has attribute "{attribute}" set to <r1_origin>'))

@@ -46,8 +46,9 @@ Feature: Compute style attribute on a single EBU-TT Live element
     Given an xml file <xml_file>
     When it contains style S1 with <style_attribute> value <S1_value>
     And it contains style S2 with <style_attribute> value <S2_value>
+    And it contains style S3 with <style_attribute> value <S3_value>
     Then document is invalid
 
     Examples:
-    | S1_value | S2_value | style_attribute |
-    | S2       | S1       | style           |
+    | S1_value | S2_value | S3_value | style_attribute |
+    | S2       | S3       | S1       | style           |

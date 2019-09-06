@@ -1385,5 +1385,23 @@ class d_p_type(IDMixin, TimingValidationMixin, SemanticValidationMixin, Regioned
         self._semantic_manage_timeline(
         dataset=dataset, element_content=element_content)
         self._semantic_validate_active_areas(dataset=dataset)
+        self._semantic_validate_is_timed_leaf(dataset=dataset)
+
 
 raw.d_p_type._SetSupersedingClass(d_p_type)
+
+
+class d_span_type(IDMixin, TimingValidationMixin,StyledElementMixin ,SemanticValidationMixin, RegionedElementMixin, raw.d_span_type):
+
+    _attr_en_pre = {
+        (pyxb.namespace.ExpandedName(None, 'begin')).uriTuple(): TimingValidationMixin._pre_timing_set_attribute,
+        (pyxb.namespace.ExpandedName(None, 'end')).uriTuple(): TimingValidationMixin._pre_timing_set_attribute
+    }
+
+    def _semantic_before_traversal(self,dataset,element_content=None, parent_binding=None):
+         self._semantic_preprocess_timing(
+             dataset=dataset, element_content=element_content)
+
+    def _semantic_after_traversal(self, dataset, element_content=None, parent_binding=None):
+        self._semantic_postprocess_timing(
+                dataset=dataset, element_content=element_content)

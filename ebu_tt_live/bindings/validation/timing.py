@@ -315,10 +315,11 @@ class TimingValidationMixin(object):
     def _semantic_validate_active_areas(self, dataset):
         # Get the document instance
         doc = dataset['document']
-        if self.begin is not None and self.end is not None:
-            affected_elements = doc.lookup_range_on_timeline(self.begin.timedelta, self.end.timedelta)
+        if self.computed_begin_time is not None and self.computed_end_time is not None:
+            affected_elements = doc.lookup_range_on_timeline(self.computed_begin_time, self.computed_end_time)
             if len(affected_elements) > 1:
                 for elem1, elem2 in itertools.combinations(affected_elements, 2):
+                  if elem1 != elem2:
                     if elem1.region is not None and elem2.region is not None: #checking if the elements have regions
                         # Getting coordinates from the attribute eg ["14% 16%"]
                         elem1_region = dataset["elements_by_id"][elem1.region]
@@ -334,7 +335,12 @@ class TimingValidationMixin(object):
                         # Checking for overlapping rectangles
                         if l1[0] < r2[0] and r1[0] > l2[0] and l1[1] > r2[1] and r1[1] < l2[1]:
                             raise OverlappingActiveElementsError(self)
-
+    
+    def _semantic_validate_is_timed_leaf(self, dataset):
+        if (len(self.span)) > 0:
+            self.begin = None
+            self.end = None
+ 
     def is_in_segment(self, begin=None, end=None):
         if begin is not None:
             if self.computed_end_time is not None and self.computed_end_time <= begin:

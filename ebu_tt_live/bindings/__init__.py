@@ -1271,9 +1271,9 @@ class d_region_type(SemanticValidationMixin,IDMixin, raw.d_region_type):
     def _validateBinding_vx(self):
         origins = self.origin.split(" ")
         extents = self.extent.split(" ")
-        if isinstance(self.origin, ebuttdt.percentageOriginType):
+        if not isinstance(self.origin, ebuttdt.percentageOriginType) and self.origin is not None:
             raise InvalidRegionOriginType(self)
-        if isinstance(self.extent, ebuttdt.percentageExtentType):
+        if not isinstance(self.extent, ebuttdt.percentageExtentType) and self.extent is not None:
             raise InvalidRegionExtentType(self)
         l1 = [float(origin.strip('%')) for origin in origins]  # l1
         r1 = [float(extent.strip('%')) for extent in extents]  # r1

@@ -92,6 +92,7 @@ class TimingValidationMixin(object):
         if 'ttd_element' in self._semantic_dataset:
             self._computed_begin_time = self._semantic_dataset['timing_syncbase']
         else:
+            #assuming that this is a live document
             if self._semantic_dataset['availability_time']:
                 self._computed_begin_time = max(self._semantic_dataset['timing_syncbase'],
                                                 self._semantic_dataset['availability_time'])
@@ -245,36 +246,10 @@ class TimingValidationMixin(object):
     # The inspected values are all attributes of the element so they do not
     # take part in the traversal directly we process them in the timed element's context instead: body, div, p, span
     def _semantic_timebase_validation(self, dataset, element_content):
-        time_base = dataset["tt_element"].timeBase
-        if self.begin is not None:
-            if hasattr(self.begin, 'compatible_timebases'):
-                # Check typing of begin attribute against the timebase
-                timebases = self.begin.compatible_timebases()
-                if time_base not in timebases['begin']:
-                    raise SemanticValidationError(
-                        ERR_SEMANTIC_VALIDATION_TIMING_TYPE.format(
-                            attr_type=type(self.begin),
-                            attr_value=self.begin,
-                            attr_name='begin',
-                            time_base=time_base
-                        )
-                    )
-        if self.end is not None:
-            if hasattr(self.end, 'compatible_timebases'):
-                # Check typing of end attribute against the timebase
-                timebases = self.end.compatible_timebases()
-                if time_base not in timebases['end']:
-                    raise SemanticValidationError(
-                        ERR_SEMANTIC_VALIDATION_TIMING_TYPE.format(
-                            attr_type=type(self.end),
-                            attr_value=self.end,
-                            attr_name='end',
-                            time_base=time_base
-                        )
-                    )
-    #WIP current workaround for tt / ttd namespace
-    def _semantic_ttd_timebase_validation(self, dataset, element_content):
-        time_base = dataset["ttd_element"].timeBase
+        if 'tt_element' in dataset:
+            time_base = dataset['tt_element'].timeBase
+        else:
+            time_base = dataset['ttd_element'].timeBase
         if self.begin is not None:
             if hasattr(self.begin, 'compatible_timebases'):
                 # Check typing of begin attribute against the timebase
@@ -312,6 +287,7 @@ class TimingValidationMixin(object):
 
     # This section covers the copying operations of timed containers.
 
+    # this semantic validation only applies on ebu-tt-d type elements where the the origin and extent units are in %
     def _semantic_validate_active_areas(self, dataset):
         # Get the document instance
         doc = dataset['document']

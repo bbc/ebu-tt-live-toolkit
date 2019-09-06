@@ -756,7 +756,7 @@ class p_type(RegionedElementMixin, LiveStyledElementMixin, SubtitleContentContai
     def _semantic_after_subtree_copy(self, copied_instance, dataset, element_content=None):
         copied_instance._assert_empty_container()
         self._semantic_copy_apply_leaf_timing(
-            copied_instance=copied_instance, dataset=dataset ,element_content=element_content)
+            copied_instance=copied_instance, dataset=dataset, element_content=element_content)
         self._semantic_copy_verify_referenced_styles(dataset=dataset)
         self._semantic_copy_verify_referenced_region(dataset=dataset)
 
@@ -830,7 +830,7 @@ class span_type(LiveStyledElementMixin, SubtitleContentContainer, raw.span_type)
     def _semantic_after_subtree_copy(self, copied_instance, dataset, element_content=None):
         copied_instance._assert_empty_container()
         self._semantic_copy_apply_leaf_timing(
-            copied_instance=copied_instance, dataset=dataset ,element_content=element_content)
+            copied_instance=copied_instance, dataset=dataset, element_content=element_content)
         self._semantic_copy_verify_referenced_styles(dataset=dataset)
 
 
@@ -918,7 +918,7 @@ class div_type(ContentContainerMixin, IDMixin, RegionedElementMixin, LiveStyledE
     def _semantic_after_subtree_copy(self, copied_instance, dataset, element_content=None):
         copied_instance._assert_empty_container()
         self._semantic_copy_apply_leaf_timing(
-            copied_instance=copied_instance, dataset=dataset,element_content=element_content)
+            copied_instance=copied_instance, dataset=dataset, element_content=element_content)
         self._semantic_copy_verify_referenced_styles(dataset=dataset)
         self._semantic_copy_verify_referenced_region(dataset=dataset)
 
@@ -1200,7 +1200,7 @@ class d_tt_type(SemanticDocumentMixin, raw.d_tt_type):
         dataset['timing_begin_stack'] = []
         dataset['timing_end_stack'] = []
         dataset['timing_syncbase'] = timedelta()
-        dataset['ttd_element'] = self #WIP with the nap
+        dataset['ttd_element'] = self #WIP with the namespace
         dataset['styles_stack'] = []
         self._elements_by_id = {}
         dataset['elements_by_id'] = self._elements_by_id
@@ -1271,9 +1271,9 @@ class d_region_type(SemanticValidationMixin,IDMixin, raw.d_region_type):
     def _validateBinding_vx(self):
         origins = self.origin.split(" ")
         extents = self.extent.split(" ")
-        if "%" not in self.origin:
+        if isinstance(self.origin, ebuttdt.percentageOriginType):
             raise InvalidRegionOriginType(self)
-        if "%" not in self.extent:
+        if isinstance(self.extent, ebuttdt.percentageExtentType):
             raise InvalidRegionExtentType(self)
         l1 = [float(origin.strip('%')) for origin in origins]  # l1
         r1 = [float(extent.strip('%')) for extent in extents]  # r1
@@ -1300,7 +1300,7 @@ raw.d_styling_type._SetSupersedingClass(d_styling_type)
 
 
 class d_style_type(SemanticValidationMixin, IDMixin, raw.d_style_type):
-
+    
     @classmethod
     def create_default_value(cls):
         instance = cls(
@@ -1317,18 +1317,6 @@ raw.d_style_type._SetSupersedingClass(d_style_type)
 
 class d_body_type(SemanticValidationMixin, raw.d_body_type):
 
-    _attr_en_pre = {
-        (pyxb.namespace.ExpandedName(None, 'begin')).uriTuple(): BodyTimingValidationMixin._pre_timing_set_attribute,
-        (pyxb.namespace.ExpandedName(None, 'dur')).uriTuple(): BodyTimingValidationMixin._pre_timing_set_attribute,
-        (pyxb.namespace.ExpandedName(None, 'end')).uriTuple(): BodyTimingValidationMixin._pre_timing_set_attribute
-    }
-
-
-    def _semantic_before_traversal(self, dataset, element_content=None, parent_binding=None):
-       pass
-
-    def _semantic_after_traversal(self, dataset, element_content=None, parent_binding=None):
-        pass
 
     def _semantic_before_copy(self, dataset, element_content=None):
         self._assert_in_segment(
@@ -1336,7 +1324,7 @@ class d_body_type(SemanticValidationMixin, raw.d_body_type):
 
     def _semantic_after_subtree_copy(self, copied_instance, dataset, element_content=None):
         self._semantic_copy_apply_leaf_timing(
-        copied_instance=copied_instance, dataset=dataset ,element_content=element_content)
+        copied_instance=copied_instance, dataset=dataset, element_content=element_content)
         self._semantic_copy_verify_referenced_styles(dataset=dataset)
 
 raw.d_body_type._SetSupersedingClass(d_body_type)
@@ -1372,7 +1360,7 @@ class d_p_type(IDMixin, TimingValidationMixin, SemanticValidationMixin, Regioned
 
     def _semantic_before_traversal(self, dataset, element_content=None, parent_binding=None):
         self._semantic_register_id(dataset=dataset)
-        self._semantic_ttd_timebase_validation(
+        self._semantic_timebase_validation(
         dataset=dataset ,element_content=element_content)
         self._semantic_preprocess_timing(
         dataset=dataset, element_content=element_content)
@@ -1385,7 +1373,7 @@ class d_p_type(IDMixin, TimingValidationMixin, SemanticValidationMixin, Regioned
         self._semantic_manage_timeline(
         dataset=dataset, element_content=element_content)
         self._semantic_validate_active_areas(dataset=dataset)
-        self._semantic_validate_is_timed_leaf(dataset=dataset)
+        #self._semantic_validate_is_timed_leaf(dataset=dataset)
 
 
 raw.d_p_type._SetSupersedingClass(d_p_type)

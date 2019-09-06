@@ -17,7 +17,7 @@ from datetime import timedelta
 from pyxb import BIND
 from sortedcontainers import sortedset
 from sortedcontainers import sortedlist
-from ebu_tt_live.documents.time_utils import TimelineUtilMixin
+from ebu_tt_live.documents.time_utils import TimelineUtilMixin, TimingEventBegin, TimingEventEnd
 import gc
 
 

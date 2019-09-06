@@ -2,15 +2,15 @@
 Feature: Compute style attribute on a single EBU-TT Live element
 
   Examples:
-  | xml_file                      | cell_resolution | extent      |
-  | style_attribute_inherited.xml | 32 15           | 320px 150px |
+  | xml_file                      |
+  | style_attribute_inherited.xml |
 
 
   # Inheritance: region (S1) > div (S2) > p (S3) > span (S4)
   Scenario: Inheritable style attributes
     Given an xml file <xml_file>
-    When it has a cell resolution of <cell_resolution>
-    And it has extent of <extent>
+    When it has a cell resolution of "32 15"
+    And it has extent of "320px 150px"
     And it contains style S1 with <style_attribute> value <S1_value>
     And it contains style S2 with <style_attribute> value <S2_value>
     And it contains style S3 with <style_attribute> value <S3_value>
@@ -44,9 +44,7 @@ Feature: Compute style attribute on a single EBU-TT Live element
 
   Scenario: Circular style references should fail
     Given an xml file <xml_file>
-    When it has a cell resolution of <cell_resolution>
-    And it has extent of <extent>
-    And it contains style S1 with <style_attribute> value <S1_value>
+    When it contains style S1 with <style_attribute> value <S1_value>
     And it contains style S2 with <style_attribute> value <S2_value>
     Then document is invalid
 

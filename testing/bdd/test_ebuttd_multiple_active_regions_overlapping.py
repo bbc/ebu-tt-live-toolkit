@@ -80,6 +80,7 @@ def when_element_has_attribute_region2(template_dict, region_id):
 def then_application_should_exit_overlapping_active_region_error(test_context, template_dict, template_file):
      with pytest.raises(OverlappingActiveElementsError) as e:
       ebuttd_document = EBUTTDDocument.create_from_raw_binding(test_context["converted_bindings"])
+      ebuttd_document.validate()
 
 @when('the EBU-TT-Live document is converted to a EBU-TT-D')
 def convert_to_ebuttd(test_context):
@@ -91,3 +92,4 @@ def convert_to_ebuttd(test_context):
 def then_application_should_exit_with_region_error(test_context, template_dict, template_file):
     with pytest.raises(RegionExtendingOutsideDocumentError) as e:
         ebuttd_document = EBUTTDDocument.create_from_raw_binding(test_context["converted_bindings"])
+        ebuttd_document.validate()

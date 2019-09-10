@@ -13,8 +13,6 @@ class TimingValidationMixin(object):
 
     _computed_begin_time = None
     _computed_end_time = None
-    _pushed_computed_begin_time = None
-    _pushed_computed_end_time = None
 
     @property
     def computed_begin_time(self):
@@ -23,14 +21,6 @@ class TimingValidationMixin(object):
     @property
     def computed_end_time(self):
         return self._computed_end_time
-
-    @property
-    def pushed_computed_begin_time(self):
-        return self._pushed_computed_begin_time
-
-    @property
-    def pushed_computed_end_time(self):
-        return self._pushed_computed_end_time
 
     def _pre_timing_set_attribute(self, attr_en, attr_use):
         # Pass in the timing_attribute_name to the context to help the timing type constructor refuse creation

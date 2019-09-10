@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 scenarios('features/timing/ebuttd_resolved_timings_on_elements.feature')
 
 @then('p resulted begin time is <p_resulted_begin_time>')
-def then_it_has_p_resulted_time(test_context, p_resulted_begin_time):
+def then_it_has_p_resulted_begin_time(test_context, p_resulted_begin_time):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
     p_element = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p')[0]
@@ -12,7 +12,7 @@ def then_it_has_p_resulted_time(test_context, p_resulted_begin_time):
     assert p_resulted_begin_time == document_generated_p_begin_time
 
 @then('p resulted end time is <p_resulted_end_time>')
-def then_it_has_p_resulted_time(test_context, p_resulted_end_time):
+def then_it_has_p_resulted_end_time(test_context, p_resulted_end_time):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
     p_element = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p')[0]
@@ -29,7 +29,7 @@ def then_it_has_span1_resulted_begin_time(test_context, span1_resulted_begin_tim
     assert span1_resulted_begin_time == document_generated_span_begin_time
 
 @then('span2 resulted begin time is <span2_resulted_begin_time>')
-def then_it_has_span2_resulted_end_time(test_context, span2_resulted_begin_time):
+def then_it_has_span2_resulted_begin_time(test_context, span2_resulted_begin_time):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
@@ -48,7 +48,7 @@ def then_it_has_span1_resulted_end_time(test_context, span1_resulted_end_time):
         assert None == document_generated_span_end_time
 
 @then('span2 resulted begin time is <span2_resulted_begin_time>')
-def then_it_has_span2_resulted_end_time(test_context, span2_resulted_begin_time):
+def then_it_has_span2_resulted_begin_time(test_context, span2_resulted_begin_time):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')

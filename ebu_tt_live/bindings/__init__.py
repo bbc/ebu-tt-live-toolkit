@@ -1373,7 +1373,6 @@ class d_p_type(IDMixin, TimingValidationMixin, SemanticValidationMixin, Regioned
         self._semantic_manage_timeline(
         dataset=dataset, element_content=element_content)
         self._semantic_validate_active_areas(dataset=dataset)
-        #self._semantic_validate_is_timed_leaf(dataset=dataset)
 
 
 raw.d_p_type._SetSupersedingClass(d_p_type)

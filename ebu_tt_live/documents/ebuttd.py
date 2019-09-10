@@ -52,7 +52,6 @@ class EBUTTDDocument(SubtitleDocument, TimelineUtilMixin):
     def create_from_raw_binding(cls, binding):
         instance = cls.__new__(cls)
         instance._ebuttd_content = binding
-        instance.validate()
         return instance
 
     def _get_bds(self):

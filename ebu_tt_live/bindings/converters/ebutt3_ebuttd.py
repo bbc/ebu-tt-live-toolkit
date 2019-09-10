@@ -281,8 +281,8 @@ class EBUTT3EBUTTDConverter(object):
         new_elem = d_p_type(
             *self.convert_children(p_in, dataset),
             space=p_in.space,
-            begin=self._process_timing_from_timedelta(p_in.computed_begin_time),
-            end=self._process_timing_from_timedelta(p_in.computed_end_time),
+            begin=None if p_in.is_timed_leaf()==False else self._process_timing_from_timedelta(p_in.computed_begin_time),
+            end=None if p_in.is_timed_leaf()==False else self._process_timing_from_timedelta(p_in.computed_end_time),
             lang=p_in.lang,
             id=p_in.id,
             region=p_in.region,

@@ -14,8 +14,6 @@ class TimingValidationMixin(object):
 
     _computed_begin_time = None
     _computed_end_time = None
-    _pushed_computed_begin_time = None
-    _pushed_computed_end_time = None
 
     @property
     def computed_begin_time(self):
@@ -25,13 +23,6 @@ class TimingValidationMixin(object):
     def computed_end_time(self):
         return self._computed_end_time
 
-    @property
-    def pushed_computed_begin_time(self):
-        return self._pushed_computed_begin_time
-
-    @property
-    def pushed_computed_end_time(self):
-        return self._pushed_computed_end_time
 
     def _pre_timing_set_attribute(self, attr_en, attr_use):
         # Pass in the timing_attribute_name to the context to help the timing type constructor refuse creation
@@ -309,13 +300,9 @@ class TimingValidationMixin(object):
                         r1 = [float(extent.strip('%')) for extent in extents_1] 
                         r2 = [float(extent.strip('%')) for extent in extents_2] 
                         # Checking for overlapping rectangles
-                        if l1[0] < r2[0] and r1[0] > l2[0] and l1[1] > r2[1] and r1[1] < l2[1]:
+                        if l1[0] < r2[0] and r1[0] > l2[0] and l1[1] > r2[1] and r1[1] < l2[1] and elem1.region != elem2.region:
                             raise OverlappingActiveElementsError(self)
     
-    def _semantic_validate_is_timed_leaf(self, dataset):
-        if (len(self.span)) > 0:
-            self.begin = None
-            self.end = None
  
     def is_in_segment(self, begin=None, end=None):
         if begin is not None:

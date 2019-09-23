@@ -727,7 +727,7 @@ class p_type(RegionedElementMixin, LiveStyledElementMixin, SubtitleContentContai
     def _semantic_before_traversal(self, dataset, element_content=None, parent_binding=None):
         self._semantic_register_id(dataset=dataset)
         self._semantic_timebase_validation(
-            dataset=dataset ,element_content=element_content)
+            dataset=dataset, element_content=element_content)
         self._semantic_preprocess_timing(
             dataset=dataset, element_content=element_content)
         self._semantic_set_region(dataset=dataset, region_type=region_type)
@@ -803,7 +803,7 @@ class span_type(LiveStyledElementMixin, SubtitleContentContainer, raw.span_type)
     def _semantic_before_traversal(self, dataset, element_content=None, parent_binding=None):
         self._semantic_register_id(dataset=dataset)
         self._semantic_timebase_validation(
-            dataset=dataset ,element_content=element_content)
+            dataset=dataset, element_content=element_content)
         self._semantic_preprocess_timing(
             dataset=dataset, element_content=element_content)
         self._semantic_collect_applicable_styles(
@@ -1011,7 +1011,7 @@ class body_type(LiveStyledElementMixin, BodyTimingValidationMixin, SemanticValid
 
     def _semantic_before_traversal(self, dataset, element_content=None, parent_binding=None):
         self._semantic_timebase_validation(
-            dataset=dataset,element_content=element_content)
+            dataset=dataset, element_content=element_content)
         self._semantic_preprocess_timing(
             dataset=dataset, element_content=element_content)
         self._semantic_collect_applicable_styles(
@@ -1030,7 +1030,7 @@ class body_type(LiveStyledElementMixin, BodyTimingValidationMixin, SemanticValid
 
     def _semantic_after_subtree_copy(self, copied_instance, dataset, element_content=None):
         self._semantic_copy_apply_leaf_timing(
-            copied_instance=copied_instance, dataset=dataset ,element_content=element_content)
+            copied_instance=copied_instance, dataset=dataset, element_content=element_content)
         self._semantic_copy_verify_referenced_styles(dataset=dataset)
 
 
@@ -1361,7 +1361,7 @@ class d_p_type(IDMixin, TimingValidationMixin, SemanticValidationMixin, Regioned
     def _semantic_before_traversal(self, dataset, element_content=None, parent_binding=None):
         self._semantic_register_id(dataset=dataset)
         self._semantic_timebase_validation(
-        dataset=dataset ,element_content=element_content)
+        dataset=dataset, element_content=element_content)
         self._semantic_preprocess_timing(
         dataset=dataset, element_content=element_content)
         self._semantic_set_d_region(dataset=dataset, region_type=d_region_type)

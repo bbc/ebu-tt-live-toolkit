@@ -287,20 +287,21 @@ class TimingValidationMixin(object):
             if len(affected_elements) > 1:
                 for elem1, elem2 in itertools.combinations(affected_elements, 2):
                   if elem1 != elem2:
-                    if elem1.region is not None and elem2.region is not None: #checking if the elements have regions
-                        # Getting coordinates from the attribute eg ["14% 16%"]
-                        elem1_region = dataset["elements_by_id"][elem1.region]
-                        elem2_region = dataset["elements_by_id"][elem2.region]
-                        origins_1 = elem1_region.origin.split(" ")
-                        origins_2 = elem2_region.origin.split(" ")
+                    if elem1.region is not None and elem2.region is not None \
+                        and elem1.region != elem2.region: #checking if the elements have regions
+                        # Getting coordinates from the attribute eg ['14% 16%']
+                        elem1_region = dataset['elements_by_id'][elem1.region]
+                        elem2_region = dataset['elements_by_id'][elem2.region]
+                        origins_1 = elem1_region.origin.split(' ')
+                        origins_2 = elem2_region.origin.split(' ')
                         l1 =  [float(origin.strip('%')) for origin in origins_1] 
                         l2 =  [float(origin.strip('%')) for origin in origins_2] 
-                        extents_1 = elem1_region.extent.split(" ")
-                        extents_2 = elem1_region.extent.split(" ")
+                        extents_1 = elem1_region.extent.split(' ')
+                        extents_2 = elem1_region.extent.split(' ')
                         r1 = [float(extent.strip('%')) for extent in extents_1] 
                         r2 = [float(extent.strip('%')) for extent in extents_2] 
                         # Checking for overlapping rectangles
-                        if l1[0] < r2[0] and r1[0] > l2[0] and l1[1] > r2[1] and r1[1] < l2[1] and elem1.region != elem2.region:
+                        if l1[0] < r2[0] and r1[0] > l2[0] and l1[1] > r2[1] and r1[1] < l2[1]:
                             raise OverlappingActiveElementsError(self)
     
  
@@ -330,7 +331,7 @@ class TimingValidationMixin(object):
             if hasattr(copied_instance, 'dur'):
                 copied_instance.dur = None
         else:
-            tt_elem = dataset["tt_element"]
+            tt_elem = dataset['tt_element']
             trimmed_begin = self.computed_begin_time
             trimmed_end = self.computed_end_time
             segment_begin = dataset['segment_begin']
@@ -398,7 +399,7 @@ class BodyTimingValidationMixin(TimingValidationMixin):
     def _semantic_timebase_validation(self, dataset, element_content):
 
         super(BodyTimingValidationMixin, self)._semantic_timebase_validation(dataset, element_content)
-        time_base = dataset["tt_element"].timeBase
+        time_base = dataset['tt_element'].timeBase
 
         if self.dur is not None:
             if hasattr(self.dur, 'compatible_timebases'):

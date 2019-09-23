@@ -4,7 +4,6 @@ from ebu_tt_live.bindings import get_xml_parsing_context
 from ebu_tt_live.errors import LogicError, SemanticValidationError, OutsideSegmentError, OverlappingActiveElementsError
 from ebu_tt_live.strings import ERR_SEMANTIC_VALIDATION_TIMING_TYPE
 import itertools
-import re
 
 class TimingValidationMixin(object):
     """

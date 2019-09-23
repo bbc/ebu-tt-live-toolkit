@@ -70,4 +70,7 @@ Feature: Resolving timings on elements
       | body_begin | body_end | div_begin | div_end  | p_begin  | p_end    | p_resulted_begin_time | p_resulted_end_time |
       | 00:01:10   |          | 00:00:01  | 00:00:04 | 00:00:02 | 00:00:03 | 00:01:13              | 00:01:14            |
       | 00:01:00   |          | 00:00:02  | 00:00:08 | 00:00:01 | 00:00:03 | 00:01:03              | 00:01:05            |
+      | 00:01:00   |          |           |          | 00:00:00 |          | 00:01:00              | None                |
+      |            |          | 00:01:00  |          | 00:00:00 |          | 00:01:00              | None                |
+      |            |          |           |          | 00:01:00 |          | 00:01:00              | None                |
       

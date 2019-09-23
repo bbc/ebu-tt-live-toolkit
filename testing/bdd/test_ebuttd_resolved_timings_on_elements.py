@@ -17,7 +17,10 @@ def then_it_has_p_resulted_end_time(test_context, p_resulted_end_time):
     tree = ET.fromstring(document.get_xml())
     p_element = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p')[0]
     document_generated_p_end_time = p_element.get('end')
-    assert p_resulted_end_time == document_generated_p_end_time
+    if (p_resulted_end_time == 'None'):
+        assert None == document_generated_p_end_time
+    else:
+        assert p_resulted_end_time == document_generated_p_end_time
 
 
 @then('span1 resulted begin time is <span1_resulted_begin_time>')

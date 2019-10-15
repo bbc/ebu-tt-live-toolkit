@@ -1478,6 +1478,12 @@ _document_specific_types = {
         raw.head_type: head_type,
         raw.layout: layout,
         raw.body_type: body_type,
+_document_specific_types = {
+    'ebutt1': {
+        raw.tt_type: tt1_tt_type
+    },
+    'ebutt3': {
+        raw.tt_type: tt_type
     },
 }
 

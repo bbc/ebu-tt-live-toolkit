@@ -1441,7 +1441,6 @@ class tt1_tt_type(tt_type):
 
 
 class tt1_head_type(SemanticValidationMixin, raw.head_type):
-    
     def _validateBinding_vx(self):
         # EBU-TT-1 documents require styling and layout elements
         if self.styling is None:

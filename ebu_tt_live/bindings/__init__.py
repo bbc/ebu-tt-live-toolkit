@@ -1459,7 +1459,7 @@ class tt1_layout_type(layout):
 
 
 class tt1_body_type(body_type):
-
+    
     def _validateBinding_vx(self):
         if self.dur:
             raise UnrecognizedAttributeError(type(self), 'dur')

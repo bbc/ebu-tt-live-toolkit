@@ -1478,18 +1478,10 @@ _document_specific_types = {
         raw.head_type: head_type,
         raw.layout: layout,
         raw.body_type: body_type,
-_document_specific_types = {
-    'ebutt1': {
-        raw.tt_type: tt1_tt_type
-    },
-    'ebutt3': {
-        raw.tt_type: tt_type
-    },
+
 }
-
-
-def load_types_for_document(doc_type):
-    if doc_type not in _document_specific_types:
-        raise KeyError('Invalid parameter. Valid types are %s' % _document_specific_types.keys())
-    for raw_type, superseding_type in _document_specific_types[doc_type].items():
-        raw_type._SetSupersedingClass(superseding_type)
+    def load_types_for_document(doc_type):
+        if doc_type not in _document_specific_types:
+            raise KeyError('Invalid parameter. Valid types are %s' % _document_specific_types.keys())
+         for raw_type, superseding_type in _document_specific_types[doc_type].items():
+            raw_type._SetSupersedingClass(superseding_type)

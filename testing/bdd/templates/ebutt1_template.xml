@@ -50,7 +50,7 @@
     </tt:layout>
     {% endif %}
   </tt:head>
-  <tt:body {% if dur %} dur="00:00:05" {% endif %}>
+  <tt:body begin="500ms" {% if dur %} dur="00:00:05" {% endif %}>
     <tt:div>
       <tt:p begin="{% if timeBase == 'smpte' %}00:00:00:12{% else %}500ms{% endif %}" end="{% if timeBase == 'smpte' %}00:00:03:12{% else %}3420ms{% endif %}" xml:id="ID005">
         <tt:span>Some example text...</tt:span>

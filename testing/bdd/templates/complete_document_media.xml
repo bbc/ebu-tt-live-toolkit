@@ -3,7 +3,7 @@
         ebuttp:sequenceIdentifier="TestSequence"
         ebuttp:sequenceNumber="1"
         ttp:timeBase="media"
-        xml:lang="ßn-GB"
+        xml:lang="en-GB"
         xmlns:ebuttm="urn:ebu:tt:metadata"
         xmlns:ebuttp="urn:ebu:tt:parameters"
         xmlns:tt="http://www.w3.org/ns/ttml"

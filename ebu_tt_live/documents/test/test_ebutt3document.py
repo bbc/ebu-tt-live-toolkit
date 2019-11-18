@@ -1,6 +1,7 @@
 from unittest import TestCase
 from datetime import timedelta, datetime
-from ebu_tt_live.documents import EBUTT3Document, EBUTT3ObjectBase, EBUTTAuthorsGroupControlRequest
+from ebu_tt_live.documents import EBUTT3Document, EBUTTAuthorsGroupControlRequest
+from ebu_tt_live.documents.base import EBUTTDocumentBase
 import os
 import six
 from ebu_tt_live.utils import compare_xml

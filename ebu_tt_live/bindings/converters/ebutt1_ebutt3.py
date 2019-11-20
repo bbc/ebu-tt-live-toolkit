@@ -8,6 +8,7 @@ from ebu_tt_live.documents import EBUTT3Document
 from pyxb.binding.basis import NonElementContent, ElementContent
 import copy
 import logging
+from pyxb import ValidationError
 
 log = logging.getLogger(__name__)
 
@@ -227,10 +228,6 @@ class EBUTT1EBUTT3Converter(object):
         return new_elem
 
     def convert_span(self, span_in, dataset):
-        new_elem = span_type(
-            *self.convert_children(span_in, dataset),
-            id=span_in.id,
-            space=span_in.space,
             lang=span_in.lang,
             style=span_in.style,
             begin=span_in.begin,

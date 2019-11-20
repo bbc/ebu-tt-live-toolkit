@@ -63,4 +63,3 @@ def then_ebutt3_doc_valid(test_context):
 @then(parsers.parse('the sequenceIdentifier is "{value}"'))
 def then_sequence_identifier_is_value(test_context, value):
     assert test_context['ebutt3_document'].sequence_identifier == value
-

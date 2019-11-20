@@ -11,6 +11,7 @@ from pyxb.binding.basis import NonElementContent, ElementContent
 from datetime import timedelta
 import copy
 import logging
+from pyxb import ValidationError
 
 log = logging.getLogger(__name__)
 

@@ -8,7 +8,6 @@ from ebu_tt_live.documents import EBUTT3Document
 from pyxb.binding.basis import NonElementContent, ElementContent
 import copy
 import logging
-from pyxb import ValidationError
 
 log = logging.getLogger(__name__)
 

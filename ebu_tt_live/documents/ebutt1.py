@@ -5,7 +5,6 @@ from ebu_tt_live.documents.time_utils import TimelineUtilMixin
 from .base import TimeBase
 from pyxb import BIND
 
-
 class EBUTT1Document(TimelineUtilMixin, SubtitleDocument, EBUTTDocumentBase):
     """
     This class wraps the binding object representation of the XML and provides the features the applications in the

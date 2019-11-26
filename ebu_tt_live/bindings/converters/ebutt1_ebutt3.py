@@ -4,8 +4,12 @@ from ebu_tt_live.bindings import tt, tt1_tt_type, tt1_body_type, \
     region_type
 from ebu_tt_live.bindings._ebuttm import headMetadata_type, documentMetadata, \
     metadataBase_type, divMetadata_type
+from ebu_tt_live.bindings._ebuttdt import FullClockTimingType
 from ebu_tt_live.documents import EBUTT3Document
+from ebu_tt_live.errors import TimeNegativeError
+from ebu_tt_live.strings import ERR_TIME_NEGATIVE
 from pyxb.binding.basis import NonElementContent, ElementContent
+from datetime import timedelta
 import copy
 import logging
 
@@ -79,7 +83,7 @@ class EBUTT1EBUTT3Converter(object):
         head_children = self.convert_children(head_in, dataset)
         for item in head_children:
             new_elem.append(item)
-        
+
         return new_elem
 
     def convert_headMetadata(self, headMetadata_in, dataset):
@@ -87,7 +91,8 @@ class EBUTT1EBUTT3Converter(object):
             *self.convert_children(headMetadata_in, dataset)
         )
 
-        # Special handling for conformsToStandard. Throw out the old, add a new.
+        # Special handling for conformsToStandard. Throw out the old, add a
+        # new.
         # TODO: When XSD updated to allow ebuttm document metadata directly in
         # head metadata, check for this by uncommenting the following lines:
         # if new_elem.conformsToStandard is not None:
@@ -107,9 +112,12 @@ class EBUTT1EBUTT3Converter(object):
         # head metadata, check for this by uncommenting the following lines:
         # if new_elem.documentIdentifier is not None:
         #     _rememberDocumentIdentifier(new_elem.documentIdentifier, dataset)
-        
-        if new_elem.documentMetadata and new_elem.documentMetadata.documentIdentifier is not None:
-            self._rememberDocumentIdentifier(new_elem.documentMetadata.documentIdentifier, dataset)
+
+        if new_elem.documentMetadata and \
+           new_elem.documentMetadata.documentIdentifier is not None:
+            self._rememberDocumentIdentifier(
+                new_elem.documentMetadata.documentIdentifier,
+                dataset)
 
         return new_elem
 
@@ -183,22 +191,84 @@ class EBUTT1EBUTT3Converter(object):
         )
         return new_elem
 
+    def calculate_times(self, elem_in, dataset):
+        begin = elem_in.begin
+        end = elem_in.end
+
+        print('calculate_times for {} begin={} end={}'.format(type(elem_in), begin, end))
+
+        if dataset['timeBase'] == 'smpte':
+            syncbase = dataset['syncbase'][-1]
+
+            print('timeBase is smpte, syncbase is {}'.format(syncbase))
+            if begin is not None:
+                begin = dataset['smpte_to_timebase_converter'].timedelta(begin)
+                if begin < syncbase:
+                    raise TimeNegativeError(ERR_TIME_NEGATIVE)
+                begin = begin - syncbase
+            if end is not None:
+                end = dataset['smpte_to_timebase_converter'].timedelta(end)
+                if end < syncbase:
+                    raise TimeNegativeError(ERR_TIME_NEGATIVE)
+                end = end - syncbase
+        else:
+            if begin is not None:
+                begin = begin.timedelta
+            if end is not None:
+                end = end.timedelta
+
+        print('returning begin={}, end={}'.format(begin, end))
+        return begin, end
+
+    def push_syncbase(self, dataset, sync_delta):
+        if sync_delta is None:
+            dataset['syncbase'].append(dataset['syncbase'][-1])
+        else:
+            dataset['syncbase'].append(dataset['syncbase'][-1] + sync_delta)
+
+    def pop_syncbase(self, dataset):
+        dataset['syncbase'].pop()
+
     def convert_body(self, body_in, dataset):
         if len(body_in.div) == 0:
             return None
+
+        # Set up a synbase list for use down the tree
+        dataset['syncbase'] = [timedelta(seconds=0)]
+
+        begin, end = self.calculate_times(body_in, dataset)
+        self.push_syncbase(dataset, begin)
+
+        if begin is not None:
+            begin = FullClockTimingType(begin)
+        if end is not None:
+            end = FullClockTimingType(end)
+
         new_elem = body_type(
             *self.convert_children(body_in, dataset),
             agent=body_in.agent,
             role=body_in.role,
             style=body_in.style,
-            begin=body_in.begin,
-            end=body_in.end
+            begin=begin,
+            end=end
         )
+
+        self.pop_syncbase(dataset)
+
         return new_elem
 
     def convert_div(self, div_in, dataset):
         if len(div_in.orderedContent()) == 0:
             return None
+
+        begin, end = self.calculate_times(div_in, dataset)
+        self.push_syncbase(dataset, begin)
+
+        if begin is not None:
+            begin = FullClockTimingType(begin)
+        if end is not None:
+            end = FullClockTimingType(end)
+
         new_elem = div_type(
             *self.convert_children(div_in, dataset),
             id=div_in.id,
@@ -206,12 +276,23 @@ class EBUTT1EBUTT3Converter(object):
             style=div_in.style,
             lang=div_in.lang,
             agent=div_in.agent,
-            begin=div_in.begin,
-            end=div_in.end
+            begin=begin,
+            end=end
         )
+
+        self.pop_syncbase(dataset)
+
         return new_elem
 
     def convert_p(self, p_in, dataset):
+        begin, end = self.calculate_times(p_in, dataset)
+        self.push_syncbase(dataset, begin)
+
+        if begin is not None:
+            begin = FullClockTimingType(begin)
+        if end is not None:
+            end = FullClockTimingType(end)
+
         new_elem = p_type(
             *self.convert_children(p_in, dataset),
             id=p_in.id,
@@ -219,21 +300,39 @@ class EBUTT1EBUTT3Converter(object):
             lang=p_in.lang,
             region=p_in.region,
             style=p_in.style,
-            begin=p_in.begin,
-            end=p_in.end,
+            begin=begin,
+            end=end,
             agent=p_in.agent,
             role=p_in.role
         )
+
+        self.pop_syncbase(dataset)
+
         return new_elem
 
     def convert_span(self, span_in, dataset):
+        begin, end = self.calculate_times(span_in, dataset)
+        self.push_syncbase(dataset, begin)
+
+        if begin is not None:
+            begin = FullClockTimingType(begin)
+        if end is not None:
+            end = FullClockTimingType(end)
+
+        new_elem = span_type(
+            *self.convert_children(span_in, dataset),
+            id=span_in.id,
+            space=span_in.space,
             lang=span_in.lang,
             style=span_in.style,
-            begin=span_in.begin,
-            end=span_in.end,
+            begin=begin,
+            end=end,
             agent=span_in.agent,
             role=span_in.role
         )
+
+        self.pop_syncbase(dataset)
+
         return new_elem
 
     def convert_br(self, br_in, dataset):
@@ -270,11 +369,15 @@ class EBUTT1EBUTT3Converter(object):
         converter = self.map_type(element)
         return converter(element, dataset)
 
-    def convert_document(self, root_element, dataset=None):
+    def convert_document(self, root_element, dataset=None,
+                         smpte_to_timedelta_converter=None):
         if dataset is None:
             self._semantic_dataset = {}
         else:
             self._semantic_dataset = dataset
+
+        self._semantic_dataset['smpte_to_timebase_converter'] = \
+            smpte_to_timedelta_converter
 
         # Make sure that any new elements we correct get the right bindings
         EBUTT3Document.load_types_for_document()

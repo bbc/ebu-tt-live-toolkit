@@ -195,12 +195,9 @@ class EBUTT1EBUTT3Converter(object):
         begin = elem_in.begin
         end = elem_in.end
 
-        print('calculate_times for {} begin={} end={}'.format(type(elem_in), begin, end))
-
         if dataset['timeBase'] == 'smpte':
             syncbase = dataset['syncbase'][-1]
 
-            print('timeBase is smpte, syncbase is {}'.format(syncbase))
             if begin is not None:
                 begin = dataset['smpte_to_timebase_converter'].timedelta(begin)
                 if begin < syncbase:
@@ -217,7 +214,6 @@ class EBUTT1EBUTT3Converter(object):
             if end is not None:
                 end = end.timedelta
 
-        print('returning begin={}, end={}'.format(begin, end))
         return begin, end
 
     def push_syncbase(self, dataset, sync_delta):
@@ -236,7 +232,11 @@ class EBUTT1EBUTT3Converter(object):
         # Set up a synbase list for use down the tree
         dataset['syncbase'] = [timedelta(seconds=0)]
 
-        begin, end = self.calculate_times(body_in, dataset)
+        try:
+            begin, end = self.calculate_times(body_in, dataset)
+        except TimeNegativeError:
+            return None
+
         self.push_syncbase(dataset, begin)
 
         if begin is not None:
@@ -261,7 +261,11 @@ class EBUTT1EBUTT3Converter(object):
         if len(div_in.orderedContent()) == 0:
             return None
 
-        begin, end = self.calculate_times(div_in, dataset)
+        try:
+            begin, end = self.calculate_times(div_in, dataset)
+        except TimeNegativeError:
+            return None
+
         self.push_syncbase(dataset, begin)
 
         if begin is not None:
@@ -285,7 +289,11 @@ class EBUTT1EBUTT3Converter(object):
         return new_elem
 
     def convert_p(self, p_in, dataset):
-        begin, end = self.calculate_times(p_in, dataset)
+        try:
+            begin, end = self.calculate_times(p_in, dataset)
+        except TimeNegativeError:
+            return None
+
         self.push_syncbase(dataset, begin)
 
         if begin is not None:
@@ -311,7 +319,11 @@ class EBUTT1EBUTT3Converter(object):
         return new_elem
 
     def convert_span(self, span_in, dataset):
-        begin, end = self.calculate_times(span_in, dataset)
+        try:
+            begin, end = self.calculate_times(span_in, dataset)
+        except TimeNegativeError:
+            return None
+
         self.push_syncbase(dataset, begin)
 
         if begin is not None:

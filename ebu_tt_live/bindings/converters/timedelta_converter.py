@@ -1,0 +1,116 @@
+from datetime import timedelta
+import re
+from math import floor
+from ebu_tt_live.strings import ERR_TIME_NEGATIVE, \
+    ERR_TIME_FRAMES_OUT_OF_RANGE, \
+    ERR_TIME_FRAME_IS_DROPPED
+from ebu_tt_live.errors import TimeNegativeError, TimeFormatError
+
+
+class ISMPTEtoTimedeltaConverter(object):
+
+    def __init__(self):
+        raise NotImplementedError()
+
+    def timedelta(smpte_time):
+        raise NotImplementedError()
+
+    def canConvert(smpte_time):
+        raise NotImplementedError()
+
+
+class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
+    """
+    Class to convert SMPTE timecodes to timedeltas using a strategy
+    of a fixed offset, i.e. there's a reference SMPTE timecode
+    value that is considered the zero point. The object
+    uses the frameRate, frameRateMultiplier and dropMode to
+    calculate the equivalent timedelta output value for any
+    given input SMPTE timecode, and raises an exception if an attempt
+    is made to convert a timecode that is earlier than the zero point.
+    This can be avoided by calling canConvert() to check first.
+    """
+    _smpteReferenceS = None
+    _frameRate = None
+    _effectiveFrameRate = None
+    _dropMode = None
+
+    _frm_regex = re.compile('(?P<numerator>\\d+)\\s(?P<denominator>\\d+)')
+    _tc_regex = \
+        re.compile('([0-9][0-9]):([0-5][0-9]):([0-5][0-9]):([0-9][0-9])')
+
+    def __init__(self, smpteReference, frameRate,
+                 frameRateMultiplier, dropMode):
+        self._frameRate = int(frameRate)
+        self._effectiveFrameRate = \
+            self._calc_effective_frame_rate(
+                int(frameRate), frameRateMultiplier)
+        self._dropMode = dropMode
+        self._smpteReferenceS = self._calculate_s(smpteReference)
+
+    def timedelta(self, smpte_time):
+        s = self._calculate_s(smpte_time)
+
+        if self._smpteReferenceS > s:
+            raise TimeNegativeError(ERR_TIME_NEGATIVE)
+
+        return timedelta(seconds=s-self._smpteReferenceS)
+
+    def canConvert(self, smpte_time):
+        s = self._calculate_s(smpte_time)
+
+        return self._smpteReferenceS <= s
+
+    @classmethod
+    def _calc_effective_frame_rate(cls, frameRate, frameRateMultiplier):
+        frm_numerator_s, frm_denominator_s = \
+            cls._frm_regex.match(frameRateMultiplier).groups()
+
+        return float(frameRate) * \
+            float(frm_numerator_s) / \
+            float(frm_denominator_s)
+
+    def _dropped_frames(self, hours, minutes):
+        dropped_frames = 0
+
+        if self._dropMode == 'dropNTSC':
+            dropped_frames = \
+                (hours * 54 + minutes - floor(minutes/10)) * 2
+        elif self._dropMode == 'dropPAL':
+            dropped_frames = \
+                (hours * 27 + floor(minutes / 2) - floor(minutes / 20)) * 4
+
+        return dropped_frames
+
+    def _counted_frames(self, hours, minutes, seconds, frames):
+        return (3600 * hours + 60 * minutes + seconds) * \
+            self._frameRate + frames
+
+    def _calculate_s(self, smpte_time):
+        hours, minutes, seconds, frames = \
+            [int(x) for x in self._tc_regex.match(smpte_time).groups()]
+        
+        if frames >= self._frameRate:
+            raise TimeFormatError(ERR_TIME_FRAMES_OUT_OF_RANGE)
+        
+        if self._is_dropped_frame(minutes, seconds, frames):
+            raise TimeFormatError(ERR_TIME_FRAME_IS_DROPPED)
+
+        s = (self._counted_frames(hours, minutes, seconds, frames) -
+             self._dropped_frames(hours, minutes)) / \
+            self._effectiveFrameRate
+
+        return s
+
+    def _is_dropped_frame(self, minutes, seconds, frames):
+        is_dropped_frame = False
+
+        if seconds == 0:  # in NTSC and PAL frames are only dropped at 0s
+            if self._dropMode == 'dropNTSC' and \
+                    minutes not in [0, 10, 20, 30, 40, 50]:
+                is_dropped_frame = seconds in [0, 1]
+            elif self._dropMode == 'dropPAL' and \
+                    minutes % 2 == 0 and minutes not in [0, 20, 40]:
+                is_dropped_frame = seconds in [0, 1, 2, 3]
+
+        return is_dropped_frame

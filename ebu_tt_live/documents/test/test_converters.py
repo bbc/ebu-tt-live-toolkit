@@ -190,7 +190,7 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
             use_doc_id_as_seq_id=True)
 
     def test_ericsson_smpte_with_overridden_start_of_programme(self):
-    
+        
         xml_file = self._load_asset(
             'converter_ericsson1_smpte_with_start_of_programme.xml')
 

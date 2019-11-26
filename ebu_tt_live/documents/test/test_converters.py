@@ -1,4 +1,3 @@
-
 from unittest import TestCase
 from datetime import timedelta
 import os
@@ -57,11 +56,12 @@ class TestEBUTT3ToEBUTTDConverter(TestCase):
             ebuttdt.LimitedClockTimingType('12:11:50.000').timedelta)
 
         document = EBUTT3Document.create_from_xml(xml_file)
-        cdoc = ebutt3_to_ebuttd(document, self._media_clock)
+        ebutt3_to_ebuttd(document, self._media_clock)
+
 
 
 class TestEBUTT1ToEBUTT3Converter(TestCase):
-    
+
     def setUp(self):
         self._seqId = 'testConverter'
 
@@ -72,8 +72,6 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
             return contents
 
     def test_simple_smpte(self):
-
-        self.skipTest('SMPTE time conversion not yet supported')
 
         div = div_type(
             p_type(
@@ -117,7 +115,7 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
             use_doc_id_as_seq_id=True)
 
     def test_simple_media(self):
-        
+
         div = div_type(
             p_type(
                 span_type(
@@ -141,7 +139,10 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
                         style_type(id='s0')
                     ),
                     tt1_layout_type(
-                        region_type(id='r0', origin='0% 0%', extent='100% 100%')
+                        region_type(
+                            id='r0',
+                            origin='0% 0%',
+                            extent='100% 100%')
                     )
                 )
             )
@@ -158,12 +159,21 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
 
     def test_ericsson_smpte(self):
 
-        self.skipTest('SMPTE time conversion not supported yet')
-
         xml_file = self._load_asset('converter_ericsson1_smpte.xml')
 
         document = EBUTT1Document.create_from_xml(xml_file)
-        cdoc = ebutt1_to_ebutt3(
+        ebutt1_to_ebutt3(
+            document,
+            sequence_id=self._seqId,
+            use_doc_id_as_seq_id=True)
+
+    def test_ericsson_smpte_with_start_of_programme(self):
+    
+        xml_file = self._load_asset(
+            'converter_ericsson1_smpte_with_start_of_programme.xml')
+
+        document = EBUTT1Document.create_from_xml(xml_file)
+        ebutt1_to_ebutt3(
             document,
             sequence_id=self._seqId,
             use_doc_id_as_seq_id=True)
@@ -173,8 +183,7 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
         xml_file = self._load_asset('converter_ericsson1_media.xml')
 
         document = EBUTT1Document.create_from_xml(xml_file)
-        cdoc = ebutt1_to_ebutt3(
+        ebutt1_to_ebutt3(
             document,
-            sequence_id=self._seqId, 
+            sequence_id=self._seqId,
             use_doc_id_as_seq_id=True)
-

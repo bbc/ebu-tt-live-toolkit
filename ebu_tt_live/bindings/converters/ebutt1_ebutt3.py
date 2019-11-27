@@ -5,7 +5,7 @@ from ebu_tt_live.bindings import tt, tt1_tt_type, tt1_body_type, \
 from ebu_tt_live.bindings._ebuttm import headMetadata_type, documentMetadata, \
     metadataBase_type, divMetadata_type
 from ebu_tt_live.bindings._ebuttdt import FullClockTimingType
-from ebu_tt_live.documents import EBUTT3Document
+from ebu_tt_live.documents.ebutt3 import EBUTT3Document
 from ebu_tt_live.errors import TimeNegativeError
 from ebu_tt_live.strings import ERR_TIME_NEGATIVE
 from pyxb.binding.basis import NonElementContent, ElementContent
@@ -17,15 +17,27 @@ log = logging.getLogger(__name__)
 
 
 class EBUTT1EBUTT3Converter(object):
+    """
+    Class to convert EBU-TT-1 documents into EBU-TT-3 documents.
+
+    Includes a setting to extract the document identifier from metadata
+    and use it as the output sequence identifier, or can just use a
+    provided sequence identifier. The sequence number is always 1.
+    """
 
     _semantic_dataset = None
     _sequenceIdentifier = None
     _use_doc_id_as_seq_id = False
 
     def __init__(self, sequence_id, use_doc_id_as_seq_id=False):
+        """
+        Construct a converter.
+
+        :param sequence_id:
+        :param use_doc_id_as_seq_id:
+        """
         self._sequenceIdentifier = sequence_id
         self._use_doc_id_as_seq_id = use_doc_id_as_seq_id
-        pass
 
     def map_type(self, in_element):
         if isinstance(in_element, tt1_tt_type):
@@ -106,7 +118,7 @@ class EBUTT1EBUTT3Converter(object):
             new_elem.documentMetadata.conformsToStandard = [
                 'urn:ebu:tt:live:2017-05']
 
-        # We want to remember the documentIdentifier and use it later for the 
+        # We want to remember the documentIdentifier and use it later for the
         # sequence identifier
         # TODO: When XSD updated to allow ebuttm document metadata directly in
         # head metadata, check for this by uncommenting the following lines:
@@ -356,7 +368,8 @@ class EBUTT1EBUTT3Converter(object):
 
     def convert_children(self, element, dataset):
         """
-        Recursive step
+        Recursive step to convert child elements.
+
         :param element:
         :param dataset:
         :return:
@@ -383,6 +396,14 @@ class EBUTT1EBUTT3Converter(object):
 
     def convert_document(self, root_element, dataset=None,
                          smpte_to_timedelta_converter=None):
+        """
+        Convert the EBU-TT-1 Document to an EBU-TT-3 document.
+
+        :param root_element: The binding class for the EBU-TT-1 document's root element.
+        :param dataset: An optional dataset for passing information into the conversion.
+        :param smpte_to_timedelta_converter ISMPTEtoTimedeltaConverter: for mapping SMPTE to media timebase. Required if SMPTE timecodes are present.
+        :return an EBU-TT-3 document's root tt element:
+        """
         if dataset is None:
             self._semantic_dataset = {}
         else:

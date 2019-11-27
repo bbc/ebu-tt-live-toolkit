@@ -79,5 +79,6 @@ Subpackages
 .. toctree::
 
     ebu_tt_live.bindings.raw
+    ebu_tt_live.bindings.converters
     ebu_tt_live.bindings.validation
 

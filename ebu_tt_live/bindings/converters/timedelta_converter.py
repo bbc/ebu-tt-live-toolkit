@@ -21,15 +21,22 @@ class ISMPTEtoTimedeltaConverter(object):
 
 class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
     """
-    Class to convert SMPTE timecodes to timedeltas using a strategy
-    of a fixed offset, i.e. there's a reference SMPTE timecode
-    value that is considered the zero point. The object
+    Converts SMPTE timecodes to timedeltas with a fixed offset.
+
+    This converter utility class uses a strategy that assumes a fixed offset,
+    a reference SMPTE timecode value that is considered the zero point, and
+    a continuous set of SMPTE timecodes monotonically increasing (aside
+    from drop frames). It should not be used in cases where there may be
+    discontinuities in the timecode, since it will give incorrect results.
+
+    The object
     uses the frameRate, frameRateMultiplier and dropMode to
     calculate the equivalent timedelta output value for any
     given input SMPTE timecode, and raises an exception if an attempt
     is made to convert a timecode that is earlier than the zero point.
     This can be avoided by calling canConvert() to check first.
     """
+
     _smpteReferenceS = None
     _frameRate = None
     _effectiveFrameRate = None
@@ -49,6 +56,14 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
         self._smpteReferenceS = self._calculate_s(smpteReference)
 
     def timedelta(self, smpte_time):
+        """
+        Convert a timecode to a timedelta.
+
+        :param smpte_time: The timecode value to convert
+        :return timedelta: The equivalent timedelta
+        :raises TimeNegativeError: if the timecode occurs before the reference zero point
+        :raises TimeFormatError: if the frames value is illegal
+        """
         s = self._calculate_s(smpte_time)
 
         if self._smpteReferenceS > s:
@@ -57,6 +72,14 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
         return timedelta(seconds=s-self._smpteReferenceS)
 
     def canConvert(self, smpte_time):
+        """
+        Check if a given timecode can successfully be converted to a timedelta.
+
+        :param smpte_time: The test value
+        :return Boolean: True if the timecode can successfully be converted
+        :raises TimeNegativeError: if the timecode occurs before the reference zero point
+        :raises TimeFormatError: if the frames value is illegal
+        """
         s = self._calculate_s(smpte_time)
 
         return self._smpteReferenceS <= s
@@ -89,10 +112,10 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
     def _calculate_s(self, smpte_time):
         hours, minutes, seconds, frames = \
             [int(x) for x in self._tc_regex.match(smpte_time).groups()]
-        
+
         if frames >= self._frameRate:
             raise TimeFormatError(ERR_TIME_FRAMES_OUT_OF_RANGE)
-        
+
         if self._is_dropped_frame(minutes, seconds, frames):
             raise TimeFormatError(ERR_TIME_FRAME_IS_DROPPED)
 

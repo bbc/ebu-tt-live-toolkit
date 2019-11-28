@@ -266,6 +266,9 @@ class EBUTT1EBUTT3Converter(object):
 
         self.pop_syncbase(dataset)
 
+        if len(new_elem.orderedContent()) == 0:
+            new_elem = None
+
         return new_elem
 
     def convert_div(self, div_in, dataset):
@@ -297,6 +300,9 @@ class EBUTT1EBUTT3Converter(object):
 
         self.pop_syncbase(dataset)
 
+        if len(new_elem.orderedContent()) == 0:
+            new_elem = None
+
         return new_elem
 
     def convert_p(self, p_in, dataset):
@@ -327,6 +333,9 @@ class EBUTT1EBUTT3Converter(object):
 
         self.pop_syncbase(dataset)
 
+        if len(new_elem.orderedContent()) == 0:
+            new_elem = None
+
         return new_elem
 
     def convert_span(self, span_in, dataset):
@@ -355,6 +364,9 @@ class EBUTT1EBUTT3Converter(object):
         )
 
         self.pop_syncbase(dataset)
+
+        if len(new_elem.orderedContent()) == 0:
+            new_elem = None
 
         return new_elem
 

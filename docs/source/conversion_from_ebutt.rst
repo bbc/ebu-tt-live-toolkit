@@ -34,7 +34,9 @@ offset based conversion strategy, encapsulated in the utility class
 This currently looks for the metadata attribute 
 ``tt/head/metadata/ebuttm:documentMetadata/ebuttm:documentStartOfProgramme``
 and if it finds it, uses that as
-the zero point, otherwise it uses ``00:00:00:00``. 
+the zero point, otherwise it uses ``00:00:00:00``. This can be
+overridden by setting the ``smpte_start_of_programme`` parameter to the
+start of programme timecode to use instead.
 
 The document's frame rate, frame rate multiplier and drop mode are taken into
 account when doing the conversion. This means that illegal frame

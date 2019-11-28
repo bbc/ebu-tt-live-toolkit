@@ -5,6 +5,7 @@
       "type": "ebutt1-ebutt3-producer",
       "sequence_identifier": "TestSequenceFromEBUTT1",
       "use_doc_id_as_sequence_id": true,
+      "smpte_start_of_programme": "11:00:00:00",
       "input": {
           "carriage": {
               "type": "filesystem",

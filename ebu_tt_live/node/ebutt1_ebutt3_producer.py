@@ -12,10 +12,12 @@ class EBUTT1EBUTT3ProducerNode(AbstractCombinedNode):
 
     For conversion of SMPTE timecodes, where ``ttp:timeBase="smpte"``,
     makes a 
-    :py:class:`ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter` using `00:00:00:00`
+    :py:class:`ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter` using ``00:00:00:00``
     as the start of programme zero point, or if available, uses the
-    `ebuttm:documentStartOfProgramme` metadata value as the zero point,
+    ``ebuttm:documentStartOfProgramme`` metadata value as the zero point,
     and discards everything before the value of that element.
+    The start of programme zero point can be overridden by specifying a
+    ``smpte_start_of_programme`` attribute in the constructor.
 
     The output sequence identifier can be specified. Alternatively,
     if the ``use_document_identifier_as_sequence_identifier`` parameter
@@ -26,6 +28,7 @@ class EBUTT1EBUTT3ProducerNode(AbstractCombinedNode):
     _ebutt3_converter = None
     _expects = EBUTT1Document
     _provides = EBUTT3Document
+    _smpte_start_of_programme = None
 
     def __init__(self,
                  node_id,
@@ -33,6 +36,7 @@ class EBUTT1EBUTT3ProducerNode(AbstractCombinedNode):
                  producer_carriage=None,
                  sequence_identifier=None,
                  use_document_identifier_as_sequence_identifier=True,
+                 smpte_start_of_programme=None,
                  **kwargs):
         super(EBUTT1EBUTT3ProducerNode, self).__init__(
             node_id=node_id,
@@ -43,6 +47,7 @@ class EBUTT1EBUTT3ProducerNode(AbstractCombinedNode):
         self._ebutt3_converter = EBUTT1EBUTT3Converter(
             sequence_id=sequence_identifier,
             use_doc_id_as_seq_id=use_document_identifier_as_sequence_identifier)
+        self._smpte_start_of_programme = smpte_start_of_programme
 
     def process_document(self, document, **kwargs):
         # Convert each receiver document into EBU-TT-3
@@ -50,12 +55,16 @@ class EBUTT1EBUTT3ProducerNode(AbstractCombinedNode):
             smpte_converter = None
             if document.binding.timeBase == 'smpte':
                 start_of_programme = '00:00:00:00'
-                head_metadata = document.binding.head.metadata
-                if head_metadata:
-                    doc_metadata = head_metadata.documentMetadata
-                    if doc_metadata and doc_metadata.documentStartOfProgramme:
-                        start_of_programme = \
-                            doc_metadata.documentStartOfProgramme
+                if self._smpte_start_of_programme is None:
+                    head_metadata = document.binding.head.metadata
+                    if head_metadata:
+                        doc_metadata = head_metadata.documentMetadata
+                        if doc_metadata and doc_metadata.documentStartOfProgramme:
+                            start_of_programme = \
+                                doc_metadata.documentStartOfProgramme
+                else:
+                    start_of_programme = self._smpte_start_of_programme
+                    
                 smpte_converter = \
                     FixedOffsetSMPTEtoTimedeltaConverter(
                         smpteReference=start_of_programme,

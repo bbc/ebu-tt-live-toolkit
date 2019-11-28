@@ -35,10 +35,13 @@ def ebutt3_to_ebuttd(ebutt3_in, media_clock):
     return ebuttd_document
 
 
-def ebutt1_to_ebutt3(ebutt1_in, sequence_id, use_doc_id_as_seq_id):
+def ebutt1_to_ebutt3(ebutt1_in, 
+                     sequence_id,
+                     use_doc_id_as_seq_id,
+                     smpte_start_of_programme=None):
     """
-    This function takes an EBUTT1Document instance and returns the same 
-    document as an EBUTT3Document instance.
+    Convert an EBUTT1Document instance to an EBUTT3Document instance.
+
     :param ebutt1_in:
     :return:
     """
@@ -51,11 +54,15 @@ def ebutt1_to_ebutt3(ebutt1_in, sequence_id, use_doc_id_as_seq_id):
     smpte_converter = None
     if ebutt1_doc.binding.timeBase == 'smpte':
         start_of_programme = '00:00:00:00'
-        head_metadata = ebutt1_doc.binding.head.metadata
-        if head_metadata:
-            doc_metadata = head_metadata.documentMetadata
-            if doc_metadata and doc_metadata.documentStartOfProgramme:
-                start_of_programme = doc_metadata.documentStartOfProgramme
+        if smpte_start_of_programme is None:
+            head_metadata = ebutt1_doc.binding.head.metadata
+            if head_metadata:
+                doc_metadata = head_metadata.documentMetadata
+                if doc_metadata and doc_metadata.documentStartOfProgramme:
+                    start_of_programme = doc_metadata.documentStartOfProgramme
+        else:
+            start_of_programme = smpte_start_of_programme
+
         smpte_converter = \
             FixedOffsetSMPTEtoTimedeltaConverter(
                 start_of_programme,

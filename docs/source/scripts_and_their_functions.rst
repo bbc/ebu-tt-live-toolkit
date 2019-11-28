@@ -136,6 +136,9 @@ an `ebuttm:documentStartOfProgramme` element in the input document, and if
 present, maps that to the zero media time, and discards any elements that
 begin or end before that time. If that element is absent, then times are
 converted assuming that media time zero is SMPTE timecode `00:00:00:00`.
+Alternatively both of those values can be overridden by specifying a
+start of programem timecode to use with the ``smpte_start_of_programme``
+configuration parameter.
 The timecode conversion currently assumes that
 the timecode is continuous.
 

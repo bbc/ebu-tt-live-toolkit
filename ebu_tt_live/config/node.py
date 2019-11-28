@@ -264,11 +264,14 @@ class EBUTT1EBUTT3Producer(ProducerMixin, ConsumerMixin, NodeBase):
     required_config = Namespace()
     required_config.add_option('id', default='ebutt1-ebutt3-producer')
     required_config.add_option('sequence_identifier', default='SequenceFromEBUTT1')
+    required_config.add_option('use_doc_id_as_sequence_id', default=False)
 
 
     def _create_component(self, config):
         self.component = processing_node.EBUTT1EBUTT3ProducerNode(
-            node_id=self.config.id
+            node_id=self.config.id,
+            sequence_identifier=self.config.sequence_identifier,
+            use_document_identifier_as_sequence_identifier=self.config.use_doc_id_as_sequence_id
         )
 
     def __init__(self, config, local_config):

@@ -1,24 +1,27 @@
 import logging
-from .base import SubtitleDocument, TimeBase, CloningDocumentSequence, EBUTTDocumentBase
+from .base import SubtitleDocument, TimeBase, CloningDocumentSequence, \
+    EBUTTDocumentBase
 from .ebutt3_segmentation import EBUTT3Segmenter
 from .ebutt3_splicer import EBUTT3Splicer
-from ebu_tt_live import bindings
-from ebu_tt_live.bindings import _ebuttm as metadata, TimingValidationMixin
-from ebu_tt_live.bindings import _ebuttlm as ebuttlm
+from ebu_tt_live.bindings import _ebuttm as metadata, _ebuttlm as ebuttlm, \
+    tt, CreateFromDocument, load_types_for_document, p_type
 from ebu_tt_live.strings import ERR_DOCUMENT_SEQUENCE_MISMATCH, \
     ERR_DOCUMENT_NOT_COMPATIBLE, ERR_DOCUMENT_NOT_PART_OF_SEQUENCE, \
-    ERR_DOCUMENT_SEQUENCE_INCONSISTENCY, DOC_DISCARDED, DOC_TRIMMED, DOC_REQ_SEGMENT, DOC_SEQ_REQ_SEGMENT, \
-    DOC_INSERTED, DOC_SEMANTIC_VALIDATION_SUCCESSFUL, ERR_SEQUENCE_FROM_DOCUMENT, \
+    ERR_DOCUMENT_SEQUENCE_INCONSISTENCY, DOC_DISCARDED, DOC_TRIMMED, \
+    DOC_REQ_SEGMENT, DOC_SEQ_REQ_SEGMENT, \
+    DOC_INSERTED, DOC_SEMANTIC_VALIDATION_SUCCESSFUL, \
+    ERR_SEQUENCE_FROM_DOCUMENT, \
     ERR_DOCUMENT_SEQUENCENUMBER_COLLISION, ERR_AUTHORS_GROUP_MISMATCH
-from ebu_tt_live.errors import IncompatibleSequenceError, DocumentDiscardedError, \
-    SequenceOverridden, SequenceNumberCollisionError, UnexpectedAuthorsGroupError
+from ebu_tt_live.errors import IncompatibleSequenceError, \
+    DocumentDiscardedError, \
+    SequenceOverridden, SequenceNumberCollisionError, \
+    UnexpectedAuthorsGroupError
 from ebu_tt_live.clocks import get_clock_from_document
 from datetime import timedelta
 from pyxb import BIND
 from sortedcontainers import sortedset
-from sortedcontainers import sortedlist
-from ebu_tt_live.documents.time_utils import TimelineUtilMixin, TimingEventBegin, TimingEventEnd
-import gc
+from ebu_tt_live.documents.time_utils import TimelineUtilMixin, \
+    TimingEventBegin, TimingEventEnd
 
 
 log = logging.getLogger(__name__)
@@ -107,6 +110,7 @@ class EBUTTAuthorsGroupControlRequest(EBUTTLiveMessage):
             # so orderedContent is needed and indexing the first component.
         )
 
+
 # Register the class in the base class
 EBUTTDocumentBase.message_type_mapping[EBUTTAuthorsGroupControlRequest.message_type_id] = EBUTTAuthorsGroupControlRequest
 
@@ -137,7 +141,7 @@ class EBUTT3Document(TimelineUtilMixin, SubtitleDocument, EBUTTDocumentBase):
         self.load_types_for_document()
         if not clock_mode and time_base is TimeBase.CLOCK:
             clock_mode = 'local'
-        self._ebutt3_content = bindings.tt(
+        self._ebutt3_content = tt(
             timeBase=time_base,
             clockMode=clock_mode,
             sequenceIdentifier=sequence_identifier,
@@ -170,7 +174,7 @@ class EBUTT3Document(TimelineUtilMixin, SubtitleDocument, EBUTTDocumentBase):
     def create_from_xml(cls, xml, availability_time=None):
         cls.load_types_for_document()
         instance = cls.create_from_raw_binding(
-            binding=bindings.CreateFromDocument(
+            binding=CreateFromDocument(
                 xml_text=xml
             ),
             availability_time=availability_time
@@ -179,7 +183,7 @@ class EBUTT3Document(TimelineUtilMixin, SubtitleDocument, EBUTTDocumentBase):
 
     @classmethod
     def load_types_for_document(cls):
-        bindings.load_types_for_document('ebutt3')
+        load_types_for_document('ebutt3')
 
     def _cmp_key(self):
         return self.sequence_number
@@ -314,7 +318,7 @@ class EBUTT3Document(TimelineUtilMixin, SubtitleDocument, EBUTTDocumentBase):
         affected_elements = self.lookup_range_on_timeline(begin=begin, end=end)
         affected_paragraphs = []
         for item in affected_elements:
-            if isinstance(item, bindings.p_type):
+            if isinstance(item, p_type):
                 affected_paragraphs.append(item)
 
         if begin is not None and self.resolved_begin_time < begin:
@@ -365,12 +369,15 @@ class EBUTT3Document(TimelineUtilMixin, SubtitleDocument, EBUTTDocumentBase):
         # This only changes if the body does not declare a begin time.
         # Same for end time.
         if self._ebutt3_content.body is not None:
-            self._computed_begin_time = self._ebutt3_content.body.computed_begin_time
-            self._computed_end_time = self._ebutt3_content.body.computed_end_time
+            self._computed_begin_time = \
+                self._ebutt3_content.body.computed_begin_time
+            self._computed_end_time = \
+                self._ebutt3_content.body.computed_end_time
         else:
             self._computed_begin_time = availability_time
             self._computed_end_time = availability_time
 
+        return result
 
     def add_div(self, div):
         body = self._ebutt3_content.body

@@ -1,7 +1,7 @@
 from ebu_tt_live.bindings.converters.ebutt1_ebutt3 import EBUTT1EBUTT3Converter
 from ebu_tt_live.documents.ebutt1 import EBUTT1Document
 from .base import AbstractCombinedNode
-from ebu_tt_live.documents import EBUTT3Document
+from ebu_tt_live.documents.ebutt3 import EBUTT3Document
 from ebu_tt_live.bindings.converters.timedelta_converter \
     import FixedOffsetSMPTEtoTimedeltaConverter
 

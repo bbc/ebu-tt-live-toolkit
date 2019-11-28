@@ -1,11 +1,10 @@
 from ebu_tt_live.bindings import tt, tt1_tt_type, tt1_body_type, \
     body_type, div_type, tt1_head_type, tt1_layout_type, p_type, span_type,  \
     br_type, head_type, style_type, styling, layout, \
-    region_type
+    region_type, load_types_for_document
 from ebu_tt_live.bindings._ebuttm import headMetadata_type, documentMetadata, \
     metadataBase_type, divMetadata_type
 from ebu_tt_live.bindings._ebuttdt import FullClockTimingType
-from ebu_tt_live.documents.ebutt3 import EBUTT3Document
 from ebu_tt_live.errors import TimeNegativeError
 from ebu_tt_live.strings import ERR_TIME_NEGATIVE
 from pyxb.binding.basis import NonElementContent, ElementContent
@@ -413,7 +412,10 @@ class EBUTT1EBUTT3Converter(object):
             smpte_to_timedelta_converter
 
         # Make sure that any new elements we correct get the right bindings
-        EBUTT3Document.load_types_for_document()
+        # Ideally we'd use EBUTT3Document.load_types_for_document() but that
+        # causes a circular import loop, because EBUTT3Document imports
+        # parts of bindings that include this (not sure why)
+        load_types_for_document('ebutt3')
         converted_bindings = self.convert_element(
             root_element,
             self._semantic_dataset

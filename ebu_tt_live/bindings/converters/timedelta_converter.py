@@ -77,7 +77,6 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
 
         :param smpte_time: The test value
         :return Boolean: True if the timecode can successfully be converted
-        :raises TimeNegativeError: if the timecode occurs before the reference zero point
         :raises TimeFormatError: if the frames value is illegal
         """
         s = self._calculate_s(smpte_time)

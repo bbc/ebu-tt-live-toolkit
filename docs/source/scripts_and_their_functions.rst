@@ -128,6 +128,22 @@ Retiming Delay Node is primarily intended for delaying explicitly timed
 documents. Use ``ebu-run`` to start this script, for example ``ebu-run
 --admin.conf=ebu_tt_live/examples/config/retiming_delay.json.``
 
+EBU-TT-1 Producer
+-----------------
+This script produces an EBU-TT Part 3 document from an EBU-TT Part 1 source.
+If SMPTE timecode is used (`ttp:timeBase="smpte"`) then the script looks for
+an `ebuttm:documentStartOfProgramme` element in the input document, and if
+present, maps that to the zero media time, and discards any elements that
+begin or end before that time. If that element is absent, then times are
+converted assuming that media time zero is SMPTE timecode `00:00:00:00`.
+The timecode conversion currently assumes that
+the timecode is continuous.
+
+The default output sequence identifier can be specified. There is also a
+parameter to allow the value of the input `ebuttm:documentIdentifier` element to
+be used as the output sequence identifier, if present, overriding the
+specified default.
+
 EBU-TT-D Encoder
 ----------------
 This script is an extension of simple consumer and is responsible for

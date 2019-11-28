@@ -41,6 +41,14 @@ node Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`ebutt1_ebutt3_producer` Module
+------------------------------------
+
+.. automodule:: ebu_tt_live.node.ebutt1_ebutt3_producer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`encoder` Module
 ---------------------
 

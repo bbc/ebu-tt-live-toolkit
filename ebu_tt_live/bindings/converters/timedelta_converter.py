@@ -30,11 +30,15 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
     discontinuities in the timecode, since it will give incorrect results.
 
     The object
-    uses the frameRate, frameRateMultiplier and dropMode to
+    uses the ``frameRate``, ``frameRateMultiplier`` and ``dropMode`` to
     calculate the equivalent timedelta output value for any
     given input SMPTE timecode, and raises an exception if an attempt
     is made to convert a timecode that is earlier than the zero point.
-    This can be avoided by calling canConvert() to check first.
+    This can be avoided by calling :py:func:`canConvert()` to check first.
+
+    Alternatively call :py:func:`timedelta()` directly in a ``try`` block
+    and catch the :py:class:`ebu_tt_live.errors.TimeNegativeError` instead,
+    which avoids essentially running the same code twice.
     """
 
     _smpteReferenceS = None

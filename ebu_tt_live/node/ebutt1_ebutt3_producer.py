@@ -10,7 +10,7 @@ class EBUTT1EBUTT3ProducerNode(AbstractCombinedNode):
     """
     Produce an EBU-TT-3 document from an EBU-TT-1 input document.
 
-    For conversion of SMPTE timecodes, where `ttp:timeBase="smpte"`,
+    For conversion of SMPTE timecodes, where ``ttp:timeBase="smpte"``,
     makes a 
     :py:class:`ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter` using `00:00:00:00`
     as the start of programme zero point, or if available, uses the
@@ -18,8 +18,8 @@ class EBUTT1EBUTT3ProducerNode(AbstractCombinedNode):
     and discards everything before the value of that element.
 
     The output sequence identifier can be specified. Alternatively,
-    if the `use_document_identifier_as_sequence_identifier` parameter
-    is `True` and the `ebuttm:documentIdentifier` element is present
+    if the ``use_document_identifier_as_sequence_identifier`` parameter
+    is ``True`` and the ``ebuttm:documentIdentifier`` element is present
     then that element's value is
     used as the output sequence identifier.
     """

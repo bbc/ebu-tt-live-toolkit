@@ -12,12 +12,16 @@ from datetime import timedelta
 class ElementRemoverNode(AbstractCombinedNode):
     """
     Removes unwanted elements from a document.
+
+    Matches elements by local names only. Restricted to
+    XML elements that have bindings; non-bound elements
+    are left in place. 
     """
 
     _expects = EBUTT3Document
     _provides = EBUTT3Document
 
-    _remove_list = None
+    _remove_list = []
     _sequence_identifier = None
     _last_sequence_number = None
 
@@ -33,14 +37,27 @@ class ElementRemoverNode(AbstractCombinedNode):
             consumer_carriage=consumer_carriage
         )
 
-        self._remove_list = remove_list
-        print('remove_list = {}'.format(remove_list))
+        self.remove(remove_list)
+        print('remove_list = {}'.format(self._remove_list))
         self._sequence_identifier = sequence_identifier
         self._last_sequence_number = 0
+
+    def remove(self, remove_list):
+        """
+        Specify the list of element local names to remove.
+
+        :param remove_list: Comma separated list of element names (can have white space)
+        """
+        self._remove_list = []
+        for r in remove_list.split(','):
+            self._remove_list.append(r.strip())
 
     def process_document(self, document, **kwargs):
         if self.is_document(document):
             if self.check_if_document_seen(document=document) is True:
+
+                print('Input document is:')
+                print(document.get_xml())
                 # Remove the elements we don't want
                 self.remove_unwanted_elements(document.binding)
 
@@ -49,6 +66,8 @@ class ElementRemoverNode(AbstractCombinedNode):
                 self._last_sequence_number += 1
                 document.sequence_identifier = self._sequence_identifier
                 document.sequence_number = self._last_sequence_number
+                print('Output document is:')
+                print(document.get_xml())
                 self.producer_carriage.emit_data(
                     data=document,
                     **kwargs
@@ -94,8 +113,9 @@ class ElementRemoverNode(AbstractCombinedNode):
                     namespace_uri = item.elementDeclaration.name().namespaceURI()
                     fully_qualified_name = namespace_uri + '%%' + local_name
                     print('Found an element with fully qualified name {}'.format(fully_qualified_name))
-                    if (fully_qualified_name in self._remove_list):
-                        print('I want to remove a {}'.format(item.name()))
+                    if (local_name in self._remove_list):
+                        print('I want to remove a {}'.format(local_name))
+                        setattr(element, local_name, None)
                     else:
                         self.remove_unwanted_elements(item.value)
             else:

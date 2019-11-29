@@ -21,7 +21,7 @@
     "node2": {
       "id": "element_remover1",
       "type": "element-remover",
-      "remove_list": "element1, element2",
+      "remove_list": "documentReadingSpeed, binaryData, documentOriginalProgrammeTitle, documentOriginalEpisodeTitle, documentTranslatedProgrammeTitle, documentTranslatedEpisodeTitle, documentTotalNumberOfSubtitles, documentMaximumNumberOfDisplayableCharacterInAnyRow, documentSubtitleListReferenceCode, documentStartOfProgramme",
       "input": {
         "carriage": {
           "type": "direct",

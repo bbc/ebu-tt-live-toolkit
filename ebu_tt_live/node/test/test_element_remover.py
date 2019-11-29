@@ -47,6 +47,19 @@ class TestDenesterNode(TestCase):
 
         self.element_remover.remove(remove_list)
 
+        # Check the elements to be removed are there - this catches if anyone
+        # edits them out of the test input file!
+        self.assertEqual(len(self.input_doc.binding.body.div[0].metadata.facet), 1)
+        self.assertIsNotNone(
+            self.input_doc.binding.head.metadata.documentMetadata.
+            documentReadingSpeed)
+        self.assertIsNotNone(
+            self.input_doc.binding.head.metadata.documentMetadata.
+            documentIntendedTargetFormat)
+        self.assertIsNotNone(
+            self.input_doc.binding.head.metadata.documentMetadata.
+            documentMaximumNumberOfDisplayableCharacterInAnyRow)
+
         self.element_remover.process_document(document=self.input_doc)
         self.element_remover.producer_carriage.emit_data.assert_called_once()
         output_doc = \

@@ -9,3 +9,4 @@ from .delay import BufferDelayNode, RetimingDelayNode
 from .distributing import DistributingNode
 from .handover import HandoverNode
 from .deduplicator import DeDuplicatorNode
+from .element_remover import ElementRemoverNode

@@ -207,6 +207,26 @@ class Denester(ConsumerMixin, ProducerMixin, NodeBase):
         self._create_output(config)
 
 
+class ElementRemover(ConsumerMixin, ProducerMixin, NodeBase):
+    required_config = Namespace()
+    required_config.add_option('sequence_identifier',
+                               default='RemovedElementSequence1')
+    required_config.add_option('remove_list', default='')
+
+    def _create_component(self, config):
+        self.component = processing_node.ElementRemoverNode(
+            node_id=self.config.id,
+            sequence_identifier=self.config.sequence_identifier,
+            remove_list=self.config.remove_list
+        )
+
+    def __init__(self, config, local_config):
+        super(ElementRemover, self).__init__(config, local_config)
+        self._create_component(config)
+        self._create_input(config)
+        self._create_output(config)
+
+
 class SimpleProducer(ProducerMixin, NodeBase):
     required_config = Namespace()
     required_config.add_option('id', default='simple-producer')
@@ -380,6 +400,7 @@ nodes_by_type = {
     'deduplicator': DeDuplicator,
     'ebutt1-ebutt3-producer': EBUTT1EBUTT3Producer,
     'ebuttd-encoder': EBUTTDEncoder,
+    'element-remover': ElementRemover,
     'buffer-delay': BufferDelay,
     'retiming-delay': RetimingDelay,
     'distributor': Distributor,

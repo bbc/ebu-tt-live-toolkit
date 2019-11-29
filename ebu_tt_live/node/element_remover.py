@@ -25,7 +25,7 @@ class ElementRemoverNode(AbstractCombinedNode):
                  sequence_identifier,
                  consumer_carriage=None,
                  producer_carriage=None,
-                 remove_list={}):
+                 remove_list=''):
         super(ElementRemoverNode, self).__init__(
             node_id=node_id,
             producer_carriage=producer_carriage,

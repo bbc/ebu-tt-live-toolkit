@@ -96,3 +96,11 @@ node Package
     :members:
     :undoc-members:
     :show-inheritance:
+
+:mod:`element_remover` Module
+-----------------------------
+
+.. automodule:: ebu_tt_live.node.element_remover
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -163,3 +163,15 @@ To see the Encoder in action, using output from the Simple Producer and the
 IMPORTANT: the Encoder is not a complete EBU-TT Live to EBU-TT-D converter.
 Since EBU-TT-D generation was not part of this project, this functionality was
 implemented only partially and should not be used as complete reference.
+
+Element Remover
+---------------
+This script iterates through the EBU-TT Part 3 and EBU-TT Metadata elements
+in the document and removes any whose element name matches one of the names
+in the ``remove_list``, supplied as a configuration parameter. The elements
+are removed regardless of their location in the hierarchy.
+
+The list is a comma separated list of names, with optional white space.
+
+For example, to remove all elements called ``documentReadingSpeed`` or
+``binaryData`` set the ``remove_list`` to ``documentReadingSpeed, binaryData``.

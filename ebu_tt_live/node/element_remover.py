@@ -89,7 +89,7 @@ class ElementRemoverNode(AbstractCombinedNode):
             if isinstance(item, ElementContent):
                 if item.elementDeclaration is not None:
                     local_name = item.elementDeclaration.name().localName()
-                    if (local_name in self._remove_list):
+                    if local_name in self._remove_list:
                         # Remove this element
                         setattr(element, local_name, None)
                     else:

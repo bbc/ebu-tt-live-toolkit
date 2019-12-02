@@ -59,7 +59,6 @@ class TestEBUTT3ToEBUTTDConverter(TestCase):
         ebutt3_to_ebuttd(document, self._media_clock)
 
 
-
 class TestEBUTT1ToEBUTT3Converter(TestCase):
 
     def setUp(self):
@@ -168,7 +167,7 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
             use_doc_id_as_seq_id=True)
 
     def test_ericsson_smpte_with_start_of_programme(self):
-    
+
         xml_file = self._load_asset(
             'converter_ericsson1_smpte_with_start_of_programme.xml')
 
@@ -181,7 +180,8 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
     def test_ericsson_smpte_with_start_of_programme_and_sub_zero(self):
 
         xml_file = self._load_asset(
-            'converter_ericsson1_smpte_with_start_of_programme_and_sub_zero.xml')
+            'converter_ericsson1_smpte_with_start_of_programme_and_sub_zero'
+            '.xml')
 
         document = EBUTT1Document.create_from_xml(xml_file)
         ebutt1_to_ebutt3(
@@ -190,7 +190,7 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
             use_doc_id_as_seq_id=True)
 
     def test_ericsson_smpte_with_overridden_start_of_programme(self):
-        
+
         xml_file = self._load_asset(
             'converter_ericsson1_smpte_with_start_of_programme.xml')
 
@@ -201,10 +201,12 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
             use_doc_id_as_seq_id=True,
             smpte_start_of_programme='11:00:00:00')
 
-    def test_ericsson_smpte_with_overridden_start_of_programme_and_sub_zero(self):
+    def test_ericsson_smpte_with_overridden_start_of_programme_and_sub_zero(
+            self):
 
         xml_file = self._load_asset(
-            'converter_ericsson1_smpte_with_start_of_programme_and_sub_zero.xml')
+            'converter_ericsson1_smpte_with_start_of_programme_and_sub_zero'
+            '.xml')
 
         document = EBUTT1Document.create_from_xml(xml_file)
         ebutt1_to_ebutt3(

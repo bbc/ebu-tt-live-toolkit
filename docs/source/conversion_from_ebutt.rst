@@ -23,7 +23,7 @@ have a sequence number. EBU-TT part 3 documents must have both.
 
 In order to set the sequence identifier the converter can be
 configured with the desired value, or it can be set to extract the
-document identifier from the `ebuttm:documentIdentifier` element
+document identifier from the ``ebuttm:documentIdentifier`` element
 and use it, if it exists.
 
 If the EBU-TT part 1 document uses the ``smpte`` timebase, then all
@@ -40,7 +40,8 @@ start of programme timecode to use instead.
 
 The document's frame rate, frame rate multiplier and drop mode are taken into
 account when doing the conversion. This means that illegal frame
-values will cause an exception to be raised.
+values will cause a
+:py:class:`ebu_tt_live.errors.TimeFormatError` exception to be raised.
 
 Elements with ``begin`` or ``end`` attributes that fall before the start of
 programme are discarded.

@@ -15,7 +15,7 @@ class ISMPTEtoTimedeltaConverter(object):
     def timedelta(smpte_time):
         raise NotImplementedError()
 
-    def canConvert(smpte_time):
+    def can_convert(smpte_time):
         raise NotImplementedError()
 
 
@@ -34,7 +34,7 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
     calculate the equivalent timedelta output value for any
     given input SMPTE timecode, and raises an exception if an attempt
     is made to convert a timecode that is earlier than the zero point.
-    This can be avoided by calling :py:func:`canConvert()` to check first.
+    This can be avoided by calling :py:func:`can_convert()` to check first.
 
     Alternatively call :py:func:`timedelta()` directly in a ``try`` block
     and catch the :py:class:`ebu_tt_live.errors.TimeNegativeError` instead,
@@ -75,7 +75,7 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
 
         return timedelta(seconds=s-self._smpteReferenceS)
 
-    def canConvert(self, smpte_time):
+    def can_convert(self, smpte_time):
         """
         Check if a given timecode can successfully be converted to a timedelta.
 
@@ -89,6 +89,8 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
 
     @classmethod
     def _calc_effective_frame_rate(cls, frameRate, frameRateMultiplier):
+        # See https://www.w3.org/TR/ttml1/#time-expression-semantics-smpte
+        # for the semantics of effective frame rate calculation
         frm_numerator_s, frm_denominator_s = \
             cls._frm_regex.match(frameRateMultiplier).groups()
 
@@ -97,6 +99,8 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
             float(frm_denominator_s)
 
     def _dropped_frames(self, hours, minutes):
+        # See https://www.w3.org/TR/ttml1/#time-expression-semantics-smpte
+        # for the semantics of dropped frame calculation
         dropped_frames = 0
 
         if self._dropMode == 'dropNTSC':
@@ -109,10 +113,15 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
         return dropped_frames
 
     def _counted_frames(self, hours, minutes, seconds, frames):
+        # See https://www.w3.org/TR/ttml1/#time-expression-semantics-smpte
+        # for the semantics of counted frame calculation
         return (3600 * hours + 60 * minutes + seconds) * \
             self._frameRate + frames
 
     def _calculate_s(self, smpte_time):
+        # Thie method mplements
+        # https://www.w3.org/TR/ttml1/#time-expression-semantics-smpte
+        # which specifies the calculation of S
         hours, minutes, seconds, frames = \
             [int(x) for x in self._tc_regex.match(smpte_time).groups()]
 
@@ -129,14 +138,17 @@ class FixedOffsetSMPTEtoTimedeltaConverter(ISMPTEtoTimedeltaConverter):
         return s
 
     def _is_dropped_frame(self, minutes, seconds, frames):
+        # This method implements
+        # https://www.w3.org/TR/ttml1/#parameter-attribute-dropMode 
+        # which defines the rules for dropped frames.
         is_dropped_frame = False
 
         if seconds == 0:  # in NTSC and PAL frames are only dropped at 0s
             if self._dropMode == 'dropNTSC' and \
                     minutes not in [0, 10, 20, 30, 40, 50]:
-                is_dropped_frame = seconds in [0, 1]
+                is_dropped_frame = frames in [0, 1]
             elif self._dropMode == 'dropPAL' and \
                     minutes % 2 == 0 and minutes not in [0, 20, 40]:
-                is_dropped_frame = seconds in [0, 1, 2, 3]
+                is_dropped_frame = frames in [0, 1, 2, 3]
 
         return is_dropped_frame

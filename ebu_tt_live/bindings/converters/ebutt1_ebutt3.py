@@ -240,7 +240,7 @@ class EBUTT1EBUTT3Converter(object):
         if len(body_in.div) == 0:
             return None
 
-        # Set up a synbase list for use down the tree
+        # Set up a syncbase list for use down the tree
         dataset['syncbase'] = [timedelta(seconds=0)]
 
         try:

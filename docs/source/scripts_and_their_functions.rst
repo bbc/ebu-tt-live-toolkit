@@ -131,20 +131,20 @@ documents. Use ``ebu-run`` to start this script, for example ``ebu-run
 EBU-TT-1 Producer
 -----------------
 This script produces an EBU-TT Part 3 document from an EBU-TT Part 1 source.
-If SMPTE timecode is used (`ttp:timeBase="smpte"`) then the script looks for
-an `ebuttm:documentStartOfProgramme` element in the input document, and if
+If SMPTE timecode is used (``ttp:timeBase="smpte"``) then the script looks for
+an ``ebuttm:documentStartOfProgramme`` element in the input document, and if
 present, maps that to the zero media time, and discards any elements that
 begin or end before that time. If that element is absent, then times are
-converted assuming that media time zero is SMPTE timecode `00:00:00:00`.
+converted assuming that media time zero is SMPTE timecode ``00:00:00:00``.
 Alternatively both of those values can be overridden by specifying a
-start of programem timecode to use with the ``smpte_start_of_programme``
+start of programme timecode to use with the ``smpte_start_of_programme``
 configuration parameter.
 The timecode conversion currently assumes that
 the timecode is continuous.
 
 The default output sequence identifier can be specified. There is also a
-parameter to allow the value of the input `ebuttm:documentIdentifier` element to
-be used as the output sequence identifier, if present, overriding the
+parameter to allow the value of the input ``ebuttm:documentIdentifier`` element
+to be used as the output sequence identifier, if present, overriding the
 specified default.
 
 EBU-TT-D Encoder

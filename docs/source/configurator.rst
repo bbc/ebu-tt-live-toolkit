@@ -105,7 +105,7 @@ Node type dependent options for [nodeN] : ::
 
    type="ebutt1-ebutt3-producer"
    ├─sequence_identifier : sequence identifier, default "SequenceFromEBUTT1"
-   ├─use_doc_id_as_sequence_id : whether to use the `ebuttm:documentIdentifier` as the output sequence identifier if it is present, default False
+   ├─use_doc_id_as_sequence_id : whether to use the ebuttm:documentIdentifier element contents as the output sequence identifier if it is present, default False
    └─smpte_start_of_programme : start of programme timecode override in case you know better than the document start of programme metadata, default None
 
    type="ebuttd-encoder"

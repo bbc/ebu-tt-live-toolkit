@@ -3,9 +3,9 @@ from unittest import TestCase
 from datetime import timedelta
 from ebu_tt_live.bindings.converters.timedelta_converter import \
     FixedOffsetSMPTEtoTimedeltaConverter
-from ebu_tt_live.errors import TimeFormatError
+from ebu_tt_live.errors import TimeFormatError, TimeNegativeError
 from ebu_tt_live.strings import ERR_TIME_FRAMES_OUT_OF_RANGE, \
-    ERR_TIME_FRAME_IS_DROPPED
+    ERR_TIME_FRAME_IS_DROPPED, ERR_TIME_NEGATIVE
 
 
 class TestFixedOffsetSMPTEtoTimedeltaConverter(TestCase):
@@ -88,8 +88,8 @@ class TestFixedOffsetSMPTEtoTimedeltaConverter(TestCase):
                                                  '25',
                                                  '1 1',
                                                  'nonDrop')
-        self.assertTrue(conv.canConvert('10:00:00:24'))
-        self.assertFalse(conv.canConvert('09:59:59:24'))
+        self.assertTrue(conv.can_convert('10:00:00:24'))
+        self.assertFalse(conv.can_convert('09:59:59:24'))
 
     def test_raise_exception_if_too_many_frames(self):
         conv = \
@@ -99,7 +99,7 @@ class TestFixedOffsetSMPTEtoTimedeltaConverter(TestCase):
                                                  'nonDrop')
         with self.assertRaises(TimeFormatError,
                                msg=ERR_TIME_FRAMES_OUT_OF_RANGE):
-            conv.canConvert('10:00:00:25')
+            conv.can_convert('10:00:00:25')
 
     def test_raise_exception_if_dropped_frame_NTSC(self):
         conv = \
@@ -109,10 +109,14 @@ class TestFixedOffsetSMPTEtoTimedeltaConverter(TestCase):
                                                  'dropNTSC')
         with self.assertRaises(TimeFormatError,
                                msg=ERR_TIME_FRAME_IS_DROPPED):
-            conv.canConvert('10:01:00:00')
+            conv.can_convert('10:01:00:00')
         with self.assertRaises(TimeFormatError,
                                msg=ERR_TIME_FRAME_IS_DROPPED):
-            conv.canConvert('10:01:00:01')
+            conv.can_convert('10:01:00:01')
+
+        # Check a not dropped frame value works fine too
+        conv.can_convert('10:01:00:02')
+
         pass
 
     def test_raise_exception_if_dropped_frame_PAL(self):
@@ -123,11 +127,30 @@ class TestFixedOffsetSMPTEtoTimedeltaConverter(TestCase):
                                                  'dropPAL')
         with self.assertRaises(TimeFormatError,
                                msg=ERR_TIME_FRAME_IS_DROPPED):
-            conv.canConvert('10:02:00:00')
+            conv.can_convert('10:02:00:00')
         with self.assertRaises(TimeFormatError,
                                msg=ERR_TIME_FRAME_IS_DROPPED):
-            conv.canConvert('10:02:00:02')
+            conv.can_convert('10:02:00:02')
         with self.assertRaises(TimeFormatError,
                                msg=ERR_TIME_FRAME_IS_DROPPED):
-            conv.canConvert('10:02:00:03')
+            conv.can_convert('10:02:00:03')
+
+        # Check a not dropped frame value works fine too
+        conv.can_convert('10:02:00:04')
+
+        pass
+
+    def test_raise_exception_if_negative(self):
+        conv = \
+            FixedOffsetSMPTEtoTimedeltaConverter('10:00:00:00',
+                                                 '25',
+                                                 '1 1',
+                                                 'nonDrop')
+
+        # Should convert without raising an exception
+        self.assertEqual(conv.timedelta('10:00:00:24'),
+                         timedelta(milliseconds=960))
+        with self.assertRaises(TimeNegativeError,
+                               msg=ERR_TIME_NEGATIVE):
+            conv.timedelta('09:59:59:24')
         pass

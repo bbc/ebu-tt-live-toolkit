@@ -42,8 +42,11 @@ def ebutt1_to_ebutt3(ebutt1_in,
     """
     Convert an EBUTT1Document instance to an EBUTT3Document instance.
 
-    :param ebutt1_in:
-    :return:
+    :param EBUTT1Document ebutt1_in: The EBU-TT Part 1 document to convert
+    :param string sequence_id: The default sequence identifier to use for the output
+    :param Boolean use_doc_id_as_seq_id: Whether to use the ebuttm:documentIdentifier element value as the output sequence identifier, if it exists
+    :param string smpte_start_of_programme: SMPTE timecode for the start of programme, if known - if present, will override the ebuttm:documentStartOfProgramme metadata.
+    :return EBUTT3Document: The converted EBU-TT Part 3 document
     """
     converter = EBUTT1EBUTT3Converter(
         sequence_id=sequence_id, 

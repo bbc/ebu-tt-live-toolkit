@@ -1,7 +1,11 @@
 from .base import AbstractCombinedNode
 from ebu_tt_live.documents.ebutt3 import EBUTT3Document
+from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
 from pyxb.binding.basis import ElementContent, \
     complexTypeDefinition, simpleTypeDefinition
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class ElementRemoverNode(AbstractCombinedNode):
@@ -51,25 +55,55 @@ class ElementRemoverNode(AbstractCombinedNode):
 
     def process_document(self, document, **kwargs):
         if self.is_document(document):
+
+            if document.sequence_identifier == self._sequence_identifier:
+                raise UnexpectedSequenceIdentifierError()
+
             if self.check_if_document_seen(document=document) is True:
+
+                self.limit_sequence_to_one(document)
+
                 # Remove the elements we don't want
-                self.remove_unwanted_elements(document.binding)
+                self.remove_unwanted_elements_from_document(document)
 
                 # Update the sequence identifier and number and emit the
                 # document
                 self._last_sequence_number += 1
                 document.sequence_identifier = self._sequence_identifier
                 document.sequence_number = self._last_sequence_number
+
+                document.validate()
                 self.producer_carriage.emit_data(
                     data=document,
                     **kwargs
                     )
+            else:
+                log.warning(
+                    'Ignoring duplicate document: {}__{}'.format(
+                        document.sequence_identifier,
+                        document.sequence_number
+                    )
+                )
         else:
             document.sequence_identifier = self._sequence_identifier
             self.producer_carriage.emit_data(
                 data=document,
                 **kwargs
             )
+
+    def remove_unwanted_elements_from_document(self, document):
+        """
+        Remove unwanted elements from the provided document.
+
+        Use this method to remove elements from a document if you are not using
+        concrete carriage mechanisms and want to manage document processing
+        manually.
+
+        :param SubtitleDocument document: the document whose elements are to be removed
+        :return SubtitleDocument: returns the provided input document, but with removed elements.
+        """
+        self.remove_unwanted_elements(document.binding)
+        return document
 
     def remove_unwanted_elements(self, element):
         """Recursive function."""

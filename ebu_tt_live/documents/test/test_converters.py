@@ -180,8 +180,7 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
     def test_ericsson_smpte_with_start_of_programme_and_sub_zero(self):
 
         xml_file = self._load_asset(
-            'converter_ericsson1_smpte_with_start_of_programme_and_sub_zero'
-            '.xml')
+            'converter_ericsson1_smpte_with_start_of_programme_and_sub_zero.xml')  # noqa:E501
 
         document = EBUTT1Document.create_from_xml(xml_file)
         ebutt1_to_ebutt3(
@@ -205,8 +204,7 @@ class TestEBUTT1ToEBUTT3Converter(TestCase):
             self):
 
         xml_file = self._load_asset(
-            'converter_ericsson1_smpte_with_start_of_programme_and_sub_zero'
-            '.xml')
+            'converter_ericsson1_smpte_with_start_of_programme_and_sub_zero.xml')  # noqa:E501
 
         document = EBUTT1Document.create_from_xml(xml_file)
         ebutt1_to_ebutt3(

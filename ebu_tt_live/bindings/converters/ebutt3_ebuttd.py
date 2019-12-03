@@ -1,17 +1,16 @@
-from ebu_tt_live.bindings import tt, ttd, tt_type, d_tt_type, body_type, d_body_type, div_type, d_div_type, \
-    p_type, d_p_type, span_type, d_span_type, br_type, d_br_type, d_metadata_type, d_head_type, d_style_type, \
-    d_styling_type, head_type, style_type, styling, layout, d_layout_type, region_type, d_region_type, ebuttdt, StyledElementMixin
+from ebu_tt_live.bindings import ttd, tt_type, body_type, d_body_type, \
+    div_type, d_div_type, p_type, d_p_type, span_type, d_span_type, \
+    br_type, d_br_type, d_head_type, d_style_type, \
+    d_styling_type, head_type, style_type, styling, layout, d_layout_type, \
+    region_type, d_region_type, ebuttdt, StyledElementMixin
 from ebu_tt_live.bindings._ebuttm import headMetadata_type, documentMetadata
 import project
 import copy
 import logging
 from pyxb.binding.basis import NonElementContent, ElementContent
-from pyxb import BIND
-
 
 log = logging.getLogger(__name__)
 
-# NOTE: Some of the code below includes handling of SMPTE time base, which was removed from version 1.0 of the specification.
 
 class EBUTT3EBUTTDConverter(object):
 
@@ -24,7 +23,9 @@ class EBUTT3EBUTTDConverter(object):
         self._media_clock = media_clock
 
     def _children_contain(self, container_elem, binding_type):
-        element_types = [type(item.value) for item in container_elem.orderedContent() if isinstance(item, ElementContent)]
+        element_types = [
+            type(item.value) for item in container_elem.orderedContent() 
+            if isinstance(item, ElementContent)]
         return binding_type in element_types
 
     def _process_timing_type(self, timing_type, dataset):
@@ -33,7 +34,8 @@ class EBUTT3EBUTTDConverter(object):
         time_base = dataset['timeBase']
         if time_base == 'clock':
             # Means we need to convert to media
-            return ebuttdt.FullClockTimingType(self._media_clock.get_media_time(timing_type.timedelta))
+            return ebuttdt.FullClockTimingType(
+                self._media_clock.get_media_time(timing_type.timedelta))
         if time_base == 'media':
             return timing_type
         if time_base == 'smpte':
@@ -45,16 +47,21 @@ class EBUTT3EBUTTDConverter(object):
         return ebuttdt.FullClockTimingType.from_timedelta(timing_type)
 
     def _adjusted_font_style_map(self):
-        return self._semantic_dataset.setdefault(self._dataset_key_for_font_styles, {})
+        return self._semantic_dataset.setdefault(
+            self._dataset_key_for_font_styles, {})
 
     def _get_font_size_style(self, vertical, dataset, horizontal=None):
         """
-        This function either points us to an already generated version of this style or creates it on demand.
+        Get a style with a font size, even if one doesn't already exist.
+
+        This function either points us to an already generated version of this
+        style or creates it on demand.
         :param vertical:
         :param horizontal:
         :return:
         """
-        font_style_id = self._font_size_style_template.format(horizontal, vertical)
+        font_style_id = \
+            self._font_size_style_template.format(horizontal, vertical)
         adjusted_font_style_map = self._adjusted_font_style_map()
         if font_style_id in adjusted_font_style_map:
             instance = adjusted_font_style_map[font_style_id]
@@ -76,8 +83,12 @@ class EBUTT3EBUTTDConverter(object):
 
     def _fix_fontsize(self, elem, celem, parent, dataset):
         """
-        This function generates styles for the purpose of conversion from c,px values to percentage values.
-        The fontSize attributes were removed in the initial styling copy function so here we generate new ones to serve
+        Generate styles with percent unit font size values.
+
+        This function generates styles for the purpose of conversion from c,px
+        values to percentage values.
+        The fontSize attributes were removed in the initial styling copy
+        function so here we generate new ones to serve
         our purpose best and easiest
         :param elem: the original instance
         :param celem: the converted instance
@@ -85,14 +96,14 @@ class EBUTT3EBUTTDConverter(object):
         :param dataset: semantic dataset
         :return:
         """
-
         if isinstance(elem, (p_type, span_type)):
             computed_font_size = elem.computed_style.fontSize
             computed_line_height = elem.computed_style.lineHeight
 
             if isinstance(elem, p_type):
-                # Since we eliminated all our fontSize attributes from the original styles here it is
-                # as simple as computing based on the default value. p does not recurse
+                # Since we eliminated all our fontSize attributes from the
+                # original styles here it is as simple as computing based
+                # on the default value. p does not recurse
                 default_font_size = ebuttdt.CellFontSizeType('1c')
                 if default_font_size == computed_font_size:
                     return
@@ -108,7 +119,8 @@ class EBUTT3EBUTTDConverter(object):
                 if parent_computed_font_size == computed_font_size:
                     return
                 else:
-                    relative_font_size = computed_font_size / parent_computed_font_size
+                    relative_font_size = computed_font_size / \
+                        parent_computed_font_size
                     adjusted_style = self._get_font_size_style(
                         vertical=relative_font_size.vertical,
                         dataset=dataset
@@ -116,17 +128,23 @@ class EBUTT3EBUTTDConverter(object):
 
             if isinstance(computed_line_height, ebuttdt.CellLineHeightType):
                 adjusted_style.lineHeight = ebuttdt.PercentageLineHeightType(
-                    '{0:g}%'.format(round(computed_line_height.vertical / computed_font_size.vertical * 100, 2))
+                    '{0:g}%'.format(
+                        round(computed_line_height.vertical /
+                              computed_font_size.vertical * 100, 2))
                 )
-            elif isinstance(computed_line_height, ebuttdt.PercentageLineHeightType):
+            elif isinstance(computed_line_height,
+                            ebuttdt.PercentageLineHeightType):
                 adjusted_style.lineHeight = computed_line_height
             elif isinstance(computed_line_height, ebuttdt.PixelLineHeightType):
                 adjusted_style.lineHeight = ebuttdt.PercentageLineHeightType(
-                    '{0:g}%'.format(round((computed_line_height.vertical / dataset['extent'].vertical)/ computed_font_size.vertical * 100, 2))
+                    '{0:g}%'.format(round((computed_line_height.vertical /
+                                           dataset['extent'].vertical) /
+                                          computed_font_size.vertical *
+                                          100, 2))
                 )
             elif computed_line_height == 'normal':
                 adjusted_style.lineHeight = computed_line_height
-                
+
             if celem.style is None:
                 celem.style = [
                     adjusted_style.id
@@ -156,7 +174,9 @@ class EBUTT3EBUTTDConverter(object):
             cellResolution=tt_in.cellResolution,
             _strict_keywords=False
         )
-        self._link_adjusted_fonts_styling(self._adjusted_font_style_map(), new_elem)
+        self._link_adjusted_fonts_styling(
+            self._adjusted_font_style_map(),
+            new_elem)
 
         return new_elem
 
@@ -176,13 +196,14 @@ class EBUTT3EBUTTDConverter(object):
         metadata.documentMetadata = documentMetadata(conformsToStandard=[
             'http://www.w3.org/ns/ttml/profile/imsc1/text',
             'urn:ebu:tt:distribution:2018-04'
-        ],
+            ],
             documentOriginatingSystem=project.name + '.' + project.version +
             type(self).__name__
             )
         new_elem.metadata = metadata
 
-        # We need default values here in case styling or layout is omitted from the source document.
+        # We need default values here in case styling or layout is omitted
+        # from the source document.
         if not self._children_contain(new_elem, d_styling_type):
             new_elem.styling = d_styling_type.create_default_value()
         if not self._children_contain(new_elem, d_layout_type):
@@ -206,18 +227,25 @@ class EBUTT3EBUTTDConverter(object):
         origin = region_in.origin
         if origin is not None:
             if isinstance(origin, ebuttdt.cellOriginType):
-                origin = ebuttdt.convert_cell_region_to_percentage(origin, dataset['cellResolution'])
+                origin = ebuttdt.convert_cell_region_to_percentage(
+                    origin, dataset['cellResolution'])
             elif isinstance(origin, ebuttdt.pixelOriginType):
-                origin = ebuttdt.convert_pixel_region_to_percentage(origin, dataset['extent'])
+                origin = ebuttdt.convert_pixel_region_to_percentage(
+                    origin, dataset['extent'])
         extent = region_in.extent
         if extent is not None:
             if isinstance(extent, ebuttdt.cellExtentType):
-                extent = ebuttdt.convert_cell_region_to_percentage(extent, dataset['cellResolution'])
+                extent = ebuttdt.convert_cell_region_to_percentage(
+                    extent, dataset['cellResolution'])
             elif isinstance(extent, ebuttdt.pixelExtentType):
-                extent = ebuttdt.convert_pixel_region_to_percentage(extent, dataset['extent'])
+                extent = ebuttdt.convert_pixel_region_to_percentage(
+                    extent, dataset['extent'])
 
-        if region_in.padding == None:
-            region_validated_styles = [style for style in region_in.validated_styles if style.id in region_in.style]
+        if region_in.padding is None:
+            region_validated_styles = \
+                [style for style in
+                 region_in.validated_styles
+                 if style.id in region_in.style]
             for region_style in region_validated_styles:
                 parent_styles = region_style.ordered_styles(dataset)
                 if parent_styles:
@@ -225,8 +253,8 @@ class EBUTT3EBUTTDConverter(object):
                         if parent_style.padding:
                             region_in.padding = parent_style.padding
                 else:
-                 if region_style.padding:
-                    region_in.padding = region_style.padding
+                    if region_style.padding:
+                        region_in.padding = region_style.padding
 
         new_elem = d_region_type(
             *self.convert_children(region_in, dataset),
@@ -267,10 +295,13 @@ class EBUTT3EBUTTDConverter(object):
         new_elem = d_style_type(
             *self.convert_children(computed_style, dataset),
             id=computed_style.id,
-            style=computed_style.style,  # there is no ordering requirement in styling so too soon to deconflict here
+            style=computed_style.style,  # there is no ordering requirement in
+                                         # styling so too soon to deconflict
+                                         # here
             direction=computed_style.direction,
             fontFamily=computed_style.fontFamily,
-            fontSize=None,  # This will be regenerated in separate style. This is necessary due to % fontSize conversions
+            fontSize=None,  # This will be regenerated in separate style.
+                            # This is necessary due to % fontSize conversions
             lineHeight=None,  # lineHeight also receives the fontSize treatment
             textAlign=computed_style.textAlign,
             color=color,
@@ -313,8 +344,10 @@ class EBUTT3EBUTTDConverter(object):
         new_elem = d_p_type(
             *self.convert_children(p_in, dataset),
             space=p_in.space,
-            begin=None if p_in.is_timed_leaf()==False else self._process_timing_from_timedelta(p_in.computed_begin_time),
-            end=None if p_in.is_timed_leaf()==False else self._process_timing_from_timedelta(p_in.computed_end_time),
+            begin=None if p_in.is_timed_leaf() is False else
+            self._process_timing_from_timedelta(p_in.computed_begin_time),
+            end=None if p_in.is_timed_leaf() is False else
+            self._process_timing_from_timedelta(p_in.computed_end_time),
             lang=p_in.lang,
             id=p_in.id,
             region=p_in.region,
@@ -328,7 +361,8 @@ class EBUTT3EBUTTDConverter(object):
         new_elem = d_span_type(
             *self.convert_children(span_in, dataset),
             space=span_in.space,
-            begin=self._process_timing_from_timedelta(span_in.computed_begin_time),
+            begin=self._process_timing_from_timedelta(
+                span_in.computed_begin_time),
             end=self._process_timing_from_timedelta(span_in.computed_end_time),
             lang=span_in.lang,
             id=span_in.id,
@@ -388,7 +422,8 @@ class EBUTT3EBUTTDConverter(object):
                 conv_elem = self.convert_element(item.value, dataset)
 
                 if conv_elem is not None:
-                    if isinstance(item.value, StyledElementMixin) and not isinstance(item.value, style_type):
+                    if isinstance(item.value, StyledElementMixin) and \
+                       not isinstance(item.value, style_type):
                         self._fix_fontsize(
                             elem=item.value,
                             celem=conv_elem,
@@ -409,6 +444,7 @@ class EBUTT3EBUTTDConverter(object):
             self._semantic_dataset = {}
         else:
             self._semantic_dataset = dataset
-        converted_bindings = self.convert_element(root_element, self._semantic_dataset)
+        converted_bindings = \
+            self.convert_element(root_element, self._semantic_dataset)
 
         return converted_bindings

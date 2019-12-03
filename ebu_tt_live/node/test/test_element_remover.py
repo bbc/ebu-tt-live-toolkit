@@ -49,16 +49,29 @@ class TestDenesterNode(TestCase):
 
         # Check the elements to be removed are there - this catches if anyone
         # edits them out of the test input file!
-        self.assertEqual(len(self.input_doc.binding.body.div[0].metadata.facet), 1)
+        self.assertEqual(
+            len(self.input_doc.binding.body.div[0].metadata.facet),
+            1,
+            'Expected the first div in the input file to have a '
+            'metadata/facet element')
         self.assertIsNotNone(
             self.input_doc.binding.head.metadata.documentMetadata.
-            documentReadingSpeed)
+            documentReadingSpeed,
+            'Expected the input file to have a '
+            'head/metadata/documentMetadata/documentReadingSpeed element')
         self.assertIsNotNone(
             self.input_doc.binding.head.metadata.documentMetadata.
-            documentIntendedTargetFormat)
+            documentIntendedTargetFormat,
+            'Expected the input file to have a '
+            'head/metadata/documentMetadata/documentIntendedTargetFormat '
+            'element')
         self.assertIsNotNone(
             self.input_doc.binding.head.metadata.documentMetadata.
-            documentMaximumNumberOfDisplayableCharacterInAnyRow)
+            documentMaximumNumberOfDisplayableCharacterInAnyRow,
+            'Expected the input file to have a '
+            'head/metadata/documentMetadata/'
+            'documentMaximumNumberOfDisplayableCharacterInAnyRow'
+            'element')
 
         self.element_remover.process_document(document=self.input_doc)
         self.element_remover.producer_carriage.emit_data.assert_called_once()

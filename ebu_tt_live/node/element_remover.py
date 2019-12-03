@@ -36,11 +36,11 @@ class ElementRemoverNode(AbstractCombinedNode):
             consumer_carriage=consumer_carriage
         )
 
-        self.remove(remove_list)
+        self._set_remove_list(remove_list)
         self._sequence_identifier = sequence_identifier
         self._last_sequence_number = 0
 
-    def remove(self, remove_list):
+    def _set_remove_list(self, remove_list):
         """
         Specify the list of element local names to remove.
 

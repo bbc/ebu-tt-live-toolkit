@@ -16,14 +16,8 @@ class TestDenesterNode(TestCase):
             input_xml = in_file.read()
         self.input_doc = EBUTT3Document.create_from_xml(input_xml)
 
-        carriage = MagicMock(spec=IProducerCarriage)
-        carriage.expects.return_value = EBUTT3Document
-
-        self.element_remover = ElementRemoverNode(
-            node_id='testElementRemover',
-            sequence_identifier='testSeqId',
-            producer_carriage=carriage
-        )
+        self.carriage = MagicMock(spec=IProducerCarriage)
+        self.carriage.expects.return_value = EBUTT3Document
 
     def test_remove_list_parsing(self):
         remove_list = 'nospaces1, spacebefore,spaceafter ,' \
@@ -36,16 +30,27 @@ class TestDenesterNode(TestCase):
                            'nospaces2',
                            'tabafter']
 
-        self.element_remover.remove(remove_list)
+        element_remover = ElementRemoverNode(
+            node_id='testElementRemover',
+            sequence_identifier='testSeqId',
+            producer_carriage=self.carriage,
+            remove_list=remove_list
+        )
+
         self.assertSequenceEqual(
-            self.element_remover._remove_list, expected_output)
+            element_remover._remove_list, expected_output)
 
     def test_remove_elements(self):
         remove_list = 'facet, documentReadingSpeed, '\
             'documentIntendedTargetFormat, ' \
             'documentMaximumNumberOfDisplayableCharacterInAnyRow'
 
-        self.element_remover.remove(remove_list)
+        element_remover = ElementRemoverNode(
+            node_id='testElementRemover',
+            sequence_identifier='testSeqId',
+            producer_carriage=self.carriage,
+            remove_list=remove_list
+        )
 
         # Check the elements to be removed are there - this catches if anyone
         # edits them out of the test input file!
@@ -73,10 +78,10 @@ class TestDenesterNode(TestCase):
             'documentMaximumNumberOfDisplayableCharacterInAnyRow'
             'element')
 
-        self.element_remover.process_document(document=self.input_doc)
-        self.element_remover.producer_carriage.emit_data.assert_called_once()
+        element_remover.process_document(document=self.input_doc)
+        element_remover.producer_carriage.emit_data.assert_called_once()
         output_doc = \
-            self.element_remover.producer_carriage.emit_data. \
+            element_remover.producer_carriage.emit_data. \
             call_args[1]['data']
 
         # Check we got a valid document out

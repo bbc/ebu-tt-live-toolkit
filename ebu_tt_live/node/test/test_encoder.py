@@ -9,7 +9,7 @@ from ebu_tt_live.bindings import _ebuttdt as datatypes
 from datetime import timedelta
 from unittest import TestCase
 from mock import MagicMock
-import project
+from ebu_tt_live.project import description, name, version
 
 
 class TestEBUTTDEncoderSuccess(TestCase):
@@ -235,7 +235,7 @@ class TestEBUTTDEncoderSuccess(TestCase):
         self.assertIn('http://www.w3.org/ns/ttml/profile/imsc1/text', conforms_to_standard)
 
         # Check documentOriginatingSystem
-        expected_originating_system = project.name + '.' + project.version + \
+        expected_originating_system = name + '.' + version + \
             '.EBUTT3EBUTTDConverter'
         self.assertEqual(
             output_doc.binding.head.metadata.documentMetadata.documentOriginatingSystem,

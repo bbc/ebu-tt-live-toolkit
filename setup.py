@@ -1,4 +1,4 @@
-import project
+from ebu_tt_live.project import description, name, version
 
 try:
     from setuptools import setup
@@ -23,9 +23,9 @@ packages=[
 ]
 
 setup(
-    name=project.name,
-    version=project.version,
-    description=project.description,
+    name=name,
+    version=version,
+    description=description,
     install_requires=[
         "PyXB",
         "ipdb>=0.10.1,<0.10.3",  # This will eventually be removed from here

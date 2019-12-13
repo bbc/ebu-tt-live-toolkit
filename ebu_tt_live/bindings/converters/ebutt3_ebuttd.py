@@ -7,9 +7,13 @@ from ebu_tt_live.bindings._ebuttm import headMetadata_type, documentMetadata
 from ebu_tt_live.bindings._ebuttdt import PercentageExtentType, \
     PercentageOriginType, PercentageLineHeightType, \
     CellFontSizeType, PercentageFontSizeType
-from ebu_tt_live.errors import InvalidRegionExtentType, InvalidRegionOriginType
-from ebu_tt_live.strings import ERR_REGION_ORIGIN_TYPE, ERR_REGION_EXTENT_TYPE
 from ebu_tt_live.project import description, name, version
+from ebu_tt_live.errors import InvalidRegionExtentType, \
+    InvalidRegionOriginType, \
+    SemanticValidationError
+from ebu_tt_live.strings import ERR_REGION_ORIGIN_TYPE, \
+    ERR_REGION_EXTENT_TYPE, \
+    ERR_SEMANTIC_VALIDATION_EXPECTED
 import copy
 import logging
 from pyxb.binding.basis import NonElementContent, ElementContent
@@ -124,8 +128,7 @@ class EBUTT3EBUTTDConverter(object):
         """
         if isinstance(elem, (body_type, div_type, p_type, span_type)):
             if elem.computed_style is None:
-                import pdb
-                pdb.set_trace()
+                raise SemanticValidationError(ERR_SEMANTIC_VALIDATION_EXPECTED)
             specified_font_size = elem.specified_style.fontSize
             specified_line_height = elem.specified_style.lineHeight
 
@@ -207,7 +210,7 @@ class EBUTT3EBUTTDConverter(object):
                     celem.style.insert(0, adjusted_style.id)
         else:
             log.warn(
-                'EBUTT3EBUTTDConverter._fix_fontsize() called on unexpected element')  # noqa: E501
+                'EBUTT3EBUTTDConverter._fix_fontsize() called on unexpected element {}'.format(type(elem).__name__))  # noqa: E501
 
     def _link_adjusted_fonts_styling(self, adjusted_fonts, root_element):
         if not adjusted_fonts:

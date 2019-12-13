@@ -38,6 +38,8 @@ Feature: Resolving timings on elements
     And   the EBU-TT-Live document is denested
     And   the EBU-TT-Live document is converted to EBU-TT-D
     Then  EBUTTD document is valid
+    And   p resulted begin time is <p_resulted_begin_time>
+    And   p resulted end time is <p_resulted_end_time>
     And   span1 resulted begin time is <span1_resulted_begin_time>
     And   span1 resulted end time is <span1_resulted_end_time>
     And   nestedSpan resulted begin time is <nestedSpan_resulted_begin_time>
@@ -45,11 +47,11 @@ Feature: Resolving timings on elements
     And   no timings present on p
 
     Examples:
-      | p_begin  | p_end    | span1_begin | span1_end | nestedSpan_begin | nestedSpan_end | span1_resulted_begin_time | span1_resulted_end_time | nestedSpan_resulted_begin_time | nestedSpan_resulted_end_time |
-      | 00:00:05 |          | 00:00:02    | 00:00:08  | 00:00:01         | 00:00:02       | 00:00:07                  | 00:00:13                | 00:00:08                       | 00:00:09                     |
-      | 00:00:05 |          | 00:00:02    | 00:00:08  | 00:00:03         | 00:00:05       | 00:00:07                  | 00:00:13                | 00:00:10                       | 00:00:12                     |
-      | 00:00:05 |          | 00:00:02    | 00:00:08  | 00:00:03         |                | 00:00:07                  | 00:00:13                | 00:00:10                       | 00:00:13                     |
-      | 00:00:05 |          | 00:00:02    | 00:00:08  |                  | 00:00:06       | 00:00:07                  | 00:00:13                | 00:00:07                       | 00:00:13                     |
+      | p_begin  | p_end    | span1_begin | span1_end | nestedSpan_begin | nestedSpan_end | p_resulted_begin_time | p_resulted_end_time | span1_resulted_begin_time | span1_resulted_end_time | nestedSpan_resulted_begin_time | nestedSpan_resulted_end_time |
+      | 00:00:05 |          | 00:00:02    | 00:00:08  | 00:00:01         | 00:00:02       | None                  | None                | 00:00:07                  | 00:00:13                | 00:00:08                       | 00:00:09                     |
+      | 00:00:05 |          | 00:00:02    | 00:00:08  | 00:00:03         | 00:00:05       | None                  | None                | 00:00:07                  | 00:00:13                | 00:00:10                       | 00:00:12                     |
+      | 00:00:05 |          | 00:00:02    | 00:00:08  | 00:00:03         |                | None                  | None                | 00:00:07                  | 00:00:13                | 00:00:10                       | 00:00:13                     |
+      | 00:00:05 |          | 00:00:02    | 00:00:08  |                  | 00:00:06       | None                  | None                | 00:00:07                  | 00:00:13                | 00:00:07                       | 00:00:13                     |
 
   Scenario: Timings specified on div, body and p shall be removed
     Given an xml file <xml_file>

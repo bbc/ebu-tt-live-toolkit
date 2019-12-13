@@ -75,6 +75,8 @@ class DenesterNode(AbstractCombinedNode):
         else:
             dataset["styles"] = []
         dataset["document"] = document.binding
+        dataset["end_times"] = [document.binding.body.end]
+        dataset["begin_times"] = [document.binding.body.begin]
         for div in divs:
             unnested_divs.extend(DenesterNode.recurse(div, dataset))
         unnested_divs = DenesterNode.combine_divs(unnested_divs)
@@ -244,6 +246,29 @@ class DenesterNode(AbstractCombinedNode):
         return ebuttdt.FullClockTimingType.from_timedelta(timing_type)
 
     @staticmethod
+    def _calculate_pushed_end(dataset):
+        earliest_pushed_end = None
+        syncbase = timedelta(seconds=0)
+        for i in range(len(dataset['end_times'])):
+            this_end = earliest_pushed_end
+            # This end time is calculated relative to the parent
+            # (previous) element's 
+            if dataset['end_times'][i] is not None:
+                this_end = syncbase + dataset['end_times'][i].timedelta
+
+            if earliest_pushed_end is None and this_end is not None:
+                earliest_pushed_end = this_end
+            elif earliest_pushed_end is not None and this_end is not None \
+                    and this_end < earliest_pushed_end:
+                earliest_pushed_end = this_end
+
+            # calculate the sync base for the next end time
+            if dataset['begin_times'][i] is not None:
+                syncbase += dataset['begin_times'][i].timedelta
+
+        return earliest_pushed_end
+
+    @staticmethod
     def recurse(div,
                 dataset,
                 merged_attr={
@@ -256,6 +281,9 @@ class DenesterNode(AbstractCombinedNode):
         merged_attr = DenesterNode.merge_attr(
             merged_attr, DenesterNode.div_attr(div))
         new_divs = []
+        dataset['end_times'].append(div.end)
+        dataset['begin_times'].append(div.begin)
+        pushed_end_time = DenesterNode._calculate_pushed_end(dataset)
         for c in div.orderedContent():
             if isinstance(c.value, div_type):
                 if div.region != c.value.region \
@@ -268,6 +296,11 @@ class DenesterNode(AbstractCombinedNode):
             elif isinstance(c.value, divMetadata_type):
                 continue
             else:
+                # we seem to be assuming we must be a `p` element.
+                dataset['end_times'].append(c.value.end)
+                dataset['begin_times'].append(c.value.begin)
+                pushed_end_time = DenesterNode._calculate_pushed_end(dataset)
+
                 new_spans = []
                 for ic in c.value.orderedContent():
                     if isinstance(ic.value, span_type):
@@ -292,13 +325,32 @@ class DenesterNode(AbstractCombinedNode):
                     # has a dur but no begin or end times. This may well be
                     # some kind of bug or incorrect behaviour, but it's hard
                     # to sort out without breaking a bunch of stuff.
-                    p_time = c.value.computed_begin_time
+                    p_begin_time = c.value.computed_begin_time
+                    p_end_time = c.value.computed_end_time
 
-                    span.compBegin = span.compBegin - p_time
-                    span.compEnd = span.compEnd - p_time
+                    if span.compBegin != p_begin_time:
+                        span.compBegin = span.compBegin - p_begin_time
+                        span.begin = ebuttdt.FullClockTimingType(
+                            span.compBegin)
+                    else:
+                        span.compBegin = span.compBegin - p_begin_time
 
-                    span.begin = ebuttdt.FullClockTimingType(span.compBegin)
-                    span.end = ebuttdt.FullClockTimingType(span.compEnd)
+                    if span.compEnd != p_end_time or \
+                       span.compEnd != pushed_end_time:
+                        # Two reasons we might be here.
+                        # Normal case - our span end time is different
+                        # from the parent's end time, so we'd better specify.
+                        # OR
+                        # Special case - here we have the same computed time as
+                        # the parent, but the parent didn't push it onto us, so
+                        # we must be the source of it.
+                        span.compEnd = span.compEnd - p_begin_time
+                        span.end = ebuttdt.FullClockTimingType(span.compEnd)
+                    else:
+                        span.compEnd = span.compEnd - p_begin_time
+
+                dataset['end_times'].pop()
+                dataset['begin_times'].pop()
 
                 new_div = div_type(
                     id=div.id,
@@ -319,9 +371,11 @@ class DenesterNode(AbstractCombinedNode):
                     lang=merged_attr["lang"],
                     region=merged_attr["region"]
                     )
-                new_div.p.append(c.value)
+                new_div.append(c.value)
                 new_divs.append(new_div)
 
+        dataset['end_times'].pop()
+        dataset['begin_times'].pop()
         return new_divs
 
     @staticmethod

@@ -20,7 +20,7 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 from recommonmark.parser import CommonMarkParser
-from .project import description, name, version
+from ebu_tt_live.project import description, name, version
 
 source_parsers = {
     '.md': CommonMarkParser,

@@ -7,7 +7,7 @@ from ebu_tt_live.bindings._ebuttm import headMetadata_type, documentMetadata
 from ebu_tt_live.bindings._ebuttdt import PercentageExtentType, \
     PercentageOriginType, PercentageLineHeightType, \
     CellFontSizeType, PercentageFontSizeType
-from ebu_tt_live.project import description, name, version
+from ebu_tt_live.project import name, version
 from ebu_tt_live.errors import InvalidRegionExtentType, \
     InvalidRegionOriginType, \
     SemanticValidationError
@@ -516,13 +516,22 @@ class EBUTT3EBUTTDConverter(object):
 
         return new_elem
 
+    def _child_spans_specify_times(self, p_in, dataset):
+        for s in p_in.span:
+            if s.begin is not None or s.end is not None:
+                return True
+        return False
+
     def convert_p(self, p_in, dataset):
+        specify_times = not self._child_spans_specify_times(p_in, dataset)
+        dataset['span_specify_times'] = not specify_times
+
         new_elem = d_p_type(
             *self.convert_children(p_in, dataset),
             space=p_in.space,
-            begin=None if p_in.is_timed_leaf() is False else
+            begin=None if specify_times is False else
             self._process_timing_from_timedelta(p_in.computed_begin_time),
-            end=None if p_in.is_timed_leaf() is False else
+            end=None if specify_times is False else
             self._process_timing_from_timedelta(p_in.computed_end_time),
             lang=p_in.lang,
             id=p_in.id,
@@ -531,17 +540,22 @@ class EBUTT3EBUTTDConverter(object):
             agent=p_in.agent,
             role=p_in.role
         )
+
         if new_elem.region is not None:
             dataset['activated_region_ids'].add(new_elem.region)
         return new_elem
 
     def convert_span(self, span_in, dataset):
+        specify_times = dataset['span_specify_times']
+
         new_elem = d_span_type(
             *self.convert_children(span_in, dataset),
             space=span_in.space,
-            begin=self._process_timing_from_timedelta(
+            begin=None if specify_times is False else
+            self._process_timing_from_timedelta(
                 span_in.computed_begin_time),
-            end=self._process_timing_from_timedelta(span_in.computed_end_time),
+            end=None if specify_times is False else
+            self._process_timing_from_timedelta(span_in.computed_end_time),
             lang=span_in.lang,
             id=span_in.id,
             style=span_in.style,

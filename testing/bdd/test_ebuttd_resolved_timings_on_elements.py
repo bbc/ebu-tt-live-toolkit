@@ -47,7 +47,10 @@ def then_it_has_span1_resulted_begin_time(test_context, span1_resulted_begin_tim
     tree = ET.fromstring(document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
     document_generated_span_begin_time = elements[0].get('begin')
-    assert span1_resulted_begin_time == document_generated_span_begin_time
+    if span1_resulted_begin_time == 'None':
+        assert document_generated_span_begin_time is None
+    else:
+        assert span1_resulted_begin_time == document_generated_span_begin_time
 
 @then('span2 resulted begin time is <span2_resulted_begin_time>')
 def then_it_has_span2_resulted_begin_time(test_context, span2_resulted_begin_time):
@@ -86,6 +89,14 @@ def then_no_timings_present_on_p(test_context):
         assert 'begin' not in p_element.keys()
         assert 'end' not in p_element.keys()
 
+@then('timings present on p')
+def then_timings_present_on_p(test_context):
+    document = test_context['ebuttd_document']
+    tree = ET.fromstring(document.get_xml())
+    p_elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p')
+    for p_element in p_elements:
+        assert 'begin' in p_element.keys()
+        assert 'end' in p_element.keys()
 
 @then('no timings present on div')
 def then_no_timings_present_on_div(test_context):

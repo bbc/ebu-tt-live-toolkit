@@ -5,8 +5,13 @@ from ebu_tt_live.bindings._ebuttm import divMetadata_type
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
 import logging
 from datetime import timedelta
+from collections import namedtuple
 
 log = logging.getLogger(__name__)
+
+
+ElementTimes = namedtuple('ElementTimes', ['begin', 'end'])
+ELEMENT_TIMES_KEY = 'element_times'
 
 
 class DenesterNode(AbstractCombinedNode):
@@ -75,8 +80,13 @@ class DenesterNode(AbstractCombinedNode):
         else:
             dataset["styles"] = []
         dataset["document"] = document.binding
-        dataset["end_times"] = [document.binding.body.end]
-        dataset["begin_times"] = [document.binding.body.begin]
+        dataset[ELEMENT_TIMES_KEY] = [
+            ElementTimes(
+                begin=document.binding.body.begin,
+                end=document.binding.body.end)
+            ]
+        # dataset["end_times"] = [document.binding.body.end]
+        # dataset["begin_times"] = [document.binding.body.begin]
         for div in divs:
             unnested_divs.extend(DenesterNode.recurse(div, dataset))
         unnested_divs = DenesterNode.combine_divs(unnested_divs)
@@ -88,13 +98,14 @@ class DenesterNode(AbstractCombinedNode):
     @staticmethod
     def check_p_regions(divs):
         """
+        Discard p elements not in parent's region.
+
         Keeps only p elements where the region matches the parent
         div region or is None.
 
         Then removes region from remaining P elements as it will be
         the same as the div region
         """
-
         for div in divs:
             if div.region is not None:
                 div.p = [p for p in div.p
@@ -111,6 +122,8 @@ class DenesterNode(AbstractCombinedNode):
     @staticmethod
     def combine_divs(divs):
         """
+        Combine the list of unnested divs.
+
         Takes the list of unnested divs, where one was created to
         contain each P element, and attempts to combine them.
 
@@ -249,12 +262,13 @@ class DenesterNode(AbstractCombinedNode):
     def _calculate_pushed_end(dataset):
         earliest_pushed_end = None
         syncbase = timedelta(seconds=0)
-        for i in range(len(dataset['end_times'])):
+        for i in range(len(dataset[ELEMENT_TIMES_KEY])):
             this_end = earliest_pushed_end
             # This end time is calculated relative to the parent
-            # (previous) element's 
-            if dataset['end_times'][i] is not None:
-                this_end = syncbase + dataset['end_times'][i].timedelta
+            # (previous) element's
+            if dataset[ELEMENT_TIMES_KEY][i].end is not None:
+                this_end = \
+                    syncbase + dataset[ELEMENT_TIMES_KEY][i].end.timedelta
 
             if earliest_pushed_end is None and this_end is not None:
                 earliest_pushed_end = this_end
@@ -263,8 +277,8 @@ class DenesterNode(AbstractCombinedNode):
                 earliest_pushed_end = this_end
 
             # calculate the sync base for the next end time
-            if dataset['begin_times'][i] is not None:
-                syncbase += dataset['begin_times'][i].timedelta
+            if dataset[ELEMENT_TIMES_KEY][i].begin is not None:
+                syncbase += dataset[ELEMENT_TIMES_KEY][i].begin.timedelta
 
         return earliest_pushed_end
 
@@ -281,8 +295,11 @@ class DenesterNode(AbstractCombinedNode):
         merged_attr = DenesterNode.merge_attr(
             merged_attr, DenesterNode.div_attr(div))
         new_divs = []
-        dataset['end_times'].append(div.end)
-        dataset['begin_times'].append(div.begin)
+        dataset[ELEMENT_TIMES_KEY].append(
+            ElementTimes(begin=div.begin, end=div.end)
+        )
+        # dataset['end_times'].append(div.end)
+        # dataset['begin_times'].append(div.begin)
         pushed_end_time = DenesterNode._calculate_pushed_end(dataset)
         for c in div.orderedContent():
             if isinstance(c.value, div_type):
@@ -297,8 +314,11 @@ class DenesterNode(AbstractCombinedNode):
                 continue
             else:
                 # we seem to be assuming we must be a `p` element.
-                dataset['end_times'].append(c.value.end)
-                dataset['begin_times'].append(c.value.begin)
+                dataset[ELEMENT_TIMES_KEY].append(
+                    ElementTimes(begin=c.value.begin, end=c.value.end)
+                )
+                # dataset['end_times'].append(c.value.end)
+                # dataset['begin_times'].append(c.value.begin)
                 pushed_end_time = DenesterNode._calculate_pushed_end(dataset)
 
                 new_spans = []
@@ -349,8 +369,7 @@ class DenesterNode(AbstractCombinedNode):
                     else:
                         span.compEnd = span.compEnd - p_begin_time
 
-                dataset['end_times'].pop()
-                dataset['begin_times'].pop()
+                dataset[ELEMENT_TIMES_KEY].pop()
 
                 new_div = div_type(
                     id=div.id,
@@ -374,8 +393,8 @@ class DenesterNode(AbstractCombinedNode):
                 new_div.append(c.value)
                 new_divs.append(new_div)
 
-        dataset['end_times'].pop()
-        dataset['begin_times'].pop()
+        dataset[ELEMENT_TIMES_KEY].pop()
+
         return new_divs
 
     @staticmethod
@@ -408,7 +427,7 @@ class DenesterNode(AbstractCombinedNode):
     @staticmethod
     def compute_span_merged_styles(span_styles, dataset):
         """
-        Combines all the nested styles of the span to create a new one
+        Combine all the nested styles of the span to create a new one.
         """
         new_style = None
         styles = []

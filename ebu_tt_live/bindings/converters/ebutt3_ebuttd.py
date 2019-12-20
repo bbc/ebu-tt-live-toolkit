@@ -315,6 +315,7 @@ class EBUTT3EBUTTDConverter(object):
 
     def convert_head(self, head_in, dataset):
         new_elem = d_head_type(
+            copyright=head_in.copyright
         )
         head_children = self.convert_children(head_in, dataset)
         for item in head_children:

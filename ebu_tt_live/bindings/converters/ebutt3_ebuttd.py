@@ -28,6 +28,7 @@ class EBUTT3EBUTTDConverter(object):
 
     _media_clock = None
     _font_size_style_template = 'autogenFontStyle_{}_{}_{}'
+    _number_template = '{:.2f}'
     _dataset_key_for_font_styles = 'adjusted_sizing_styles'
     _semantic_dataset = None
 
@@ -82,11 +83,13 @@ class EBUTT3EBUTTDConverter(object):
         adjusted_line_height = 'n'
 
         if isinstance(line_height, PercentageLineHeightType):
-            adjusted_line_height = line_height.vertical
+            adjusted_line_height = self._number_template.format(line_height.vertical)
 
+        h = 'n' if horizontal is None else self._number_template.format(horizontal)
+        v = 'n' if vertical is None else self._number_template.format(vertical)
         font_style_id = \
             self._font_size_style_template.format(
-                horizontal, vertical, adjusted_line_height)
+                h, v, adjusted_line_height)
         adjusted_font_style_map = self._adjusted_font_style_map()
         if font_style_id in adjusted_font_style_map:
             instance = adjusted_font_style_map[font_style_id]
@@ -96,10 +99,10 @@ class EBUTT3EBUTTDConverter(object):
             if vertical is not None:
                 if horizontal is None:
                     font_size = ebuttdt.PercentageFontSizeType(
-                        vertical)
+                        round(vertical, 2))
                 else:
                     font_size = ebuttdt.PercentageFontSizeType(
-                        horizontal, vertical)
+                        round(horizontal, 2), round(vertical, 2))
 
             instance = d_style_type(
                 id=font_style_id,

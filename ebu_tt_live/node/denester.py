@@ -85,8 +85,6 @@ class DenesterNode(AbstractCombinedNode):
                 begin=document.binding.body.begin,
                 end=document.binding.body.end)
             ]
-        # dataset["end_times"] = [document.binding.body.end]
-        # dataset["begin_times"] = [document.binding.body.begin]
         for div in divs:
             unnested_divs.extend(DenesterNode.recurse(div, dataset))
         unnested_divs = DenesterNode.combine_divs(unnested_divs)
@@ -298,8 +296,6 @@ class DenesterNode(AbstractCombinedNode):
         dataset[ELEMENT_TIMES_KEY].append(
             ElementTimes(begin=div.begin, end=div.end)
         )
-        # dataset['end_times'].append(div.end)
-        # dataset['begin_times'].append(div.begin)
         pushed_end_time = DenesterNode._calculate_pushed_end(dataset)
         for c in div.orderedContent():
             if isinstance(c.value, div_type):
@@ -317,8 +313,6 @@ class DenesterNode(AbstractCombinedNode):
                 dataset[ELEMENT_TIMES_KEY].append(
                     ElementTimes(begin=c.value.begin, end=c.value.end)
                 )
-                # dataset['end_times'].append(c.value.end)
-                # dataset['begin_times'].append(c.value.begin)
                 pushed_end_time = DenesterNode._calculate_pushed_end(dataset)
 
                 new_spans = []

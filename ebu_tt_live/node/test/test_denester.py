@@ -14,10 +14,6 @@ class TestDenesterNode(TestCase):
         xml_file = "testing/bdd/templates/nested_elements_hardcoded.xml"
         with open(xml_file, 'r') as in_file:
             input_xml = in_file.read()
-        input_xml = re.sub(
-            r"(<ebuttm:documentStartOfProgramme>[^<]*</ebuttm:documentStartOfProgramme>)",  # noqa: E501
-            r"<!-- \1 -->",
-            input_xml)
         self.actual_doc = EBUTT3Document.create_from_xml(input_xml)
 
         xml_file_2 = "testing/bdd/templates/unnested_elements_hardcoded.xml"

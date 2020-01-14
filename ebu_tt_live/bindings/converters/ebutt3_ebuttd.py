@@ -512,7 +512,8 @@ class EBUTT3EBUTTDConverter(object):
             id=div_in.id,
             region=div_in.region,
             style=div_in.style,
-            agent=div_in.agent
+            agent=div_in.agent,
+            lang=div_in.lang
         )
 
         if new_elem.region is not None:

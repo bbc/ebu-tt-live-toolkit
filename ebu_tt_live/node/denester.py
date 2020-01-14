@@ -89,7 +89,9 @@ class DenesterNode(AbstractCombinedNode):
             unnested_divs.extend(DenesterNode.recurse(div, dataset))
         unnested_divs = DenesterNode.combine_divs(unnested_divs)
         unnested_divs = DenesterNode.check_p_regions(unnested_divs)
-        document.binding.body.div = unnested_divs
+        #TODO: do we have to remove the old divs from the body's ordered content? body can contain metadata or divs
+        document.binding.body.div.clear()
+        document.binding.body.div.extend(unnested_divs)
 
         return document
 
@@ -315,22 +317,27 @@ class DenesterNode(AbstractCombinedNode):
                 )
                 pushed_end_time = DenesterNode._calculate_pushed_end(dataset)
 
-                new_spans = []
+                new_ordered_content = []
                 for ic in c.value.orderedContent():
                     if isinstance(ic.value, span_type):
-                        new_spans.extend(
+                        new_ordered_content.extend(
                             DenesterNode.recurse_span(
                                 ic.value, dataset))
-                c.value.span = new_spans
+                    else:
+                        new_ordered_content.append(ic.value)
+                # Removing elements has to be done in two places. pyxb
+                # maintains a list of elements of each plural type, as well as
+                # a list of ordered content that specifies the overall order
+                # of elements.
+                # We need to clear off both otherwise one or other will
+                # come back to haunt us later, for example generating orphan
+                # elements warnings for elements in the ordered content list
+                # but not in the plural binding list for their type.
+                c.value.span.clear()
+                c.value.br.clear()
+                c.value.orderedContent().clear()
+                c.value.extend(new_ordered_content)
                 for span in c.value.span:
-                    # The following lines address some test cases but are not a
-                    # general solution, so commented out, however see comments
-                    # on line immediately below.
-                    # if c.value.begin is not None:
-                    #     p_time = c.value.computed_begin_time
-                    # else:
-                    #     p_time = div.computed_begin_time
-
                     # The following line fails if the parent p element's
                     # computed begin time has been
                     # advanced to its earliest child's computed begin time and
@@ -395,28 +402,61 @@ class DenesterNode(AbstractCombinedNode):
     def recurse_span(span, dataset, span_styles=[]):
         if span.style is not None:
             span_styles = span_styles+span.style
-        new_spans = []
+        # We're going to create a new ordered list of content for this span,
+        # and return that. If any of the children is a span, we're going to
+        # extract its content and create a new span for it, appending it to
+        # the ordered list of content
+        new_ordered_content = []
+        # If the span contains a mix of content like character content and br
+        # elements we can simply append each of those within a single span,
+        # but we need to close that span if we encounter a child span.
+        # Maintain a working span to which we will append the non-span children
+        # in order. Start without one, and make it whenever we need it.
+        working_span = None
         for sc in span.orderedContent():
             if isinstance(sc.value, span_type):
-                new_spans.extend(
+                # Stash the current working span in the ordered content list
+                if working_span is not None:
+                    new_ordered_content.append(working_span)
+                    working_span = None
+                # Extend the ordered content list recursively
+                new_ordered_content.extend(
                     DenesterNode.recurse_span(
                         sc.value, dataset, span_styles))
             else:
-                new_span = span_type(
-                    sc.value
-                )
-
-                new_span.compBegin = span.computed_begin_time
-                new_span.compEnd = span.computed_end_time
-
-                if len(span_styles) != 0:
-                    new_span.style = DenesterNode.compute_span_merged_styles(
-                        span_styles,
-                        dataset).id if len(span_styles) > 1 else span_styles
+                # We have a non-span child
+                if working_span is not None:
+                    working_span.append(sc.value)
                 else:
-                    new_span.style = None
-                new_spans.append(new_span)
-        return new_spans
+                    # We have no working span, so make one, and set it up
+                    # with the right times and styles
+                    working_span = span_type(
+                        sc.value
+                    )
+
+                    working_span.compBegin = span.computed_begin_time
+                    working_span.compEnd = span.computed_end_time
+
+                    if len(span_styles) > 1:
+                        working_span.style = \
+                            DenesterNode.compute_span_merged_styles(
+                                span_styles,
+                                dataset).id
+                    elif len(span_styles) == 1:
+                        working_span.style = span_styles
+                    else:
+                        working_span.style = None
+
+        # If we have a working span we haven't stopped working on, we
+        # won't have appended it to our ordered content list, so add it now.
+        if working_span is not None:
+            new_ordered_content.append(working_span)
+
+        # We're going to add new versions of the contents of this span later,
+        # so we don't need anything in it, so clear it down.
+        span.reset()
+
+        return new_ordered_content
 
     @staticmethod
     def compute_span_merged_styles(span_styles, dataset):

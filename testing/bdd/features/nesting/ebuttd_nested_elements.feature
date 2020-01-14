@@ -78,6 +78,18 @@ Feature: Merging nested elements
             | xml_file                   |
             | nested_spans_hardcoded.xml |
 
+    Scenario: Nested spans with br children should create new spans with br children
+        Given an xml file <xml_file>
+        When the document is generated
+        And the EBU-TT-Live document is denested
+        And the EBU-TT-Live document is converted to EBU-TT-D
+        Then EBUTTD document is valid
+        And the second span contains a br
+
+        Examples:
+            | xml_file                   |
+            | nested_spans_hardcoded.xml |
+
     Scenario: New styles are not created where the values of the new style match an existing one
         Given an xml file <xml_file>
         When the document is generated

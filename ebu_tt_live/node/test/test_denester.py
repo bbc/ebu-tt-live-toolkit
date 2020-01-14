@@ -286,6 +286,7 @@ class TestDenesterNode(TestCase):
         assert len(unnested_divs) == len(expected_divs)
 
     def test_nested_spans(self):
+        #TODO: Make this take into account br elements as well as spans
         expected_spans = self.expected_doc_4.binding.body.div[0].p[0].span
         nested_spans = self.actual_doc_4.binding.body.div[0].p[0].span
         unnested_spans = []

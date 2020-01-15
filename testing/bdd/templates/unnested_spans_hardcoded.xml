@@ -36,10 +36,10 @@
         <tt:span style="autogenFontStyle_n_200.00 outer">
             Parent text
         </tt:span>
-        <tt:span style="autogenFontStyle_n_200.00 outerinnerYellow">text1</tt:span>
+        <tt:span style="autogenFontStyle_n_200.00 outerinnerYellow">text1<tt:br/></tt:span>
         <tt:span style="autogenFontStyle_n_200.00 outer"></tt:span>
         <tt:span style="autogenFontStyle_n_200.00 outerinnerYellow">text133</tt:span>
-        <tt:span style="autogenFontStyle_n_200.00 outer"></tt:span>
+        <tt:span style="autogenFontStyle_n_200.00 outer"><tt:br/></tt:span>
         <tt:span style="autogenFontStyle_n_300.00 outerinnerWhite">text2</tt:span>
         <tt:span style="autogenFontStyle_n_200.00 outer"></tt:span>
         <tt:span style="autogenFontStyle_n_200.00 outer">text3</tt:span>

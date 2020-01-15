@@ -4,7 +4,6 @@ from ebu_tt_live.node.denester import DenesterNode, ELEMENT_TIMES_KEY, \
     ElementTimes
 from ebu_tt_live.bindings import style_type
 from ebu_tt_live.bindings._ebuttdt import FullClockTimingType
-import re
 
 
 class TestDenesterNode(TestCase):
@@ -19,67 +18,39 @@ class TestDenesterNode(TestCase):
         xml_file_2 = "testing/bdd/templates/unnested_elements_hardcoded.xml"
         with open(xml_file_2, 'r') as in_file:
             expected_xml = in_file.read()
-        expected_xml = re.sub(
-            r"(<ebuttm:documentStartOfProgramme>[^<]*</ebuttm:documentStartOfProgramme>)",  # noqa: E501
-            r"<!-- \1 -->",
-            expected_xml)
         self.expected_doc = EBUTT3Document.create_from_xml(expected_xml)
 
         xml_file_3 = "testing/bdd/templates/many_nested_elements_hardcoded.xml"
         with open(xml_file_3, 'r') as in_file:
             input_xml_2 = in_file.read()
-        input_xml_2 = re.sub(
-            r"(<ebuttm:documentStartOfProgramme>[^<]*</ebuttm:documentStartOfProgramme>)",  # noqa: E501
-            r"<!-- \1 -->",
-            input_xml_2)
         self.actual_doc_2 = EBUTT3Document.create_from_xml(input_xml_2)
 
         xml_file_4 = \
             "testing/bdd/templates/many_unnested_elements_hardcoded.xml"
         with open(xml_file_4, 'r') as in_file:
             expected_xml_2 = in_file.read()
-        expected_xml_2 = re.sub(
-            r"(<ebuttm:documentStartOfProgramme>[^<]*</ebuttm:documentStartOfProgramme>)",  # noqa: E501
-            r"<!-- \1 -->",
-            expected_xml_2)
         self.expected_doc_2 = EBUTT3Document.create_from_xml(expected_xml_2)
 
         xml_file_5 = \
             "testing/bdd/templates/regions_nested_elements_hardcoded.xml"
         with open(xml_file_5, 'r') as in_file:
             input_xml_3 = in_file.read()
-        input_xml_3 = re.sub(
-            r"(<ebuttm:documentStartOfProgramme>[^<]*</ebuttm:documentStartOfProgramme>)",  # noqa: E501
-            r"<!-- \1 -->",
-            input_xml_3)
         self.actual_doc_3 = EBUTT3Document.create_from_xml(input_xml_3)
 
         xml_file_6 = \
             "testing/bdd/templates/regions_unnested_elements_hardcoded.xml"
         with open(xml_file_6, 'r') as in_file:
             expected_xml_3 = in_file.read()
-        expected_xml_3 = re.sub(
-            r"(<ebuttm:documentStartOfProgramme>[^<]*</ebuttm:documentStartOfProgramme>)",  # noqa: E501
-            r"<!-- \1 -->",
-            expected_xml_3)
         self.expected_doc_3 = EBUTT3Document.create_from_xml(expected_xml_3)
 
         xml_file_7 = "testing/bdd/templates/nested_spans_hardcoded.xml"
         with open(xml_file_7, 'r') as in_file:
             input_xml_4 = in_file.read()
-        input_xml_4 = re.sub(
-            r"(<ebuttm:documentStartOfProgramme>[^<]*</ebuttm:documentStartOfProgramme>)",  # noqa: E501
-            r"<!-- \1 -->",
-            input_xml_4)
         self.actual_doc_4 = EBUTT3Document.create_from_xml(input_xml_4)
 
         xml_file_8 = "testing/bdd/templates/unnested_spans_hardcoded.xml"
         with open(xml_file_8, 'r') as in_file:
             expected_xml_4 = in_file.read()
-        expected_xml_4 = re.sub(
-            r"(<ebuttm:documentStartOfProgramme>[^<]*</ebuttm:documentStartOfProgramme>)",  # noqa: E501
-            r"<!-- \1 -->",
-            expected_xml_4)
         self.expected_doc_4 = EBUTT3Document.create_from_xml(expected_xml_4)
 
     def test_merged_attr_styles_(self):
@@ -91,7 +62,8 @@ class TestDenesterNode(TestCase):
             "lang": None,
             "region": None,
             "begin": None,
-            "end": None
+            "end": None,
+            "metadata": None
         }
         actual_div = self.actual_doc_2.binding.body.div[0].div[0]
         actual_divs_attr = \
@@ -128,7 +100,8 @@ class TestDenesterNode(TestCase):
             "lang": None,
             "region": None,
             "begin": None,
-            "end": None
+            "end": None,
+            "metadata": None
         }
         actual_div = self.actual_doc_2.binding.body.div[0].div[0]
         actual_divs_attr = \
@@ -147,7 +120,8 @@ class TestDenesterNode(TestCase):
             "lang": "fr",
             "region": None,
             "begin":  None,
-            "end": None
+            "end": None,
+            "metadata": None
         }
         actual_div = self.actual_doc.binding.body.div[0].div[0]
         actual_divs_attr = \
@@ -166,7 +140,8 @@ class TestDenesterNode(TestCase):
             "lang": "fr",
             "region": None,
             "begin": None,
-            "end": None
+            "end": None,
+            "metadata": None
         }
         actual_div = self.actual_doc.binding.body.div[0].div[1]
         actual_divs_attr = \
@@ -181,14 +156,16 @@ class TestDenesterNode(TestCase):
             "region": None,
             "lang": "fr",
             "begin": FullClockTimingType("00:00:11"),
-            "end": FullClockTimingType("00:00:15")
+            "end": FullClockTimingType("00:00:15"),
+            "metadata": None
         }
         parent_attr = {
             "styles": ["S2"],
             "lang": "fr",
             "region": None,
             "begin": FullClockTimingType("00:00:10"),
-            "end": FullClockTimingType("00:00:20")
+            "end": FullClockTimingType("00:00:20"),
+            "metadata": None
         }
         actual_div = self.actual_doc.binding.body.div[0].div[0]
         actual_divs_attr = \
@@ -209,14 +186,16 @@ class TestDenesterNode(TestCase):
             "region": None,
             "lang": "fr",
             "begin": FullClockTimingType("00:00:11"),
-            "end": FullClockTimingType("00:00:15")
+            "end": FullClockTimingType("00:00:15"),
+            "metadata": None
         }
         parent_attr = {
             "styles": ["S2"],
             "lang": "fr",
             "region": None,
             "begin": FullClockTimingType("00:00:10"),
-            "end": None
+            "end": None,
+            "metadata": None
         }
         actual_div = self.actual_doc.binding.body.div[0].div[0]
         actual_divs_attr = \
@@ -267,6 +246,28 @@ class TestDenesterNode(TestCase):
                     DenesterNode.recurse(nested_div, dataset))))
         assert unnested_divs[0].region == expected_divs[0].region
 
+    def test_merged_attr_metadata(self):
+        expected_divs = self.expected_doc_3.binding.body.div
+        nested_divs = self.actual_doc_3.binding.body.div
+        dataset = {}
+        dataset["styles"] = self.actual_doc_3.binding.head.styling.style
+        dataset[ELEMENT_TIMES_KEY] = [
+            ElementTimes(
+                begin=self.actual_doc_3.binding.body.begin,
+                end=self.actual_doc_3.binding.body.end
+            )
+        ]
+        unnested_divs = []
+        for nested_div in nested_divs:
+            unnested_divs.extend(
+                (DenesterNode.combine_divs(
+                    DenesterNode.recurse(nested_div, dataset))))
+        self.assertEqual(
+            len(unnested_divs[0].metadata.orderedContent()),
+            len(expected_divs[0].metadata.orderedContent())
+        )
+        pass
+
     def test_combine_same_divs(self):
         expected_divs = self.expected_doc_2.binding.body.div
         dataset = {}
@@ -286,7 +287,6 @@ class TestDenesterNode(TestCase):
         assert len(unnested_divs) == len(expected_divs)
 
     def test_nested_spans(self):
-        #TODO: Make this take into account br elements as well as spans
         expected_spans = self.expected_doc_4.binding.body.div[0].p[0].span
         nested_spans = self.actual_doc_4.binding.body.div[0].p[0].span
         unnested_spans = []
@@ -296,6 +296,27 @@ class TestDenesterNode(TestCase):
             unnested_spans.extend(
                 DenesterNode.recurse_span(nested_span, dataset))
         assert len(expected_spans) == len(unnested_spans)
+
+    def test_nested_spans_preserve_brs(self):
+        expected_brs = self.count_brs_recursively(
+            self.expected_doc_4.binding.body.div[0].p[0])
+        nested_spans = self.actual_doc_4.binding.body.div[0].p[0].span
+        unnested_spans = []
+        dataset = {}
+        dataset["styles"] = self.actual_doc_4.binding.head.styling.style
+        for nested_span in nested_spans:
+            unnested_spans.extend(
+                DenesterNode.recurse_span(nested_span, dataset))
+        unnested_brs = len(self.actual_doc_4.binding.body.div[0].p[0].br)
+        for unnested_span in unnested_spans:
+            unnested_brs += len(unnested_span.br)
+        self.assertEqual(expected_brs, unnested_brs)
+
+    def count_brs_recursively(self, element):
+        num_brs = len(element.br)
+        for s in element.span:
+            num_brs += self.count_brs_recursively(s)
+        return num_brs
 
     def test_compute_spans_have_valid_styles(self):
         nested_spans = self.actual_doc_4.binding.body.div[0].p[0].span

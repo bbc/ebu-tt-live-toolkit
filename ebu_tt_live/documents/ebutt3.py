@@ -139,6 +139,9 @@ class EBUTT3Document(TimelineUtilMixin, SubtitleDocument, EBUTTDocumentBase):
     # The sequence the document belongs to
     _sequence = None
 
+    # Encoding to use when creating XML representations
+    _encoding = 'UTF-8'
+
     def __init__(self,
                  time_base, sequence_number, sequence_identifier, lang,
                  clock_mode=None, availability_time=None,
@@ -425,11 +428,12 @@ class EBUTT3Document(TimelineUtilMixin, SubtitleDocument, EBUTTDocumentBase):
             )
 
     def get_xml(self, indent='  ', newl='\n'):
-        return self._ebutt3_content.toxml(
+        return str(self._ebutt3_content.toxml(
+            encoding=self._encoding,
             bds=self._get_bds(),
             indent=indent,
             newl=newl
-        )
+        ), encoding=self._encoding)
 
     def get_dom(self):
         return self._ebutt3_content.toDOM()

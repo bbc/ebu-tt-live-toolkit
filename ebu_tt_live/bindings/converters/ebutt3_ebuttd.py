@@ -119,11 +119,10 @@ class EBUTT3EBUTTDConverter(object):
             font_size = None
             if vertical is not None:
                 if horizontal is None:
-                    font_size = ebuttdt.PercentageFontSizeType(
-                        round(vertical, 2))
+                    font_size = roundAndStrip(vertical, 2) + '%'
                 else:
-                    font_size = ebuttdt.PercentageFontSizeType(
-                        round(horizontal, 2), round(vertical, 2))
+                    font_size = roundAndStrip(horizontal, 2) + '% ' + \
+                        roundAndStrip(vertical, 2) + '%'
 
             instance = d_style_type(
                 id=font_style_id,

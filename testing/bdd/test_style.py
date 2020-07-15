@@ -8,6 +8,7 @@ from datetime import timedelta
 
 scenarios('features/styles/ebuttd_fontsize_conversion.feature')
 scenarios('features/styles/ebuttd_fontsize_inheritance.feature')
+scenarios('features/styles/ebuttd_fontsize_same_style_ref.feature')
 scenarios('features/styles/style_attribute_simple.feature')
 scenarios('features/styles/style_attribute_inherited.feature')
 scenarios('features/styles/lineHeight.feature')
@@ -27,19 +28,19 @@ def when_extent(template_dict, extent):
 
 @when('it has region fontSize of <region_fontSize>')
 @when(parsers.parse('it has region fontSize of "{region_fontSize}"'))
-def when_extent(template_dict, region_fontSize):
+def when_region_fontSize(template_dict, region_fontSize):
     template_dict['region_fontSize'] = region_fontSize
 
 
 @when('it has div fontSize of <div_fontSize>')
 @when(parsers.parse('it has div fontSize of "{div_fontSize}"'))
-def when_extent(template_dict, div_fontSize):
+def when_div_fontSize(template_dict, div_fontSize):
     template_dict['div_fontSize'] = div_fontSize
 
 
 @when('it has p fontSize of <p_fontSize>')
 @when(parsers.parse('it has p fontSize of "{p_fontSize}"'))
-def when_extent(template_dict, p_fontSize):
+def when_p_fontSize(template_dict, p_fontSize):
     template_dict['p_fontSize'] = p_fontSize
 
 
@@ -116,6 +117,9 @@ def when_document_converted(test_context, local_time_mapping):
     ebuttd_converter = EBUTT3EBUTTDConverter(
         media_clock=media_clock
     )
+    print('Input document:')
+    print(test_context['document'].get_xml())
+    print('XXXXXXXXX')
     converted_bindings = ebuttd_converter.convert_document(test_context['document'].binding)
     ebuttd_document = EBUTTDDocument.create_from_raw_binding(converted_bindings)
     test_context['ebuttd_document'] = ebuttd_document

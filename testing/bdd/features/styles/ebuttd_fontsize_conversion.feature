@@ -2,8 +2,8 @@
 Feature: Compute fontSize on a single EBU-TT Live element
 
   Examples:
-  | style_attribute | local_time_mapping |
-  | tts:fontSize    | 00:00:00           |
+  | xml_file                      | extent | cell_resolution | style_attribute | local_time_mapping |
+  | ebuttd_fontsize_convert.xml   |        | 40 22           | tts:fontSize    | 00:00:00           |
 
   # Elements referencing styles with different fontSize attribute values
   Scenario: Font size inheritance
@@ -23,6 +23,6 @@ Feature: Compute fontSize on a single EBU-TT Live element
     # TODO: implement the rest of the assertions once EBUTTD has some semantic validation of sorts...
 
     Examples:
-    | xml_file                      | extent | cell_resolution | S1_value | S2_value | S3_value | S4_value  | S5_value | S6_value |
-    | ebuttd_fontsize_convert.xml   |        | 40 22           | 100%     | 100%     | 100%     | 100%      | 100%     | 100%     |
-    | ebuttd_fontsize_convert.xml   |        | 40 22           | 50%      | 100%     | 100%     | 100%      | 1c       | 1c       |
+    | S1_value | S2_value | S3_value | S4_value  | S5_value | S6_value |
+    | 100%     | 100%     | 100%     | 100%      | 100%     | 100%     |
+    | 50%      | 100%     | 100%     | 100%      | 1c       | 1c       |

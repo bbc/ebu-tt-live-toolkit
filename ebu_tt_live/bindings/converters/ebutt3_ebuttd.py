@@ -151,7 +151,7 @@ class EBUTT3EBUTTDConverter(object):
         :param dataset: semantic dataset
         :return:
         """
-        if isinstance(elem, (body_type, div_type, p_type, span_type)):
+        if isinstance(elem, (region_type, body_type, div_type, p_type, span_type)):
             if elem.computed_style is None:
                 raise SemanticValidationError(ERR_SEMANTIC_VALIDATION_EXPECTED)
             specified_font_size = elem.specified_style.fontSize
@@ -163,35 +163,40 @@ class EBUTT3EBUTTDConverter(object):
 
             computed_font_size = elem.computed_style.fontSize
             computed_line_height = elem.computed_style.lineHeight
+            parent_computed_font_size = DEFAULT_CELL_FONT_SIZE
+            if isinstance(parent, (body_type, div_type, p_type, span_type)):
+                if parent.computed_style.fontSize is not None:
+                    parent_computed_font_size = parent.computed_style.fontSize
 
             required_font_size = None
             required_line_height = None
 
             if specified_font_size is not None:
+                print('_fix_fontSize for {} specifying font size {}; parent {} computed font size {}'.format(elem._description(name_only=True), specified_font_size, parent._description(name_only=True), parent_computed_font_size))
                 # Fallback for body element fontSize is the default value
                 # because EBU-TT Live does not allow fontSize on region
                 # elements.
-                if isinstance(elem, body_type) and computed_font_size is None:
+                if isinstance(elem, (body_type, region_type)) and computed_font_size is None:
                     computed_font_size = DEFAULT_CELL_FONT_SIZE
 
-                if isinstance(elem, (body_type, div_type, p_type)):
+                if isinstance(elem, (region_type, body_type, div_type, p_type, span_type)):
                     # Since we eliminated all our fontSize attributes from the
                     # original styles here it is as simple as computing based
                     # on the default value.
                     if isinstance(computed_font_size,
                                   CellFontSizeType) \
                        and computed_font_size != DEFAULT_CELL_FONT_SIZE:
-                        required_font_size = \
-                            computed_font_size / DEFAULT_CELL_FONT_SIZE
+
+                        if parent_computed_font_size.vertical != computed_font_size.vertical:
+                            required_font_size = \
+                                computed_font_size / parent_computed_font_size
+
+                        print('computed_font_size is a CellFontSizeType: {}, required = {}'.format(computed_font_size, required_font_size))
                     elif isinstance(computed_font_size,
                                     PercentageFontSizeType):
-                        required_font_size = computed_font_size
-
-                elif isinstance(elem, span_type):
-                    parent_computed_font_size = parent.computed_style.fontSize
-                    if parent_computed_font_size != computed_font_size:
-                        required_font_size = \
-                            computed_font_size / parent_computed_font_size
+                        if computed_font_size.vertical != 100:
+                            required_font_size = computed_font_size
+                        print('computed_font_size is a PercentageFontSizeType: {}, required = {}'.format(computed_font_size, required_font_size))
 
             if specified_line_height is not None:
                 if isinstance(
@@ -333,6 +338,7 @@ class EBUTT3EBUTTDConverter(object):
             activeArea=tt_in.activeArea,
             _strict_keywords=False
         )
+        print('convert_tt fixing fontsize on body')
         self._fix_fontsize(tt_in.body, new_elem.body, tt_in, dataset)
         self._link_adjusted_fonts_styling(
             self._adjusted_font_style_map(),
@@ -377,8 +383,14 @@ class EBUTT3EBUTTDConverter(object):
         return new_elem
 
     def convert_layout(self, layout_in, dataset):
+        def convert_and_fix_fontsize(r, dataset):
+            new_r = self.convert_element(r, dataset)
+            print('convert_tt fixing fontsize on region')
+            self._fix_fontsize(r, new_r, layout_in, dataset)
+            return new_r
+
         new_elem = d_layout_type(
-            region=[self.convert_element(r, dataset) for r in layout_in.region]
+            region=[convert_and_fix_fontsize(r, dataset) for r in layout_in.region]
         )
 
         # Fill in the gaps with default values
@@ -489,6 +501,7 @@ class EBUTT3EBUTTDConverter(object):
         for div in body_in.div:
             new_div = self.convert_element(div, dataset)
             if new_div is not None:
+                print('convert_body calling fix_fontsize on new div')
                 self._fix_fontsize(
                     elem=div,
                     celem=new_div,
@@ -518,6 +531,7 @@ class EBUTT3EBUTTDConverter(object):
         for p in div_in.p:
             new_p = self.convert_element(p, dataset)
             if new_p is not None:
+                print('convert_div calling fix fontsize on new p')
                 self._fix_fontsize(
                     elem=p,
                     celem=new_p,
@@ -647,6 +661,7 @@ class EBUTT3EBUTTDConverter(object):
                 if conv_elem is not None:
                     if isinstance(item.value, StyledElementMixin) and \
                        not isinstance(item.value, style_type):
+                        print('convert_children calling fix font size on a new child')
                         self._fix_fontsize(
                             elem=item.value,
                             celem=conv_elem,

@@ -25,14 +25,15 @@ Feature: Convert fontSize from EBU-TT Live to EBU-TT-D
 
   Examples:
   | cell_resolution | extent       | region_fontSize | div_fontSize | p_fontSize | ttd_region_fontSize | ttd_div_fontSize | ttd_p_fontSize |
-  | 40 24           |              |                 | 1c 2c        | 1c 2c      |                     | 200%             | 100%           |
-  | 32 15           |              |                 | 1c           | 100%       |                     | 100%             | 100%           |
-  | 32 15           |              | 100%            |              | 200%       | 100%                |                  | 200%           |
-  | 32 15           |              |                 | 1c 1c        | 2c         |                     | 100%             | 200%           |
+  | 40 24           |              |                 | 1c 2c        | 1c 2c      |                     | 200%             |                |
+  | 32 15           |              |                 | 1c           | 100%       |                     |                  |                |
+  | 32 15           |              | 100%            |              | 200%       |                     |                  | 200%           |
+  | 32 15           |              |                 | 1c 1c        | 2c         |                     |                  | 200%           |
   | 32 15           |              | 1c 2c           |              | 50%        | 200%                |                  | 50%            |
-  | 32 15           | 1280px 720px |                 | 48px         | 24px       |                     | 100%             | 50%            |
+  | 32 15           | 1280px 720px |                 | 48px         | 24px       |                     |                  | 50%            |
   | 32 15           | 1280px 720px | 1c 2c           |              | 48px       | 200%                |                  | 50%            |
 
+# TODO: if we implement different output EBU-TT-D cell resolution compared to input, these tests are relevant (but need to be checked).
 #  | cell_resolution | extent       | region_fontSize | div_fontSize | p_fontSize | ttd_cell_resolution | ttd_region_fontSize | ttd_div_fontSize | ttd_p_fontSize |
 #  | 64 30           |              | 200%            |              | 50%        | 32 15               | 100%                | 50%              |                |
 #  | 64 30           |              |                 | 200%         | 1c         | 32 15               |                     | 100%             | 50%            |

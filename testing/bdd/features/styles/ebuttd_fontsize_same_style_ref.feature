@@ -5,9 +5,12 @@ Feature: Convert fontSize from EBU-TT Live to EBU-TT-D when two elements referen
   | local_time_mapping | xml_file                           | style_attribute |
   | 00:00:00           | ebuttd_fontsize_same_style_ref.xml | tts:fontSize    |
 
-  # If specified in cell units, the computation must take into account cellResolution.
+  # Both the div and the p in the XML file reference style S1, unlike the fontsize inheritance test.
+  # The fontSize can be set on the input in different units.
+  # The converted output sets percentage unit single value font sizes only.
+  # Output font sizes of 100% are removed.
   # If not region element, calculation is relative to parent element's font size; otherwise, relative to the Computed Cell Size.
-  # The second value for font size is ignored in the conversion.
+  # The (first) horizontal component of two component font sizes is ignored in the conversion.
 
   Scenario: Inherited font size calculation
     Given an xml file <xml_file>

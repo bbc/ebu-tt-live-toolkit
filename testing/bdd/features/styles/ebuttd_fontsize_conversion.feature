@@ -6,6 +6,9 @@ Feature: Compute fontSize on a single EBU-TT Live element
   | ebuttd_fontsize_convert.xml   |        | 40 22           | tts:fontSize    | 00:00:00           |
 
   # Elements referencing styles with different fontSize attribute values
+  # This feature tests that valid output is generated, but does not check
+  # that the output is correct. The fontsize inheritance and fontsize same style ref
+  # features check for correct output too.
   Scenario: Font size inheritance
     Given an xml file <xml_file>
     When it has a cell resolution of <cell_resolution>

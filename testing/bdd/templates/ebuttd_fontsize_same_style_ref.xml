@@ -21,7 +21,9 @@
       <ebuttm:documentMetadata/>
     </tt:metadata>
     <tt:styling>
-      <tt:style {% if S1_value and S1_value != "*?Empty?*" %} {{ style_attribute }}="{{ S1_value }}" {% endif %}xml:id="S1"/>
+      <tt:style {% if S1_value and S1_value != "*?Empty?*" %} {{ style_attribute }}="{{ S1_value }}" {% endif %}
+      {% if S1_value2 and S1_value2 != "*?Empty?*" %} {{ style_attribute2 }}="{{ S1_value2 }}" {% endif %}
+      xml:id="S1"/>
     </tt:styling>
     <tt:layout>
       <tt:region tts:origin="0c 0c" tts:extent="10c 10c" xml:id="R1"/>

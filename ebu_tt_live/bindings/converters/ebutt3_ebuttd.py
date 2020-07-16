@@ -201,7 +201,11 @@ class EBUTT3EBUTTDConverter(object):
                         if computed_font_size.vertical != 100:
                             required_font_size = computed_font_size
 
-            if specified_line_height is not None:
+            if specified_line_height is not None \
+               and computed_line_height != parent_computed_line_height:
+                # Even if a line height was specified, if it is the same as
+                # what we are inheriting, there's no point writing it to the
+                # output file.
                 if isinstance(
                         computed_line_height, ebuttdt.CellLineHeightType):
                     required_line_height = ebuttdt.PercentageLineHeightType(
@@ -222,10 +226,6 @@ class EBUTT3EBUTTDConverter(object):
                     )
                 elif computed_line_height == DEFAULT_LINE_HEIGHT:
                     required_line_height = computed_line_height
-
-            # Don't bother setting the line height to what it already is
-            if required_line_height == parent_computed_line_height:
-                required_line_height = None
 
             if required_font_size is not None or \
                required_line_height is not None:

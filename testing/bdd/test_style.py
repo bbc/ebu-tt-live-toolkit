@@ -146,6 +146,17 @@ def then_EBUTTD_has_div_fontSize(test_context, ttd_div_fontSize):
         assert fontSize == ttd_div_fontSize
 
 
+@then('the EBUTTD has div lineHeight of <ttd_div_lineHeight>')
+def then_EBUTTD_has_div_lineHeight(test_context, ttd_div_lineHeight):
+    ttd_doc = test_context['ebuttd_document']
+    div = ttd_doc.get_element_by_id('div1')
+    lineHeight = div.specified_style.get_attribute_value('lineHeight')
+    if ttd_div_lineHeight == '':
+        assert lineHeight is None
+    else:
+        assert lineHeight == ttd_div_lineHeight
+
+
 @then('the EBUTTD has p fontSize of <ttd_p_fontSize>')
 def then_EBUTTD_has_p_fontSize(test_context, ttd_p_fontSize):
     ttd_doc = test_context['ebuttd_document']
@@ -155,3 +166,14 @@ def then_EBUTTD_has_p_fontSize(test_context, ttd_p_fontSize):
         assert fontSize is None
     else:
         assert fontSize == ttd_p_fontSize
+
+
+@then('the EBUTTD has p lineHeight of <ttd_p_lineHeight>')
+def then_EBUTTD_has_p_lineHeight(test_context, ttd_p_lineHeight):
+    ttd_doc = test_context['ebuttd_document']
+    p = ttd_doc.get_element_by_id('p1')
+    lineHeight = p.specified_style.get_attribute_value('lineHeight')
+    if ttd_p_lineHeight == '':
+        assert lineHeight is None
+    else:
+        assert lineHeight == ttd_p_lineHeight

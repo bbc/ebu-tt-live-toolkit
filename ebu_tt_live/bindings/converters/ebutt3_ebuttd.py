@@ -22,6 +22,7 @@ log = logging.getLogger(__name__)
 
 
 DEFAULT_CELL_FONT_SIZE = CellFontSizeType('1c')
+DEFAULT_LINE_HEIGHT = 'normal'
 
 
 def roundAndStrip(value, dp):
@@ -164,9 +165,12 @@ class EBUTT3EBUTTDConverter(object):
             computed_font_size = elem.computed_style.fontSize
             computed_line_height = elem.computed_style.lineHeight
             parent_computed_font_size = DEFAULT_CELL_FONT_SIZE
+            parent_computed_line_height = DEFAULT_LINE_HEIGHT
             if isinstance(parent, (body_type, div_type, p_type, span_type)):
                 if parent.computed_style.fontSize is not None:
                     parent_computed_font_size = parent.computed_style.fontSize
+                if parent.computed_style.lineHeight is not None:
+                    parent_computed_line_height = parent.computed_style.lineHeight
 
             required_font_size = None
             required_line_height = None
@@ -216,8 +220,12 @@ class EBUTT3EBUTTDConverter(object):
                                               computed_font_size.vertical *
                                               100, 2))
                     )
-                elif computed_line_height == 'normal':
+                elif computed_line_height == DEFAULT_LINE_HEIGHT:
                     required_line_height = computed_line_height
+
+            # Don't bother setting the line height to what it already is
+            if required_line_height == parent_computed_line_height:
+                required_line_height = None
 
             if required_font_size is not None or \
                required_line_height is not None:

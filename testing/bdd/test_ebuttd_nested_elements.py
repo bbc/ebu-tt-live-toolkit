@@ -55,7 +55,7 @@ def then_span_contains_no_spans(test_context):
             assert tmp.tag != "{http://www.w3.org/ns/ttml}span"
 
 @then('the second span\'s style is outerinnerYellow')
-def combine_span_styles(test_context):
+def second_span_style_outerinnerYellow(test_context):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
@@ -68,6 +68,13 @@ def second_span_contains_br(test_context):
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
     assert elements[1].find("{http://www.w3.org/ns/ttml}br") is not None
 
+@then('the 22nd span\'s style is nestSizingnestSizingnestSizing')
+def twentysecond_span_style_nestSizingnestSizingnestSizing(test_context):
+    document = test_context['ebuttd_document']
+    tree = ET.fromstring(document.get_xml())
+    elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
+    assert elements[21].get("style") == "autogenFontStyle_n_12.5_n nestSizingnestSizingnestSizing"
+
 @then(parsers.parse('there is no style named "{style_name}"'))
 def no_duplicate_styles(test_context, style_name):
     document = test_context['ebuttd_document']
@@ -76,6 +83,13 @@ def no_duplicate_styles(test_context, style_name):
     for element in elements:
         assert element.get("{http://www.w3.org/XML/1998/namespace}id") != style_name
 
+@then(parsers.parse('the style "{style_id}" exists'))
+def style_exists(test_context, style_id):
+    document = test_context['ebuttd_document']
+    tree = ET.fromstring(document.get_xml())
+    elements = tree.findall('{http://www.w3.org/ns/ttml}head/{http://www.w3.org/ns/ttml}styling/{http://www.w3.org/ns/ttml}style')
+    style_ids = [element.get("{http://www.w3.org/XML/1998/namespace}id") for element in elements]
+    assert style_id in style_ids
 
 @then(parsers.parse('any span with the style "{style_name}" also has the style "{size_style}"'))
 def percentage_size_for_nested_styles(test_context, style_name, size_style):

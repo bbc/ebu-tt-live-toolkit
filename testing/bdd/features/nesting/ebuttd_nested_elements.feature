@@ -73,6 +73,9 @@ Feature: Merging nested elements
         And the EBU-TT-Live document is converted to EBU-TT-D
         Then EBUTTD document is valid
         And the second span's style is outerinnerYellow
+        And the style "outerinnerYellow" exists
+        And the 22nd span's style is nestSizingnestSizingnestSizing
+        And the style "nestSizingnestSizingnestSizing" exists
 
         Examples:
             | xml_file                   |

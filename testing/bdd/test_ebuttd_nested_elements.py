@@ -54,7 +54,7 @@ def then_span_contains_no_spans(test_context):
         for tmp in list(element):
             assert tmp.tag != "{http://www.w3.org/ns/ttml}span"
 
-@then('the second span\'s style is outerinnerYellow')
+@then('the second span\'s style is autogenFontStyle_n_200_n outerinnerYellow')
 def second_span_style_outerinnerYellow(test_context):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
@@ -68,7 +68,7 @@ def second_span_contains_br(test_context):
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
     assert elements[1].find("{http://www.w3.org/ns/ttml}br") is not None
 
-@then('the 22nd span\'s style is nestSizingnestSizingnestSizing')
+@then('the 22nd span\'s style is autogenFontStyle_n_12.5_n nestSizingnestSizingnestSizing')
 def twentysecond_span_style_nestSizingnestSizingnestSizing(test_context):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())

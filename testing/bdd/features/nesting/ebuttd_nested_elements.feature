@@ -100,6 +100,7 @@ Feature: Merging nested elements
         And the EBU-TT-Live document is converted to EBU-TT-D
         Then EBUTTD document is valid
         And there is no style named "nestnest"
+        And no span references style "nestnest"
 
         Examples:
             | xml_file                   |

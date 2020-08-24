@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from itertools import chain
 from pytest_bdd import scenarios, given, when, then, parsers
 
 scenarios('features/nesting/ebuttd_nested_elements.feature')
@@ -100,6 +101,14 @@ def percentage_size_for_nested_styles(test_context, style_name, size_style):
         styles = element.get("style").split(" ")
         if style_name in styles:
             assert size_style in styles
+
+@then(parsers.parse('no span references style "{style_id}"'))
+def no_span_references_style(test_context, style_id):
+    document = test_context['ebuttd_document']
+    tree = ET.fromstring(document.get_xml())
+    elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
+    style_ids = set(chain(*[element.get("style").split(" ") for element in elements]))
+    assert style_id not in style_ids
 
 @when(parsers.parse('it contains a div with id "{div_id}"'))
 def given_div(test_context, template_dict, div_id):

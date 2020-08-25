@@ -72,14 +72,27 @@ Feature: Merging nested elements
         And the EBU-TT-Live document is denested
         And the EBU-TT-Live document is converted to EBU-TT-D
         Then EBUTTD document is valid
-        And the second span's style is autogenFontStyle_n_200_n outerinnerYellow
+        And span 1 has style "autogenFontStyle_n_200_n outerinnerYellow"
         And the style "outerinnerYellow" exists
-        And the 22nd span's style is autogenFontStyle_n_12.5_n nestSizingnestSizingnestSizing
+        And span 21 has style "autogenFontStyle_n_12.5_n nestSizingnestSizingnestSizing"
         And the style "nestSizingnestSizingnestSizing" exists
 
         Examples:
             | xml_file                   |
             | nested_spans_hardcoded.xml |
+
+    Scenario: Nested spans with styles should create new, combined styles that make it to the EBU-TT_D
+        Given an xml file <xml_file>
+        When the document is generated
+        And the EBU-TT-Live document is denested
+        And the EBU-TT-Live document is converted to EBU-TT-D
+        Then EBUTTD document is valid
+        And span 1 has style "S2S6"
+        And the style "S2S6" exists
+
+        Examples:
+            | xml_file                               |
+            | nested_spans_ebuttd_style_creation.xml |
 
     Scenario: Nested spans with br children should create new spans with br children
         Given an xml file <xml_file>

@@ -55,12 +55,12 @@ def then_span_contains_no_spans(test_context):
         for tmp in list(element):
             assert tmp.tag != "{http://www.w3.org/ns/ttml}span"
 
-@then('the second span\'s style is autogenFontStyle_n_200_n outerinnerYellow')
-def second_span_style_outerinnerYellow(test_context):
+@then(parsers.parse('span {span_number:d} has style "{style_refs}"'))
+def span_n_has_style_stylerefs(test_context, span_number, style_refs):
     document = test_context['ebuttd_document']
     tree = ET.fromstring(document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
-    assert elements[1].get("style") == "autogenFontStyle_n_200_n outerinnerYellow"
+    assert elements[span_number].get("style") == style_refs
 
 @then('the second span contains a br')
 def second_span_contains_br(test_context):
@@ -68,13 +68,6 @@ def second_span_contains_br(test_context):
     tree = ET.fromstring(document.get_xml())
     elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
     assert elements[1].find("{http://www.w3.org/ns/ttml}br") is not None
-
-@then('the 22nd span\'s style is autogenFontStyle_n_12.5_n nestSizingnestSizingnestSizing')
-def twentysecond_span_style_nestSizingnestSizingnestSizing(test_context):
-    document = test_context['ebuttd_document']
-    tree = ET.fromstring(document.get_xml())
-    elements = tree.findall('{http://www.w3.org/ns/ttml}body/{http://www.w3.org/ns/ttml}div/{http://www.w3.org/ns/ttml}p/{http://www.w3.org/ns/ttml}span')
-    assert elements[21].get("style") == "autogenFontStyle_n_12.5_n nestSizingnestSizingnestSizing"
 
 @then(parsers.parse('there is no style named "{style_name}"'))
 def no_duplicate_styles(test_context, style_name):

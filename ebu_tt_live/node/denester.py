@@ -578,7 +578,7 @@ class DenesterNode(AbstractCombinedNode):
         if dataset["styling"] is None:
             # not sure how we can get here, but if so, make a styling
             dataset["document"].head.append(styling())
-        dataset["styling"] = dataset["document"].head.styling
+            dataset["styling"] = dataset["document"].head.styling
         for style in dataset["styling"].style:
             if new_style.id == style.id:
                 return new_style

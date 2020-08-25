@@ -83,11 +83,14 @@ Feature: Merging nested elements
 
     Scenario: Nested spans with styles should create new, combined styles that make it to the EBU-TT_D
         Given an xml file <xml_file>
-        When the document is generated
+        When the XML is parsed as a valid EBU-TT-1 document
+        And the EBU-TT-1 converter is set to use the documentIdentifier as a sequenceIdentifier
+        And the EBU-TT-1 converter is set to use a FixedOffsetSMPTEConverter
+        And the EBU-TT-1 document is converted to EBU-TT-Live
         And the EBU-TT-Live document is denested
         And the EBU-TT-Live document is converted to EBU-TT-D
         Then EBUTTD document is valid
-        And span 1 has style "S2S6"
+        And span 2 has style "S2S6"
         And the style "S2S6" exists
 
         Examples:

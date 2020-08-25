@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<tt xmlns="http://www.w3.org/ns/ttml" xmlns:tts="http://www.w3.org/ns/ttml#styling" xmlns:ttm="http://www.w3.org/ns/ttml#metadata" xmlns:ttp="http://www.w3.org/ns/ttml#parameter" xmlns:ebuttdt="urn:ebu:tt:datatypes" xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebutts="urn:ebu:tt:style" xmlns:ebuttp="urn:ebu:tt:parameters" ebuttp:sequenceIdentifier="TestSequence" ebuttp:sequenceNumber="1"  xml:space="preserve" ttp:timeBase="media" ttp:cellResolution="40 24" xml:lang="en-GB">
+<tt xmlns="http://www.w3.org/ns/ttml" xmlns:tts="http://www.w3.org/ns/ttml#styling" xmlns:ttm="http://www.w3.org/ns/ttml#metadata" xmlns:ttp="http://www.w3.org/ns/ttml#parameter" xmlns:ebuttdt="urn:ebu:tt:datatypes" xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebutts="urn:ebu:tt:style" xmlns:ebuttp="urn:ebu:tt:parameters" xml:space="preserve" ttp:timeBase="smpte" ttp:frameRate="25" ttp:frameRateMultiplier="1 1" ttp:dropMode="nonDrop" ttp:markerMode="discontinuous" ttp:cellResolution="40 24" xml:lang="en-GB">
 <head>
 <metadata>
-<ebuttm:documentMetadata><ebuttm:documentEbuttVersion>v1.0</ebuttm:documentEbuttVersion><ebuttm:documentCopyright>BBC</ebuttm:documentCopyright><ebuttm:documentReadingSpeed>200</ebuttm:documentReadingSpeed><ebuttm:documentTargetAspectRatio>4:3</ebuttm:documentTargetAspectRatio><ebuttm:documentIntendedTargetFormat>WSTTeletextSubtitles</ebuttm:documentIntendedTargetFormat><ebuttm:documentOriginalProgrammeTitle>Nested span test</ebuttm:documentOriginalProgrammeTitle><ebuttm:documentCreationDate>2020-08-25</ebuttm:documentCreationDate><ebuttm:documentTotalNumberOfSubtitles>1</ebuttm:documentTotalNumberOfSubtitles><ebuttm:documentMaximumNumberOfDisplayableCharacterInAnyRow>37</ebuttm:documentMaximumNumberOfDisplayableCharacterInAnyRow><ebuttm:documentCountryOfOrigin>UK</ebuttm:documentCountryOfOrigin><ebuttm:documentPublisher>BBC</ebuttm:documentPublisher></ebuttm:documentMetadata>
+<ebuttm:documentMetadata><ebuttm:documentEbuttVersion>v1.0</ebuttm:documentEbuttVersion><ebuttm:documentIdentifier>TestSequence1</ebuttm:documentIdentifier><ebuttm:documentCopyright>BBC</ebuttm:documentCopyright><ebuttm:documentReadingSpeed>200</ebuttm:documentReadingSpeed><ebuttm:documentTargetAspectRatio>4:3</ebuttm:documentTargetAspectRatio><ebuttm:documentIntendedTargetFormat>WSTTeletextSubtitles</ebuttm:documentIntendedTargetFormat><ebuttm:documentOriginalProgrammeTitle>Nested span test</ebuttm:documentOriginalProgrammeTitle><ebuttm:documentCreationDate>2020-08-25</ebuttm:documentCreationDate><ebuttm:documentTotalNumberOfSubtitles>1</ebuttm:documentTotalNumberOfSubtitles><ebuttm:documentMaximumNumberOfDisplayableCharacterInAnyRow>37</ebuttm:documentMaximumNumberOfDisplayableCharacterInAnyRow><ebuttm:documentStartOfProgramme>10:00:00:00</ebuttm:documentStartOfProgramme><ebuttm:documentCountryOfOrigin>UK</ebuttm:documentCountryOfOrigin><ebuttm:documentPublisher>BBC</ebuttm:documentPublisher></ebuttm:documentMetadata>
 </metadata>
 <styling>
 <style xml:id="S1" tts:fontSize="1c 2c" ebutts:linePadding="1c" tts:textAlign="start" tts:lineHeight="2c"/>
@@ -19,7 +19,7 @@
 </head>
 <body ttm:role="caption">
 <div style="S1">
-<p xml:id="P1" region="R1" style="S2" begin="00:32:16.2" end="00:32:18.16"><span style="S3">She'll be OK.</span><br/><span style="S2" begin="00:32:18.16" end="00:32:19.2"><span style="S6">No thanks to you.</span></span></p>
+<p xml:id="P1" region="R1" style="S2" begin="10:32:16:05" end="10:32:18:05"><span style="S3">She'll be OK.</span><br/><span style="S2" begin="10:32:18:04" end="10:32:19:05"><span style="S6">No thanks to you.</span></span></p>
 </div>
 </body>
 </tt>

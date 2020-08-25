@@ -13,8 +13,8 @@ Feature: Converting EBU-TT Part 1 files
     And the document contains a "layout" element
     And the document contains a "region" element
     And the XML is parsed as a valid EBU-TT-1 document
-    And the EBU-TT-1 document is converted to EBU-TT-3
-    Then the EBU-TT-3 document is valid
+    And the EBU-TT-1 document is converted to EBU-TT-Live
+    Then the EBU-TT-Live document is valid
     And the sequenceIdentifier is "headDocId"
 
   Scenario: Pass conversion check with documentIdentifier in document metadata and converter set to use documentIdentifier as a sequenceIdentifier
@@ -26,8 +26,8 @@ Feature: Converting EBU-TT Part 1 files
     And the document contains a "region" element
     And the XML is parsed as a valid EBU-TT-1 document
     And the EBU-TT-1 converter is set to use the documentIdentifier as a sequenceIdentifier
-    And the EBU-TT-1 document is converted to EBU-TT-3
-    Then the EBU-TT-3 document is valid
+    And the EBU-TT-1 document is converted to EBU-TT-Live
+    Then the EBU-TT-Live document is valid
     And the sequenceIdentifier is "docMetaDocId"
 
 
@@ -41,8 +41,8 @@ Feature: Converting EBU-TT Part 1 files
     And the XML is parsed as a valid EBU-TT-1 document
     And the EBU-TT-1 converter is set not to use the documentIdentifier as a sequenceIdentifier
     And the EBU-TT-1 converter sequenceIdentifier is "BDDSEQID"
-    And the EBU-TT-1 document is converted to EBU-TT-3
-    Then the EBU-TT-3 document is valid
+    And the EBU-TT-1 document is converted to EBU-TT-Live
+    Then the EBU-TT-Live document is valid
     And the sequenceIdentifier is "BDDSEQID"
 
   Scenario: Pass conversion check with no documentIdentifier
@@ -52,6 +52,6 @@ Feature: Converting EBU-TT Part 1 files
     And the document contains a "layout" element
     And the document contains a "region" element
     And the XML is parsed as a valid EBU-TT-1 document
-    And the EBU-TT-1 document is converted to EBU-TT-3
-    Then the EBU-TT-3 document is valid
+    And the EBU-TT-1 document is converted to EBU-TT-Live
+    Then the EBU-TT-Live document is valid
     And the sequenceIdentifier is "TestConverter"

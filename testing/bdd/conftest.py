@@ -1,11 +1,16 @@
 from pytest_bdd import when, given, then
 from jinja2 import Environment, FileSystemLoader
-from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence, EBUTTDDocument
+from ebu_tt_live.documents import EBUTT1Document, EBUTT3Document, \
+    EBUTT3DocumentSequence, EBUTTDDocument
+from ebu_tt_live.bindings.converters.ebutt1_ebutt3 import EBUTT1EBUTT3Converter
 from ebu_tt_live.documents.converters import EBUTT3EBUTTDConverter
+from ebu_tt_live.bindings.converters.timedelta_converter import \
+    FixedOffsetSMPTEtoTimedeltaConverter
 from ebu_tt_live.clocks.local import LocalMachineClock
 from ebu_tt_live.node.denester import DenesterNode
 from ebu_tt_live.clocks.media import MediaClock
-from ebu_tt_live.bindings._ebuttdt import FullClockTimingType, LimitedClockTimingType, CellFontSizeType, lineHeightType
+from ebu_tt_live.bindings._ebuttdt import FullClockTimingType, \
+    LimitedClockTimingType, CellFontSizeType, lineHeightType
 from datetime import timedelta
 import pytest
 import os
@@ -65,6 +70,11 @@ def valid_doc(template_file, template_dict):
     xml_file = template_file.render(template_dict)
     document = EBUTT3Document.create_from_xml(xml_file)
     assert isinstance(document, EBUTT3Document)
+
+@then('the EBU-TT-Live document is valid')
+def then_ebutt3_doc_valid(test_context):
+    test_context['document'].validate()
+    assert isinstance(test_context['document'], EBUTT3Document)
 
 @then('the first document is valid')
 def valid_doc_1(template_file_one, template_dict):
@@ -165,6 +175,67 @@ def then_ebuttd_document_valid(test_context):
     print('valid EBU-TT-D document:')
     print(ebuttd_document.get_xml())
     assert isinstance(ebuttd_document, EBUTTDDocument)
+
+@when('the XML is parsed as a valid EBU-TT-1 document')
+def when_document_parsed_ebutt1(test_context, template_file, template_dict):
+    xml_text = template_file.render(template_dict)
+    ebutt1_document = EBUTT1Document.create_from_xml(xml_text)
+    ebutt1_document.validate()
+    test_context['ebutt1_document'] = ebutt1_document
+
+@when('the EBU-TT-1 converter is set to use the documentIdentifier as a sequenceIdentifier')
+def when_converter_uses_docId_as_seqId(test_context):
+    test_context['use_doc_id_as_seq_id'] = True
+
+
+@when('the EBU-TT-1 converter is set not to use the documentIdentifier as a sequenceIdentifier')
+def when_converter_does_not_use_docId_as_seqId(test_context):
+    test_context['use_doc_id_as_seq_id'] = False
+
+@when('the EBU-TT-1 converter is set to use a FixedOffsetSMPTEConverter')
+def when_converter_set_to_use_fixed_offset_smpte_converter(test_context):
+    document = test_context['ebutt1_document'].binding
+    if document.timeBase == 'smpte':
+        start_of_programme = '00:00:00:00'
+        head_metadata = document.head.metadata
+        if head_metadata:
+            doc_metadata = head_metadata.documentMetadata
+            if doc_metadata and doc_metadata.documentStartOfProgramme:
+                start_of_programme = doc_metadata.documentStartOfProgramme
+        print('making a FixedOffsetTimedeltaConverter for start_of_programme {}'.format(start_of_programme))
+        test_context['smpte_to_timedelta_converter'] = \
+            FixedOffsetSMPTEtoTimedeltaConverter(
+                start_of_programme,
+                document.frameRate,
+                document.frameRateMultiplier,
+                document.dropMode
+            )
+    else:
+        print('tried making a FixedOffsetSMPTEConvverter but document timebase was not SMPTE')
+
+@when('the EBU-TT-1 document is converted to EBU-TT-Live')
+def when_ebutt1_converted_to_ebutt3(test_context, template_file, template_dict):
+    use_doc_id_as_seq_id = False
+    if 'use_doc_id_as_seq_id' in test_context:
+        use_doc_id_as_seq_id = test_context['use_doc_id_as_seq_id']
+    seq_id = 'TestConverter'
+    if 'converter_seq_id' in test_context:
+        seq_id = test_context['converter_seq_id']
+    time_converter = None
+    if 'smpte_to_timedelta_converter' in test_context:
+        time_converter = test_context['smpte_to_timedelta_converter']
+    ebutt1_converter = EBUTT1EBUTT3Converter(
+        sequence_id=seq_id, 
+        use_doc_id_as_seq_id=use_doc_id_as_seq_id)
+    doc_xml = test_context["ebutt1_document"].get_xml()
+    ebutt1_doc = EBUTT1Document.create_from_xml(doc_xml)
+    converted_bindings = ebutt1_converter.convert_document(
+        ebutt1_doc.binding,
+        smpte_to_timedelta_converter = time_converter)
+    ebutt3_document = EBUTT3Document.create_from_raw_binding(
+        converted_bindings)
+    test_context['document'] = ebutt3_document
+
 
 def timestr_to_timedelta(time_str, time_base):
     if time_base == 'clock':

@@ -1,7 +1,7 @@
 from .base import AbstractCombinedNode
 from ebu_tt_live.documents.ebutt3 import EBUTT3Document
 from ebu_tt_live.bindings import div_type, p_type, span_type, ebuttdt, \
-    style_type
+    style_type, styling
 from ebu_tt_live.bindings._ebuttm import divMetadata_type, pMetadata_type
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
 import logging
@@ -76,10 +76,7 @@ class DenesterNode(AbstractCombinedNode):
         divs = document.binding.body.div
         unnested_divs = []
         dataset = {}
-        if document.binding.head.styling is not None:
-            dataset["styles"] = document.binding.head.styling.style
-        else:
-            dataset["styles"] = []
+        dataset["styling"] = document.binding.head.styling
         dataset["document"] = document.binding
         dataset[ELEMENT_TIMES_KEY] = [
             ElementTimes(
@@ -536,10 +533,11 @@ class DenesterNode(AbstractCombinedNode):
         """
         new_style = None
         styles = []
-        for style_name in span_styles:  # go through styles in xml
-            for style in dataset["styles"]:
-                if style.id == style_name:
-                    styles.append(style)
+        if dataset["styling"] is not None:
+            for style_name in span_styles:  # go through styles in xml
+                for style in dataset["styling"].style:
+                    if style.id == style_name:
+                        styles.append(style)
         new_style = style_type(
             id="".join(span_styles),
             backgroundColor=DenesterNode.get_value_from_style(
@@ -577,13 +575,17 @@ class DenesterNode(AbstractCombinedNode):
         the name are the same.
         If not, a new style is created and added to the dataset.
         """
-        for style in dataset["styles"]:
+        if dataset["styling"] is None:
+            # not sure how we can get here, but if so, make a styling
+            dataset["document"].head.append(styling())
+        dataset["styling"] = dataset["document"].head.styling
+        for style in dataset["styling"].style:
             if new_style.id == style.id:
                 return new_style
             if new_style.check_equal(style):
                 new_style.id = style.id
                 return new_style
-        dataset["styles"].append(new_style)
+        dataset["styling"].append(new_style)
         return new_style
 
     @staticmethod

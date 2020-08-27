@@ -76,6 +76,7 @@ class TestDenesterNode(TestCase):
         expected_divs = self.expected_doc_2.binding.body.div
         nested_divs = self.actual_doc_2.binding.body.div
         dataset = {}
+        dataset["document"] = self.actual_doc_2.binding
         dataset["styles"] = self.actual_doc_2.binding.head.styling.style
         dataset[ELEMENT_TIMES_KEY] = [
             ElementTimes(
@@ -214,6 +215,7 @@ class TestDenesterNode(TestCase):
         expected_divs = self.expected_doc_3.binding.body.div
         nested_divs = self.actual_doc_3.binding.body.div
         dataset = {}
+        dataset["document"] = self.actual_doc_3.binding
         dataset["styles"] = self.actual_doc_3.binding.head.styling
         dataset[ELEMENT_TIMES_KEY] = [
             ElementTimes(
@@ -232,6 +234,7 @@ class TestDenesterNode(TestCase):
         expected_divs = self.expected_doc_3.binding.body.div
         nested_divs = self.actual_doc_3.binding.body.div
         dataset = {}
+        dataset["document"] = self.actual_doc_3.binding
         dataset["styles"] = self.actual_doc_3.binding.head.styling.style
         dataset[ELEMENT_TIMES_KEY] = [
             ElementTimes(
@@ -250,6 +253,7 @@ class TestDenesterNode(TestCase):
         expected_divs = self.expected_doc_3.binding.body.div
         nested_divs = self.actual_doc_3.binding.body.div
         dataset = {}
+        dataset["document"] = self.actual_doc_3.binding
         dataset["styles"] = self.actual_doc_3.binding.head.styling.style
         dataset[ELEMENT_TIMES_KEY] = [
             ElementTimes(
@@ -271,6 +275,7 @@ class TestDenesterNode(TestCase):
     def test_combine_same_divs(self):
         expected_divs = self.expected_doc_2.binding.body.div
         dataset = {}
+        dataset["document"] = self.actual_doc_2.binding
         dataset["styles"] = self.actual_doc_2.binding.head.styling.style
         dataset[ELEMENT_TIMES_KEY] = [
             ElementTimes(

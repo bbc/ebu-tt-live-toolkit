@@ -296,10 +296,10 @@ class DenesterNode(AbstractCombinedNode):
             return child_attr["end"]
 
     @staticmethod
-    def process_timing_from_timedelta(timing_type):
+    def create_compatible_time(timing_type, dataset):
         if timing_type is None:
             return None
-        return ebuttdt.FullClockTimingType.from_timedelta(timing_type)
+        return dataset["document"].get_timing_type(timing_type)
 
     @staticmethod
     def _calculate_pushed_end(dataset):
@@ -414,7 +414,7 @@ class DenesterNode(AbstractCombinedNode):
 
                     if span.compBegin != p_begin_time:
                         span.compBegin = span.compBegin - p_begin_time
-                        span.begin = ebuttdt.FullClockTimingType(
+                        span.begin = dataset["document"].get_timing_type(
                             span.compBegin)
                     else:
                         span.compBegin = span.compBegin - p_begin_time
@@ -429,7 +429,7 @@ class DenesterNode(AbstractCombinedNode):
                         # the parent, but the parent didn't push it onto us, so
                         # we must be the source of it.
                         span.compEnd = span.compEnd - p_begin_time
-                        span.end = ebuttdt.FullClockTimingType(span.compEnd)
+                        span.end = dataset["document"].get_timing_type(span.compEnd)
                     else:
                         span.compEnd = span.compEnd - p_begin_time
 
@@ -440,14 +440,16 @@ class DenesterNode(AbstractCombinedNode):
                     style=None
                     if len(merged_attr["styles"]) == 0
                     else merged_attr["styles"],
-                    begin=DenesterNode.process_timing_from_timedelta(
-                        merged_attr["begin"]
+                    begin=DenesterNode.create_compatible_time(
+                        merged_attr["begin"],
+                        dataset
                     )
                     if merged_attr["begin"] is not None
                     else merged_attr["begin"],
-                    end=DenesterNode.process_timing_from_timedelta
+                    end=DenesterNode.create_compatible_time
                     (
-                        merged_attr["end"]
+                        merged_attr["end"],
+                        dataset
                     )
                     if merged_attr["end"] is not None
                     else merged_attr["end"],

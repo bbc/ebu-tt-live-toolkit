@@ -5,6 +5,7 @@ Feature: Converted EBUTTD file contains required metadata elements
     Given an xml file <xml_file>
     When the document is generated
     And the EBU-TT-Live document is denested
+    And the EBU-TT-Live document is valid
     And the EBU-TT-Live document is converted to EBU-TT-D
     Then EBUTTD document is valid
     And the EBUTTD document contains a documentMetadata element <element_name> with value <element_value>

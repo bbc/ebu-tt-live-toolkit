@@ -14,6 +14,7 @@ Feature: EBU-TT-D lineHeight conversion
         And it contains some text with style "s1"
         When the document is generated
         And the EBU-TT-Live document is denested
+        And the EBU-TT-Live document is valid
         And the EBU-TT-Live document is converted to EBU-TT-D
         Then the ebu_tt_d document contains style <style_id> with attribute "lineHeight" set to <ebu_tt_d_value>
 

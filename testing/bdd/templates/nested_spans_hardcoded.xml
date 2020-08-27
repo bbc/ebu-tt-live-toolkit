@@ -17,7 +17,7 @@
       <tt:region xml:id="R1" tts:origin="14% 60%" tts:extent="71.25% 24%" style="outer" />
     </tt:layout>
   </tt:head>
-  <tt:body begin="500ms" end="5ms">
+  <tt:body begin="500ms" dur="00:00:05">
     <tt:div xml:id="d1" xml:lang="fr" region="R1">
       <tt:p xml:id="p1">
         <tt:span xml:id="sp0" style="outer">

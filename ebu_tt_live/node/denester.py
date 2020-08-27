@@ -630,7 +630,7 @@ class DenesterNode(AbstractCombinedNode):
                 float(stripped_nested_font_size) \
                 * (float(stripped_current_font_size)/100)
 
-            return ebuttdt.percentageFontSizeType(
+            return ebuttdt.PercentageFontSizeType(
                 '{0:g}%'.format(calculated_font_size))
         elif isinstance(current_font_size, str):
             if current_font_size[-1:] == "x":

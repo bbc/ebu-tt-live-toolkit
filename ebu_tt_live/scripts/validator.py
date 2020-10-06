@@ -3,7 +3,8 @@ Validates an EBU-TT or EBU-TT-D file.
 
 The ``validator`` script validates the specified input file as either an
 EBU-TT Part 1, Part 3 or EBU-TT-D file, reporting the first error that is
-found, or that everything is fine, if no errors are found.
+found, or that everything is fine, if no errors are found. If the format
+is not specified, the default is EBU-TT-D.
 
 Basic usage:
 ------------

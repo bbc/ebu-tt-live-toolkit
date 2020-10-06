@@ -193,3 +193,17 @@ The list is a comma separated list of names, with optional white space.
 
 For example, to remove all elements called ``documentReadingSpeed`` or
 ``binaryData`` set the ``remove_list`` to ``documentReadingSpeed, binaryData``.
+
+Validator
+---------
+This script loads a file from the file system and attempts to validate it
+as the specified format, either EBU-TT Part 1, EBU-TT Part 3 or EBU-TT-D.
+By default the expected format is EBU-TT-D.
+
+Example command lines:
+
+``validator -i path/to/ebu-tt-1-file-to-test.xml -f 1``
+
+``validator -i path/to/ebu-tt-3-file-to-test.xml -f 3``
+
+``validator -i path/to/ebu-tt-d-file-to-test.xml -f D``

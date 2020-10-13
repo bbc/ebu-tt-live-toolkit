@@ -35,7 +35,13 @@ ERR_1DIM_ONLY = gettext('{type} accepts 1 dimensional values only')
 ERR_2DIM_ONLY = gettext('{type} accepts 2 dimensional values only')
 END_OF_DATA = gettext('End of available data reached')
 ERR_UNKNOWN_HASH = gettext('The hash for this document is not known')
-ERR_EBUTTD_OVERLAPPING_ACTIVE_AREAS = gettext("The EBU-TT-D spec forbids overlapping active areas")
+ERR_EBUTTD_OVERLAPPING_ACTIVE_AREAS = gettext(
+    "The EBU-TT-D spec forbids overlapping active areas. "
+    "Element {elem1_id} references region"
+    "id={region1_id}, origin={region1_origin}, extent={region1_extent}"
+    " and Element {elem2_id} references region"
+    "id={region2_id}, origin={region2_origin}, extent={region2_extent}."
+    )
 ERR_EBUTTD_REGION_EXTENDING_OUTSIDE_DOCUMENT = gettext("The EBU-TT-D spec forbids region extending outside document")
 ERR_WS_INVALID_ACTION = gettext('Invalid action: {action}')
 ERR_WS_NOT_PRODUCER = gettext('This socket does not belong to a producer.')

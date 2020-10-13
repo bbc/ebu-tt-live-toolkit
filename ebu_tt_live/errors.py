@@ -105,12 +105,31 @@ class UnexpectedAuthorsGroupError(Exception):
 class OverlappingActiveElementsError(Exception):
     
     _attribute = None
+    _region1 = None
+    _region2 = None
+    _elem1_id = None
+    _elem2_id = None
 
-    def __init__(self, attribute):
+    def __init__(self, attribute, region1, region2, elem1_id, elem2_id):
         self._attribute = attribute
+        self._region1 = region1
+        self._region2 = region2
+        self._elem1_id = elem1_id
+        self._elem2_id = elem2_id
 
     def __str__(self):
-        return ERR_EBUTTD_OVERLAPPING_ACTIVE_AREAS.format(type=type(self._attribute), value=self._attribute)
+        return ERR_EBUTTD_OVERLAPPING_ACTIVE_AREAS.format(
+            type=type(self._attribute), 
+            value=self._attribute,
+            elem1_id=self._elem1_id,
+            region1_id=self._region1.id,
+            region1_origin=self._region1.origin,
+            region1_extent=self._region1.extent,
+            elem2_id=self._elem2_id,
+            region2_id=self._region2.id,
+            region2_origin=self._region2.origin,
+            region2_extent=self._region2.extent,
+        )
 
 
 class RegionExtendingOutsideDocumentError(Exception):

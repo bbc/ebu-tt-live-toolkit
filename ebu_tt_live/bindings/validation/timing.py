@@ -299,7 +299,9 @@ class TimingValidationMixin(object):
                         elem1_region = dataset['elements_by_id'][elem1.region]
                         elem2_region = dataset['elements_by_id'][elem2.region]
                         if elem1_region.overlaps(elem2_region):
-                            raise OverlappingActiveElementsError(self)
+                            raise OverlappingActiveElementsError(
+                                self, elem1_region, elem2_region,
+                                elem1.id, elem2.id)
 
     def is_in_segment(self, begin=None, end=None):
         if begin is not None:

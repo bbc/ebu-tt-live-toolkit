@@ -76,11 +76,30 @@ def when_element_has_attribute_region1(template_dict, region_id):
 def when_element_has_attribute_region2(template_dict, region_id):
     template_dict['text_region2'] = region_id
 
+
 @then(parsers.parse('application should exit with error OverlappingActiveElementsError'))
-def then_application_should_exit_overlapping_active_region_error(test_context, template_dict, template_file):
-     with pytest.raises(OverlappingActiveElementsError) as e:
-      ebuttd_document = EBUTTDDocument.create_from_raw_binding(test_context["converted_bindings"])
-      ebuttd_document.validate()
+def then_application_should_exit_overlapping_active_region_error(
+        test_context, template_dict):
+    match_string = "The EBU-TT-D spec forbids overlapping active areas. " \
+        "Element {elem1_id} references region" \
+        "id={region1_id}, origin={region1_origin}, extent={region1_extent}" \
+        " and Element {elem2_id} references region" \
+        "id={region2_id}, origin={region2_origin}, extent={region2_extent}.".format(
+            elem1_id=template_dict['p_elements'][0]['id'],
+            elem2_id=template_dict['p_elements'][1]['id'],
+            region1_id=template_dict['regions'][0]['id'],
+            region2_id=template_dict['regions'][1]['id'],
+            region1_origin=template_dict['regions'][0]['origin'],
+            region1_extent=template_dict['regions'][0]['extent'],
+            region2_origin=template_dict['regions'][1]['origin'],
+            region2_extent=template_dict['regions'][1]['extent'],
+        )
+    with pytest.raises(
+            OverlappingActiveElementsError,
+            match=match_string):
+        ebuttd_document = EBUTTDDocument.create_from_raw_binding(
+            test_context["converted_bindings"])
+        ebuttd_document.validate()
 
 @when('the EBU-TT-Live document is converted to a EBU-TT-D')
 def convert_to_ebuttd(test_context):

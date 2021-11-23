@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+ipython = "*"
+sphinx-autobuild = "*"
+sphinxcontrib-plantuml = "*"
+recommonmark = "*"
+sphinx-rtd-theme = "*"
+pytest-bdd = "<4.0.0"
+pytest-cov = "*"
+pytest-mock = "*"
+pytest-catchlog = "*"
+pytest-subtests = "*"
+pytest-twisted = "*"
+coverage = "*"
+pytest-runner = "*"
+pytest = "*"
+mock = "*"
+ebu-tt-live = {editable = true,file = "file:///Users/megitn02/Code/bbc/ebu-tt-live-toolkit"}
+Sphinx = "*"
+Jinja2 = "*"

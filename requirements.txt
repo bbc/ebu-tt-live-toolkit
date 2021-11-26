@@ -9,7 +9,6 @@ sphinx-rtd-theme
 pytest-bdd<4.0.0
 pytest-cov
 pytest-mock
-pytest-catchlog
 pytest-subtests
 pytest-twisted
 coverage

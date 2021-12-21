@@ -4,7 +4,7 @@ try:
     from setuptools import setup
     extra = dict(
         include_package_data=True,
-        setup_requires=['pytest-runner']
+        # setup_requires=['pytest-runner']
     )
 except ImportError:
     from distutils.core import setup
@@ -34,7 +34,7 @@ setup(
         "service_identity",
         "twisted",
         "autobahn<18",
-        "nltk",
+        "nltk<3.5",
         "sortedcontainers",
         "configmanners @ git+ssh://git@github.com/twobraids/configmanners.git@bff28a98cb45dde1b75f52ba3a3ac572a96885eb#egg=configmanners",
         "six"

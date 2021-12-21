@@ -8,58 +8,55 @@ on:
 
 jobs:
   build:
-    environment: CI
     name: Install and build and test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-      - name: Setup Python 3.11
-        uses: actions/setup-python@v4
+      - name: Setup Python 2.7
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.11'
+          python-version: '2.7'
           cache: 'pip'
-      #----------------------------------------------
-      #  -----  install & configure poetry  -----
-      #----------------------------------------------
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          installer-parallel: true
-      #----------------------------------------------
-      #       load cached venv if cache exists
-      #----------------------------------------------
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
-      - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      - name: Install older pip
         run: |
-          poetry install --no-interaction
+          python -m pip install pip==20.3.4
+        shell: bash
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
         shell: bash
       - name: Generate bindings
         run: |
-          poetry run pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings
+          pyxbgen --binding-root=./ebu_tt_live/bindings -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd
         shell: bash
       - name: Test
         run: |
-          poetry run pytest
+          python setup.py test
         shell: bash
       - name: Install coveralls
         run: |
-          poetry add "coveralls<2"
+          pip install "coveralls<2"
         shell: bash
       - name: Coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
-          poetry run coveralls
+          coveralls
+      - name: Build notification
+        if: always()
+        uses: edge/simple-slack-notify@v1.1.2
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          BRANCH: ${{ github.ref_name }}
+          ACTOR: ${{ github.actor }}
+          COMMIT_REF: ${{ github.sha }}
+        with:
+          channel: '#ci'
+          status: ${{ job.status }}
+          success_text: 'Build <${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}|#${env.GITHUB_RUN_NUMBER}> (${env.COMMIT_REF}) of ${env.BRANCH} by ${env.ACTOR} completed successfully'
+          failure_text: 'Build <${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}|#${env.GITHUB_RUN_NUMBER}> (${env.COMMIT_REF}) of ${env.BRANCH} by ${env.ACTOR} failed'
+          cancelled_text: 'Build <${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}|#${env.GITHUB_RUN_NUMBER}> (${env.COMMIT_REF}) of ${env.BRANCH} by ${env.ACTOR} was cancelled'
+          fields: |
+            [{ "title": "${env.GITHUB_WORKFLOW}"}]

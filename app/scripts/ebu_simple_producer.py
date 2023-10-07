@@ -7,7 +7,7 @@ from .common import create_loggers
 from ebu_tt_live.utils import tokenize_english_document
 
 from ebu_tt_live.clocks.local import LocalMachineClock
-from ebu_tt_live.examples import get_example_data
+from app.examples import get_example_data
 from ebu_tt_live.documents import EBUTT3DocumentSequence
 from ebu_tt_live.node import SimpleProducer
 from ebu_tt_live.twisted import BroadcastServerFactory, BroadcastServerProtocol, \

@@ -1,10 +1,10 @@
 
 from pytest import fixture, raises
-from ebu_tt_live.config import AppConfig, UniversalNodes
-import ebu_tt_live.config.node as node_config
-import ebu_tt_live.config.carriage as carriage_config
+from app.config import AppConfig, UniversalNodes
+import app.config.node as node_config
+import app.config.carriage as carriage_config
 import ebu_tt_live.node as processing_node
-from ebu_tt_live.config.common import ConfigurableComponent
+from app.config.common import ConfigurableComponent
 from ebu_tt_live.errors import ConfigurationError
 
 

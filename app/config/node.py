@@ -1,15 +1,15 @@
-from .common import ConfigurableComponent, Namespace, converters, RequiredConfig
-from .clocks import get_clock
-from .carriage import get_producer_carriage, get_consumer_carriage
+from ebu_tt_live.common import ConfigurableComponent, Namespace, converters, RequiredConfig
+from ebu_tt_live.clocks import get_clock
+from ebu_tt_live.carriage import get_producer_carriage, get_consumer_carriage
 from ebu_tt_live import documents
 from ebu_tt_live import bindings
-from ebu_tt_live.examples import get_example_data
+from app.examples import get_example_data
 import ebu_tt_live.node as processing_node
 from itertools import cycle
 from ebu_tt_live.utils import tokenize_english_document
 from ebu_tt_live.errors import ConfigurationError
 from ebu_tt_live.strings import ERR_CONF_NO_SUCH_NODE
-from .adapters import ProducerNodeCarriageAdapter, ConsumerNodeCarriageAdapter
+from ebu_tt_live.adapters import ProducerNodeCarriageAdapter, ConsumerNodeCarriageAdapter
 
 
 class NodeBase(ConfigurableComponent):

@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ebu-tt-live"
+version = "3.0.1"
+description = "EBU-TT Part 3 library implementing Specification EBU-3370"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pyxb = "^1.2.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

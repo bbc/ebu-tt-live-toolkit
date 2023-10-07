@@ -28,7 +28,7 @@ _module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
-import _ebuttp as _ImportedBinding__ebuttp
+from . import _ebuttp as _ImportedBinding__ebuttp
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('urn:ebu:tt:livemessage', create_if_missing=True)

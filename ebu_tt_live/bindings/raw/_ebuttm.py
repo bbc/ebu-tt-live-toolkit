@@ -28,8 +28,8 @@ _module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
-import _ebuttdt as _ImportedBinding__ebuttdt
-import _ttm as _ImportedBinding__ttm
+from . import _ebuttdt as _ImportedBinding__ebuttdt
+from . import _ttm as _ImportedBinding__ttm
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('urn:ebu:tt:metadata', create_if_missing=True)

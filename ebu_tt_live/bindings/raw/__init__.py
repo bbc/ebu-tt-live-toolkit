@@ -28,16 +28,16 @@ _module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
-import _ebuttm as _ImportedBinding__ebuttm
-import _ttm as _ImportedBinding__ttm
+from . import _ebuttm as _ImportedBinding__ebuttm
+from . import _ttm as _ImportedBinding__ttm
 import pyxb.binding.xml_
-import _ebutts as _ImportedBinding__ebutts
-import _tts as _ImportedBinding__tts
-import _ebuttdt as _ImportedBinding__ebuttdt
-import _itts as _ImportedBinding__itts
-import _ttp as _ImportedBinding__ttp
-import _ittp as _ImportedBinding__ittp
-import _ebuttp as _ImportedBinding__ebuttp
+from . import _ebutts as _ImportedBinding__ebutts
+from . import _tts as _ImportedBinding__tts
+from . import _ebuttdt as _ImportedBinding__ebuttdt
+from . import _itts as _ImportedBinding__itts
+from . import _ttp as _ImportedBinding__ttp
+from . import _ittp as _ImportedBinding__ittp
+from . import _ebuttp as _ImportedBinding__ebuttp
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://www.w3.org/ns/ttml', create_if_missing=True)

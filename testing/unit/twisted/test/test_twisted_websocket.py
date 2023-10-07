@@ -1,7 +1,7 @@
 # coding=utf8
 from twisted.trial.unittest import TestCase
 from twisted.test import proto_helpers
-from ebu_tt_live.twisted.websocket import BroadcastServerFactory, BroadcastServerProtocol, \
+from app.twisted.websocket import BroadcastServerFactory, BroadcastServerProtocol, \
     BroadcastClientFactory, BroadcastClientProtocol, TwistedWSConsumer, TwistedWSPushProducer
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
 from mock import MagicMock

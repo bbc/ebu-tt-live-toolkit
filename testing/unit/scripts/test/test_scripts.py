@@ -1,7 +1,7 @@
 
 from subprocess import Popen, PIPE
 from unittest import TestCase
-from ebu_tt_live.scripts import ebu_dummy_encoder
+from app.scripts import ebu_dummy_encoder
 
 
 class TestDummyScript(TestCase):

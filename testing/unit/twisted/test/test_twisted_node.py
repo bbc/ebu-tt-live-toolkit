@@ -1,6 +1,6 @@
 
 from twisted.trial.unittest import TestCase
-from ebu_tt_live.twisted import TwistedWSPushProducer, TwistedWSConsumer
+from app.twisted import TwistedWSPushProducer, TwistedWSConsumer
 from mock import MagicMock
 
 

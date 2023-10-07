@@ -8,6 +8,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.7"
 pyxb = "^1.2.6"
+nltk = "^3.8.1"
+six = "^1.16.0"
+sortedcontainers = "^2.4.0"
 
 [build-system]
 requires = ["poetry-core"]

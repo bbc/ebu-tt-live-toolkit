@@ -1,7 +1,7 @@
 # ./ebu_tt_live/bindings/raw/_itts.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:3de6582874db8dbcce5075849f6c52f7eb30ed34
-# Generated 2023-10-07 05:57:42.203673 by PyXB version 1.2.6 using Python 3.7.17.final.0
+# Generated 2023-10-07 08:40:44.658586 by PyXB version 1.2.6 using Python 3.7.17.final.0
 # Namespace http://www.w3.org/ns/ttml/profile/imsc1#styling [xmlns:itts]
 
 from __future__ import unicode_literals
@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:0be8b1f0-64ce-11ee-98e9-3aa47047536c')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d2b761da-64e4-11ee-8828-3aa47047536c')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.6'

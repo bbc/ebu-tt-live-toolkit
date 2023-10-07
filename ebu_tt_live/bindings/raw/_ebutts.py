@@ -1,7 +1,7 @@
 # ./ebu_tt_live/bindings/raw/_ebutts.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:87f8fc9acea1afc969411b045fe36314f287f502
-# Generated 2023-10-07 05:57:42.202899 by PyXB version 1.2.6 using Python 3.7.17.final.0
+# Generated 2023-10-07 08:40:44.657942 by PyXB version 1.2.6 using Python 3.7.17.final.0
 # Namespace urn:ebu:tt:style [xmlns:ebutts]
 
 from __future__ import unicode_literals
@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:0be8b1f0-64ce-11ee-98e9-3aa47047536c')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d2b761da-64e4-11ee-8828-3aa47047536c')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.6'

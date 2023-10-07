@@ -1,7 +1,7 @@
 # ./ebu_tt_live/bindings/raw/_ttm.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:20bf17fcf9b73854cba2c110c3abf6a8b2d3ceeb
-# Generated 2023-10-07 05:57:42.204697 by PyXB version 1.2.6 using Python 3.7.17.final.0
+# Generated 2023-10-07 08:40:44.657534 by PyXB version 1.2.6 using Python 3.7.17.final.0
 # Namespace http://www.w3.org/ns/ttml#metadata [xmlns:ttm]
 
 from __future__ import unicode_literals
@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:0be8b1f0-64ce-11ee-98e9-3aa47047536c')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d2b761da-64e4-11ee-8828-3aa47047536c')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.6'
@@ -123,14 +123,6 @@ class CTD_ANON (pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
-    # Attribute {http://www.w3.org/XML/1998/namespace}id uses Python identifier id
-    __id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'id'), 'id', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON_httpwww_w3_orgXML1998namespaceid', pyxb.binding.datatypes.ID)
-    __id._DeclarationLocation = None
-    __id._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 41, 12)
-    
-    id = property(__id.value, __id.set, None, None)
-
-    
     # Attribute {http://www.w3.org/XML/1998/namespace}lang uses Python identifier lang
     __lang = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'lang'), 'lang', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON_httpwww_w3_orgXML1998namespacelang', pyxb.binding.xml_.STD_ANON_lang)
     __lang._DeclarationLocation = None
@@ -147,6 +139,14 @@ class CTD_ANON (pyxb.binding.basis.complexTypeDefinition):
     space = property(__space.value, __space.set, None, None)
 
     
+    # Attribute {http://www.w3.org/XML/1998/namespace}id uses Python identifier id
+    __id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'id'), 'id', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON_httpwww_w3_orgXML1998namespaceid', pyxb.binding.datatypes.ID)
+    __id._DeclarationLocation = None
+    __id._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 41, 12)
+    
+    id = property(__id.value, __id.set, None, None)
+
+    
     # Attribute agent uses Python identifier agent
     __agent = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'agent'), 'agent', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON_agent', pyxb.binding.datatypes.IDREF, required=True)
     __agent._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 40, 12)
@@ -158,9 +158,9 @@ class CTD_ANON (pyxb.binding.basis.complexTypeDefinition):
         
     })
     _AttributeMap.update({
-        __id.name() : __id,
         __lang.name() : __lang,
         __space.name() : __space,
+        __id.name() : __id,
         __agent.name() : __agent
     })
 _module_typeBindings.CTD_ANON = CTD_ANON
@@ -192,6 +192,14 @@ class CTD_ANON_ (pyxb.binding.basis.complexTypeDefinition):
     actor = property(__actor.value, __actor.set, None, None)
 
     
+    # Attribute {http://www.w3.org/XML/1998/namespace}space uses Python identifier space
+    __space = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'space'), 'space', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON__httpwww_w3_orgXML1998namespacespace', pyxb.binding.xml_.STD_ANON_space)
+    __space._DeclarationLocation = None
+    __space._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 62, 6)
+    
+    space = property(__space.value, __space.set, None, None)
+
+    
     # Attribute {http://www.w3.org/XML/1998/namespace}lang uses Python identifier lang
     __lang = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'lang'), 'lang', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON__httpwww_w3_orgXML1998namespacelang', pyxb.binding.xml_.STD_ANON_lang)
     __lang._DeclarationLocation = None
@@ -208,14 +216,6 @@ class CTD_ANON_ (pyxb.binding.basis.complexTypeDefinition):
     id = property(__id.value, __id.set, None, None)
 
     
-    # Attribute {http://www.w3.org/XML/1998/namespace}space uses Python identifier space
-    __space = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'space'), 'space', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON__httpwww_w3_orgXML1998namespacespace', pyxb.binding.xml_.STD_ANON_space)
-    __space._DeclarationLocation = None
-    __space._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 62, 6)
-    
-    space = property(__space.value, __space.set, None, None)
-
-    
     # Attribute type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'type'), 'type', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON__type', _module_typeBindings.STD_ANON_)
     __type._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 49, 6)
@@ -228,9 +228,9 @@ class CTD_ANON_ (pyxb.binding.basis.complexTypeDefinition):
         __actor.name() : __actor
     })
     _AttributeMap.update({
+        __space.name() : __space,
         __lang.name() : __lang,
         __id.name() : __id,
-        __space.name() : __space,
         __type.name() : __type
     })
 _module_typeBindings.CTD_ANON_ = CTD_ANON_
@@ -248,6 +248,14 @@ class CTD_ANON_2 (pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
+    # Attribute {http://www.w3.org/XML/1998/namespace}space uses Python identifier space
+    __space = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'space'), 'space', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON_2_httpwww_w3_orgXML1998namespacespace', pyxb.binding.xml_.STD_ANON_space)
+    __space._DeclarationLocation = None
+    __space._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 34, 12)
+    
+    space = property(__space.value, __space.set, None, None)
+
+    
     # Attribute {http://www.w3.org/XML/1998/namespace}id uses Python identifier id
     __id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'id'), 'id', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON_2_httpwww_w3_orgXML1998namespaceid', pyxb.binding.datatypes.ID)
     __id._DeclarationLocation = None
@@ -264,14 +272,6 @@ class CTD_ANON_2 (pyxb.binding.basis.complexTypeDefinition):
     lang = property(__lang.value, __lang.set, None, None)
 
     
-    # Attribute {http://www.w3.org/XML/1998/namespace}space uses Python identifier space
-    __space = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(pyxb.namespace.XML, 'space'), 'space', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON_2_httpwww_w3_orgXML1998namespacespace', pyxb.binding.xml_.STD_ANON_space)
-    __space._DeclarationLocation = None
-    __space._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 34, 12)
-    
-    space = property(__space.value, __space.set, None, None)
-
-    
     # Attribute type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'type'), 'type', '__httpwww_w3_orgnsttmlmetadata_CTD_ANON_2_type', _module_typeBindings.STD_ANON)
     __type._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 21, 12)
@@ -283,9 +283,9 @@ class CTD_ANON_2 (pyxb.binding.basis.complexTypeDefinition):
         
     })
     _AttributeMap.update({
+        __space.name() : __space,
         __id.name() : __id,
         __lang.name() : __lang,
-        __space.name() : __space,
         __type.name() : __type
     })
 _module_typeBindings.CTD_ANON_2 = CTD_ANON_2

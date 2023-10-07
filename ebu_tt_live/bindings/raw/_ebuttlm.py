@@ -1,7 +1,7 @@
 # ./ebu_tt_live/bindings/raw/_ebuttlm.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:6ddd049f6e7bfeeff5fc8cd93c2a70773009a59e
-# Generated 2023-10-07 05:57:42.204173 by PyXB version 1.2.6 using Python 3.7.17.final.0
+# Generated 2023-10-07 08:40:44.657331 by PyXB version 1.2.6 using Python 3.7.17.final.0
 # Namespace urn:ebu:tt:livemessage [xmlns:ebuttlm]
 
 from __future__ import unicode_literals
@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:0be8b1f0-64ce-11ee-98e9-3aa47047536c')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d2b761da-64e4-11ee-8828-3aa47047536c')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.6'
@@ -28,12 +28,12 @@ _module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
-from . import _ebuttp as _ImportedBinding__ebuttp
+import ebu_tt_live.bindings._ebuttp as _ImportedBinding_ebu_tt_live_bindings__ebuttp
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('urn:ebu:tt:livemessage', create_if_missing=True)
 Namespace.configureCategories(['typeBinding', 'elementBinding'])
-_Namespace_ebuttp = _ImportedBinding__ebuttp.Namespace
+_Namespace_ebuttp = _ImportedBinding_ebu_tt_live_bindings__ebuttp.Namespace
 _Namespace_ebuttp.configureCategories(['typeBinding', 'elementBinding'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
@@ -154,7 +154,7 @@ class message_type (pyxb.binding.basis.complexTypeDefinition):
 
     
     # Attribute {urn:ebu:tt:parameters}sequenceIdentifier uses Python identifier sequenceIdentifier
-    __sequenceIdentifier = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_ebuttp, 'sequenceIdentifier'), 'sequenceIdentifier', '__urnebuttlivemessage_message_type_urnebuttparameterssequenceIdentifier', _ImportedBinding__ebuttp.STD_ANON, required=True)
+    __sequenceIdentifier = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_ebuttp, 'sequenceIdentifier'), 'sequenceIdentifier', '__urnebuttlivemessage_message_type_urnebuttparameterssequenceIdentifier', _ImportedBinding_ebu_tt_live_bindings__ebuttp.STD_ANON, required=True)
     __sequenceIdentifier._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_parameters.xsd', 17, 4)
     __sequenceIdentifier._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_livemessage.xsd', 36, 8)
     

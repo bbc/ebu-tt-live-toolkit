@@ -1,7 +1,7 @@
 # ./ebu_tt_live/bindings/raw/_ebuttm.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:ca3389a21c0cafded0139f24017756c1e6ca4da7
-# Generated 2023-10-07 05:57:42.205277 by PyXB version 1.2.6 using Python 3.7.17.final.0
+# Generated 2023-10-07 08:40:44.657728 by PyXB version 1.2.6 using Python 3.7.17.final.0
 # Namespace urn:ebu:tt:metadata [xmlns:ebuttm]
 
 from __future__ import unicode_literals
@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:0be8b1f0-64ce-11ee-98e9-3aa47047536c')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d2b761da-64e4-11ee-8828-3aa47047536c')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.6'
@@ -28,13 +28,13 @@ _module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
-from . import _ebuttdt as _ImportedBinding__ebuttdt
-from . import _ttm as _ImportedBinding__ttm
+import ebu_tt_live.bindings._ebuttdt as _ImportedBinding_ebu_tt_live_bindings__ebuttdt
+import ebu_tt_live.bindings._ttm as _ImportedBinding_ebu_tt_live_bindings__ttm
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('urn:ebu:tt:metadata', create_if_missing=True)
 Namespace.configureCategories(['typeBinding', 'elementBinding'])
-_Namespace_ttm = _ImportedBinding__ttm.Namespace
+_Namespace_ttm = _ImportedBinding_ebu_tt_live_bindings__ttm.Namespace
 _Namespace_ttm.configureCategories(['typeBinding', 'elementBinding'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
@@ -1111,7 +1111,7 @@ class documentTransitionStyle_type (pyxb.binding.basis.complexTypeDefinition):
     # Base type is pyxb.binding.datatypes.string
     
     # Attribute inUnit uses Python identifier inUnit
-    __inUnit = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'inUnit'), 'inUnit', '__urnebuttmetadata_documentTransitionStyle_type_inUnit', _ImportedBinding__ebuttdt.transitionStyleAttributeType, required=True)
+    __inUnit = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'inUnit'), 'inUnit', '__urnebuttmetadata_documentTransitionStyle_type_inUnit', _ImportedBinding_ebu_tt_live_bindings__ebuttdt.transitionStyleAttributeType, required=True)
     __inUnit._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 544, 4)
     __inUnit._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 544, 4)
     
@@ -1119,7 +1119,7 @@ class documentTransitionStyle_type (pyxb.binding.basis.complexTypeDefinition):
 
     
     # Attribute outUnit uses Python identifier outUnit
-    __outUnit = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'outUnit'), 'outUnit', '__urnebuttmetadata_documentTransitionStyle_type_outUnit', _ImportedBinding__ebuttdt.transitionStyleAttributeType, required=True)
+    __outUnit = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'outUnit'), 'outUnit', '__urnebuttmetadata_documentTransitionStyle_type_outUnit', _ImportedBinding_ebu_tt_live_bindings__ebuttdt.transitionStyleAttributeType, required=True)
     __outUnit._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 545, 4)
     __outUnit._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 545, 4)
     
@@ -1419,7 +1419,7 @@ class font_type (pyxb.binding.basis.complexTypeDefinition):
     # Base type is pyxb.binding.datatypes.string
     
     # Attribute fontFamilyName uses Python identifier fontFamilyName
-    __fontFamilyName = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'fontFamilyName'), 'fontFamilyName', '__urnebuttmetadata_font_type_fontFamilyName', _ImportedBinding__ebuttdt.fontFamilyType, required=True)
+    __fontFamilyName = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'fontFamilyName'), 'fontFamilyName', '__urnebuttmetadata_font_type_fontFamilyName', _ImportedBinding_ebu_tt_live_bindings__ebuttdt.fontFamilyType, required=True)
     __fontFamilyName._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 488, 4)
     __fontFamilyName._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 488, 4)
     
@@ -1435,7 +1435,7 @@ class font_type (pyxb.binding.basis.complexTypeDefinition):
 
     
     # Attribute fontStyle uses Python identifier fontStyle
-    __fontStyle = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'fontStyle'), 'fontStyle', '__urnebuttmetadata_font_type_fontStyle', _ImportedBinding__ebuttdt.fontStyleType)
+    __fontStyle = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'fontStyle'), 'fontStyle', '__urnebuttmetadata_font_type_fontStyle', _ImportedBinding_ebu_tt_live_bindings__ebuttdt.fontStyleType)
     __fontStyle._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 490, 4)
     __fontStyle._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 490, 4)
     
@@ -1443,7 +1443,7 @@ class font_type (pyxb.binding.basis.complexTypeDefinition):
 
     
     # Attribute fontWeight uses Python identifier fontWeight
-    __fontWeight = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'fontWeight'), 'fontWeight', '__urnebuttmetadata_font_type_fontWeight', _ImportedBinding__ebuttdt.fontWeightType)
+    __fontWeight = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'fontWeight'), 'fontWeight', '__urnebuttmetadata_font_type_fontWeight', _ImportedBinding_ebu_tt_live_bindings__ebuttdt.fontWeightType)
     __fontWeight._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 491, 4)
     __fontWeight._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 491, 4)
     
@@ -1451,7 +1451,7 @@ class font_type (pyxb.binding.basis.complexTypeDefinition):
 
     
     # Attribute fontSize uses Python identifier fontSize
-    __fontSize = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'fontSize'), 'fontSize', '__urnebuttmetadata_font_type_fontSize', _ImportedBinding__ebuttdt.fontSizeType)
+    __fontSize = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'fontSize'), 'fontSize', '__urnebuttmetadata_font_type_fontSize', _ImportedBinding_ebu_tt_live_bindings__ebuttdt.fontSizeType)
     __fontSize._DeclarationLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 492, 4)
     __fontSize._UseLocation = pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 492, 4)
     
@@ -1503,7 +1503,7 @@ documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedN
 
 documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'relatedObjectIdentifier'), CTD_ANON_2, scope=documentMetadata, location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 251, 4)))
 
-documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'relatedMediaDuration'), _ImportedBinding__ebuttdt.mediaTimingType, scope=documentMetadata, location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 256, 4)))
+documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'relatedMediaDuration'), _ImportedBinding_ebu_tt_live_bindings__ebuttdt.mediaTimingType, scope=documentMetadata, location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 256, 4)))
 
 documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'documentBeginDate'), pyxb.binding.datatypes.date, scope=documentMetadata, location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 257, 4)))
 
@@ -1539,7 +1539,7 @@ documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedN
 
 documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'documentMaximumNumberOfDisplayableCharacterInAnyRow'), pyxb.binding.datatypes.nonNegativeInteger, scope=documentMetadata, documentation='Maximum number of displayable rows per television frame\n\t\t\t\t\t\t\twhich could be occupied at any one time by the subtitles defined in the\n\t\t\t\t\t\t\tTTI blocks. STL mapping: Maximum Number of Displayable Characters in any\n\t\t\t\t\t\t\ttext row (MNC). ', location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 337, 4)))
 
-documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'documentStartOfProgramme'), _ImportedBinding__ebuttdt.startOfProgrammeTimingType, scope=documentMetadata, documentation='The time code of the first frame of the recorded video\n\t\t\t\t\t\t\tsignal which is intended for transmission. Note: When the referenced\n\t\t\t\t\t\t\tstart timecode of the video material the subtitles were authored for is\n\t\t\t\t\t\t\tgreater than 00:00:00:00 (e.g. 10:00:00:00) it is recommended to specify\n\t\t\t\t\t\t\tthe attribute ebuttm:documentStartOfPrograme. STL mapping: Timecode:\n\t\t\t\t\t\t\tStart-of-Programme (TCP).', location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 345, 4)))
+documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'documentStartOfProgramme'), _ImportedBinding_ebu_tt_live_bindings__ebuttdt.startOfProgrammeTimingType, scope=documentMetadata, documentation='The time code of the first frame of the recorded video\n\t\t\t\t\t\t\tsignal which is intended for transmission. Note: When the referenced\n\t\t\t\t\t\t\tstart timecode of the video material the subtitles were authored for is\n\t\t\t\t\t\t\tgreater than 00:00:00:00 (e.g. 10:00:00:00) it is recommended to specify\n\t\t\t\t\t\t\tthe attribute ebuttm:documentStartOfPrograme. STL mapping: Timecode:\n\t\t\t\t\t\t\tStart-of-Programme (TCP).', location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 345, 4)))
 
 documentMetadata._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'documentCountryOfOrigin'), pyxb.binding.datatypes.string, scope=documentMetadata, documentation='The country of origin of the subtitle list. STL mapping:\n\t\t\t\t\t\t\tCountry of Origin (CO). ', location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 355, 4)))
 
@@ -4297,7 +4297,7 @@ def _BuildAutomaton_2 ():
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.WildcardUse(pyxb.binding.content.Wildcard(process_contents=pyxb.binding.content.Wildcard.PC_lax, namespace_constraint=set(['not','urn:ebu:tt','http://www.w3.org/ns/ttml'])), pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 555, 3))
+    symbol = pyxb.binding.content.WildcardUse(pyxb.binding.content.Wildcard(process_contents=pyxb.binding.content.Wildcard.PC_lax, namespace_constraint=set(['urn:ebu:tt','not','http://www.w3.org/ns/ttml'])), pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 555, 3))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -4352,7 +4352,7 @@ metadataBase_type._Automaton = _BuildAutomaton_3()
 
 
 
-headMetadata_type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(_Namespace_ttm, 'agent'), _ImportedBinding__ttm.CTD_ANON_, scope=headMetadata_type, location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 15, 2)))
+headMetadata_type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(_Namespace_ttm, 'agent'), _ImportedBinding_ebu_tt_live_bindings__ttm.CTD_ANON_, scope=headMetadata_type, location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/metadata.xsd', 15, 2)))
 
 headMetadata_type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'documentMetadata'), documentMetadata, scope=headMetadata_type, location=pyxb.utils.utility.Location('/Users/cablej01/Projects/ebu-tt-live-toolkit/ebu_tt_live/xsd/ebutt_metadata.xsd', 570, 5)))
 

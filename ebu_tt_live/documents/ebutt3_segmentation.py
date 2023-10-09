@@ -78,7 +78,10 @@ class EBUTT3Segmenter(RecursiveOperation):
 
         # Map instances to their converted versions because not everything has an id and there is no complete
         # equivalence check either
-        dataset['instance_mapping'][element] = celem
+        if isinstance(element, list):
+            dataset['instance_mapping'][element[0]] = celem
+        else:
+            dataset['instance_mapping'][element] = celem
 
         return celem
 

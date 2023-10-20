@@ -4,6 +4,7 @@
           ttp:timeBase="{{timeBase}}"
           {% if timeBase == 'smpte' %}
             ttp:frameRate="25"
+            ttp:frameRateMultiplier="1 1"
             ttp:dropMode="nonDrop"
             ttp:markerMode="continuous"
           {% elif timeBase == 'clock' %}
@@ -55,7 +56,7 @@
       <tt:p begin="{% if timeBase == 'smpte' %}00:00:00:12{% else %}500ms{% endif %}" end="{% if timeBase == 'smpte' %}00:00:03:12{% else %}3420ms{% endif %}" xml:id="ID005">
         <tt:span>Some example text...</tt:span>
         <tt:br/>
-        <tt:span>And another line</tt:span>
+        <tt:span {% if timeBase == 'smpte' %} begin="00:00:01:04" end="00:00:03:20" {% endif %}>And another line</tt:span>
       </tt:p>
     </tt:div>
   </tt:body>

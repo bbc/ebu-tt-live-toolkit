@@ -55,3 +55,35 @@ Feature: Converting EBU-TT Part 1 files
     And the EBU-TT-1 document is converted to EBU-TT-Live
     Then the EBU-TT-Live document is valid
     And the sequenceIdentifier is "TestConverter"
+
+  Scenario: Pass conversion check with non-smpte timebase
+    Given an xml file <xml_file>
+    When the document contains a "styling" element
+    And the document contains a "style" element
+    And the document contains a "layout" element
+    And the document contains a "region" element
+    And the document's timeBase is set to <timebase>
+    And the XML is parsed as a valid EBU-TT-1 document
+    And the EBU-TT-1 document is converted to EBU-TT-Live
+    Then the EBU-TT-Live document is valid
+
+    Examples:
+      | timebase |
+      | media    |
+      | clock    |
+
+  Scenario: Pass conversion check with smpte timebase
+    Given an xml file <xml_file>
+    When the document contains a "styling" element
+    And the document contains a "style" element
+    And the document contains a "layout" element
+    And the document contains a "region" element
+    And the document's timeBase is set to <timebase>
+    And the XML is parsed as a valid EBU-TT-1 document
+    And the EBU-TT-1 converter is set to use a FixedOffsetSMPTEConverter
+    And the EBU-TT-1 document is converted to EBU-TT-Live
+    Then the EBU-TT-Live document is valid
+
+    Examples:
+      | timebase |
+      | smpte    |

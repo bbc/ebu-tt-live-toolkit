@@ -73,7 +73,11 @@ class XMLtoEBUTTDAdapter(IDocumentDataAdapter):
     _provides = EBUTTDDocument
 
     def convert_data(self, data, **kwargs):
-        return EBUTTDDocument.create_from_xml(data), kwargs
+        doc = EBUTTDDocument.create_from_xml(data)
+        kwargs.update(dict(
+            raw_xml=data
+        ))
+        return doc, kwargs
 
 
 class EBUTTDtoXMLAdapter(IDocumentDataAdapter):

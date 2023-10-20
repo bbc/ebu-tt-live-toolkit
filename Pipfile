@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[[source]]
+url = "https://pypi.python.org/simple/"
+verify_ssl = true
+name = "pypipython"
+
+[packages]
+ipython = "*"
+sphinx = "*"
+sphinx-autobuild = "*"
+sphinxcontrib-plantuml = "*"
+recommonmark = "*"
+sphinx-rtd-theme = "*"
+pytest-bdd = "<4.0.0"
+pytest-cov = "*"
+pytest-mock = "*"
+pytest-subtests = "*"
+pytest-twisted = "*"
+coverage = "*"
+pytest-runner = "*"
+pytest = "*"
+jinja2 = "*"
+mock = "*"
+importlib-metadata = "<4.3,>2.0.0"
+ebu-tt-live = {editable = true, file = "file:///Users/megitn02/Code/bbc/ebu-tt-live-toolkit"}
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

@@ -57,8 +57,13 @@ class EBUTTDDocument(SubtitleDocument, TimelineUtilMixin):
         # for the same name. tt comes in but we rename it to ttd to make the xsd validate.
         cls.load_types_for_document()
         xml_dom = minidom.parseString(xml)
-        if xml_dom.documentElement.tagName == xml_dom.documentElement.prefix + ':tt':
-            xml_dom.documentElement.tagName = xml_dom.documentElement.prefix +  ':ttd'
+        if xml_dom.documentElement.namespaceURI == 'http://www.w3.org/ns/ttml':
+            if xml_dom.documentElement.prefix is not None and \
+               xml_dom.documentElement.prefix != '' and \
+               xml_dom.documentElement.tagName == xml_dom.documentElement.prefix + ':tt':
+                xml_dom.documentElement.tagName = xml_dom.documentElement.prefix +  ':ttd'
+            elif xml_dom.documentElement.tagName == 'tt':
+                xml_dom.documentElement.tagName = 'ttd'
         instance = cls.create_from_raw_binding(
             binding=bindings.CreateFromDOM(
                 xml_dom

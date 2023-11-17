@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Available rendering time exceeded due to glyph drawing (mix copy and draw) -->
+<tt xml:lang="en"
+    xmlns="http://www.w3.org/ns/ttml"
+    xmlns:tts="http://www.w3.org/ns/ttml#styling"
+    xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
+    ttp:timeBase="media">
+  <head>
+    <styling>
+      <style xml:id="s0" tts:fontSize="200%"/>
+    </styling>
+    <layout>
+      <region xml:id="r0" tts:origin="0% 0%" tts:extent="100% 100%"></region>
+    </layout>
+  </head>
+  <body>
+    <div region="r0">
+      <p begin="00:00:00" end="00:00:00.2" style="s0" xml:id="p0">abcdefg<br/>あいうえおかきくけ</p>
+      <p begin="00:00:00.6" end="00:00:04" style="s0" xml:id="p1">abcdefghijklmnopqrstuvwxyz<br/>あいうえおかきくけこさしすせそたち</p>
+    </div>
+  </body>
+</tt>

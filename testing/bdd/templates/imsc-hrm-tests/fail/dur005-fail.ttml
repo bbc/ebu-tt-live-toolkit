@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Available rendering time exceeded due to glyph drawing and background drawing (multi-region) -->
+<tt xml:lang="en"
+    xmlns="http://www.w3.org/ns/ttml"
+    xmlns:tts="http://www.w3.org/ns/ttml#styling"
+    xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
+    ttp:timeBase="media">
+  <head>
+    <styling>
+      <style xml:id="s1" tts:backgroundColor="#ff0000" />
+    </styling>
+    <layout>
+      <region xml:id="r1" style="s1" tts:extent="50% 50%" tts:origin="0% 0%"/>
+      <region xml:id="r2" style="s1" tts:extent="50% 50%" tts:origin="0% 50%"/>
+      <region xml:id="r3" style="s1" tts:extent="50% 50%" tts:origin="50% 50%"/>
+      <region xml:id="r4" tts:extent="50% 50%" tts:origin="50% 0%"/>
+    </layout>
+  </head>
+  <body>
+    <div>
+      <p region="r4" begin="00:00:00" end="00:00:00.2" xml:id="p0">ABCDEF</p>
+      <p region="r1" begin="00:00:00.31" end="00:00:04" xml:id="p1"><span style="s1">abcdef</span></p>
+      <p region="r2" begin="00:00:00.31" end="00:00:04" xml:id="p2"><span style="s1">ghijkl</span></p>
+      <p region="r3" begin="00:00:00.31" end="00:00:04" xml:id="p3"><span style="s1">mnopqr</span></p>
+      <p region="r4" begin="00:00:00.31" end="00:00:04" xml:id="p4"><span style="s1">stuvwy</span></p>
+    </div>
+  </body>
+</tt>

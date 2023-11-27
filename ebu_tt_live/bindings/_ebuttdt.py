@@ -614,6 +614,9 @@ class CellFontSizeType(TwoDimSizingMixin, ebuttdt_raw.cellFontSizeType):
 
     def __eq__(self, other):
         return self._do_eq(other)
+    
+    def __hash__(self):
+        return hash((self.horizontal, self.vertical))
 
 
 ebuttdt_raw.cellFontSizeType._SetSupersedingClass(CellFontSizeType)

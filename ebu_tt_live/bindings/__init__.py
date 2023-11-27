@@ -2020,6 +2020,10 @@ class d_span_type(
              dataset=dataset, element_content=element_content)
         self._semantic_compute_roles(dataset=dataset)
         self._semantic_push_computed_roles(dataset=dataset)
+        self._semantic_collect_applicable_styles(
+            dataset=dataset,
+            style_type=style_type,
+            parent_binding=parent_binding)
 
     def _semantic_after_traversal(
             self,

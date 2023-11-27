@@ -2,7 +2,7 @@ from collections import namedtuple
 from datetime import timedelta
 from ebu_tt_live.documents import EBUTTDDocument
 from ebu_tt_live.bindings import d_p_type, d_span_type
-from ebu_tt_live.bindings._ebuttdt import PercentageOriginType, PercentageExtentType, rgbHexColorType, rgbaHexColorType, namedColorType, named_color_to_rgba
+from ebu_tt_live.bindings._ebuttdt import CellFontSizeType, PercentageOriginType, PercentageExtentType, rgbHexColorType, rgbaHexColorType, namedColorType, named_color_to_rgba
 from pyxb.binding.basis import NonElementContent, ElementContent
 import logging
 
@@ -22,7 +22,7 @@ glyphStyles = [
 ]
 
 "Tuple to represent a Glyph"
-glyph_tuple_fieldnames = glyphStyles
+glyph_tuple_fieldnames = glyphStyles[:]  # copy not reference
 glyph_tuple_fieldnames.append('characterCode')
 glyph = namedtuple('glyph', glyph_tuple_fieldnames)
 
@@ -38,9 +38,10 @@ class imscHrmValidator:
     _BDraw = 12
 
     # Things we need
-    _glyphCache = set([])  # Array of glyphs
+    _glyphCache = set()  # Array of glyphs
     _doc = None
     _p_to_parent_div_with_background_color = {}
+    _cell_height = float(1/15)
 
     def _getIsdTimes(self) -> list:
         """Get the set of ISD times."""
@@ -171,9 +172,96 @@ class imscHrmValidator:
 
         return S
 
+    def _getGlyphStyles(self, e) -> dict:
+        """ Get the set of glyph styles from the provided element."""
+
+        rv = dict.fromkeys(glyphStyles)
+        cs = e.computed_style
+        for style_attr in glyphStyles:
+            rv[style_attr] = getattr(cs, style_attr)
+        return rv
+
+    def _calc_NRGA(self, fontSize) -> float:
+        if isinstance(fontSize, CellFontSizeType):
+            return fontSize.vertical * self._cell_height
+        else:
+            log.error('unexpected fontSize {} of type {}'.format(
+                fontSize,
+                type(fontSize).__name__))
+            
+        return 100  # silly big number
+
+    def _copyDur(self, copy_glyph: glyph) -> float:
+        return 0.1  # TODO just for testing
+
+    def _renderDur(self, render_glyph: glyph) -> float:
+        return 0.2  # TODO just for testing
+
+    def _checkGlyphCacheSize(self) -> bool:
+        """Compute sum of NRGA over all glyphs and check it is not largher than NGBS"""
+        NGBS = 1
+        NRGA_SUM = 0
+        for g in self._glyphCache:
+            NRGA_SUM += self._calc_NRGA(g.fontSize)
+
+        log.debug('Glyph cache size check: NRGA_SUM = {}'.format(NRGA_SUM))
+
+        return (NRGA_SUM <= NGBS)
+
     def _textDuration(self, isd) -> float:
-        """Compute the painting duration for the text in the ISD."""
-        return 1
+        """Compute the painting duration for the text in the ISD.
+        
+        We will assume that the glyph cache is in a good state to start."""
+        this_text = ''
+        this_style = dict.fromkeys(glyphStyles)
+        DURT = 0
+
+        next_glyph_cache = set()
+
+        # breakpoint()
+        for p in isd:
+            # should be a p
+            if isinstance(p, d_p_type):
+                for poci in p.orderedContent():
+                    if isinstance(poci, NonElementContent):
+                        print('processing character content child of p')
+                        this_text = poci.value
+                        this_style = self._getGlyphStyles(p)
+                    elif isinstance(poci.value, d_span_type):
+                        print('processing a span')
+                        for soci in poci.value.orderedContent():
+                            if isinstance(soci, NonElementContent):
+                                this_text = soci.value
+                                break
+                        this_style = self._getGlyphStyles(poci.value)
+
+                    print('this_text: {}'.format(this_text))
+                    print('this_style: {}'.format(this_style))
+                    # iterate through text and style processing glyphs
+                    for char in this_text:
+                        # there must be a better way to make our glyph tuple
+                        # than the next 3 lines, but I haven't found it.
+                        tsc = this_style.copy()
+                        tsc.update({'characterCode': char})
+                        this_glyph = glyph(**tsc)
+                        if this_glyph in self._glyphCache:
+                            print('glyph for {} is in the glyph cache'.format(char))
+                            DURT += self._copyDur(this_glyph)
+                            next_glyph_cache.add(glyph)
+                        elif this_glyph in next_glyph_cache:
+                            print('glyph for {} already rendered in this ISD'.format(char))
+                            DURT += self._copyDur(this_glyph)
+                        else:
+                            print('rendering glyph for {}'.format(char))
+                            DURT += self._renderDur(this_glyph)
+                            next_glyph_cache.add(this_glyph)
+            else:  # not a p
+                log.warning('Found non p element type {}'.format(type(p).__name__))
+
+        self._glyphCache = next_glyph_cache
+
+        log.debug('Returning DURT = {}'.format(DURT))
+        return DURT
 
     def _paintingDuration(self, isd) -> float:
         """Compute the total painting duration for the ISD."""
@@ -183,9 +271,14 @@ class imscHrmValidator:
         """Validate the EBU-TT-D document against the IMSC-HRM."""
 
         # reset
-        self._glyphCache = set([])
+        self._glyphCache = set()
         self._doc = doc
         self._preprocess_divs()
+        if doc.binding.cellResolution is not None:
+            self._cell_height = 1/doc.binding.cellResolution.vertical
+        else:
+            self._cell_height = 1/15
+        log.debug('Cell height = {}'.format(self._cell_height))
 
         last_nonzero_presentation_time = timedelta(seconds=0 - self._ipd)
 
@@ -226,6 +319,10 @@ class imscHrmValidator:
             if painting_dur > available_draw_time:
                 rv = False
                 log.error('ISD at {} fails validation'.format(timeline[timeline_idx]))
+
+            if not self._checkGlyphCacheSize():
+                rv = False
+                log.error('Glyph cache total NRGA is larger than NGBS')
 
         return rv
 

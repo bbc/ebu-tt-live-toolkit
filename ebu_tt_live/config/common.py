@@ -2,7 +2,7 @@ import re
 import six
 import logging
 import time
-from configman import RequiredConfig, Namespace, converters
+from configmanners import RequiredConfig, Namespace, converters
 from ebu_tt_live.strings import ERR_CONF_ONE_BACKEND_ONLY
 from ebu_tt_live.errors import ConfigurationError
 

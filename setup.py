@@ -27,7 +27,7 @@ setup(
     version=version,
     description=description,
     install_requires=[
-        "PyXB",
+        "PyXB-X",
         "ipdb",  # This will eventually be removed from here
         "configobj",
         "pyyaml",
@@ -35,7 +35,7 @@ setup(
         "autobahn",
         "nltk",
         "sortedcontainers",
-        "configman",
+        "configmanners @ git+ssh://git@github.com/twobraids/configmanners.git@bff28a98cb45dde1b75f52ba3a3ac572a96885eb#egg=configmanners",
         "six"
     ],
     license="BSD3",

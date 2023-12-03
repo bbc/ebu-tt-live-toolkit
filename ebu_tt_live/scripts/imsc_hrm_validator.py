@@ -4,6 +4,7 @@ from ebu_tt_live.documents import EBUTTDDocument
 from ebu_tt_live.bindings import d_p_type, d_span_type
 from ebu_tt_live.bindings._ebuttdt import CellFontSizeType, PercentageOriginType, PercentageExtentType, rgbHexColorType, rgbaHexColorType, namedColorType, named_color_to_rgba
 from pyxb.binding.basis import NonElementContent, ElementContent
+import ebu_tt_live.uax24 as uax24
 import logging
 
 
@@ -26,6 +27,20 @@ glyph_tuple_fieldnames = glyphStyles[:]  # copy not reference
 glyph_tuple_fieldnames.append('characterCode')
 glyph = namedtuple('glyph', glyph_tuple_fieldnames)
 
+GCpy12_chars = set(
+    uax24.Latin_list + 
+    uax24.Greek_list + 
+    uax24.Cyrillic_list +
+    uax24.Hebrew_list +
+    uax24.Common_list)
+
+Ren0_6_chars = set(
+    uax24.Han_list +
+    uax24.Katakana_list +
+    uax24.Hiragana_list +
+    uax24.Bopomofo_list +
+    uax24.Hangul_list
+)
 
 class imscHrmValidator:
     """Class for validating an EBU-TT-D document against the IMSC-HRM.
@@ -183,19 +198,28 @@ class imscHrmValidator:
 
     def _calc_NRGA(self, fontSize) -> float:
         if isinstance(fontSize, CellFontSizeType):
-            return fontSize.vertical * self._cell_height
+            return (fontSize.vertical * self._cell_height)**2
         else:
             log.error('unexpected fontSize {} of type {}'.format(
                 fontSize,
                 type(fontSize).__name__))
-            
+            breakpoint()
+
         return 100  # silly big number
 
-    def _copyDur(self, copy_glyph: glyph) -> float:
-        return 0.1  # TODO just for testing
+    def _GCpy(self, char) -> float:
+        log.debug('char {} is {}in GCpy12_chars'.format(
+            char,
+            '' if char in GCpy12_chars else 'not '
+        ))
+        return 12 if char in GCpy12_chars else 3
 
-    def _renderDur(self, render_glyph: glyph) -> float:
-        return 0.2  # TODO just for testing
+    def _Ren(self, char) -> float:
+        log.debug('char {} is {}in Ren0_6_chars'.format(
+            char,
+            '' if char in Ren0_6_chars else 'not '
+        ))
+        return 0.6 if char in Ren0_6_chars else 1.2
 
     def _checkGlyphCacheSize(self) -> bool:
         """Compute sum of NRGA over all glyphs and check it is not largher than NGBS"""
@@ -229,31 +253,34 @@ class imscHrmValidator:
                         this_style = self._getGlyphStyles(p)
                     elif isinstance(poci.value, d_span_type):
                         print('processing a span')
+                        this_style = self._getGlyphStyles(poci.value)
                         for soci in poci.value.orderedContent():
                             if isinstance(soci, NonElementContent):
                                 this_text = soci.value
                                 break
-                        this_style = self._getGlyphStyles(poci.value)
 
                     print('this_text: {}'.format(this_text))
-                    print('this_style: {}'.format(this_style))
+                    print('this_style: {} '.format(this_style))
+                    this_NRGA = self._calc_NRGA(this_style['fontSize'])
+                    print('this_NRGA = {}'.format(this_NRGA))
                     # iterate through text and style processing glyphs
                     for char in this_text:
+                        charCode = ord(char)
                         # there must be a better way to make our glyph tuple
                         # than the next 3 lines, but I haven't found it.
                         tsc = this_style.copy()
-                        tsc.update({'characterCode': char})
+                        tsc.update({'characterCode': charCode})
                         this_glyph = glyph(**tsc)
                         if this_glyph in self._glyphCache:
-                            print('glyph for {} is in the glyph cache'.format(char))
-                            DURT += self._copyDur(this_glyph)
-                            next_glyph_cache.add(glyph)
+                            print('glyph for {} ({}) is in the glyph cache'.format(char, charCode))
+                            DURT += this_NRGA / self._GCpy(charCode)
+                            next_glyph_cache.add(this_glyph)
                         elif this_glyph in next_glyph_cache:
-                            print('glyph for {} already rendered in this ISD'.format(char))
-                            DURT += self._copyDur(this_glyph)
+                            print('glyph for {} ({}) already rendered in this ISD'.format(char, charCode))
+                            DURT += this_NRGA / self._GCpy(charCode)
                         else:
-                            print('rendering glyph for {}'.format(char))
-                            DURT += self._renderDur(this_glyph)
+                            print('rendering glyph for {} ({})'.format(char, charCode))
+                            DURT += this_NRGA / self._Ren(charCode)
                             next_glyph_cache.add(this_glyph)
             else:  # not a p
                 log.warning('Found non p element type {}'.format(type(p).__name__))
@@ -323,6 +350,11 @@ class imscHrmValidator:
             if not self._checkGlyphCacheSize():
                 rv = False
                 log.error('Glyph cache total NRGA is larger than NGBS')
+
+        if rv:
+            log.info('Document is valid')
+        else:
+            log.error('Document is not valid')
 
         return rv
 

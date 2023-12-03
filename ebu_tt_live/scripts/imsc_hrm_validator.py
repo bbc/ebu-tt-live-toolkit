@@ -254,10 +254,10 @@ class imscHrmValidator:
                     elif isinstance(poci.value, d_span_type):
                         print('processing a span')
                         this_style = self._getGlyphStyles(poci.value)
+                        this_text = ''
                         for soci in poci.value.orderedContent():
                             if isinstance(soci, NonElementContent):
-                                this_text = soci.value
-                                break
+                                this_text += soci.value
 
                     print('this_text: {}'.format(this_text))
                     print('this_style: {} '.format(this_style))

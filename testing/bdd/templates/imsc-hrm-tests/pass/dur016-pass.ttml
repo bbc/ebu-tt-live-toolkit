@@ -12,7 +12,7 @@
     </layout>
   </head>
   <body>
-    <div>
+    <div region="r0">
       <p begin="00:00:00" end="00:00:00.1" xml:id="p0">a</p>
       <p begin="00:00:00.1" end="00:00:00.2" xml:id="p1">ab</p>
       <p begin="00:00:00.2" end="00:00:00.3" xml:id="p2">abc</p>

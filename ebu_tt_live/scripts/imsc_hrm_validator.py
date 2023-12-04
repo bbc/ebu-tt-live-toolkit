@@ -99,7 +99,7 @@ class imscHrmValidator:
             elif isinstance(backgroundColor, rgbHexColorType):
                 rv = True
 
-        print('backgroundColor {} has opacity {}'.format(backgroundColor, rv))
+        log.debug('backgroundColor {} has opacity {}'.format(backgroundColor, rv))
         return rv
 
     def _preprocess_divs(self):
@@ -135,39 +135,39 @@ class imscHrmValidator:
         body = self._doc.binding.body
         if self._hasBackgroundColor(body):
             body_has_background_color = 1
-            print('body has background color')
+            log.debug('body has background color')
         for e in isd:
             if isinstance(e, d_p_type):
-                print('processing p id {}'.format(e.id))
+                log.debug('processing p id {}'.format(e.id))
                 region = e._validated_region
                 if region is None:
                     region = e._inherited_region
                 region_set.add(region)
                 if region.id not in region_to_element_count:
-                    print('adding new region id {}'.format(region.id))
+                    log.debug('adding new region id {}'.format(region.id))
                     region_to_element_count[region.id] = body_has_background_color
                     region_to_div_map[region.id] = set()
                     if self._hasBackgroundColor(region):
                         region_to_element_count[region.id] += 1
-                        print('region has a background color')
+                        log.debug('region has a background color')
                 if self._hasBackgroundColor(e):
                     region_to_element_count[region.id] += 1
-                    print('p has a background color')
+                    log.debug('p has a background color')
                 # Make sure we count the div for this region if it has a backgroundColor
                 if e.id in self._p_to_parent_div_with_background_color:
-                    print('this p is in a div with a background color')
+                    log.debug('this p is in a div with a background color')
                     region_to_div_map[region.id].add(self._p_to_parent_div_with_background_color[e.id])
-                print('processing {} span children of p id {}'.format(len(e.span), e.id))
+                log.debug('processing {} span children of p id {}'.format(len(e.span), e.id))
                 for span_child in e.span:
                     if self._hasBackgroundColor(span_child):
-                        print('span has background color')
+                        log.debug('span has background color')
                         region_to_element_count[region.id] += 1
                     else:
-                        print('span with no background color')
+                        log.debug('span with no background color')
 
         for rid in region_to_element_count.keys():
             region_to_element_count[rid] += len(region_to_div_map[rid])
-        print(region_to_element_count)
+        log.debug(region_to_element_count)
 
         PAINT = 0.0
         for region in region_set:
@@ -242,27 +242,32 @@ class imscHrmValidator:
 
         next_glyph_cache = set()
 
+        log.debug('Calculating textDuration for isd')
+
         # breakpoint()
         for p in isd:
             # should be a p
             if isinstance(p, d_p_type):
+                log.debug('Processing p id={}'.format(p.id))
                 for poci in p.orderedContent():
                     if isinstance(poci, NonElementContent):
-                        print('processing character content child of p')
+                        log.debug('processing character content child of p')
                         this_text = poci.value
                         this_style = self._getGlyphStyles(p)
                     elif isinstance(poci.value, d_span_type):
-                        print('processing a span')
+                        log.debug('processing a span')
                         this_style = self._getGlyphStyles(poci.value)
                         this_text = ''
                         for soci in poci.value.orderedContent():
                             if isinstance(soci, NonElementContent):
                                 this_text += soci.value
+                    else:
+                        continue
 
-                    print('this_text: {}'.format(this_text))
-                    print('this_style: {} '.format(this_style))
+                    log.debug('this_text: {}'.format(this_text))
+                    log.debug('this_style: {} '.format(this_style))
                     this_NRGA = self._calc_NRGA(this_style['fontSize'])
-                    print('this_NRGA = {}'.format(this_NRGA))
+                    log.debug('this_NRGA = {}'.format(this_NRGA))
                     # iterate through text and style processing glyphs
                     for char in this_text:
                         charCode = ord(char)
@@ -272,14 +277,14 @@ class imscHrmValidator:
                         tsc.update({'characterCode': charCode})
                         this_glyph = glyph(**tsc)
                         if this_glyph in self._glyphCache:
-                            print('glyph for {} ({}) is in the glyph cache'.format(char, charCode))
+                            log.debug('glyph for {} ({}) is in the glyph cache'.format(char, charCode))
                             DURT += this_NRGA / self._GCpy(charCode)
                             next_glyph_cache.add(this_glyph)
                         elif this_glyph in next_glyph_cache:
-                            print('glyph for {} ({}) already rendered in this ISD'.format(char, charCode))
+                            log.debug('glyph for {} ({}) already rendered in this ISD'.format(char, charCode))
                             DURT += this_NRGA / self._GCpy(charCode)
                         else:
-                            print('rendering glyph for {} ({})'.format(char, charCode))
+                            log.debug('rendering glyph for {} ({})'.format(char, charCode))
                             DURT += this_NRGA / self._Ren(charCode)
                             next_glyph_cache.add(this_glyph)
             else:  # not a p

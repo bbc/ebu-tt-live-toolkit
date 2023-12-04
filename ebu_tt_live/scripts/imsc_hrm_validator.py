@@ -73,8 +73,19 @@ class imscHrmValidator:
             for c in e.orderedContent():
                 v = c.value
                 if isinstance(c, NonElementContent):
+                    region = e._validated_region
+                    if region is None:
+                        region = e._inherited_region
+                    if region is None:
+                        continue  # prune content with no associated region
                     empty = (len(v) == 0)
                 elif isinstance(v, d_span_type):
+                    region = e._validated_region
+                    if region is None:
+                        region = e._inherited_region
+                    if region is None:
+                        continue  # prune content with no associated region
+
                     for sc in v.orderedContent():
                         if isinstance(sc, NonElementContent):
                             empty = (len(sc.value) == 0)

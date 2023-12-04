@@ -15,6 +15,7 @@
   </head>
   <body>
     <div>
+      <p xml:id="p0" region="r1" begin="00:00:02.5" end="00:00:03">z</p>
       <p xml:id="p1" region="r1" begin="00:00:03" end="00:00:04"><span style="s1">a</span><span style="s1">b</span><span style="s1">c</span></p>
     </div>
   </body>

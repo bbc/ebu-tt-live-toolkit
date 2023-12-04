@@ -60,7 +60,7 @@ def genLists(csv_reader):
 def charOrRange(char_code: str) -> str:
     range_indicator = char_code.find('..')
     if range_indicator != -1:
-        return '*lr(0x{}, 0x{})'.format(
+        return '*lr(0x{}, 0x{} + 1)'.format(
             char_code[0:range_indicator],
             char_code[range_indicator+2:]  # assume already stripped of trailing spaces
         )

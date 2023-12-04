@@ -58,13 +58,14 @@ def genLists(csv_reader):
     return
 
 def charOrRange(char_code: str) -> str:
-    if char_code[4:6] == '..':
+    range_indicator = char_code.find('..')
+    if range_indicator != -1:
         return '*lr(0x{}, 0x{})'.format(
-            char_code[0:4],
-            char_code[6:10]
+            char_code[0:range_indicator],
+            char_code[range_indicator+2:]  # assume already stripped of trailing spaces
         )
     else:
-        return '0x{}'.format(char_code[0:4])
+        return '0x{}'.format(char_code)
 
 def writeLists(outFile):
     for script, char_codes in SCRIPTS_TO_LIST.items():

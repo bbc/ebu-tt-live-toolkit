@@ -11,14 +11,18 @@ Basic usage:
 
   ::
 
-    validator -i [input-file] -f [1|3|D]
+    validator -i [input-file] -f [1|3|D] [--hrm]
 """
 
 from ebu_tt_live.documents import EBUTTDDocument, \
                                   EBUTT1Document, \
                                   EBUTT3Document
+from imsc_hrm_validator import imscHrmValidator, log as hrm_log
 import argparse
 import os
+import logging
+
+log = logging.getLogger()
 
 type_lookup = {
     '1': EBUTT1Document,
@@ -37,10 +41,25 @@ def main():
                         metavar='FORMAT',
                         help='Format desired: 1 for EBU-TT Part 1, 3 for Part'
                         ' 3, D for EBU-TT-D')
+    parser.add_argument('--hrm',
+                        action='store_true',
+                        required=False,
+                        help='Also validate with the IMSC HRM (EBU-TT-D only)')
+    parser.add_argument('--verbose', '-v',
+                        action='store_true',
+                        required=False,
+                        help='Output verbose logging details.')
     args = parser.parse_args()
 
     in_file = args.input
     format = args.format
+
+    if args.verbose:
+        hrm_validator_log = logging.getLogger('imsc_hrm_validator')
+        hrm_validator_log.setLevel(logging.DEBUG)
+        hrm_log.setLevel(logging.DEBUG)
+        log.setLevel(logging.DEBUG)
+        log.debug('Verbose logging enabled')
 
     with open(os.path.join(os.getcwd(), os.path.expanduser(in_file)),
               'r') as f:
@@ -50,7 +69,15 @@ def main():
     document = file_type.create_from_xml(in_data)
     document.validate()
 
-    print('Everything seems fine')
+    valid = True
+    if format == 'D' and args.hrm:
+        hrmValidator = imscHrmValidator()
+        valid = hrmValidator.validate(document)
+
+    if valid:
+        print('Everything seems fine')
+    else:
+        print('Validation errors encountered. Document is not valid.')
 
 
 if __name__ == '__main__':

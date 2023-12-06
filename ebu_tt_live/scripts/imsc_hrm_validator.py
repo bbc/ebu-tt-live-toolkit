@@ -56,18 +56,24 @@ class imscHrmValidator:
     _glyphCache = set()  # Array of glyphs
     _doc = None
     _p_to_parent_div_with_background_color = {}
+    # _any_region_has_background_color_and_show_background_always = False
+    _region_ids_with_always_background = None
     _cell_height = float(1/15)
 
     def _getIsdTimes(self) -> list:
         """Get the set of ISD times."""
-        return self._doc.timeline
+        isd_times = sorted(set([t.when for t in self._doc.timeline]))
+        return isd_times
 
     def _getIsd(self, isd_begin_time, isd_end_time):
         """Get the elements in the ISD for a particular time"""
-        return self._doc.lookup_range_on_timeline(isd_begin_time.when, isd_end_time.when if isd_end_time is not None else None)
+        return self._doc.lookup_range_on_timeline(isd_begin_time, isd_end_time if isd_end_time is not None else None)
 
     def _isEmptyISD(self, isd) -> bool:
         """Determine if the ISD is empty or renders some text."""
+        if len(self._region_ids_with_always_background) > 0:
+            return False
+
         empty = True
         for e in isd:
             for c in e.orderedContent():
@@ -113,6 +119,23 @@ class imscHrmValidator:
         log.debug('backgroundColor {} has opacity {}'.format(backgroundColor, rv))
         return rv
 
+    def _preprocess_regions(self):
+        """Check if any region has an opaque backgroundColor and showBackground set to always.
+
+        If this is the case, then no ISD is ever empty, because every ISD has to paint that
+        region's background.
+        """
+        # self._any_region_has_background_color_and_show_background_always = False
+        self._region_ids_with_always_background  = set()
+        for region in self._doc.binding.head.layout.region:
+            if self._hasBackgroundColor(region) and \
+               (region.showBackground is None or region.showBackground=="always"):
+                self._any_region_has_background_color_and_show_background_always = True
+                log.debug(
+                    'Found region {} with opaque backgroundColor and showBackground="always"'.format(
+                        region.id))
+                self._region_ids_with_always_background.add(region.id)
+
     def _preprocess_divs(self):
         """For all divs with an opaque backgroundColor, record their p children
         
@@ -144,9 +167,16 @@ class imscHrmValidator:
         region_to_div_map = {}  # will map all the divs selected into each region
         body_has_background_color = 0
         body = self._doc.binding.body
+
         if self._hasBackgroundColor(body):
             body_has_background_color = 1
             log.debug('body has background color')
+
+        for region_id in self._region_ids_with_always_background:
+            region_set.add(self._doc.get_element_by_id(region_id))
+            region_to_element_count[region_id] = 1 + body_has_background_color
+            region_to_div_map[region_id] = set()
+
         for e in isd:
             if isinstance(e, d_p_type):
                 log.debug('processing p id {}'.format(e.id))
@@ -182,7 +212,6 @@ class imscHrmValidator:
 
         PAINT = 0.0
         for region in region_set:
-            origin = PercentageOriginType(region.origin)
             extent = PercentageExtentType(region.extent)
 
             NSIZE = extent.horizontal/100 * extent.vertical/100
@@ -310,18 +339,20 @@ class imscHrmValidator:
         """Compute the total painting duration for the ISD."""
         return self._drawingAreaS(isd)/self._BDraw + self._textDuration(isd)
 
-    def validate(self, doc: EBUTTDDocument) -> bool:
-        """Validate the EBU-TT-D document against the IMSC-HRM."""
-
-        # reset
+    def _setup(self, doc: EBUTTDDocument) -> None:
         self._glyphCache = set()
         self._doc = doc
         self._preprocess_divs()
+        self._preprocess_regions()
         if doc.binding.cellResolution is not None:
             self._cell_height = 1/doc.binding.cellResolution.vertical
         else:
             self._cell_height = 1/15
         log.debug('Cell height = {}'.format(self._cell_height))
+
+    def validate(self, doc: EBUTTDDocument) -> bool:
+        """Validate the EBU-TT-D document against the IMSC-HRM."""
+        self._setup(doc)
 
         last_nonzero_presentation_time = timedelta(seconds=0 - self._ipd)
 
@@ -345,12 +376,12 @@ class imscHrmValidator:
 
             # Work out how long we have to draw this
             available_draw_time = \
-                (timeline[timeline_idx].when - last_nonzero_presentation_time).total_seconds()
+                (timeline[timeline_idx] - last_nonzero_presentation_time).total_seconds()
             if available_draw_time > self._ipd:
                 available_draw_time = self._ipd
 
             # remember for next time round the loop
-            last_nonzero_presentation_time = timeline[timeline_idx].when
+            last_nonzero_presentation_time = timeline[timeline_idx]
 
             painting_dur = self._paintingDuration(isd)
             log.debug(

@@ -38,7 +38,7 @@ setup(
         "sortedcontainers",
         "configmanners @ git+ssh://git@github.com/twobraids/configmanners.git@bff28a98cb45dde1b75f52ba3a3ac572a96885eb#egg=configmanners",
         "six",
-        "zope.interface",
+        # "zope.interface",
     ],
     license="BSD3",
     packages=packages,

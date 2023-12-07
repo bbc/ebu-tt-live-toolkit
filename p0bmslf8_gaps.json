@@ -1,4 +1,0 @@
-> /Users/megitn02/Code/bbc/ebu-tt-live-toolkit/ebu_tt_live/scripts/get_times_from_ebuttd.py(1)<module>()
--> from ebu_tt_live.documents import EBUTTDDocument
-(Pdb) --KeyboardInterrupt--
-(Pdb) 

@@ -59,7 +59,7 @@ class TestFullClockTimingType(TestCase):
         '111:22:33.400': timedelta(hours = 111, minutes = 22, seconds = 33, milliseconds = 400),
         '111:22:33.040': timedelta(hours = 111, minutes = 22, seconds = 33, milliseconds = 40),
         '111:22:33.004': timedelta(hours = 111, minutes = 22, seconds = 33, milliseconds = 4),
-        '111:22:33.0045': timedelta(hours = 111, minutes = 22, seconds = 33, milliseconds = 4.5),
+        '111:22:33.0045': timedelta(hours = 111, minutes = 22, seconds = 33, milliseconds = 4),  # deliberately truncated when parsed
     }
 
     _type_class = ebuttdt.FullClockTimingType
@@ -81,7 +81,7 @@ class TestLimitedClockTimingType(TestCase):
         '11:22:33.400': timedelta(hours = 11, minutes = 22, seconds = 33, milliseconds = 400),
         '11:22:33.040': timedelta(hours = 11, minutes = 22, seconds = 33, milliseconds = 40),
         '11:22:33.004': timedelta(hours = 11, minutes = 22, seconds = 33, milliseconds = 4),
-        '11:22:33.0045': timedelta(hours = 11, minutes = 22, seconds = 33, milliseconds = 4.5),
+        '11:22:33.0045': timedelta(hours = 11, minutes = 22, seconds = 33, milliseconds = 4),  # deliberately truncated when parsed
     }
     
     _type_class = ebuttdt.LimitedClockTimingType

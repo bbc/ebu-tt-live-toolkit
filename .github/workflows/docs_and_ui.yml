@@ -25,7 +25,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Generate templates
         run: |
           npm install nunjucks
@@ -41,14 +41,14 @@ jobs:
         shell: bash
       - name: Setup graphviz
         uses: ts-graphviz/setup-graphviz@v1
-      - name: Setup Python 2.7
+      - name: Setup Python 3.7
         uses: actions/setup-python@v2
         with:
-          python-version: '2.7'
+          python-version: '3.7'
           cache: 'pip'
-      - name: Install older pip
+      - name: Install pip
         run: |
-          python -m pip install pip==20.3.4
+          python -m pip install pip==23.3
         shell: bash
       - name: Install dependencies
         run: |

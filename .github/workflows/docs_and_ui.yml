@@ -56,7 +56,7 @@ jobs:
         shell: bash
       - name: Generate bindings
         run: |
-          pyxbgen --binding-root=./ebu_tt_live/bindings -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd
+          pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings
         shell: bash
       - name: Build the documentation
         run: |

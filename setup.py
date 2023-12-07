@@ -6,7 +6,7 @@ try:
         include_package_data=True,
         setup_requires=[
             # 'pytest-runner',
-            'zope.interface',
+            # 'zope.interface',
             ]
     )
 except ImportError:

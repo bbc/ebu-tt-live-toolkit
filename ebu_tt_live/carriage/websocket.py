@@ -21,7 +21,7 @@ class WebsocketProducerCarriage(AbstractProducerCarriage):
 
     def emit_data(self, data, sequence_identifier='default', delay=None, **kwargs):
         if self._backend_producer:
-            self._backend_producer.emit_data(sequence_identifier, data, delay=delay)
+            self._backend_producer.emit_data(sequence_identifier, data.encode(), delay=delay)
 
 
 class WebsocketConsumerCarriage(AbstractConsumerCarriage):

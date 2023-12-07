@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "ebu-tt-live"
+version = "3.1.0"
+description = ""
+authors = ["jcable <julian.cable@bbc.co.uk>"]
+readme = "README.md"
+packages = [{include = "ebu_tt_live"}]
+
+[tool.poetry.scripts]
+ebu-dummy-encoder = 'ebu_tt_live.scripts.ebu_dummy_encoder:main'
+ebu-interactive-shell = 'ebu_tt_live.scripts.ebu_interactive_shell:main'
+ebu-simple-consumer = 'ebu_tt_live.scripts.ebu_simple_consumer:main'
+ebu-simple-producer = 'ebu_tt_live.scripts.ebu_simple_producer:main'
+ebu-user-input-consumer = 'ebu_tt_live.scripts.ebu_user_input_consumer:main'
+ebu-user-input-forwarder = 'ebu_tt_live.scripts.ebu_user_input_forwarder:main'
+ebu-ebuttd-encoder = 'ebu_tt_live.scripts.ebu_ebuttd_encoder:main'
+ebu-run = 'ebu_tt_live.scripts.ebu_run:main'
+validator = 'ebu_tt_live.scripts.validator:main'
+
+[tool.poetry.dependencies]
+python = "^3.7.1"
+zope-interface = "^5.0"
+ipdb = "^0.13.13"
+configobj = "^5.0.8"
+pyyaml = "^6.0.1"
+autobahn = "^20.0.0"
+nltk = "^3.8.1"
+sortedcontainers = "^2.4.0"
+six = "^1.16.0"
+sphinxcontrib-plantuml = "^0.26"
+sphinx-rtd-theme = "^1.3.0"
+pyxb-x = "^1.2.6.1"
+configman = "^1.3.0"
+twisted = "^23.8.0"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+sphinx-autobuild = "^2021.3.14"
+recommonmark = "^0.7.1"
+pytest-bdd = "<4"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.11.1"
+pytest-subtests = "^0.11.0"
+pytest-twisted = "^1.14.0"
+pytest-runner = "^6.0.0"
+pytest = "^7.4.2"
+Jinja2 = "^3.1.2"
+mock = "^5.1.0"
+commitizen = "^2.38.0"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+tag_format = "v$version"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"

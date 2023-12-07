@@ -15,10 +15,53 @@ We have a Slack team called [ebu-tt-lit](https://ebu-tt-lit.slack.com) for day t
 
 If you would like to contribute or join the Slack team, please contact <subtitling@ebu.ch> or <nigel.megitt@bbc.co.uk>
 
-Preparing the build environment
-===============================
+Running with Poetry
+===================
 
-Make sure you have Python 3+. Make sure you have python virtual environment capability.
+Make sure you have nodejs, Python 3.9 and poetry. On a Mac:
+
+    brew install python@3.9
+    brew install poetry
+
+Clone the repository:
+
+    git clone git@github.com:jcable/ebu-tt-live-toolkit.git  
+    cd ebu-tt-live-toolkit
+
+Install the dependencies:
+
+    poetry install
+
+Open a poetry shell:
+
+    poetry shell
+
+You are now in the correct virtual environment. Your prompt should start:
+
+    (ebu-tt-live-toolkit-py3.9)
+
+Build the runtime system using make.
+
+    make bindings ui
+
+After this you should to be able to launch the command line tools this python package
+provides i.e.:
+
+    ebu-dummy-encoder
+
+If the build succeeded, this should output an xml file.
+
+To start sending some timed text to a browser run:
+
+    open ebu_tt_live/ui/test/index.html
+    ebu-run --admin.conf ebu_tt_live/examples/config/simple_producer.json
+
+In the browser tab click 'connect' and you should start seeing xml files in the display area.
+
+Preparing the build environment without poetry
+==============================================
+
+Make sure you have Python 3.9. Make sure you have python virtual environment capability.
 
 If not you can install virtualenv systemwide from your operating system's package repository
 or by pip:
@@ -85,6 +128,8 @@ The bindings will keep the validation sane and PyXB makes sure that updates are 
 expected. Should the schema be modified a regeneration can be run and the bindings will respect
 the changes.
 
+N.B. PyXB won't work with Python 3.10 or later
+
 Scripts
 =======
 
@@ -92,8 +137,9 @@ There are several scripts that emulate different components (nodes) in the infra
 
 Below is a list of some of the key components. .
 
-The simple producer is the beginning of the data pipeline. It generates EBU-TT-Live documents in a timed manner. In the repository root there is a *test.html* file that can be used for manual testing of the producer in any websocket capable browser. To run it use `ebu-run`:
+The simple producer is the beginning of the data pipeline. It generates EBU-TT-Live documents in a timed manner. In the ebu_tt_live/ui/test folder there is an *index.html* file that can be used for manual testing of the producer in any websocket capable browser. To run it use `ebu-run`:
 
+    `open ebu_tt_live/ui/test/index.html`
     `ebu-run --admin.conf ebu_tt_live/examples/config/simple_producer.json`
 
 The simple consumer connects to the producer or later on in the pipeline, assuming there are more components inserted.

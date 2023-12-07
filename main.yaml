@@ -1,0 +1,153 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Outputs: {}
+Resources:
+  ECSService:
+    Type: AWS::ECS::Service
+    Properties:
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: DISABLED
+          SecurityGroups: []
+          Subnets:
+            - Fn::ImportValue:
+                Fn::Sub: ${CoreInfrastructureStack}-PrivateSubnet0
+            - Fn::ImportValue:
+                Fn::Sub: ${CoreInfrastructureStack}-PrivateSubnet1
+            - Fn::ImportValue:
+                Fn::Sub: ${CoreInfrastructureStack}-PrivateSubnet2
+      LaunchType: FARGATE
+      LoadBalancers: []
+      DesiredCount: 1
+      Cluster:
+        Fn::ImportValue:
+          Fn::Sub: ${ClusterStack}-ClusterArn
+      ServiceName:
+        Fn::Join:
+          - '-'
+          - - Ref: ServiceName
+            - Fn::ImportValue:
+                Fn::Sub: ${ClusterStack}-ClusterEnvironment
+      DeploymentConfiguration:
+        MinimumHealthyPercent:
+          Ref: DeploymentMinimumHealthyPercent
+      TaskDefinition:
+        Ref: TaskDefinition
+  TaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Sid: AllowECSTaskAssumption
+            Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      Cpu: "256"
+      ExecutionRoleArn:
+        Fn::GetAtt:
+          - TaskExecutionRole
+          - Arn
+      Memory: "512"
+      ContainerDefinitions:
+        - LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-datetime-format: '%Y-%m-%dT%H:%M:%S.%f%z'
+              awslogs-region:
+                Fn::Sub: ${AWS::Region}
+              awslogs-group:
+                Ref: LogGroup
+              awslogs-stream-prefix:
+                Fn::Join:
+                  - '-'
+                  - - Ref: ServiceName
+                    - Fn::ImportValue:
+                        Fn::Sub: ${ClusterStack}-ClusterEnvironment
+          Name: main
+          Image:
+            Ref: myAppImage
+          Environment:
+            - Name: COSMOS_ENVIRONMENT
+              Value:
+                Ref: CosmosEnvironment
+            - Name: COSMOS_RELEASE
+              Value:
+                Ref: CosmosRelease
+            - Name: COSMOS_DEPLOYMENT_ID
+              Value:
+                Ref: CosmosDeployment
+            - Name: COLOUR
+              Value:
+                Ref: ColourSetting
+          StopTimeout:
+            Ref: ContainerStopTimeout
+          PortMappings:
+            - Protocol: tcp
+              ContainerPort: "80"
+          Essential: "true"
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      RetentionInDays: 14
+      LogGroupName:
+        Fn::Sub: ${ServiceName}-logs-${AWS::StackName}
+Description: Simple ECS Fargate service
+Parameters:
+  myAppImage:
+    Type: String
+    Default: 047552984295.dkr.ecr.eu-west-1.amazonaws.com/bootstrap-ecs/bootstrap-ecs:1
+    Description: The ECR image for the main container
+  CosmosEnvironment:
+    Type: String
+    Description: A special parameter populated by Cosmos
+  CosmosDeployment:
+    Type: String
+    Description: A special parameter populated by Cosmos
+  CosmosRelease:
+    Type: String
+    Description: A special parameter populated by Cosmos
+  ClusterStack:
+    Default: test-ecs-cluster
+    MinLength: "1"
+    Type: String
+    Description: The stack to retrieve the Cluster ARN from
+    MaxLength: "128"
+  ContainerStopTimeout:
+    Default: "2"
+    MinValue: "0"
+    Type: Number
+    Description: The amount of time, in seconds, that the ECS platform should wait before forcefully killing a container.
+    MaxValue: "120"
+  CoreInfrastructureStack:
+    Default: core-infrastructure
+    MinLength: "1"
+    Type: String
+    Description: The core infrastructure stack to deploy using
+    MaxLength: "128"
+  ServiceName:
+    Default: dazzler-tt
+    Type: String
+    Description: The name of the service being created
+  DeploymentMinimumHealthyPercent:
+    Default: "0"
+    MinValue: "0"
+    Type: Number
+    Description: The minimum percentage of the desired tasks in the service which should be running at all times. Usually 0 on test, and probably 100 on live
+    MaxValue: "100"
+  ColourSetting:
+    Type: String
+    Description: Environment variable
+    AllowedValues:
+      - red
+      - green
+      - blue

@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    environment: CI
     name: Install and build and test
     runs-on: ubuntu-latest
     steps:

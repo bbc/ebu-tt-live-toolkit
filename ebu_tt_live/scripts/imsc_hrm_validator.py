@@ -62,7 +62,15 @@ class imscHrmValidator:
 
     def _getIsdTimes(self) -> list:
         """Get the set of ISD times."""
-        isd_times = sorted(set([t.when for t in self._doc.timeline]))
+        include_extra_times = []
+        if len(self._region_ids_with_always_background) > 0:
+            # in EBU-TT-D region elements cannot have begin or end times,
+            # so if they have an opaque background colour and
+            # showBackground="always" (the default) then there must
+            # be an ISD beginning at time zero, but the document's
+            # timeline may exclude it: force it to be present.
+            include_extra_times.append(timedelta(seconds=0))
+        isd_times = sorted(set([*include_extra_times, *[t.when for t in self._doc.timeline]]))
         return isd_times
 
     def _getIsd(self, isd_begin_time, isd_end_time):
@@ -183,6 +191,10 @@ class imscHrmValidator:
                 region = e._validated_region
                 if region is None:
                     region = e._inherited_region
+                if region is None:
+                    # It's possible to have a p with no associated region.
+                    # If this happens, then skip it as though it were pruned.
+                    continue
                 region_set.add(region)
                 if region.id not in region_to_element_count:
                     log.debug('adding new region id {}'.format(region.id))

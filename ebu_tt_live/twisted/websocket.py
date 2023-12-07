@@ -325,9 +325,9 @@ class BroadcastServerFactory(BroadcastFactoryCommon, WebSocketServerFactory):
                 self.consumer.register(client)
 
     def unregister(self, client):
-        if client.action == 'subscribe':
+        if client.action == 'subscribe' and self._producer is not None:
             self._producer.unregister(client)
-        if client.action == 'publish':
+        if client.action == 'publish' and self._consumer is not None:
             self._consumer.unregister(client)
 
     def stopFactory(self):

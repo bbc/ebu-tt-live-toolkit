@@ -334,7 +334,7 @@ configobj = "*"
 
 [package.source]
 type = "git"
-url = "git+ssh://git@github.com/twobraids/configmanners.git"
+url = "ssh://git@github.com/twobraids/configmanners.git"
 reference = "bff28a98cb45dde1b75f52ba3a3ac572a96885eb"
 resolved_reference = "bff28a98cb45dde1b75f52ba3a3ac572a96885eb"
 
@@ -1890,4 +1890,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11.3"
-content-hash = "f52492049e3be623f29ea590bfdcdc6d0987b475bf206b521ebea628a282ff24"
+content-hash = "61749eff6b9cdb03e58d5a5566b050d6aba98caf34d5a8189fd73bcd496f28f1"

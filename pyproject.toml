@@ -29,7 +29,7 @@ six = "^1.16.0"
 sphinxcontrib-plantuml = "^0.26"
 sphinx-rtd-theme = "^1.3.0"
 pyxb-x = "^1.2.6.1"
-configmanners = { git = "git+ssh://git@github.com/twobraids/configmanners.git", rev = "bff28a98cb45dde1b75f52ba3a3ac572a96885eb" }
+configmanners = { git = "ssh://git@github.com/twobraids/configmanners.git", rev = "bff28a98cb45dde1b75f52ba3a3ac572a96885eb" }
 twisted = "^23.8.0"
 
 [tool.poetry.group.dev.dependencies]

@@ -15,10 +15,50 @@ We have a Slack team called [ebu-tt-lit](https://ebu-tt-lit.slack.com) for day t
 
 If you would like to contribute or join the Slack team, please contact <subtitling@ebu.ch> or <nigel.megitt@bbc.co.uk>
 
-Preparing the build environment
-===============================
+Preparing the build environment with poetry
+==============================================
 
-Make sure you have Python 3+. Make sure you have python virtual environment capability.
+Make sure you have nodejs, Python 3.11 and poetry. On a Mac:
+
+     brew install python@3.11
+     brew install poetry
+
+To install the dependencies via poetry:
+     
+     poetry install
+
+To open a poetry shell:
+
+     poetry shell
+
+Once you are in the correct virtual environment after running `poetry shell`, Your prompt should display something like below:
+
+     (ebu-tt-live-py3.11) bash-3.2$
+
+If your virtual environment doesn't have the correct python version then you can run the below command before running `poetry shell`:
+
+     poetry env use python3.11
+
+To Build the runtime system using make:
+
+     make bindings ui
+
+To Run tests:
+
+     make bindings test
+
+To Generate Documentation:
+
+     make docs
+
+To exit poetry shell:
+
+     exit
+
+Preparing the build environment without poetry
+==============================================
+
+Make sure you have Python 3.11. Make sure you have python virtual environment capability.
 
 If not you can install virtualenv systemwide from your operating system's package repository
 or by pip:

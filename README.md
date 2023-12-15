@@ -39,6 +39,10 @@ If your virtual environment doesn't have the correct python version then you can
 
      poetry env use python3.11
 
+To Build the poetry environment:
+
+     poetry build
+
 To Build the runtime system using make:
 
      make bindings ui

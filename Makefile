@@ -3,7 +3,7 @@
 all: init ui
 	
 init:
-	pip install --upgrade -r requirements.txt
+	poetry install
 	pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings
 
 initnpm:
@@ -14,10 +14,10 @@ else
 endif
 
 test:
-	python setup.py test
+	poetry run python setup.py test
 
 docs:
-	python setup.py build_sphinx
+	poetry run python setup.py build_sphinx
 
 bindings:
 	pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings

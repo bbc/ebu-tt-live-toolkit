@@ -10,9 +10,9 @@ IF NOT DEFINED VIRTUAL_ENV (
 call env\Scripts\activate
 )
 
-call pip install --upgrade -r requirements.txt
+call poetry install
 
-python %HERE%\env\Scripts\pyxbgen --binding-root=ebu_tt_live/bindings -m __init__ -r -u file:///%HERE%/ebu_tt_live/xsd/ebutt_all.xsd
+poetry run python %HERE%\env\Scripts\pyxbgen --binding-root=ebu_tt_live/bindings -m __init__ -r -u file:///%HERE%/ebu_tt_live/xsd/ebutt_all.xsd
 
 IF EXIST %HERE%\node_modules (
 call npm update nunjucks

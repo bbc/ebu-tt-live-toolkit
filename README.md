@@ -15,47 +15,54 @@ We have a Slack team called [ebu-tt-lit](https://ebu-tt-lit.slack.com) for day t
 
 If you would like to contribute or join the Slack team, please contact <subtitling@ebu.ch> or <nigel.megitt@bbc.co.uk>
 
-Preparing the build environment
-===============================
+Preparing the build environment with poetry
+==============================================
 
-Make sure you have Python 3+. Make sure you have python virtual environment capability.
+Make sure you have nodejs, Python 3.11 and poetry. 
 
-If not you can install virtualenv systemwide from your operating system's package repository
-or by pip:
+To install the dependencies via poetry:
+     
+     poetry install
 
-    sudo pip install virtualenv
+or
+     make
 
-After that creating a virtual environment should be as simple as:
+To open a poetry shell (which you don't have to do, because you can prefix all commands with `poetry run`):
 
-    virtualenv env
+     poetry shell
 
-Let's activate it (source makes sure the current shell executes the script
-and assumes the environment variables that the activation script sets):
+Once you are in the correct virtual environment after running `poetry shell`, Your prompt should display something like below:
 
-    source ./env/bin/activate
+     (ebu-tt-live-py3.11) bash-3.2$
 
-To build the project you will also need node.js. Please read the instructions for your system [here](https://nodejs.org/en/download/package-manager/).
+If your virtual environment doesn't have the correct python version then you can run the below command before running `poetry shell`:
 
-After having created the python virtual environment, having activated it and having installed node.js the package
-can be built by typing make if you have GNU build tooling on your system.
+     poetry env use python3.11
 
-    make
+To Build the runtime system using make:
 
+     make bindings ui
 
-Alternatively:
+To Run tests:
 
-    pip install -r requirements.txt
-    python setup.py develop
+     make bindings test
 
-    pyxbgen --binding-root=./ebu_tt_live/bindings -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd
+To Generate Documentation, follow the instructions to install graphviz, below, then run:
 
-    npm install nunjucks
-    node_modules/nunjucks/bin/precompile ebu_tt_live/ui/user_input_producer/template/user_input_producer_template.xml > ebu_tt_live/ui/user_input_producer/template/user_input_producer_template.js
+     make docs
+
+To exit poetry shell:
+
+     exit
 
 After this you are supposed to be able to launch the command line tools this python package
 provides i.e.:
 
     ebu-dummy-encoder
+
+or if you are not in a poetry shell, 
+
+    poetry run ebu-dummy-encoder
 
 Windows users
 =============
@@ -130,7 +137,13 @@ following three ways:
  1 Calling setuptools
 
 ```Shell
-python setup.py build_sphinx
+poetry run python setup.py build_sphinx
+```
+
+or
+
+```Shell
+make docs
 ```
 
  2 Running make in the docs directory where separate makefiles and a make.bat file is giving a variety of options.

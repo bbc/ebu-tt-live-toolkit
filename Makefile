@@ -4,7 +4,7 @@ all: init ui
 	
 init:
 	poetry install
-	pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings
+	poetry run pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings
 
 initnpm:
 ifeq ("$(wildcard node_modules)","")
@@ -14,13 +14,13 @@ else
 endif
 
 test:
-	poetry run python setup.py test
+	poetry run pytest
 
 docs:
-	poetry run python setup.py build_sphinx
+	poetry run sphinx-build docs/source docs/build
 
 bindings:
-	pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings
+	poetry run pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings
 
 ui: uiclean uibuild
 	

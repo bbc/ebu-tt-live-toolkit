@@ -1,10 +1,17 @@
 [tool.poetry]
-name = "ebu-tt-live"
-version = "1.0.0"
-description = ""
+version = '3.0.2'
+name = 'ebu-tt-live'
+description = 'EBU-TT Part 3 library implementing Specification EBU-3370'
+license = "BSD3"
 authors = []
 readme = "README.md"
-packages = [{include = "ebu_tt_live"}]
+packages = [
+    { include = "ebu_tt_live" }
+    ]
+include = [
+    { path = "ebu_tt_live.examples/*.txt" },
+    { path = "ebu_tt_live.examples/*.json" }
+    ]
 
 [tool.poetry.scripts]
 ebu-dummy-encoder = 'ebu_tt_live.scripts.ebu_dummy_encoder:main'

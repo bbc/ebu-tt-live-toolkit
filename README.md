@@ -18,16 +18,16 @@ If you would like to contribute or join the Slack team, please contact <subtitli
 Preparing the build environment with poetry
 ==============================================
 
-Make sure you have nodejs, Python 3.11 and poetry. On a Mac:
-
-     brew install python@3.11
-     brew install poetry
+Make sure you have nodejs, Python 3.11 and poetry. 
 
 To install the dependencies via poetry:
      
      poetry install
 
-To open a poetry shell:
+or
+     make
+
+To open a poetry shell (which you don't have to do, because you can prefix all commands with `poetry run`):
 
      poetry shell
 
@@ -39,10 +39,6 @@ If your virtual environment doesn't have the correct python version then you can
 
      poetry env use python3.11
 
-To Build the poetry environment:
-
-     poetry build
-
 To Build the runtime system using make:
 
      make bindings ui
@@ -51,7 +47,7 @@ To Run tests:
 
      make bindings test
 
-To Generate Documentation:
+To Generate Documentation, follow the instructions to install graphviz, below, then run:
 
      make docs
 
@@ -59,47 +55,14 @@ To exit poetry shell:
 
      exit
 
-Preparing the build environment without poetry
-==============================================
-
-Make sure you have Python 3.11. Make sure you have python virtual environment capability.
-
-If not you can install virtualenv systemwide from your operating system's package repository
-or by pip:
-
-    sudo pip install virtualenv
-
-After that creating a virtual environment should be as simple as:
-
-    virtualenv env
-
-Let's activate it (source makes sure the current shell executes the script
-and assumes the environment variables that the activation script sets):
-
-    source ./env/bin/activate
-
-To build the project you will also need node.js. Please read the instructions for your system [here](https://nodejs.org/en/download/package-manager/).
-
-After having created the python virtual environment, having activated it and having installed node.js the package
-can be built by typing make if you have GNU build tooling on your system.
-
-    make
-
-
-Alternatively:
-
-    pip install -r requirements.txt
-    python setup.py develop
-
-    pyxbgen --binding-root=./ebu_tt_live/bindings -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd
-
-    npm install nunjucks
-    node_modules/nunjucks/bin/precompile ebu_tt_live/ui/user_input_producer/template/user_input_producer_template.xml > ebu_tt_live/ui/user_input_producer/template/user_input_producer_template.js
-
 After this you are supposed to be able to launch the command line tools this python package
 provides i.e.:
 
     ebu-dummy-encoder
+
+or if you are not in a poetry shell, 
+
+    poetry run ebu-dummy-encoder
 
 Windows users
 =============
@@ -174,7 +137,13 @@ following three ways:
  1 Calling setuptools
 
 ```Shell
-python setup.py build_sphinx
+poetry run python setup.py build_sphinx
+```
+
+or
+
+```Shell
+make docs
 ```
 
  2 Running make in the docs directory where separate makefiles and a make.bat file is giving a variety of options.

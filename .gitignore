@@ -131,6 +131,7 @@ ebu_tt_live/ui/user_input_producer/template/live_message_template.js
 docs/build/*
 !docs/build/index.html
 !docs/build/img
+!docs/build/.nojekyll
 
 # Test Sequences export folder
 export/

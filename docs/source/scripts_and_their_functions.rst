@@ -67,11 +67,11 @@ consumer is listening. See detailed instructions here:
 Distributor
 -----------
 This script mimics a distribution node. To see it forwarding documents from the
-Simple Producer the the Simple Consumer using Websocket, run ``ebu-run
+Simple Producer to the Simple Consumer using Websocket, run ``ebu-run
 --admin.conf=ebu_tt_live/examples/config/sproducer_dist_sconsumer_ws.json``. A
 more interesting scenario is distributing documents from the User Input Producer
 to two consumer nodes: ``ebu-run
---admin.conf=ebu_tt_live/examples/config/user_input_producer_dist_consumers``.
+--admin.conf=ebu_tt_live/examples/config/user_input_producer_dist_consumers.json``.
 
 Like the Simple Producer, the Distributor can also save the documents it
 receives to the file system. To do that, create you own configuration file as
@@ -103,7 +103,8 @@ example ``ebu-run --admin.conf=ebu_tt_live/examples/config/buffer_delay.json``
 DeDuplicator Node
 -----------------
 This node addresses instances where ``style`` and ``region`` elements and
-attributes are duplicated.
+attributes are duplicated, which can occur for example when sequences are
+resequenced.
 For the default configuration of the node, see:
 ``ebu-run --admin.conf=ebu_tt_live/examples/config/deduplicator_fs.json``
 
@@ -118,15 +119,40 @@ If nested ``div`` or ``span`` elements might be present in a document, the
 Denester node should be used to flatten them before passing them to the
 EBU-TT-D Encoder, because EBU-TT-D does not permit such nested elements.
 
-Resequencer
------------
-This node receives input documents from one sequence and periodically issues
-a document corresponding to a segment of time. Each time a document is
-issued the time of the next segment is incremented. For example this node
-can be used to extract a 5s chunk of subtitles every 5s.
+Resequencer Node
+----------------
+This node consumes documents from one sequence and
+creates a new sequence of documents based on the content in that input sequence,
+where every document in the output sequence has the same duration. The
+resequencer repeatedly extracts and then outputs a document of the specified
+duration, then waits for a period equal to that 
+duration before extracting the next document. It can be configured to begin
+extracting the first document immediately when it is run, or to wait until a
+specific time until extracting the first document. 
 
-This node may be used upstream of the EBU-TT-D Encoder to generate an
-ongoing sequence of subtitle documents from a streaming source.
+The resequencer is
+particularly useful upstream of an EBU-TT-D Encoder, to generate segmented
+EBU-TT-D, for example prior to wrapping in fragmented MPEG-4 and serving
+with a DASH or HLS manifest; those onward steps are not part of this project.
+This pattern effectively converts an asynchronous stream of input documents
+into something that can be delivered synchronously downstream, which is
+useful for distribution to media players.
+
+Note that the resequencer output can contain duplicated ``style`` and ``region``
+elements. These can be cleaned up by passing the output to a DeDuplicator
+node before downstream encoding to other formats.
+
+In general the resequencer does not begin emitting any documents until it has received
+at least one input document. To immediately start to emit documents an
+initial document can be configured. Necessary initial parameters like
+language or sequence ID are retrieved from that document.
+
+Note that the resequencer accepts only input documents which all have the
+same sequence ID. This sequence ID is determined by the first received input
+document (or the configured initial document instead, if applicable).
+
+Use ``ebu-run`` to start
+this script, for example ``ebu-run --admin.conf=ebu_tt_live/examples/config/sproducer_resequencer_direct_ebuttd_encoder_fs.json``
 
 Retiming Delay Node
 -------------------

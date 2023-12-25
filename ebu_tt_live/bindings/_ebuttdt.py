@@ -38,6 +38,13 @@ class _TimedeltaBindingMixin(object):
     }
 
     @classmethod
+    def _int_or_none(cls, value):
+        try:
+            return int(value)
+        except TypeError:
+            return 0
+
+    @classmethod
     def compatible_timebases(cls):
         return cls._compatible_timebases
 

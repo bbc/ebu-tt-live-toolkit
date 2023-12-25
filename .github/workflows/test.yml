@@ -55,7 +55,7 @@ jobs:
         shell: bash
       - name: Install coveralls
         run: |
-          poetry install "coveralls<2"
+          poetry add "coveralls<2"
         shell: bash
       - name: Coveralls
         env:

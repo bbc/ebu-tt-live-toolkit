@@ -22,10 +22,10 @@ glyphStyles = [
     # 'textShadow',   # textShadow is not permitted in EBU-TT_D
 ]
 
-"Tuple to represent a Glyph"
 glyph_tuple_fieldnames = glyphStyles[:]  # copy not reference
 glyph_tuple_fieldnames.append('characterCode')
-glyph = namedtuple('glyph', glyph_tuple_fieldnames)
+glyph = namedtuple('glyph', glyph_tuple_fieldnames)  # Tuple to represent a Glyph
+
 
 GCpy12_chars = set(
     uax24.Latin_list + 
@@ -363,7 +363,12 @@ class imscHrmValidator:
         log.debug('Cell height = {}'.format(self._cell_height))
 
     def validate(self, doc: EBUTTDDocument) -> bool:
-        """Validate the EBU-TT-D document against the IMSC-HRM."""
+        """Validate the EBU-TT-D document against the IMSC-HRM.
+
+        :param doc EBUTTDDocument: a validated EBUTTDDocument object
+
+        :return: True if the document is valid, False otherwise.
+        """
         self._setup(doc)
 
         last_nonzero_presentation_time = timedelta(seconds=0 - self._ipd)
@@ -416,6 +421,3 @@ class imscHrmValidator:
             log.error('Document is not valid')
 
         return rv
-
-
-

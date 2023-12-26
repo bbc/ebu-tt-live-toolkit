@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ebu_tt_live.bindings.converters.ebutt1_ebutt3 &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview of the EBU-TT live toolkit.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../bindings.html">ebu_tt_live.bindings</a></li>
+      <li class="breadcrumb-item active">ebu_tt_live.bindings.converters.ebutt1_ebutt3</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ebu_tt_live.bindings.converters.ebutt1_ebutt3</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ebu_tt_live.bindings</span> <span class="kn">import</span> <span class="n">tt</span><span class="p">,</span> <span class="n">tt1_tt_type</span><span class="p">,</span> <span class="n">tt1_body_type</span><span class="p">,</span> \
+    <span class="n">body_type</span><span class="p">,</span> <span class="n">div_type</span><span class="p">,</span> <span class="n">tt1_head_type</span><span class="p">,</span> <span class="n">tt1_layout_type</span><span class="p">,</span> <span class="n">p_type</span><span class="p">,</span> <span class="n">span_type</span><span class="p">,</span>  \
+    <span class="n">br_type</span><span class="p">,</span> <span class="n">head_type</span><span class="p">,</span> <span class="n">style_type</span><span class="p">,</span> <span class="n">styling</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> \
+    <span class="n">region_type</span><span class="p">,</span> <span class="n">load_types_for_document</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.bindings._ebuttm</span> <span class="kn">import</span> <span class="n">headMetadata_type</span><span class="p">,</span> <span class="n">documentMetadata</span><span class="p">,</span> \
+    <span class="n">divMetadata_type</span><span class="p">,</span> <span class="n">bodyMetadata_type</span><span class="p">,</span> <span class="n">pMetadata_type</span><span class="p">,</span> <span class="n">spanMetadata_type</span><span class="p">,</span> \
+    <span class="n">metadataBase_type</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.bindings._ebuttdt</span> <span class="kn">import</span> <span class="n">FullClockTimingType</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.errors</span> <span class="kn">import</span> <span class="n">TimeNegativeError</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.strings</span> <span class="kn">import</span> <span class="n">ERR_TIME_NEGATIVE</span>
+<span class="kn">from</span> <span class="nn">pyxb.binding.basis</span> <span class="kn">import</span> <span class="n">NonElementContent</span><span class="p">,</span> <span class="n">ElementContent</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter">[docs]</a><span class="k">class</span> <span class="nc">EBUTT1EBUTT3Converter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to convert EBU-TT-1 documents into EBU-TT-3 documents.</span>
+
+<span class="sd">    Includes a setting to extract the document identifier from metadata</span>
+<span class="sd">    and use it as the output sequence identifier, or can just use a</span>
+<span class="sd">    provided sequence identifier. The sequence number is always 1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_semantic_dataset</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_sequenceIdentifier</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_use_doc_id_as_seq_id</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequence_id</span><span class="p">,</span> <span class="n">use_doc_id_as_seq_id</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a converter.</span>
+
+<span class="sd">        :param sequence_id:</span>
+<span class="sd">        :param use_doc_id_as_seq_id:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sequenceIdentifier</span> <span class="o">=</span> <span class="n">sequence_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_doc_id_as_seq_id</span> <span class="o">=</span> <span class="n">use_doc_id_as_seq_id</span>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.map_type"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.map_type">[docs]</a>    <span class="k">def</span> <span class="nf">map_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_element</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">tt1_tt_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_tt</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">tt1_head_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_head</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">tt1_body_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_body</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">div_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_div</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">p_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_p</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">span_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_span</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">br_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_br</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">tt1_layout_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_layout</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">region_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_region</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">styling</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_styling</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">style_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_style</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">headMetadata_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_headMetadata</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">divMetadata_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_divMetadata</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">bodyMetadata_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_bodyMetadata</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">pMetadata_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pMetadata</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">spanMetadata_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_spanMetadata</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_element</span><span class="p">,</span> <span class="n">metadataBase_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_metadata</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_unknown</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_tt"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_tt">[docs]</a>    <span class="k">def</span> <span class="nf">convert_tt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tt_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;timeBase&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tt_in</span><span class="o">.</span><span class="n">timeBase</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">tt</span><span class="p">(</span>
+            <span class="n">head</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_element</span><span class="p">(</span><span class="n">tt_in</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span>
+            <span class="n">body</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_element</span><span class="p">(</span><span class="n">tt_in</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span>
+            <span class="n">timeBase</span><span class="o">=</span><span class="s1">&#39;media&#39;</span><span class="p">,</span>
+            <span class="n">lang</span><span class="o">=</span><span class="n">tt_in</span><span class="o">.</span><span class="n">lang</span><span class="p">,</span>
+            <span class="n">space</span><span class="o">=</span><span class="n">tt_in</span><span class="o">.</span><span class="n">space</span><span class="p">,</span>
+            <span class="n">cellResolution</span><span class="o">=</span><span class="n">tt_in</span><span class="o">.</span><span class="n">cellResolution</span><span class="p">,</span>
+            <span class="n">sequenceIdentifier</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_sequenceIdentifier</span><span class="p">,</span>
+            <span class="n">sequenceNumber</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">,</span>
+            <span class="n">_strict_keywords</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_doc_id_as_seq_id</span> <span class="ow">and</span> <span class="s1">&#39;documentIdentifier&#39;</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+            <span class="n">new_elem</span><span class="o">.</span><span class="n">sequenceIdentifier</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;documentIdentifier&#39;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_head"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_head">[docs]</a>    <span class="k">def</span> <span class="nf">convert_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">head_type</span><span class="p">()</span>
+        <span class="n">head_children</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">head_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">head_children</span><span class="p">:</span>
+            <span class="n">new_elem</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_headMetadata"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_headMetadata">[docs]</a>    <span class="k">def</span> <span class="nf">convert_headMetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headMetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">headMetadata_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">headMetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Special handling for conformsToStandard. Throw out the old, add a</span>
+        <span class="c1"># new.</span>
+        <span class="c1"># TODO: When XSD updated to allow ebuttm document metadata directly in</span>
+        <span class="c1"># head metadata, check for this by uncommenting the following lines:</span>
+        <span class="c1"># if new_elem.conformsToStandard is not None:</span>
+        <span class="c1">#     new_elem.conformsToStandard=[</span>
+        <span class="c1">#         &#39;urn:ebu:tt:live:2017-05&#39;]</span>
+        <span class="k">if</span> <span class="n">new_elem</span><span class="o">.</span><span class="n">documentMetadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_elem</span><span class="o">.</span><span class="n">documentMetadata</span> <span class="o">=</span> <span class="n">documentMetadata</span><span class="p">(</span><span class="n">conformsToStandard</span><span class="o">=</span><span class="p">[</span>
+                <span class="s1">&#39;urn:ebu:tt:live:2017-05&#39;</span>
+            <span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_elem</span><span class="o">.</span><span class="n">documentMetadata</span><span class="o">.</span><span class="n">conformsToStandard</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;urn:ebu:tt:live:2017-05&#39;</span><span class="p">]</span>
+
+        <span class="c1"># We want to remember the documentIdentifier and use it later for the</span>
+        <span class="c1"># sequence identifier</span>
+        <span class="c1"># TODO: When XSD updated to allow ebuttm document metadata directly in</span>
+        <span class="c1"># head metadata, check for this by uncommenting the following lines:</span>
+        <span class="c1"># if new_elem.documentIdentifier is not None:</span>
+        <span class="c1">#     _rememberDocumentIdentifier(new_elem.documentIdentifier, dataset)</span>
+
+        <span class="k">if</span> <span class="n">new_elem</span><span class="o">.</span><span class="n">documentMetadata</span> <span class="ow">and</span> \
+           <span class="n">new_elem</span><span class="o">.</span><span class="n">documentMetadata</span><span class="o">.</span><span class="n">documentIdentifier</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rememberDocumentIdentifier</span><span class="p">(</span>
+                <span class="n">new_elem</span><span class="o">.</span><span class="n">documentMetadata</span><span class="o">.</span><span class="n">documentIdentifier</span><span class="p">,</span>
+                <span class="n">dataset</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter._rememberDocumentIdentifier"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._rememberDocumentIdentifier">[docs]</a>    <span class="k">def</span> <span class="nf">_rememberDocumentIdentifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">documentIdentifier_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;documentIdentifier&#39;</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Already got a documentIdentifier&#39;</span><span class="p">)</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;documentIdentifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">documentIdentifier_in</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_divMetadata"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_divMetadata">[docs]</a>    <span class="k">def</span> <span class="nf">convert_divMetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divmetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">divMetadata_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">divmetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_bodyMetadata"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_bodyMetadata">[docs]</a>    <span class="k">def</span> <span class="nf">convert_bodyMetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bodymetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">bodyMetadata_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">bodymetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_pMetadata"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_pMetadata">[docs]</a>    <span class="k">def</span> <span class="nf">convert_pMetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pmetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">pMetadata_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">pmetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_spanMetadata"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_spanMetadata">[docs]</a>    <span class="k">def</span> <span class="nf">convert_spanMetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spanmetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">spanMetadata_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">spanmetadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_metadata"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">convert_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">metadataBase_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">metadata_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_styling"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_styling">[docs]</a>    <span class="k">def</span> <span class="nf">convert_styling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">styling_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">styling</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">styling_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_style"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_style">[docs]</a>    <span class="k">def</span> <span class="nf">convert_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">style_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">style_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">style</span><span class="p">,</span>
+            <span class="n">direction</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">direction</span><span class="p">,</span>
+            <span class="n">fontFamily</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">fontFamily</span><span class="p">,</span>
+            <span class="n">fontSize</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">fontSize</span><span class="p">,</span>
+            <span class="n">lineHeight</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">lineHeight</span><span class="p">,</span>
+            <span class="n">textAlign</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">textAlign</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">backgroundColor</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">backgroundColor</span><span class="p">,</span>
+            <span class="n">fontStyle</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">fontStyle</span><span class="p">,</span>
+            <span class="n">fontWeight</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">fontWeight</span><span class="p">,</span>
+            <span class="n">textDecoration</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">textDecoration</span><span class="p">,</span>
+            <span class="n">unicodeBidi</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">unicodeBidi</span><span class="p">,</span>
+            <span class="n">wrapOption</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">wrapOption</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span>
+            <span class="n">multiRowAlign</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">multiRowAlign</span><span class="p">,</span>
+            <span class="n">linePadding</span><span class="o">=</span><span class="n">style_in</span><span class="o">.</span><span class="n">linePadding</span><span class="p">,</span>
+            <span class="n">_strict_keywords</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_layout"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_layout">[docs]</a>    <span class="k">def</span> <span class="nf">convert_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">layout</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">layout_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_region"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_region">[docs]</a>    <span class="k">def</span> <span class="nf">convert_region</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">region_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">region_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">region_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">origin</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">origin</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">extent</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">style</span><span class="p">,</span>
+            <span class="n">displayAlign</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">displayAlign</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span>
+            <span class="n">writingMode</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">writingMode</span><span class="p">,</span>
+            <span class="n">showBackground</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">showBackground</span><span class="p">,</span>
+            <span class="n">overflow</span><span class="o">=</span><span class="n">region_in</span><span class="o">.</span><span class="n">overflow</span><span class="p">,</span>
+            <span class="n">_strict_keywords</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.calculate_times"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.calculate_times">[docs]</a>    <span class="k">def</span> <span class="nf">calculate_times</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elem_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">begin</span> <span class="o">=</span> <span class="n">elem_in</span><span class="o">.</span><span class="n">begin</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">elem_in</span><span class="o">.</span><span class="n">end</span>
+
+        <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;timeBase&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;smpte&#39;</span><span class="p">:</span>
+            <span class="n">syncbase</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;syncbase&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">begin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">begin</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;smpte_to_timebase_converter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">begin</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">begin</span> <span class="o">&lt;</span> <span class="n">syncbase</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">TimeNegativeError</span><span class="p">(</span><span class="n">ERR_TIME_NEGATIVE</span><span class="p">)</span>
+                <span class="n">begin</span> <span class="o">=</span> <span class="n">begin</span> <span class="o">-</span> <span class="n">syncbase</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;smpte_to_timebase_converter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="n">syncbase</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">TimeNegativeError</span><span class="p">(</span><span class="n">ERR_TIME_NEGATIVE</span><span class="p">)</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">syncbase</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">begin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">begin</span> <span class="o">=</span> <span class="n">begin</span><span class="o">.</span><span class="n">timedelta</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">end</span><span class="o">.</span><span class="n">timedelta</span>
+
+        <span class="k">return</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.push_syncbase"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.push_syncbase">[docs]</a>    <span class="k">def</span> <span class="nf">push_syncbase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">sync_delta</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sync_delta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;syncbase&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;syncbase&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;syncbase&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;syncbase&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sync_delta</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.pop_syncbase"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.pop_syncbase">[docs]</a>    <span class="k">def</span> <span class="nf">pop_syncbase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;syncbase&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_body"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_body">[docs]</a>    <span class="k">def</span> <span class="nf">convert_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">body_in</span><span class="o">.</span><span class="n">div</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Set up a syncbase list for use down the tree</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;syncbase&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">0</span><span class="p">)]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_times</span><span class="p">(</span><span class="n">body_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">TimeNegativeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">push_syncbase</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">begin</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">begin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">begin</span> <span class="o">=</span> <span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">begin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">body_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">body_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span>
+            <span class="n">agent</span><span class="o">=</span><span class="n">body_in</span><span class="o">.</span><span class="n">agent</span><span class="p">,</span>
+            <span class="n">role</span><span class="o">=</span><span class="n">body_in</span><span class="o">.</span><span class="n">role</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">body_in</span><span class="o">.</span><span class="n">style</span><span class="p">,</span>
+            <span class="n">begin</span><span class="o">=</span><span class="n">begin</span><span class="p">,</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">end</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pop_syncbase</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_elem</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_elem</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_div"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_div">[docs]</a>    <span class="k">def</span> <span class="nf">convert_div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">div_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">div_in</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_times</span><span class="p">(</span><span class="n">div_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">TimeNegativeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">push_syncbase</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">begin</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">begin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">begin</span> <span class="o">=</span> <span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">begin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">div_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">div_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">div_in</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">region</span><span class="o">=</span><span class="n">div_in</span><span class="o">.</span><span class="n">region</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">div_in</span><span class="o">.</span><span class="n">style</span><span class="p">,</span>
+            <span class="n">lang</span><span class="o">=</span><span class="n">div_in</span><span class="o">.</span><span class="n">lang</span><span class="p">,</span>
+            <span class="n">agent</span><span class="o">=</span><span class="n">div_in</span><span class="o">.</span><span class="n">agent</span><span class="p">,</span>
+            <span class="n">begin</span><span class="o">=</span><span class="n">begin</span><span class="p">,</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">end</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pop_syncbase</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_elem</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_elem</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_p"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_p">[docs]</a>    <span class="k">def</span> <span class="nf">convert_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_times</span><span class="p">(</span><span class="n">p_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">TimeNegativeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">push_syncbase</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">begin</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">begin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">begin</span> <span class="o">=</span> <span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">begin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">p_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">p_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">p_in</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">space</span><span class="o">=</span><span class="n">p_in</span><span class="o">.</span><span class="n">space</span><span class="p">,</span>
+            <span class="n">lang</span><span class="o">=</span><span class="n">p_in</span><span class="o">.</span><span class="n">lang</span><span class="p">,</span>
+            <span class="n">region</span><span class="o">=</span><span class="n">p_in</span><span class="o">.</span><span class="n">region</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">p_in</span><span class="o">.</span><span class="n">style</span><span class="p">,</span>
+            <span class="n">begin</span><span class="o">=</span><span class="n">begin</span><span class="p">,</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span>
+            <span class="n">agent</span><span class="o">=</span><span class="n">p_in</span><span class="o">.</span><span class="n">agent</span><span class="p">,</span>
+            <span class="n">role</span><span class="o">=</span><span class="n">p_in</span><span class="o">.</span><span class="n">role</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pop_syncbase</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_elem</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_elem</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_span"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_span">[docs]</a>    <span class="k">def</span> <span class="nf">convert_span</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">span_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_times</span><span class="p">(</span><span class="n">span_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">TimeNegativeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">push_syncbase</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">begin</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">begin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">begin</span> <span class="o">=</span> <span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">begin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">span_type</span><span class="p">(</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">convert_children</span><span class="p">(</span><span class="n">span_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">span_in</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">space</span><span class="o">=</span><span class="n">span_in</span><span class="o">.</span><span class="n">space</span><span class="p">,</span>
+            <span class="n">lang</span><span class="o">=</span><span class="n">span_in</span><span class="o">.</span><span class="n">lang</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">span_in</span><span class="o">.</span><span class="n">style</span><span class="p">,</span>
+            <span class="n">begin</span><span class="o">=</span><span class="n">begin</span><span class="p">,</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span>
+            <span class="n">agent</span><span class="o">=</span><span class="n">span_in</span><span class="o">.</span><span class="n">agent</span><span class="p">,</span>
+            <span class="n">role</span><span class="o">=</span><span class="n">span_in</span><span class="o">.</span><span class="n">role</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pop_syncbase</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_elem</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_elem</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_br"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_br">[docs]</a>    <span class="k">def</span> <span class="nf">convert_br</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">br_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">br_type</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_unknown"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_unknown">[docs]</a>    <span class="k">def</span> <span class="nf">convert_unknown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_in</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">new_elem</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">element_in</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_elem</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_children"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_children">[docs]</a>    <span class="k">def</span> <span class="nf">convert_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Recursive step to convert child elements.</span>
+
+<span class="sd">        :param element:</span>
+<span class="sd">        :param dataset:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">children</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">NonElementContent</span><span class="p">):</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">ElementContent</span><span class="p">):</span>
+                <span class="n">conv_elem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_element</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">conv_elem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conv_elem</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Can this even happen!??!?!?!&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">output</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_element"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_element">[docs]</a>    <span class="k">def</span> <span class="nf">convert_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">converter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">converter</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3Converter.convert_document"><a class="viewcode-back" href="../../../../ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_document">[docs]</a>    <span class="k">def</span> <span class="nf">convert_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_element</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">smpte_to_timedelta_converter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert the EBU-TT-1 Document to an EBU-TT-3 document.</span>
+
+<span class="sd">        :param root_element: The binding class for the EBU-TT-1 document&#39;s root element.</span>
+<span class="sd">        :param dataset: An optional dataset for passing information into the conversion.</span>
+<span class="sd">        :param smpte_to_timedelta_converter ISMPTEtoTimedeltaConverter: for mapping SMPTE to media timebase. Required if SMPTE timecodes are present.</span>
+<span class="sd">        :return an EBU-TT-3 document&#39;s root tt element:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_dataset</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_dataset</span> <span class="o">=</span> <span class="n">dataset</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_dataset</span><span class="p">[</span><span class="s1">&#39;smpte_to_timebase_converter&#39;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="n">smpte_to_timedelta_converter</span>
+
+        <span class="c1"># Make sure that any new elements we correct get the right bindings</span>
+        <span class="c1"># Ideally we&#39;d use EBUTT3Document.load_types_for_document() but that</span>
+        <span class="c1"># causes a circular import loop, because EBUTT3Document imports</span>
+        <span class="c1"># parts of bindings that include this (not sure why)</span>
+        <span class="n">load_types_for_document</span><span class="p">(</span><span class="s1">&#39;ebutt3&#39;</span><span class="p">)</span>
+        <span class="n">converted_bindings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_element</span><span class="p">(</span>
+            <span class="n">root_element</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_dataset</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">converted_bindings</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

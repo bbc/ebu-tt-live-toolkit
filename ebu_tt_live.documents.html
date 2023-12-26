@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>documents Package &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="examples Package" href="ebu_tt_live.examples.html" />
+    <link rel="prev" title="config Package - Component configurators" href="ebu_tt_live.config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#layout-of-the-source-files">Layout of the source files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ebu_tt_live.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.bindings.html">bindings Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.carriage.html">carriage Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.clocks.html">clocks Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.config.html">config Package - Component configurators</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">documents Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">documents</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.documents.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">base</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.documents.ebutt3"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.documents.ebutt3_segmentation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_segmentation</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.documents.ebutt3_splicer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_splicer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.documents.converters"><code class="xref py py-mod docutils literal notranslate"><span class="pre">document_converters</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.documents.ebutt1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt1</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.documents.ebuttd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebuttd</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.examples.html">examples Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.node.html">node Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.scripts.html">scripts Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.twisted.html">twisted Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.errors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errors</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.strings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">strings</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code> Module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ebu_tt_live.html">Source code reference</a></li>
+      <li class="breadcrumb-item active">documents Package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ebu_tt_live.documents.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="documents-package">
+<h1>documents Package<a class="headerlink" href="#documents-package" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">documents</span></code> Package<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<span class="target" id="module-ebu_tt_live.documents"></span></section>
+<section id="module-ebu_tt_live.documents.base">
+<span id="base-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">base</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.documents.base" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.CloningDocumentSequence">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.base.</span></span><span class="sig-name descname"><span class="pre">CloningDocumentSequence</span></span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#CloningDocumentSequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.CloningDocumentSequence" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebu_tt_live.documents.base.DocumentSequence" title="ebu_tt_live.documents.base.DocumentSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocumentSequence</span></code></a></p>
+<p>Base class that picks up a document and creates an appropriate stream based on it.
+Bear in mind continuation/revision or reproduction of a received document stream.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.CloningDocumentSequence.create_from_document">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#CloningDocumentSequence.create_from_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.CloningDocumentSequence.create_from_document" title="Permalink to this definition"></a></dt>
+<dd><p>Extract data from document
+:param document:
+:param args:
+:param kwargs: parameter override to constructor
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.DocumentSequence">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.base.</span></span><span class="sig-name descname"><span class="pre">DocumentSequence</span></span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#DocumentSequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.DocumentSequence" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class that facilitates most production-related workflows.
+The document stream should maintain the consistency across critical document attributes. It should maintain
+all sorts of counters and static information. It plays a key role in the validation of an outgoing stream of
+subtitle documents.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.DocumentSequence.add_document">
+<span class="sig-name descname"><span class="pre">add_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#DocumentSequence.add_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.DocumentSequence.add_document" title="Permalink to this definition"></a></dt>
+<dd><p>Add the document to the sequence on the consumer side of things. This will put the document on the timeline
+and validate the sequence in terms of timing resolution.
+:param document:
+:raises IncompatibleSequenceError meaning that the document cannot be part of this sequence for
+it does not match the semantics of the sequence.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.DocumentSequence.fork">
+<span class="sig-name descname"><span class="pre">fork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#DocumentSequence.fork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.DocumentSequence.fork" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new stream with modified arguments.
+:param args:
+:param kwargs: parameter override to constructor
+:return: a new documentstream instance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.DocumentSequence.get_document">
+<span class="sig-name descname"><span class="pre">get_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#DocumentSequence.get_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.DocumentSequence.get_document" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve document by sequence number
+:param seq_id:
+:return: a document
+:raises: KeyError meaning the document is not in the sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.DocumentSequence.new_document">
+<span class="sig-name descname"><span class="pre">new_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#DocumentSequence.new_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.DocumentSequence.new_document" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new document with the stream defaults
+:param args:
+:param kwargs: parameter override to constructor
+:return: a new document</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.EBUTTDocumentBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.base.</span></span><span class="sig-name descname"><span class="pre">EBUTTDocumentBase</span></span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#EBUTTDocumentBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.EBUTTDocumentBase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.EBUTTDocumentBase.create_from_raw_binding">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_raw_binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#EBUTTDocumentBase.create_from_raw_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.EBUTTDocumentBase.create_from_raw_binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.EBUTTDocumentBase.create_from_xml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#EBUTTDocumentBase.create_from_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.EBUTTDocumentBase.create_from_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.EBUTTDocumentBase.get_dom">
+<span class="sig-name descname"><span class="pre">get_dom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#EBUTTDocumentBase.get_dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.EBUTTDocumentBase.get_dom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.EBUTTDocumentBase.get_xml">
+<span class="sig-name descname"><span class="pre">get_xml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#EBUTTDocumentBase.get_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.EBUTTDocumentBase.get_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.EBUTTDocumentBase.message_type_mapping">
+<span class="sig-name descname"><span class="pre">message_type_mapping</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'authorsGroupControlRequest':</span> <span class="pre">&lt;class</span> <span class="pre">'ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest'&gt;}</span></em><a class="headerlink" href="#ebu_tt_live.documents.base.EBUTTDocumentBase.message_type_mapping" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.SubtitleDocument">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.base.</span></span><span class="sig-name descname"><span class="pre">SubtitleDocument</span></span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#SubtitleDocument"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.SubtitleDocument" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.ComparableMixin" title="ebu_tt_live.utils.ComparableMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComparableMixin</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.SubtitleDocument.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#SubtitleDocument.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.SubtitleDocument.validate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.TimeBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.base.</span></span><span class="sig-name descname"><span class="pre">TimeBase</span></span><a class="reference internal" href="_modules/ebu_tt_live/documents/base.html#TimeBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.base.TimeBase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.TimeBase.CLOCK">
+<span class="sig-name descname"><span class="pre">CLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'clock'</span></em><a class="headerlink" href="#ebu_tt_live.documents.base.TimeBase.CLOCK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.TimeBase.MEDIA">
+<span class="sig-name descname"><span class="pre">MEDIA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'media'</span></em><a class="headerlink" href="#ebu_tt_live.documents.base.TimeBase.MEDIA" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.base.TimeBase.SMPTE">
+<span class="sig-name descname"><span class="pre">SMPTE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'smpte'</span></em><a class="headerlink" href="#ebu_tt_live.documents.base.TimeBase.SMPTE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.documents.ebutt3">
+<span id="ebutt3-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.documents.ebutt3" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.ebutt3.</span></span><span class="sig-name descname"><span class="pre">EBUTT3Document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_identifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clock_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">availability_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authors_group_identifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TimelineUtilMixin</span></code>, <a class="reference internal" href="#ebu_tt_live.documents.base.SubtitleDocument" title="ebu_tt_live.documents.base.SubtitleDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubtitleDocument</span></code></a>, <a class="reference internal" href="#ebu_tt_live.documents.base.EBUTTDocumentBase" title="ebu_tt_live.documents.base.EBUTTDocumentBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EBUTTDocumentBase</span></code></a></p>
+<p>This class wraps the binding object representation of the XML and provides the features the applications in the
+specification require. e.g:availability time.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._availability_time">
+<span class="sig-name descname"><span class="pre">_availability_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._availability_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._cmp_checks">
+<span class="sig-name descname"><span class="pre">_cmp_checks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document._cmp_checks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._cmp_checks" title="Permalink to this definition"></a></dt>
+<dd><p>Extra checks that need to be fulfilled in order for the comparison to make sense.
+Any custom exceptions thrown here are preserved and propagated in original form.
+:param other:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._cmp_key">
+<span class="sig-name descname"><span class="pre">_cmp_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document._cmp_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._cmp_key" title="Permalink to this definition"></a></dt>
+<dd><p>Implement the delegation method.
+:return: comparable member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._computed_begin_time">
+<span class="sig-name descname"><span class="pre">_computed_begin_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._computed_begin_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._computed_end_time">
+<span class="sig-name descname"><span class="pre">_computed_end_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._computed_end_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._ebutt3_content">
+<span class="sig-name descname"><span class="pre">_ebutt3_content</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._ebutt3_content" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._encoding">
+<span class="sig-name descname"><span class="pre">_encoding</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UTF-8'</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._encoding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._get_bds">
+<span class="sig-name descname"><span class="pre">_get_bds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document._get_bds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._get_bds" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._implicit_ns">
+<span class="sig-name descname"><span class="pre">_implicit_ns</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._implicit_ns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._resolved_begin_time">
+<span class="sig-name descname"><span class="pre">_resolved_begin_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._resolved_begin_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._resolved_end_time">
+<span class="sig-name descname"><span class="pre">_resolved_end_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._resolved_end_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document._sequence">
+<span class="sig-name descname"><span class="pre">_sequence</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document._sequence" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.add_div">
+<span class="sig-name descname"><span class="pre">add_div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">div</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.add_div"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.add_div" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.authors_group_control_token">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authors_group_control_token</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.authors_group_control_token" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.authors_group_identifier">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authors_group_identifier</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.authors_group_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.authors_group_selected_sequence_identifier">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authors_group_selected_sequence_identifier</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.authors_group_selected_sequence_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.availability_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">availability_time</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.availability_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.binding">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">binding</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.cleanup">
+<span class="sig-name descname"><span class="pre">cleanup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.cleanup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.cleanup" title="Permalink to this definition"></a></dt>
+<dd><p>This function is meant to get rid of all the validation added data that may be blocking garbage collection of
+the objects.
+:return:</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.clock_mode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clock_mode</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.clock_mode" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.computed_begin_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">computed_begin_time</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.computed_begin_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.computed_end_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">computed_end_time</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.computed_end_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.content_to_string">
+<span class="sig-name descname"><span class="pre">content_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">begin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.content_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.content_to_string" title="Permalink to this definition"></a></dt>
+<dd><p>Extract the document textual content between begin/end along with their activation times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>begin</strong> – From specified begin time or resolved begin time if begin is not specified.</p></li>
+<li><p><strong>end</strong> – Up to specified end time or resolved end time if end is not specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>String showing the activation and content of the elements.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.create_from_raw_binding">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_raw_binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binding</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">availability_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.create_from_raw_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.create_from_raw_binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.create_from_xml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">availability_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.create_from_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.create_from_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.discard_document">
+<span class="sig-name descname"><span class="pre">discard_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolved_end_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.discard_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.discard_document" title="Permalink to this definition"></a></dt>
+<dd><p>This function discards the document by setting a resolved end time
+before the document begins.
+:param resolved_end_time:</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.discarded">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">discarded</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.discarded" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.extract_segment">
+<span class="sig-name descname"><span class="pre">extract_segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">begin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deconflict_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.extract_segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.extract_segment" title="Permalink to this definition"></a></dt>
+<dd><p>Create a valid ebutt3 document subset. As it collects data it will also prefix the ids in the document with
+the document sequence number so that later merge does not have collision.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>begin</strong> – </p></li>
+<li><p><strong>end</strong> – </p></li>
+<li><p><strong>deconflict_ids</strong> – prevent id clash across documents by prefixing the IDs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>EBUTT3Document</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.get_dom">
+<span class="sig-name descname"><span class="pre">get_dom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.get_dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.get_dom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.get_element_by_id">
+<span class="sig-name descname"><span class="pre">get_element_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.get_element_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.get_element_by_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.get_xml">
+<span class="sig-name descname"><span class="pre">get_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span>&#160; <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.get_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.get_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.implicit_ns">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">implicit_ns</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.implicit_ns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.lang">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lang</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.lang" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.load_types_for_document">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_types_for_document</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.load_types_for_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.load_types_for_document" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.resolved_begin_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resolved_begin_time</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.resolved_begin_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.resolved_end_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resolved_end_time</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.resolved_end_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.sequence">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sequence</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.sequence" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.sequence_identifier">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sequence_identifier</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.sequence_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.sequence_number">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sequence_number</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.sequence_number" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.set_begin">
+<span class="sig-name descname"><span class="pre">set_begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">begin</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.set_begin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.set_begin" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.set_dur">
+<span class="sig-name descname"><span class="pre">set_dur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dur</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.set_dur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.set_dur" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.set_end">
+<span class="sig-name descname"><span class="pre">set_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.set_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.set_end" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.time_base">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time_base</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.time_base" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3Document.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3Document.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3Document.validate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.ebutt3.</span></span><span class="sig-name descname"><span class="pre">EBUTT3DocumentSequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence_identifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_clock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authors_group_identifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TimelineUtilMixin</span></code>, <a class="reference internal" href="#ebu_tt_live.documents.base.CloningDocumentSequence" title="ebu_tt_live.documents.base.CloningDocumentSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">CloningDocumentSequence</span></code></a></p>
+<p>EBU-TT Live specific document sequence. It maps the documents based on their sequence numbers and timing attributes.</p>
+<dl class="simple">
+<dt>The sequence object can be used in 2 different modes:</dt><dd><ul class="simple">
+<li><p>It can be used to produce a sequence(i.e.: new_document method)</p></li>
+<li><p>as well as it is the pivotal point of the consumer use-case when the document timings need to be resolved.
+(i.e.: add_document method)</p></li>
+</ul>
+</dd>
+</dl>
+<p>The sequence is responsible to keep the documents ordered and filter those documents out, which were eventually
+overwritten. It ensures that at any given time exactly 0 or 1 document is active (R14).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._authors_group_identifier">
+<span class="sig-name descname"><span class="pre">_authors_group_identifier</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._authors_group_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._check_document_compatibility">
+<span class="sig-name descname"><span class="pre">_check_document_compatibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence._check_document_compatibility"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._check_document_compatibility" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._clock_mode">
+<span class="sig-name descname"><span class="pre">_clock_mode</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._clock_mode" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._documents">
+<span class="sig-name descname"><span class="pre">_documents</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._documents" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._find_resolved_begin_event">
+<span class="sig-name descname"><span class="pre">_find_resolved_begin_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence._find_resolved_begin_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._find_resolved_begin_event" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._find_resolved_end_event">
+<span class="sig-name descname"><span class="pre">_find_resolved_end_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence._find_resolved_end_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._find_resolved_end_event" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._insert_document">
+<span class="sig-name descname"><span class="pre">_insert_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ends</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence._insert_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._insert_document" title="Permalink to this definition"></a></dt>
+<dd><p>In the end this function adds the document to the sequence registers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>document</strong> – </p></li>
+<li><p><strong>ends</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._insert_or_discard">
+<span class="sig-name descname"><span class="pre">_insert_or_discard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence._insert_or_discard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._insert_or_discard" title="Permalink to this definition"></a></dt>
+<dd><p>This function does the heavy lifting of timing resolution. It inspects the close vicinity in which the
+new document is coming by looking at the timeline in both directions.</p>
+<dl class="simple">
+<dt>Based on that information it can detect 3 different cases:</dt><dd><ul class="simple">
+<li><p>out of order delivery of documents in which case it inserts and trims the document,</p></li>
+<li><p>sequence override scenario in which case an exception is raised.</p></li>
+<li><p>Document discard scenario in which case the document is already overwritten in the sequence so
+it will not get inserted.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ValueError, SequenceOverridden, DocumentDiscardedError</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._lang">
+<span class="sig-name descname"><span class="pre">_lang</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._lang" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._last_sequence_number">
+<span class="sig-name descname"><span class="pre">_last_sequence_number</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._last_sequence_number" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._override_sequence">
+<span class="sig-name descname"><span class="pre">_override_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence._override_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._override_sequence" title="Permalink to this definition"></a></dt>
+<dd><p>This function clears the timeline and the associated documents after the document in the parameter.
+This happens when a document with a higher sequence number is added preceding some other documents with lower
+sequence numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._reference_clock">
+<span class="sig-name descname"><span class="pre">_reference_clock</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._reference_clock" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._sequence_identifier">
+<span class="sig-name descname"><span class="pre">_sequence_identifier</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._sequence_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._time_base">
+<span class="sig-name descname"><span class="pre">_time_base</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._time_base" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._verbose">
+<span class="sig-name descname"><span class="pre">_verbose</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence._verbose" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.add_document">
+<span class="sig-name descname"><span class="pre">add_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.add_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.add_document" title="Permalink to this definition"></a></dt>
+<dd><p>Add the document to the sequence on the consumer side of things. This will put the document on the timeline
+and validate the sequence in terms of timing resolution.
+:param document:
+:raises IncompatibleSequenceError meaning that the document cannot be part of this sequence for
+it does not match the semantics of the sequence.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.authors_group_identifier">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authors_group_identifier</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.authors_group_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.cleanup">
+<span class="sig-name descname"><span class="pre">cleanup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.cleanup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.cleanup" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.create_compatible_document">
+<span class="sig-name descname"><span class="pre">create_compatible_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.create_compatible_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.create_compatible_document" title="Permalink to this definition"></a></dt>
+<dd><p>This utility function is used by the converter to extract segments and by the new_document function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – </p></li>
+<li><p><strong>kwargs</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.create_from_document">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.create_from_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.create_from_document" title="Permalink to this definition"></a></dt>
+<dd><p>Extract data from document
+:param document:
+:param args:
+:param kwargs: parameter override to constructor
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.discard_before">
+<span class="sig-name descname"><span class="pre">discard_before</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.discard_before"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.discard_before" title="Permalink to this definition"></a></dt>
+<dd><p>This function gets rid of old documents we do not wish to keep any longer.
+:param document: The document up to which we would like to discard things
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.extract_segment">
+<span class="sig-name descname"><span class="pre">extract_segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">begin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discard</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.extract_segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.extract_segment" title="Permalink to this definition"></a></dt>
+<dd><p>Extract the subtitles from the sequence in the given timeframe. The return value is one
+merged EBUTT3Document</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>begin</strong> – </p></li>
+<li><p><strong>end</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>EBUTT3Document</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.fork">
+<span class="sig-name descname"><span class="pre">fork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.fork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.fork" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new stream with modified arguments.
+:param args:
+:param kwargs: parameter override to constructor
+:return: a new documentstream instance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.get_document">
+<span class="sig-name descname"><span class="pre">get_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.get_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.get_document" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve document by sequence number
+:param seq_id:
+:return: a document
+:raises: KeyError meaning the document is not in the sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.is_compatible">
+<span class="sig-name descname"><span class="pre">is_compatible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.is_compatible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.is_compatible" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.last_sequence_number">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_sequence_number</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.last_sequence_number" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.new_document">
+<span class="sig-name descname"><span class="pre">new_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.new_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.new_document" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new document with the stream defaults
+:param args:
+:param kwargs: parameter override to constructor
+:return: a new document</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.reference_clock">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reference_clock</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.reference_clock" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.resolved_begin_time">
+<span class="sig-name descname"><span class="pre">resolved_begin_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.resolved_begin_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.resolved_begin_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.resolved_end_time">
+<span class="sig-name descname"><span class="pre">resolved_end_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTT3DocumentSequence.resolved_end_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.resolved_end_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.sequence_identifier">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sequence_identifier</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.sequence_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.ebutt3.</span></span><span class="sig-name descname"><span class="pre">EBUTTAuthorsGroupControlRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence_identifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">availability_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sender</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTTAuthorsGroupControlRequest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage" title="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">EBUTTLiveMessage</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest._create_binding">
+<span class="sig-name descname"><span class="pre">_create_binding</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTTAuthorsGroupControlRequest._create_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest._create_binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.create_from_raw_binding">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_raw_binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binding</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">availability_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTTAuthorsGroupControlRequest.create_from_raw_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.create_from_raw_binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.get_dom">
+<span class="sig-name descname"><span class="pre">get_dom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTTAuthorsGroupControlRequest.get_dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.get_dom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.get_xml">
+<span class="sig-name descname"><span class="pre">get_xml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTTAuthorsGroupControlRequest.get_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.get_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.message_type_id">
+<span class="sig-name descname"><span class="pre">message_type_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'authorsGroupControlRequest'</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.message_type_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.ebutt3.</span></span><span class="sig-name descname"><span class="pre">EBUTTLiveMessage</span></span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3.html#EBUTTLiveMessage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebu_tt_live.documents.base.EBUTTDocumentBase" title="ebu_tt_live.documents.base.EBUTTDocumentBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EBUTTDocumentBase</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._availability_time">
+<span class="sig-name descname"><span class="pre">_availability_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._availability_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._payload">
+<span class="sig-name descname"><span class="pre">_payload</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._payload" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._recipient">
+<span class="sig-name descname"><span class="pre">_recipient</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._recipient" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._sender">
+<span class="sig-name descname"><span class="pre">_sender</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._sender" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._sequence_identifier">
+<span class="sig-name descname"><span class="pre">_sequence_identifier</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage._sequence_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.availability_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">availability_time</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.availability_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.payload">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">payload</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.payload" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.recipient">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recipient</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.recipient" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.sender">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sender</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.sender" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.sequence_identifier">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sequence_identifier</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.sequence_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.documents.ebutt3_segmentation">
+<span id="ebutt3-segmentation-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_segmentation</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.documents.ebutt3_segmentation" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.ebutt3_segmentation.</span></span><span class="sig-name descname"><span class="pre">EBUTT3Segmenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">begin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deconflict_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.pyxb_utils.RecursiveOperation" title="ebu_tt_live.bindings.pyxb_utils.RecursiveOperation"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecursiveOperation</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._after_element">
+<span class="sig-name descname"><span class="pre">_after_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_binding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter._after_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._after_element" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._before_element">
+<span class="sig-name descname"><span class="pre">_before_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_binding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter._before_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._before_element" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._begin">
+<span class="sig-name descname"><span class="pre">_begin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._begin" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._convert_time">
+<span class="sig-name descname"><span class="pre">_convert_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timedelta_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter._convert_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._convert_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._deconflict_ids">
+<span class="sig-name descname"><span class="pre">_deconflict_ids</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._deconflict_ids" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._do_copy">
+<span class="sig-name descname"><span class="pre">_do_copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter._do_copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._do_copy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._do_deconflict_id">
+<span class="sig-name descname"><span class="pre">_do_deconflict_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter._do_deconflict_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._do_deconflict_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._document">
+<span class="sig-name descname"><span class="pre">_document</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._document" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._end">
+<span class="sig-name descname"><span class="pre">_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._end" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._instance_mapping">
+<span class="sig-name descname"><span class="pre">_instance_mapping</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._instance_mapping" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._process_element">
+<span class="sig-name descname"><span class="pre">_process_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_binding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter._process_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._process_element" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._process_non_element">
+<span class="sig-name descname"><span class="pre">_process_non_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_binding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter._process_non_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._process_non_element" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._prune_orphan_elements">
+<span class="sig-name descname"><span class="pre">_prune_orphan_elements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter._prune_orphan_elements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._prune_orphan_elements" title="Permalink to this definition"></a></dt>
+<dd><p>Unused elements need to go from the head section.
+:return:</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._segment">
+<span class="sig-name descname"><span class="pre">_segment</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._segment" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._semantic_dataset">
+<span class="sig-name descname"><span class="pre">_semantic_dataset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter._semantic_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.begin">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">begin</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.begin" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.compute_document_segment">
+<span class="sig-name descname"><span class="pre">compute_document_segment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter.compute_document_segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.compute_document_segment" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.deconflict_ids">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deconflict_ids</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.deconflict_ids" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.document">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">document</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.document" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.end">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">end</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.end" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.proceed">
+<span class="sig-name descname"><span class="pre">proceed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_segmentation.html#EBUTT3Segmenter.proceed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.proceed" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.segment">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">segment</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_segmentation.EBUTT3Segmenter.segment" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.documents.ebutt3_splicer">
+<span id="ebutt3-splicer-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_splicer</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.documents.ebutt3_splicer" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.ebutt3_splicer.</span></span><span class="sig-name descname"><span class="pre">EBUTT3Splicer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document_segments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_identifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_splicer.html#EBUTT3Splicer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._dataset">
+<span class="sig-name descname"><span class="pre">_dataset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._do_splice">
+<span class="sig-name descname"><span class="pre">_do_splice</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt3_splicer.html#EBUTT3Splicer._do_splice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._do_splice" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._document_segments">
+<span class="sig-name descname"><span class="pre">_document_segments</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._document_segments" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._sequence_identifier">
+<span class="sig-name descname"><span class="pre">_sequence_identifier</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._sequence_identifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._sequence_number">
+<span class="sig-name descname"><span class="pre">_sequence_number</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._sequence_number" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._spliced_document">
+<span class="sig-name descname"><span class="pre">_spliced_document</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer._spliced_document" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer.spliced_document">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spliced_document</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt3_splicer.EBUTT3Splicer.spliced_document" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.documents.converters">
+<span id="document-converters-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">document_converters</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.documents.converters" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.converters.ebutt1_to_ebutt3">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.converters.</span></span><span class="sig-name descname"><span class="pre">ebutt1_to_ebutt3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ebutt1_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_doc_id_as_seq_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smpte_start_of_programme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/converters.html#ebutt1_to_ebutt3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.converters.ebutt1_to_ebutt3" title="Permalink to this definition"></a></dt>
+<dd><p>Convert an EBUTT1Document instance to an EBUTT3Document instance.</p>
+<p>This code is (currently!) the same as the code in
+<a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode" title="ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode</span></code></a>
+so it probably makes sense to use one of those rather than this utility
+function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ebutt1_in</strong> (<a class="reference internal" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document" title="ebu_tt_live.documents.ebutt1.EBUTT1Document"><em>EBUTT1Document</em></a>) – The EBU-TT Part 1 document to convert</p></li>
+<li><p><strong>sequence_id</strong> (<em>string</em>) – The default sequence identifier to use for the output</p></li>
+<li><p><strong>use_doc_id_as_seq_id</strong> (<em>Boolean</em>) – Whether to use the ebuttm:documentIdentifier element value as the output sequence identifier, if it exists</p></li>
+<li><p><strong>smpte_start_of_programme</strong> (<em>string</em>) – SMPTE timecode for the start of programme, if known - if present, will override the ebuttm:documentStartOfProgramme metadata.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return EBUTT3Document<span class="colon">:</span></dt>
+<dd class="field-even"><p>The converted EBU-TT Part 3 document</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.converters.ebutt3_to_ebuttd">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.converters.</span></span><span class="sig-name descname"><span class="pre">ebutt3_to_ebuttd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ebutt3_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">media_clock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/converters.html#ebutt3_to_ebuttd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.converters.ebutt3_to_ebuttd" title="Permalink to this definition"></a></dt>
+<dd><p>This function takes an EBUTT3Document instance and returns the same
+document as an EBUTTDDocument instance.
+:param ebutt3_in:
+:return:</p>
+</dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.documents.ebutt1">
+<span id="ebutt1-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt1</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.documents.ebutt1" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.ebutt1.</span></span><span class="sig-name descname"><span class="pre">EBUTT1Document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clock_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_rate_multiplier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TimelineUtilMixin</span></code>, <a class="reference internal" href="#ebu_tt_live.documents.base.SubtitleDocument" title="ebu_tt_live.documents.base.SubtitleDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubtitleDocument</span></code></a>, <a class="reference internal" href="#ebu_tt_live.documents.base.EBUTTDocumentBase" title="ebu_tt_live.documents.base.EBUTTDocumentBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EBUTTDocumentBase</span></code></a></p>
+<p>This class wraps the binding object representation of the XML and provides the features the applications in the
+specification require.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document._cmp_key">
+<span class="sig-name descname"><span class="pre">_cmp_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document._cmp_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document._cmp_key" title="Permalink to this definition"></a></dt>
+<dd><p>Implement the delegation method.
+:return: comparable member</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document._ebutt1_content">
+<span class="sig-name descname"><span class="pre">_ebutt1_content</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document._ebutt1_content" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.add_div">
+<span class="sig-name descname"><span class="pre">add_div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">div</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.add_div"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.add_div" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.binding">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">binding</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.clock_mode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clock_mode</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.clock_mode" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.create_from_raw_binding">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_raw_binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binding</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.create_from_raw_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.create_from_raw_binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.create_from_xml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.create_from_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.create_from_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.get_dom">
+<span class="sig-name descname"><span class="pre">get_dom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.get_dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.get_dom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.get_element_by_id">
+<span class="sig-name descname"><span class="pre">get_element_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.get_element_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.get_element_by_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.get_xml">
+<span class="sig-name descname"><span class="pre">get_xml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.get_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.get_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.lang">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lang</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.lang" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.load_types_for_document">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_types_for_document</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.load_types_for_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.load_types_for_document" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.set_begin">
+<span class="sig-name descname"><span class="pre">set_begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">begin</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.set_begin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.set_begin" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.set_end">
+<span class="sig-name descname"><span class="pre">set_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.set_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.set_end" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebutt1.EBUTT1Document.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebutt1.html#EBUTT1Document.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebutt1.EBUTT1Document.validate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.documents.ebuttd">
+<span id="ebuttd-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebuttd</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.documents.ebuttd" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.documents.ebuttd.</span></span><span class="sig-name descname"><span class="pre">EBUTTDDocument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lang</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebuttd.html#EBUTTDDocument"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebu_tt_live.documents.base.SubtitleDocument" title="ebu_tt_live.documents.base.SubtitleDocument"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubtitleDocument</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TimelineUtilMixin</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument._ebuttd_content">
+<span class="sig-name descname"><span class="pre">_ebuttd_content</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument._ebuttd_content" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument._encoding">
+<span class="sig-name descname"><span class="pre">_encoding</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UTF-8'</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument._encoding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument._get_bds">
+<span class="sig-name descname"><span class="pre">_get_bds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebuttd.html#EBUTTDDocument._get_bds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument._get_bds" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument._implicit_ns">
+<span class="sig-name descname"><span class="pre">_implicit_ns</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument._implicit_ns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument.binding">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">binding</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument.binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument.create_from_raw_binding">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_raw_binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binding</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebuttd.html#EBUTTDDocument.create_from_raw_binding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument.create_from_raw_binding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument.create_from_xml">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebuttd.html#EBUTTDDocument.create_from_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument.create_from_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_dom">
+<span class="sig-name descname"><span class="pre">get_dom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebuttd.html#EBUTTDDocument.get_dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_dom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_element_by_id">
+<span class="sig-name descname"><span class="pre">get_element_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebuttd.html#EBUTTDDocument.get_element_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_element_by_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_xml">
+<span class="sig-name descname"><span class="pre">get_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebuttd.html#EBUTTDDocument.get_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_xml" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument.implicit_ns">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">implicit_ns</span></span><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument.implicit_ns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.documents.ebuttd.EBUTTDDocument.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/documents/ebuttd.html#EBUTTDDocument.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.documents.ebuttd.EBUTTDDocument.validate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ebu_tt_live.config.html" class="btn btn-neutral float-left" title="config Package - Component configurators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ebu_tt_live.examples.html" class="btn btn-neutral float-right" title="examples Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

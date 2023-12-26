@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>converters package &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="validation package" href="ebu_tt_live.bindings.validation.html" />
+    <link rel="prev" title="raw Package" href="ebu_tt_live.bindings.raw.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#layout-of-the-source-files">Layout of the source files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ebu_tt_live.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="ebu_tt_live.bindings.html">bindings Package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bindings</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ebuttdt"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ebuttdt</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ebuttm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ebuttm</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ebuttp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ebuttp</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ebutts"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ebutts</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ttm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ttm</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ttp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ttp</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._tts"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_tts</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ittp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ittp</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._itts"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_itts</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings.pyxb_utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyxb_utils</span></code> Module</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="ebu_tt_live.bindings.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.carriage.html">carriage Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.clocks.html">clocks Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.config.html">config Package - Component configurators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.documents.html">documents Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.examples.html">examples Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.node.html">node Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.scripts.html">scripts Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.twisted.html">twisted Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.errors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errors</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.strings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">strings</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code> Module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ebu_tt_live.html">Source code reference</a></li>
+          <li class="breadcrumb-item"><a href="ebu_tt_live.bindings.html">bindings Package</a></li>
+      <li class="breadcrumb-item active">converters package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ebu_tt_live.bindings.converters.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="converters-package">
+<h1>converters package<a class="headerlink" href="#converters-package" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">converters</span></code> Package<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-ebu_tt_live.bindings.converters.ebutt3_ebuttd">
+<span id="ebutt3-ebuttd-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_ebuttd</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.bindings.converters.ebutt3_ebuttd" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.bindings.converters.ebutt3_ebuttd.</span></span><span class="sig-name descname"><span class="pre">EBUTT3EBUTTDConverter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">media_clock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculate_active_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._activeArea_max_dp">
+<span class="sig-name descname"><span class="pre">_activeArea_max_dp</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._activeArea_max_dp" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._adjusted_font_style_map">
+<span class="sig-name descname"><span class="pre">_adjusted_font_style_map</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._adjusted_font_style_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._adjusted_font_style_map" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._calculate_active_area">
+<span class="sig-name descname"><span class="pre">_calculate_active_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._calculate_active_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._calculate_active_area" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._child_spans_specify_times">
+<span class="sig-name descname"><span class="pre">_child_spans_specify_times</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._child_spans_specify_times"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._child_spans_specify_times" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._children_contain">
+<span class="sig-name descname"><span class="pre">_children_contain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_elem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binding_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._children_contain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._children_contain" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._dataset_key_for_font_styles">
+<span class="sig-name descname"><span class="pre">_dataset_key_for_font_styles</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'adjusted_sizing_styles'</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._dataset_key_for_font_styles" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._decode_origin_and_extent">
+<span class="sig-name descname"><span class="pre">_decode_origin_and_extent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._decode_origin_and_extent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._decode_origin_and_extent" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._fix_fontsize">
+<span class="sig-name descname"><span class="pre">_fix_fontsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">celem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._fix_fontsize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._fix_fontsize" title="Permalink to this definition"></a></dt>
+<dd><p>Generate styles with percent unit font size values.</p>
+<p>This function generates styles for the purpose of conversion from c,px
+values to percentage values.
+The fontSize attributes were removed in the initial styling copy
+function so here we generate new ones to serve
+our purpose best and easiest
+:param elem: the original instance
+:param celem: the converted instance
+:param parent: the parent of the original
+:param dataset: semantic dataset
+:return:</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._fontSize_max_dp">
+<span class="sig-name descname"><span class="pre">_fontSize_max_dp</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._fontSize_max_dp" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._font_size_style_template">
+<span class="sig-name descname"><span class="pre">_font_size_style_template</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'autogenFontStyle_{}_{}_{}'</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._font_size_style_template" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._get_font_size_style">
+<span class="sig-name descname"><span class="pre">_get_font_size_style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">horizontal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._get_font_size_style"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._get_font_size_style" title="Permalink to this definition"></a></dt>
+<dd><p>Get a style with a font size, even if one doesn’t already exist.</p>
+<p>This function either points us to an already generated version of this
+style or creates it on demand.
+:param vertical:
+:param horizontal:
+:param line_height:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._link_adjusted_fonts_styling">
+<span class="sig-name descname"><span class="pre">_link_adjusted_fonts_styling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjusted_fonts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._link_adjusted_fonts_styling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._link_adjusted_fonts_styling" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._media_clock">
+<span class="sig-name descname"><span class="pre">_media_clock</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._media_clock" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._process_timing_from_timedelta">
+<span class="sig-name descname"><span class="pre">_process_timing_from_timedelta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timing_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._process_timing_from_timedelta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._process_timing_from_timedelta" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._process_timing_type">
+<span class="sig-name descname"><span class="pre">_process_timing_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timing_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter._process_timing_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._process_timing_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._semantic_dataset">
+<span class="sig-name descname"><span class="pre">_semantic_dataset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._semantic_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_body">
+<span class="sig-name descname"><span class="pre">convert_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_body" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_br">
+<span class="sig-name descname"><span class="pre">convert_br</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">br_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_br"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_br" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_children">
+<span class="sig-name descname"><span class="pre">convert_children</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_children"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_children" title="Permalink to this definition"></a></dt>
+<dd><p>Recursive step
+:param element:
+:param dataset:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_div">
+<span class="sig-name descname"><span class="pre">convert_div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">div_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_div"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_div" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_document">
+<span class="sig-name descname"><span class="pre">convert_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_document" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_element">
+<span class="sig-name descname"><span class="pre">convert_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_element" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_head">
+<span class="sig-name descname"><span class="pre">convert_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">head_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_head" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_layout">
+<span class="sig-name descname"><span class="pre">convert_layout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_layout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_layout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_p">
+<span class="sig-name descname"><span class="pre">convert_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_p" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_region">
+<span class="sig-name descname"><span class="pre">convert_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_region" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_span">
+<span class="sig-name descname"><span class="pre">convert_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">span_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_span" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_style">
+<span class="sig-name descname"><span class="pre">convert_style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_style"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_style" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_styling">
+<span class="sig-name descname"><span class="pre">convert_styling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">styling_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_styling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_styling" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_tt">
+<span class="sig-name descname"><span class="pre">convert_tt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tt_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_tt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_tt" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_unknown">
+<span class="sig-name descname"><span class="pre">convert_unknown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.convert_unknown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_unknown" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.map_type">
+<span class="sig-name descname"><span class="pre">map_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#EBUTT3EBUTTDConverter.map_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.map_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt3_ebuttd.roundAndStrip">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.bindings.converters.ebutt3_ebuttd.</span></span><span class="sig-name descname"><span class="pre">roundAndStrip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt3_ebuttd.html#roundAndStrip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt3_ebuttd.roundAndStrip" title="Permalink to this definition"></a></dt>
+<dd><p>Round the supplied value to dp decimal places and tidy the end.</p>
+<p>After rounding, strips any trailing zeros after the decimal point,
+and the decimal point itself if that’s the last thing we’re left with.</p>
+</dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.bindings.converters.ebutt1_ebutt3">
+<span id="ebutt1-ebutt3-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt1_ebutt3</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.bindings.converters.ebutt1_ebutt3" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.bindings.converters.ebutt1_ebutt3.</span></span><span class="sig-name descname"><span class="pre">EBUTT1EBUTT3Converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_doc_id_as_seq_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to convert EBU-TT-1 documents into EBU-TT-3 documents.</p>
+<p>Includes a setting to extract the document identifier from metadata
+and use it as the output sequence identifier, or can just use a
+provided sequence identifier. The sequence number is always 1.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._rememberDocumentIdentifier">
+<span class="sig-name descname"><span class="pre">_rememberDocumentIdentifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">documentIdentifier_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter._rememberDocumentIdentifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._rememberDocumentIdentifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._semantic_dataset">
+<span class="sig-name descname"><span class="pre">_semantic_dataset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._semantic_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._sequenceIdentifier">
+<span class="sig-name descname"><span class="pre">_sequenceIdentifier</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._sequenceIdentifier" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._use_doc_id_as_seq_id">
+<span class="sig-name descname"><span class="pre">_use_doc_id_as_seq_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._use_doc_id_as_seq_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.calculate_times">
+<span class="sig-name descname"><span class="pre">calculate_times</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.calculate_times"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.calculate_times" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_body">
+<span class="sig-name descname"><span class="pre">convert_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_body" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_bodyMetadata">
+<span class="sig-name descname"><span class="pre">convert_bodyMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bodymetadata_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_bodyMetadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_bodyMetadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_br">
+<span class="sig-name descname"><span class="pre">convert_br</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">br_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_br"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_br" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_children">
+<span class="sig-name descname"><span class="pre">convert_children</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_children"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_children" title="Permalink to this definition"></a></dt>
+<dd><p>Recursive step to convert child elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>element</strong> – </p></li>
+<li><p><strong>dataset</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_div">
+<span class="sig-name descname"><span class="pre">convert_div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">div_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_div"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_div" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_divMetadata">
+<span class="sig-name descname"><span class="pre">convert_divMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divmetadata_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_divMetadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_divMetadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_document">
+<span class="sig-name descname"><span class="pre">convert_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smpte_to_timedelta_converter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_document" title="Permalink to this definition"></a></dt>
+<dd><p>Convert the EBU-TT-1 Document to an EBU-TT-3 document.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root_element</strong> – The binding class for the EBU-TT-1 document’s root element.</p></li>
+<li><p><strong>dataset</strong> – An optional dataset for passing information into the conversion.</p></li>
+<li><p><strong>ISMPTEtoTimedeltaConverter</strong> (<em>smpte_to_timedelta_converter</em>) – for mapping SMPTE to media timebase. Required if SMPTE timecodes are present.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return an EBU-TT-3 document’s root tt element<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_element">
+<span class="sig-name descname"><span class="pre">convert_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_element" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_head">
+<span class="sig-name descname"><span class="pre">convert_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">head_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_head" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_headMetadata">
+<span class="sig-name descname"><span class="pre">convert_headMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headMetadata_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_headMetadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_headMetadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_layout">
+<span class="sig-name descname"><span class="pre">convert_layout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layout_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_layout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_layout" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_metadata">
+<span class="sig-name descname"><span class="pre">convert_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_metadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_p">
+<span class="sig-name descname"><span class="pre">convert_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_p" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_pMetadata">
+<span class="sig-name descname"><span class="pre">convert_pMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pmetadata_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_pMetadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_pMetadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_region">
+<span class="sig-name descname"><span class="pre">convert_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_region" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_span">
+<span class="sig-name descname"><span class="pre">convert_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">span_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_span" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_spanMetadata">
+<span class="sig-name descname"><span class="pre">convert_spanMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spanmetadata_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_spanMetadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_spanMetadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_style">
+<span class="sig-name descname"><span class="pre">convert_style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_style"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_style" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_styling">
+<span class="sig-name descname"><span class="pre">convert_styling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">styling_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_styling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_styling" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_tt">
+<span class="sig-name descname"><span class="pre">convert_tt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tt_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_tt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_tt" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_unknown">
+<span class="sig-name descname"><span class="pre">convert_unknown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.convert_unknown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_unknown" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.map_type">
+<span class="sig-name descname"><span class="pre">map_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.map_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.map_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.pop_syncbase">
+<span class="sig-name descname"><span class="pre">pop_syncbase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.pop_syncbase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.pop_syncbase" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.push_syncbase">
+<span class="sig-name descname"><span class="pre">push_syncbase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync_delta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/ebutt1_ebutt3.html#EBUTT1EBUTT3Converter.push_syncbase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.push_syncbase" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.bindings.converters.timedelta_converter">
+<span id="timedelta-converter-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">timedelta_converter</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.bindings.converters.timedelta_converter" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.bindings.converters.timedelta_converter.</span></span><span class="sig-name descname"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smpteReference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frameRate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frameRateMultiplier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropMode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#FixedOffsetSMPTEtoTimedeltaConverter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter" title="ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ISMPTEtoTimedeltaConverter</span></code></a></p>
+<p>Converts SMPTE timecodes to timedeltas with a fixed offset.</p>
+<p>This converter utility class uses a strategy that assumes a fixed offset,
+a reference SMPTE timecode value that is considered the zero point, and
+a continuous set of SMPTE timecodes monotonically increasing (aside
+from drop frames). It should not be used in cases where there may be
+discontinuities in the timecode, since it will give incorrect results.</p>
+<p>The object
+uses the <code class="docutils literal notranslate"><span class="pre">frameRate</span></code>, <code class="docutils literal notranslate"><span class="pre">frameRateMultiplier</span></code> and <code class="docutils literal notranslate"><span class="pre">dropMode</span></code> to
+calculate the equivalent timedelta output value for any
+given input SMPTE timecode, and raises an exception if an attempt
+is made to convert a timecode that is earlier than the zero point.
+This can be avoided by calling <a class="reference internal" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.can_convert" title="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.can_convert"><code class="xref py py-func docutils literal notranslate"><span class="pre">can_convert()</span></code></a> to check first.</p>
+<p>Alternatively call <a class="reference internal" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.timedelta" title="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.timedelta"><code class="xref py py-func docutils literal notranslate"><span class="pre">timedelta()</span></code></a> directly in a <code class="docutils literal notranslate"><span class="pre">try</span></code> block
+and catch the <a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeNegativeError" title="ebu_tt_live.errors.TimeNegativeError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.errors.TimeNegativeError</span></code></a> instead,
+which avoids essentially running the same code twice.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._calc_effective_frame_rate">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_calc_effective_frame_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frameRate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frameRateMultiplier</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#FixedOffsetSMPTEtoTimedeltaConverter._calc_effective_frame_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._calc_effective_frame_rate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._calculate_s">
+<span class="sig-name descname"><span class="pre">_calculate_s</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smpte_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#FixedOffsetSMPTEtoTimedeltaConverter._calculate_s"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._calculate_s" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._counted_frames">
+<span class="sig-name descname"><span class="pre">_counted_frames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hours</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minutes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#FixedOffsetSMPTEtoTimedeltaConverter._counted_frames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._counted_frames" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._dropMode">
+<span class="sig-name descname"><span class="pre">_dropMode</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._dropMode" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._dropped_frames">
+<span class="sig-name descname"><span class="pre">_dropped_frames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hours</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minutes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#FixedOffsetSMPTEtoTimedeltaConverter._dropped_frames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._dropped_frames" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._effectiveFrameRate">
+<span class="sig-name descname"><span class="pre">_effectiveFrameRate</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._effectiveFrameRate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._frameRate">
+<span class="sig-name descname"><span class="pre">_frameRate</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._frameRate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._frm_regex">
+<span class="sig-name descname"><span class="pre">_frm_regex</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('(?P&lt;numerator&gt;\\d+)\\s(?P&lt;denominator&gt;\\d+)')</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._frm_regex" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._is_dropped_frame">
+<span class="sig-name descname"><span class="pre">_is_dropped_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minutes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#FixedOffsetSMPTEtoTimedeltaConverter._is_dropped_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._is_dropped_frame" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._smpteReferenceS">
+<span class="sig-name descname"><span class="pre">_smpteReferenceS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._smpteReferenceS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._tc_regex">
+<span class="sig-name descname"><span class="pre">_tc_regex</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('([0-9][0-9]):([0-5][0-9]):([0-5][0-9]):([0-9][0-9])')</span></em><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._tc_regex" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.can_convert">
+<span class="sig-name descname"><span class="pre">can_convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smpte_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#FixedOffsetSMPTEtoTimedeltaConverter.can_convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.can_convert" title="Permalink to this definition"></a></dt>
+<dd><p>Check if a given timecode can successfully be converted to a timedelta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>smpte_time</strong> – The test value</p>
+</dd>
+<dt class="field-even">Return Boolean<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the timecode can successfully be converted</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeFormatError" title="ebu_tt_live.errors.TimeFormatError"><strong>TimeFormatError</strong></a> – if the frames value is illegal</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.timedelta">
+<span class="sig-name descname"><span class="pre">timedelta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smpte_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#FixedOffsetSMPTEtoTimedeltaConverter.timedelta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.timedelta" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a timecode to a timedelta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>smpte_time</strong> – The timecode value to convert</p>
+</dd>
+<dt class="field-even">Return timedelta<span class="colon">:</span></dt>
+<dd class="field-even"><p>The equivalent timedelta</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeNegativeError" title="ebu_tt_live.errors.TimeNegativeError"><strong>TimeNegativeError</strong></a> – if the timecode occurs before the reference zero point</p></li>
+<li><p><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeFormatError" title="ebu_tt_live.errors.TimeFormatError"><strong>TimeFormatError</strong></a> – if the frames value is illegal</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.bindings.converters.timedelta_converter.</span></span><span class="sig-name descname"><span class="pre">ISMPTEtoTimedeltaConverter</span></span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#ISMPTEtoTimedeltaConverter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter.can_convert">
+<span class="sig-name descname"><span class="pre">can_convert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#ISMPTEtoTimedeltaConverter.can_convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter.can_convert" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter.timedelta">
+<span class="sig-name descname"><span class="pre">timedelta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/bindings/converters/timedelta_converter.html#ISMPTEtoTimedeltaConverter.timedelta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter.timedelta" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ebu_tt_live.bindings.raw.html" class="btn btn-neutral float-left" title="raw Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ebu_tt_live.bindings.validation.html" class="btn btn-neutral float-right" title="validation package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

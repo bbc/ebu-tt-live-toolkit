@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Denesting of EBU-TT-Live documents &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Conversion of EBU-TT Part 1 documents to EBU-TT Live documents" href="conversion_from_ebutt.html" />
+    <link rel="prev" title="DeDuplication of EBU-TT-Live documents" href="deduplication.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nodes_and_carriage_mechanisms.html">Nodes and Carriage Mechanisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts_and_their_functions.html">Scripts and their functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configurator.html">Configuration files and <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation.html">Document and sequence validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_input_producer.html">User input producer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing_resolution.html">Timing resolution and consumer logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentation.html">Segmentation of EBU-TT-Live document sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deduplication.html">DeDuplication of EBU-TT-Live documents</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Denesting of EBU-TT-Live documents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#merging-metadata">Merging metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-details">Implementation details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#removing-elements-from-their-parent-in-pyxb">Removing elements from their parent in pyxb</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_from_ebutt.html">Conversion of EBU-TT Part 1 documents to EBU-TT Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_to_ebuttd.html">Conversion of EBU-TT-Live documents to EBU-TT-D documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
+      <li class="breadcrumb-item active">Denesting of EBU-TT-Live documents</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/denesting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="denesting-of-ebu-tt-live-documents">
+<h1>Denesting of EBU-TT-Live documents<a class="headerlink" href="#denesting-of-ebu-tt-live-documents" title="Permalink to this heading"></a></h1>
+<p>DenesterNode should be used when a EBU-TT-3 document has a div that contains
+other divs, or a span contains another span, and those nested elements need
+to be flattened, for example before conversion to EBU-TT-D. These elements
+are not permitted to be nested inside each other in EBU-TT-D documents.</p>
+<p>When documents are Denested, any nested elements must be removed from
+their parent elements, while retaining attributes they would have inherited.
+To address this, the DenesterNode node processes the
+document(s) with the
+<a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.recurse" title="ebu_tt_live.node.denester.DenesterNode.recurse"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.node.denester.DenesterNode.recurse()</span></code></a> and
+<a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.recurse_span" title="ebu_tt_live.node.denester.DenesterNode.recurse_span"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.node.denester.DenesterNode.recurse_span()</span></code></a>
+functions. These iterate through the file to locate the deepest
+nested <code class="docutils literal notranslate"><span class="pre">div</span></code> and <code class="docutils literal notranslate"><span class="pre">span</span></code> elements,
+and create a new copy of it with its content and
+expected inherited attributes.
+Where necessary new <code class="docutils literal notranslate"><span class="pre">div</span></code> or <code class="docutils literal notranslate"><span class="pre">span</span></code> elements are synthesised to wrap
+content that is <cite>not</cite> wrapped as deeply as its adjacent content. The end result is a file containing
+these newly created <code class="docutils literal notranslate"><span class="pre">div</span></code> s and <code class="docutils literal notranslate"><span class="pre">span</span></code> s in place of the nested ones,
+ensuring all content is in the correct order.</p>
+<p>Any content elements whose region differs from its inherited region are pruned
+by the Denester.</p>
+<section id="merging-metadata">
+<h2>Merging metadata<a class="headerlink" href="#merging-metadata" title="Permalink to this heading"></a></h2>
+<p>If a <code class="docutils literal notranslate"><span class="pre">div</span></code> element <em>d1</em> contains a <code class="docutils literal notranslate"><span class="pre">metadata</span></code> child with some metadata in it,
+<em>and</em> a <code class="docutils literal notranslate"><span class="pre">div</span></code> <em>d1_1</em> element which <em>also</em> contains a <code class="docutils literal notranslate"><span class="pre">metadata</span></code> child with
+some different metadata in it, how shall we merge them together?</p>
+<p>Unlike time, lang, style or region attributes where the computed effect is
+specified by the TTML specification, there is no such defined semantic for
+computing metadata; there are no inheritance rules for example, in general.
+Our choices were to discard some metadata or try to keep it all at the risk of
+it not making sense.</p>
+<p>The denester code currently merges metadata by concatenating the lists of
+child elements of the metadata elements in order of least nested to most nested
+parent element. In other words an input with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">metadata</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">foo</span><span class="p">:</span><span class="n">bar</span><span class="o">&gt;</span><span class="n">First</span><span class="o">&lt;/</span><span class="n">foo</span><span class="p">:</span><span class="n">bar</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">metadata</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">metadata</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">foo</span><span class="p">:</span><span class="n">bar</span><span class="o">&gt;</span><span class="n">Second</span><span class="o">&lt;/</span><span class="n">foo</span><span class="p">:</span><span class="n">bar</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">metadata</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span> <span class="n">xml</span><span class="p">:</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;p0&quot;</span><span class="o">&gt;</span><span class="n">Some</span> <span class="n">content</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>will generate an output like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">metadata</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">foo</span><span class="p">:</span><span class="n">bar</span><span class="o">&gt;</span><span class="n">First</span><span class="o">&lt;/</span><span class="n">foo</span><span class="p">:</span><span class="n">bar</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">foo</span><span class="p">:</span><span class="n">bar</span><span class="o">&gt;</span><span class="n">Second</span><span class="o">&lt;/</span><span class="n">foo</span><span class="p">:</span><span class="n">bar</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">metadata</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">p</span> <span class="n">xml</span><span class="p">:</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;p0&quot;</span><span class="o">&gt;</span><span class="n">Some</span> <span class="n">content</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="implementation-details">
+<h2>Implementation details<a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.recurse" title="ebu_tt_live.node.denester.DenesterNode.recurse"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.node.denester.DenesterNode.recurse()</span></code></a> generates a complete
+ordered list of <code class="docutils literal notranslate"><span class="pre">div</span></code> elements, but it does so in a brutish sort of way:
+<em>every</em> descendant <code class="docutils literal notranslate"><span class="pre">p</span></code> element gets a single parent <code class="docutils literal notranslate"><span class="pre">div</span></code> element.</p>
+<p>It is important that the computed values of time, lang, style and region are
+the same in the unnested divs as they would be in the input document, in other
+words, that the attributes that the <code class="docutils literal notranslate"><span class="pre">p</span></code> children inherit are identical.
+<a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.merge_attr" title="ebu_tt_live.node.denester.DenesterNode.merge_attr"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.node.denester.DenesterNode.merge_attr()</span></code></a> takes care of
+this processing.</p>
+<p>Having one <code class="docutils literal notranslate"><span class="pre">div</span></code> element per <code class="docutils literal notranslate"><span class="pre">p</span></code> child is not desirable in the output,
+so after doing this any adjacent <code class="docutils literal notranslate"><span class="pre">div</span></code> s
+that have the same set of “attributes” are combined. The test for whether
+two adjacent <code class="docutils literal notranslate"><span class="pre">div</span></code> s are combinable checks attributes for
+style, region, begin and end times and xml:lang and also the contents of the
+<code class="docutils literal notranslate"><span class="pre">metadata</span></code> element).
+<a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.combine_divs" title="ebu_tt_live.node.denester.DenesterNode.combine_divs"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.node.denester.DenesterNode.combine_divs()</span></code></a> takes care of
+this combination of <code class="docutils literal notranslate"><span class="pre">div</span></code> elements.</p>
+<p>The code for processing nested <code class="docutils literal notranslate"><span class="pre">span</span></code> s is a little
+different. This is handled in
+<a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.recurse_span" title="ebu_tt_live.node.denester.DenesterNode.recurse_span"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.node.denester.DenesterNode.recurse_span()</span></code></a>.
+Again, we could create a new <code class="docutils literal notranslate"><span class="pre">span</span></code> for every piece of character content
+and <code class="docutils literal notranslate"><span class="pre">br</span></code> element (and foreign namespace elements), and then combine
+adjacent ones, however instead we merge as we go along, appending new
+content to a “working” copy of a span as we iterate through, and then
+closing this off if we encounter a new child <code class="docutils literal notranslate"><span class="pre">span</span></code>.</p>
+<p>Sometimes new styles are needed to represent the computed value of the
+styles of a nested element. The Denester remembers any styles it needs to
+make and tries to reuse them.</p>
+<p>In the combined divs, every p element should have the same region
+as its parent div. Any p elements that specify a different region
+to their inherited region are removed here: as per TTML semantics,
+such p elements are never presented.
+The
+<a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.check_p_regions" title="ebu_tt_live.node.denester.DenesterNode.check_p_regions"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.node.denester.DenesterNode.check_p_regions()</span></code></a>
+function iterates through the divs that have an assigned region and
+removes any p where its region does not match.
+It then removes the region attribute from any remaining p, as it will
+inhert the region of its parent div and the attribute is unnecessary.
+It will also remove any now-empty divs that exist as a result of having
+their p elements removed.</p>
+</section>
+<section id="removing-elements-from-their-parent-in-pyxb">
+<h2>Removing elements from their parent in pyxb<a class="headerlink" href="#removing-elements-from-their-parent-in-pyxb" title="Permalink to this heading"></a></h2>
+<p>During implementation and testing we noticed that validating documents
+generated by the Denester sometimes generated a lot of info-level log
+messages similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">orphan</span> <span class="o">&lt;</span><span class="n">pyxb</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">basis</span><span class="o">.</span><span class="n">ElementContent</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f7fdc77ea90</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">content</span>
+</pre></div>
+</div>
+<p>The cause of this was that when the Denester code removed a <code class="docutils literal notranslate"><span class="pre">span</span></code>
+element from its parent <code class="docutils literal notranslate"><span class="pre">p</span></code> or <code class="docutils literal notranslate"><span class="pre">span</span></code> some memory of the removed
+element remained.</p>
+<p>pyxb maintains both an ordered list of all child elements, which can
+be obtained by calling <code class="docutils literal notranslate"><span class="pre">.orderedContent()</span></code> on the element, <em>and</em> a
+list of each type of child element where there can be more than one.</p>
+<p>We learned that calling <code class="docutils literal notranslate"><span class="pre">[span</span> <span class="pre">or</span> <span class="pre">p</span> <span class="pre">object].span.clear()</span></code> clears all
+the <code class="docutils literal notranslate"><span class="pre">span</span></code> children associated with the span binding location,
+but leaves them in the list of ordered content. The <code class="docutils literal notranslate"><span class="pre">validate()</span></code>
+function then discovers the discrepancy and tries to tidy up, giving
+these strange log messages.</p>
+<p>We resolved this by creating a complete new list of the elements that
+we want to be the children of the parent element, and then clearing
+<em>both</em> the binding points for plural elements <em>and</em> the existing
+ordered content list, and then appending all the desired child elements
+by calling <code class="docutils literal notranslate"><span class="pre">[object].extend(new_ordered_content)</span></code>.</p>
+<p>Removing elements from pyxb binding objects can be done, but it’s more
+complex than adding or changing them, and somewhat less intuitive!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="deduplication.html" class="btn btn-neutral float-left" title="DeDuplication of EBU-TT-Live documents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="conversion_from_ebutt.html" class="btn btn-neutral float-right" title="Conversion of EBU-TT Part 1 documents to EBU-TT Live documents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

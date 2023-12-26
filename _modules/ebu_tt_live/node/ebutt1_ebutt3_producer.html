@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ebu_tt_live.node.ebutt1_ebutt3_producer &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview of the EBU-TT live toolkit.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ebu_tt_live.node.ebutt1_ebutt3_producer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ebu_tt_live.node.ebutt1_ebutt3_producer</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ebu_tt_live.bindings.converters.ebutt1_ebutt3</span> <span class="kn">import</span> <span class="n">EBUTT1EBUTT3Converter</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.documents.ebutt1</span> <span class="kn">import</span> <span class="n">EBUTT1Document</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AbstractCombinedNode</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.documents.ebutt3</span> <span class="kn">import</span> <span class="n">EBUTT3Document</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.bindings.converters.timedelta_converter</span> \
+    <span class="kn">import</span> <span class="nn">FixedOffsetSMPTEtoTimedeltaConverter</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="EBUTT1EBUTT3ProducerNode"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode">[docs]</a><span class="k">class</span> <span class="nc">EBUTT1EBUTT3ProducerNode</span><span class="p">(</span><span class="n">AbstractCombinedNode</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Produce an EBU-TT-3 document from an EBU-TT-1 input document.</span>
+
+<span class="sd">    For conversion of SMPTE timecodes, where ``ttp:timeBase=&quot;smpte&quot;``,</span>
+<span class="sd">    makes a</span>
+<span class="sd">    :py:class:`ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter` using ``00:00:00:00``</span>
+<span class="sd">    as the start of programme zero point, or if available, uses the</span>
+<span class="sd">    ``ebuttm:documentStartOfProgramme`` metadata value as the zero point,</span>
+<span class="sd">    and discards everything before the value of that element.</span>
+<span class="sd">    The start of programme zero point can be overridden by specifying a</span>
+<span class="sd">    ``smpte_start_of_programme`` attribute in the constructor.</span>
+
+<span class="sd">    The output sequence identifier can be specified. Alternatively,</span>
+<span class="sd">    if the ``use_document_identifier_as_sequence_identifier`` parameter</span>
+<span class="sd">    is ``True`` and the ``ebuttm:documentIdentifier`` element is present</span>
+<span class="sd">    then that element&#39;s value is</span>
+<span class="sd">    used as the output sequence identifier.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ebutt3_converter</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_expects</span> <span class="o">=</span> <span class="n">EBUTT1Document</span>
+    <span class="n">_provides</span> <span class="o">=</span> <span class="n">EBUTT3Document</span>
+    <span class="n">_smpte_start_of_programme</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">node_id</span><span class="p">,</span>
+                 <span class="n">consumer_carriage</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">producer_carriage</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">sequence_identifier</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">use_document_identifier_as_sequence_identifier</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">smpte_start_of_programme</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EBUTT1EBUTT3ProducerNode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">node_id</span><span class="o">=</span><span class="n">node_id</span><span class="p">,</span>
+            <span class="n">consumer_carriage</span><span class="o">=</span><span class="n">consumer_carriage</span><span class="p">,</span>
+            <span class="n">producer_carriage</span><span class="o">=</span><span class="n">producer_carriage</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ebutt3_converter</span> <span class="o">=</span> <span class="n">EBUTT1EBUTT3Converter</span><span class="p">(</span>
+            <span class="n">sequence_id</span><span class="o">=</span><span class="n">sequence_identifier</span><span class="p">,</span>
+            <span class="n">use_doc_id_as_seq_id</span><span class="o">=</span><span class="n">use_document_identifier_as_sequence_identifier</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_smpte_start_of_programme</span> <span class="o">=</span> <span class="n">smpte_start_of_programme</span>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3ProducerNode.process_document"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode.process_document">[docs]</a>    <span class="k">def</span> <span class="nf">process_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Convert each received document into EBU-TT-3</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">EBUTT1Document</span><span class="p">):</span>
+            <span class="n">converted_doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_document</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">producer_carriage</span><span class="o">.</span><span class="n">emit_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">converted_doc</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s1">&#39;Ignoring incoming document that is not an EBUTT1Document&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EBUTT1EBUTT3ProducerNode.convert_document"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode.convert_document">[docs]</a>    <span class="k">def</span> <span class="nf">convert_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">):</span>
+        <span class="n">smpte_converter</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">timeBase</span> <span class="o">==</span> <span class="s1">&#39;smpte&#39;</span><span class="p">:</span>
+            <span class="n">start_of_programme</span> <span class="o">=</span> <span class="s1">&#39;00:00:00:00&#39;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_smpte_start_of_programme</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">head_metadata</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">metadata</span>
+                <span class="k">if</span> <span class="n">head_metadata</span><span class="p">:</span>
+                    <span class="n">doc_metadata</span> <span class="o">=</span> <span class="n">head_metadata</span><span class="o">.</span><span class="n">documentMetadata</span>
+                    <span class="k">if</span> <span class="n">doc_metadata</span> \
+                       <span class="ow">and</span> <span class="n">doc_metadata</span><span class="o">.</span><span class="n">documentStartOfProgramme</span><span class="p">:</span>
+                        <span class="n">start_of_programme</span> <span class="o">=</span> \
+                            <span class="n">doc_metadata</span><span class="o">.</span><span class="n">documentStartOfProgramme</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">start_of_programme</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_smpte_start_of_programme</span>
+
+            <span class="n">smpte_converter</span> <span class="o">=</span> \
+                <span class="n">FixedOffsetSMPTEtoTimedeltaConverter</span><span class="p">(</span>
+                    <span class="n">smpteReference</span><span class="o">=</span><span class="n">start_of_programme</span><span class="p">,</span>
+                    <span class="n">frameRate</span><span class="o">=</span><span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">frameRate</span><span class="p">,</span>
+                    <span class="n">frameRateMultiplier</span><span class="o">=</span><span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span>
+                    <span class="n">frameRateMultiplier</span><span class="p">,</span>
+                    <span class="n">dropMode</span><span class="o">=</span><span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">dropMode</span>
+                <span class="p">)</span>
+        <span class="n">converted_doc</span> <span class="o">=</span> <span class="n">EBUTT3Document</span><span class="o">.</span><span class="n">create_from_raw_binding</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ebutt3_converter</span><span class="o">.</span><span class="n">convert_document</span><span class="p">(</span>
+                <span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="p">,</span>
+                <span class="n">dataset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">smpte_to_timedelta_converter</span><span class="o">=</span><span class="n">smpte_converter</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">converted_doc</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

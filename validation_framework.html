@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validation framework &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User input producer" href="user_input_producer.html" />
+    <link rel="prev" title="Document and sequence validation" href="validation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nodes_and_carriage_mechanisms.html">Nodes and Carriage Mechanisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts_and_their_functions.html">Scripts and their functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configurator.html">Configuration files and <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="validation.html">Document and sequence validation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Validation framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ebu-tt-part-1-ebu-tt-part-3-and-ebu-tt-d-constraints">EBU-TT Part 1, EBU-TT Part 3 and EBU-TT-D constraints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ebu-tt-part-1-and-ebu-tt-part-3">EBU-TT Part 1 and EBU-TT Part 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ebu-tt-part-3-and-ebu-tt-d">EBU-TT Part 3 and EBU-TT-D</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#semantic-parser-patch">Semantic parser patch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_input_producer.html">User input producer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing_resolution.html">Timing resolution and consumer logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentation.html">Segmentation of EBU-TT-Live document sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deduplication.html">DeDuplication of EBU-TT-Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="denesting.html">Denesting of EBU-TT-Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_from_ebutt.html">Conversion of EBU-TT Part 1 documents to EBU-TT Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_to_ebuttd.html">Conversion of EBU-TT-Live documents to EBU-TT-D documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
+          <li class="breadcrumb-item"><a href="validation.html">Document and sequence validation</a></li>
+      <li class="breadcrumb-item active">Validation framework</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/validation_framework.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="validation-framework">
+<h1>Validation framework<a class="headerlink" href="#validation-framework" title="Permalink to this heading"></a></h1>
+<p>The validation framework consists of 2 kinds of validation: syntactic and
+semantic. The PyXB library does a pretty good job validating the syntax but it
+does not provide any tooling to process any semantics that could not be
+described in XSD 1.0 (PyXB does not understand XSD 1.1 and xpath assertions).</p>
+<dl class="simple">
+<dt>Example:</dt><dd><p>If ttp:timebase=”clock” then all begin and end attributes of timed elements shall be of type ebuttdt:clockTimingType.</p>
+</dd>
+</dl>
+<p>Elements/types are independent and according to the principles of OOP they do
+not know much about one another. In order to provide semantic validation there
+is need for a semantic validation context. A common object that shared
+information can be collected to and each type/element receives it as a parameter
+in its semantic validation hooks if the element needs to take part in the
+semantic validation process.</p>
+<p>For an element to be part of the semantic validation flow it needs to inherit
+the <code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.validation.SemanticValidationMixin</span></code> mixin,
+which contains the boilerplate that enables semantic validation and the hook
+functions, that the developer can override and write custom functionality that
+effectively does the semantic validation of the type.</p>
+</section>
+<section id="ebu-tt-part-1-ebu-tt-part-3-and-ebu-tt-d-constraints">
+<h1>EBU-TT Part 1, EBU-TT Part 3 and EBU-TT-D constraints<a class="headerlink" href="#ebu-tt-part-1-ebu-tt-part-3-and-ebu-tt-d-constraints" title="Permalink to this heading"></a></h1>
+<p>EBU-TT Part 3 (EBU Tech3370) is derived from EBU-TT Part 1 (Tech3350).
+Some of the changes are required syntactic additions, such as the sequence
+identifier and sequence number. Others are relaxations, such as the permission
+to omit elements such as <code class="docutils literal notranslate"><span class="pre">styling</span></code> and <code class="docutils literal notranslate"><span class="pre">layout</span></code>.</p>
+<p>Conversely EBU-TT-D is a complete syntactic and semantic subset of EBU-TT Part
+1. There are two ways that we can code for these differences.</p>
+<p>The first is by creating <strong>similar XML Schemas</strong>, one for each flavour that we
+want to support. This allows PyXB to validate the syntactic restrictions, and
+might allow us to use vanilla off-the-shelf XML Schemas for these types.
+However, they are all flavours of TTML, and so they use the same namespaces.
+This is hard to manage in PyXB, without having completely separate
+implementations for each type, with a lot of duplication.</p>
+<p>The second is by creating a <strong>single XML Schema</strong>, which enforces only the more
+relaxed constraints, and then coding additional validation rules in our own
+classes. This is a little awkward to manage in PyXB, because PyXB needs to
+instantiate an object of a known type for every XML element that it finds, and
+it doesn’t allow for some kind of selective choice. The calling code can
+call <code class="docutils literal notranslate"><span class="pre">_SetSupersedingClass()</span></code> on the raw binding class, which registers the
+type to create.</p>
+<p>Given these two non-ideal options, we decided to use both!</p>
+<section id="ebu-tt-part-1-and-ebu-tt-part-3">
+<h2>EBU-TT Part 1 and EBU-TT Part 3<a class="headerlink" href="#ebu-tt-part-1-and-ebu-tt-part-3" title="Permalink to this heading"></a></h2>
+<p>We have one XML Schema for both of these, and put validation rules into the
+classes. For example we need to ensure that <code class="docutils literal notranslate"><span class="pre">ebuttp:sequenceIdentifier</span></code> is
+absent from the root <code class="docutils literal notranslate"><span class="pre">tt</span></code> element in a Part 1 document. Conversely we need
+to check that it is present in a Part 3 document.</p>
+<p>We do this by creating a
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type" title="ebu_tt_live.bindings.tt_type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.tt_type</span></code></a> class that is the basis of Part 3 documents and has a
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._validateBinding_vx" title="ebu_tt_live.bindings.tt_type._validateBinding_vx"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.tt_type._validateBinding_vx()</span></code></a> method
+that raises an exception if the attribute is absent.</p>
+<p>Then for Part 1 documents we make a sub-class of the <cite>tt_type</cite> called
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_tt_type" title="ebu_tt_live.bindings.tt1_tt_type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.tt1_tt_type</span></code></a> whose
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_tt_type._validateBinding_vx" title="ebu_tt_live.bindings.tt1_tt_type._validateBinding_vx"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.tt1_tt_type._validateBinding_vx()</span></code></a> method
+explicitly checks for the presence of the attribute and raises an
+exception if it is there. This method does <em>not</em> call the base class’s
+method of the same name, otherwise we would always get an exception for
+every document!</p>
+<p>How can we have two classes for an XML element with the same qualified name?
+We have to tell PyXB which class to use when making a Python object for the
+element, and this is done using <code class="docutils literal notranslate"><span class="pre">_SetSupersedingClass()</span></code>. For most elements
+we only have to do this once, but for these two variants of the <code class="docutils literal notranslate"><span class="pre">tt</span></code>
+element we have to understand the context of the document and adjust the
+setting before processing, otherwise PyXB gets very confused and starts
+to throw exceptions.</p>
+<p>There is a utility function provided to make this easier,
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.load_types_for_document" title="ebu_tt_live.bindings.load_types_for_document"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.load_types_for_document()</span></code></a>, which takes one of
+two values, either <code class="docutils literal notranslate"><span class="pre">ebutt1</span></code> for Part 1 documents or <code class="docutils literal notranslate"><span class="pre">ebutt3</span></code> for Part 3
+documents, and makes sure PyXB is set up correctly.</p>
+<p>This feels a bit ugly but does work. When code doesn’t behave in an
+expected way, the solution is sometimes to make sure that the right types
+are loaded!</p>
+</section>
+<section id="ebu-tt-part-3-and-ebu-tt-d">
+<h2>EBU-TT Part 3 and EBU-TT-D<a class="headerlink" href="#ebu-tt-part-3-and-ebu-tt-d" title="Permalink to this heading"></a></h2>
+<p>The differences between EBU-TT Part 3 and EBU-TT-D are more significant, with
+EBU-TT-D having many more restrictions on content structure and value.
+Here, we use a separate XML Schema Document (XSD) so PyXB does the heavy
+lifting, and create specific subclasses prefixed <cite>d_</cite>, such as
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type" title="ebu_tt_live.bindings.d_tt_type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.d_tt_type</span></code></a> so that we can perform the
+required checks, conversions etc.</p>
+<p>This is straightforward in all but one respect: the namespace of the
+root element is the same for both document formats, so how can we tell PyXB
+which is which? The answer is a hack!
+:py:func:ebu_tt_live.documents.EBUTTDDocument.create_from_xml changes the
+root element tag from <code class="docutils literal notranslate"><span class="pre">tt</span></code> to <code class="docutils literal notranslate"><span class="pre">ttd</span></code>, and the XSD has a whole separate
+set of definitions for this made-up <code class="docutils literal notranslate"><span class="pre">ttd</span></code> root element.
+Then when we serialise the EBU-TT-D document object back into XML, in
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type.toDOM" title="ebu_tt_live.bindings.d_tt_type.toDOM"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.d_tt_type.toDOM()</span></code></a>, we explicitly fix the
+element name back to <code class="docutils literal notranslate"><span class="pre">tt</span></code>.</p>
+<p>Using this method, we don’t have to worry about setting superseding
+classes dynamically, because each <code class="docutils literal notranslate"><span class="pre">d_*</span></code> type has its own explicit class,
+and we set the superseding class just once for each. PyXB doesn’t get
+confused by this, because it knows the processing context.</p>
+</section>
+</section>
+<section id="semantic-parser-patch">
+<h1>Semantic parser patch<a class="headerlink" href="#semantic-parser-patch" title="Permalink to this heading"></a></h1>
+<p>PyXB uses the same bindings and same object model for 2 very different purposes.
+On one hand it allows the user to programmatically create syntactically valid
+XML documents, on the other hand it can pick up an XML document and parse it.
+When the document is parsed PyXB does most of the heavy lifting and the user
+does not have much access to the logic of the parser. The problem with this
+parser is the fact that it does not hold on to semantic context so it follows
+the XSD and instantiates the elements/attributes using the values from the
+parsed xml. The problem occurs when 2 types are just vaguely similar and they
+belong in the same union in the structure so the parser based on the information
+it has in context cannot make a decision which one to instantiate. This causes
+however an issue with the timingType union, which has fullClockTimingType and
+limitedClockTimingType. In the first 99 hours the 2 type overlaps in values so
+PyXB will instantiate the first one it can and continues on to the next
+attribute. This conflicts with the semantic validation, which expects
+particularly one timing type in that case and it may receive the wrong one.</p>
+<p>Hence the SemanticValidationMixin also has an overloaded _setAttribute function,
+which applies 2 hooks for the types in which custom code can enforce the right
+behaviour. The complexity and layered architecture of the parser limits the
+capability to pass around a context object the same way the semantic validation
+can so in the <a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.pyxb_utils.xml_parsing_context" title="ebu_tt_live.bindings.pyxb_utils.xml_parsing_context"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.pyxb_utils.xml_parsing_context</span></code></a>
+context manager there is a threadLocal object that keeps a similar dictionary to
+the one used at the semantic validation. The difference is that the
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.CreateFromDocument" title="ebu_tt_live.bindings.CreateFromDocument"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.CreateFromDocument()</span></code></a> function resets the context
+by using the context manager class and instead of the context being passed
+around as a parameter among functions the binding classes call the
+<a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.pyxb_utils.get_xml_parsing_context" title="ebu_tt_live.bindings.pyxb_utils.get_xml_parsing_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.pyxb_utils.get_xml_parsing_context()</span></code></a> function to
+gain access to the parsing context object.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="validation.html" class="btn btn-neutral float-left" title="Document and sequence validation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_input_producer.html" class="btn btn-neutral float-right" title="User input producer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

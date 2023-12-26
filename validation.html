@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document and sequence validation &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Validation framework" href="validation_framework.html" />
+    <link rel="prev" title="Configuration files and ebu-run" href="configurator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nodes_and_carriage_mechanisms.html">Nodes and Carriage Mechanisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts_and_their_functions.html">Scripts and their functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configurator.html">Configuration files and <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Document and sequence validation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="validation_framework.html">Validation framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_framework.html#ebu-tt-part-1-ebu-tt-part-3-and-ebu-tt-d-constraints">EBU-TT Part 1, EBU-TT Part 3 and EBU-TT-D constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_framework.html#semantic-parser-patch">Semantic parser patch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_input_producer.html">User input producer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing_resolution.html">Timing resolution and consumer logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentation.html">Segmentation of EBU-TT-Live document sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deduplication.html">DeDuplication of EBU-TT-Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="denesting.html">Denesting of EBU-TT-Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_from_ebutt.html">Conversion of EBU-TT Part 1 documents to EBU-TT Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_to_ebuttd.html">Conversion of EBU-TT-Live documents to EBU-TT-D documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
+      <li class="breadcrumb-item active">Document and sequence validation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/validation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="document-and-sequence-validation">
+<h1>Document and sequence validation<a class="headerlink" href="#document-and-sequence-validation" title="Permalink to this heading"></a></h1>
+<p>The validation of the documents require a semantic and a syntactic validation approach. Using the validation framework
+the syntactic and semantic requirements can be fulfilled.</p>
+<p>The conformance specification is in the SPEC-CONFORMANCE.md file, which contains the document semantics and their
+explanations.</p>
+<p>The validation framework uses a collection of mixins to add functionality to the XSD-derived datatypes and thereby
+making it possible for us to add a granular functionality set that is the closest possible match to the datatype’s
+expected semantic behaviour. The validation is currently split into several source files in the validation package
+based on the the general aspect they are applicable for.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <a class="reference internal" href="ebu_tt_live.bindings.validation.html#module-ebu_tt_live.bindings.validation.validator" title="ebu_tt_live.bindings.validation.validator"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.validation.validator</span></code></a> contains the general validator class that is controlling the
+validation flow and managing the traversal of the document tree. The validation mixing are implementing the callback
+interface expected by this class to interact with the semantic validation flow. This basically means that as the
+document tree is walked at each element the <a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.validator.SemanticValidator" title="ebu_tt_live.bindings.validation.validator.SemanticValidator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.validation.validator.SemanticValidator</span></code></a>
+class checks if that element is implementing the SemanticValidationMixin interface and if so it calls
+callbacks on the way down the tree and all the way up.</p></li>
+<li><p>The <a class="reference internal" href="ebu_tt_live.bindings.validation.html#module-ebu_tt_live.bindings.validation.base" title="ebu_tt_live.bindings.validation.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.validation.base</span></code></a> contains the most basic common mixins that enable semantic
+validation. See: Semantic Validation Framework.</p></li>
+<li><p>The <a class="reference internal" href="ebu_tt_live.bindings.validation.html#module-ebu_tt_live.bindings.validation.timing" title="ebu_tt_live.bindings.validation.timing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.validation.timing</span></code></a> contains the mixins necessary to get a timing resolution
+context. Its main purpose is to update the timing context as we move up and down in the document tree. The timing
+context is updated by the latest timing values pushed to a stack or popped from there. Another important function
+is to store the computed begin and end times on the document elements when they get resolved.</p></li>
+<li><p>The <a class="reference internal" href="ebu_tt_live.bindings.validation.html#module-ebu_tt_live.bindings.validation.presentation" title="ebu_tt_live.bindings.validation.presentation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.validation.presentation</span></code></a> contains everything that has something to do with
+visual representation. These are the styling related operations as well as region assignment.</p></li>
+<li><p>The <a class="reference internal" href="ebu_tt_live.bindings.validation.html#module-ebu_tt_live.bindings.validation.content" title="ebu_tt_live.bindings.validation.content"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.validation.content</span></code></a> contains the mixins that predominantly apply to real content
+elements such as span and p.</p></li>
+</ul>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="validation_framework.html">Validation framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation_framework.html#ebu-tt-part-1-ebu-tt-part-3-and-ebu-tt-d-constraints">EBU-TT Part 1, EBU-TT Part 3 and EBU-TT-D constraints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="validation_framework.html#ebu-tt-part-1-and-ebu-tt-part-3">EBU-TT Part 1 and EBU-TT Part 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation_framework.html#ebu-tt-part-3-and-ebu-tt-d">EBU-TT Part 3 and EBU-TT-D</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="validation_framework.html#semantic-parser-patch">Semantic parser patch</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="configurator.html" class="btn btn-neutral float-left" title="Configuration files and ebu-run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="validation_framework.html" class="btn btn-neutral float-right" title="Validation framework" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

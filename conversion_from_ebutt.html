@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conversion of EBU-TT Part 1 documents to EBU-TT Live documents &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Conversion of EBU-TT-Live documents to EBU-TT-D documents" href="conversion_to_ebuttd.html" />
+    <link rel="prev" title="Denesting of EBU-TT-Live documents" href="denesting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nodes_and_carriage_mechanisms.html">Nodes and Carriage Mechanisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts_and_their_functions.html">Scripts and their functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configurator.html">Configuration files and <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation.html">Document and sequence validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_input_producer.html">User input producer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing_resolution.html">Timing resolution and consumer logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentation.html">Segmentation of EBU-TT-Live document sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deduplication.html">DeDuplication of EBU-TT-Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="denesting.html">Denesting of EBU-TT-Live documents</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Conversion of EBU-TT Part 1 documents to EBU-TT Live documents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-problem">The problem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_to_ebuttd.html">Conversion of EBU-TT-Live documents to EBU-TT-D documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
+      <li class="breadcrumb-item active">Conversion of EBU-TT Part 1 documents to EBU-TT Live documents</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/conversion_from_ebutt.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="conversion-of-ebu-tt-part-1-documents-to-ebu-tt-live-documents">
+<h1>Conversion of EBU-TT Part 1 documents to EBU-TT Live documents<a class="headerlink" href="#conversion-of-ebu-tt-part-1-documents-to-ebu-tt-live-documents" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.converters.ebutt1_to_ebutt3" title="ebu_tt_live.documents.converters.ebutt1_to_ebutt3"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.documents.converters.ebutt1_to_ebutt3()</span></code></a> function
+creates an EBUTT3Document from an EBUTT1Document using the helper class
+<a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter" title="ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter</span></code></a>.</p>
+<p>This class manages various possible complications, including mapping SMPTE
+timecodes into media time, and setting a sequence identifier.</p>
+<p>Here’s some documentation from the coding process that captures some of our
+internal conversation about how to map font sizes, to give an idea of the
+complexity.</p>
+<section id="the-problem">
+<h2>The problem<a class="headerlink" href="#the-problem" title="Permalink to this heading"></a></h2>
+<p>Convert an EBU-TT part 1 document to an EBU-TT part 3 document</p>
+<p>EBU-TT part 1 can have smpte timebase; EBU-TT part 3 cannot.
+EBU-TT part 1 must not have a sequence identifier and must not
+have a sequence number. EBU-TT part 3 documents must have both.</p>
+<p>In order to set the sequence identifier the converter can be
+configured with the desired value, or it can be set to extract the
+document identifier from the <code class="docutils literal notranslate"><span class="pre">ebuttm:documentIdentifier</span></code> element
+and use it, if it exists.</p>
+<p>If the EBU-TT part 1 document uses the <code class="docutils literal notranslate"><span class="pre">smpte</span></code> timebase, then all
+the time expressions must be converted to some other timebase.
+Currently they are all converted to <code class="docutils literal notranslate"><span class="pre">media</span></code>, using a simple fixed
+offset based conversion strategy, encapsulated in the utility class
+<a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter" title="ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter</span></code></a>.
+This currently looks for the metadata attribute
+<code class="docutils literal notranslate"><span class="pre">tt/head/metadata/ebuttm:documentMetadata/ebuttm:documentStartOfProgramme</span></code>
+and if it finds it, uses that as
+the zero point, otherwise it uses <code class="docutils literal notranslate"><span class="pre">00:00:00:00</span></code>. This can be
+overridden by setting the <code class="docutils literal notranslate"><span class="pre">smpte_start_of_programme</span></code> parameter to the
+start of programme timecode to use instead.</p>
+<p>The document’s frame rate, frame rate multiplier and drop mode are taken into
+account when doing the conversion. This means that illegal frame
+values will cause a
+<a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeFormatError" title="ebu_tt_live.errors.TimeFormatError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.errors.TimeFormatError</span></code></a> exception to be raised.</p>
+<p>Elements with <code class="docutils literal notranslate"><span class="pre">begin</span></code> or <code class="docutils literal notranslate"><span class="pre">end</span></code> attributes that fall before the start of
+programme are discarded.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="denesting.html" class="btn btn-neutral float-left" title="Denesting of EBU-TT-Live documents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="conversion_to_ebuttd.html" class="btn btn-neutral float-right" title="Conversion of EBU-TT-Live documents to EBU-TT-D documents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

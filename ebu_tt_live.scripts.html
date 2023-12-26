@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scripts Package &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="twisted Package" href="ebu_tt_live.twisted.html" />
+    <link rel="prev" title="node Package" href="ebu_tt_live.node.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#layout-of-the-source-files">Layout of the source files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ebu_tt_live.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.bindings.html">bindings Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.carriage.html">carriage Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.clocks.html">clocks Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.config.html">config Package - Component configurators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.documents.html">documents Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.examples.html">examples Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.node.html">node Package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">scripts Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.common"><code class="xref py py-mod docutils literal notranslate"><span class="pre">common</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_run</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_dummy_encoder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_dummy_encoder</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_interactive_shell"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_interactive_shell</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_simple_consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_consumer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_simple_producer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_producer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_user_input_consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_user_input_consumer</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.twisted.html">twisted Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.errors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errors</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.strings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">strings</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code> Module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ebu_tt_live.html">Source code reference</a></li>
+      <li class="breadcrumb-item active">scripts Package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ebu_tt_live.scripts.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scripts-package">
+<h1>scripts Package<a class="headerlink" href="#scripts-package" title="Permalink to this heading"></a></h1>
+<section id="module-ebu_tt_live.scripts.common">
+<span id="common-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">common</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.scripts.common" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.common.create_loggers">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.scripts.common.</span></span><span class="sig-name descname"><span class="pre">create_loggers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/scripts/common.html#create_loggers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.common.create_loggers" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.scripts.ebu_run">
+<span id="ebu-run-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_run</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.scripts.ebu_run" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code> script is a universal runner for any component or complex interconnected sets of components
+based on a compliant configuration file or set of valid options. The configuration framework uses
+the mozilla/configman package that picks up configuration from command line/config file.</p>
+<section id="basic-usage">
+<h3>Basic usage:<a class="headerlink" href="#basic-usage" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ebu</span><span class="o">-</span><span class="n">run</span> <span class="o">--</span><span class="n">admin</span><span class="o">.</span><span class="n">conf</span><span class="o">=</span><span class="n">ebu_tt_live</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">simple</span><span class="o">-</span><span class="n">producer</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="adjust-existing-config-file">
+<h3>Adjust existing config file:<a class="headerlink" href="#adjust-existing-config-file" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ebu</span><span class="o">-</span><span class="n">run</span> <span class="o">--</span><span class="n">admin</span><span class="o">.</span><span class="n">conf</span><span class="o">=</span><span class="n">ebu_tt_live</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">simple</span><span class="o">-</span><span class="n">producer</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">nodes</span><span class="o">.</span><span class="n">node1</span><span class="o">.</span><span class="n">sequence_identifier</span><span class="o">=</span><span class="n">Sequence2</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="help">
+<h3>Help:<a class="headerlink" href="#help" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ebu</span><span class="o">-</span><span class="n">run</span> <span class="o">--</span><span class="n">admin</span><span class="o">.</span><span class="n">conf</span><span class="o">=</span><span class="n">ebu_tt_live</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">simple</span><span class="o">-</span><span class="n">producer</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The –help flag aims to be context matching so anywhere as long as configman is used is expected and it elaborates
+the directly accessible config file keys using the current configuration structure as well as possible alternative
+values for the keys already having a value from the config file or from the command line.</p>
+<p>Since the components and their connections are not hard-coded the <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code> does not have a single purpose
+limitation. The usage of a configurator facilitates the configuration mapping of a single node or an entire complex
+interconnected set of nodes via various carriage mechanisms, events and timings.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.ebu_run.main">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.scripts.ebu_run.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/scripts/ebu_run.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.ebu_run.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.scripts.ebu_dummy_encoder">
+<span id="ebu-dummy-encoder-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_dummy_encoder</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.scripts.ebu_dummy_encoder" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.ebu_dummy_encoder.main">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.scripts.ebu_dummy_encoder.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/scripts/ebu_dummy_encoder.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.ebu_dummy_encoder.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.scripts.ebu_interactive_shell">
+<span id="ebu-interactive-shell-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_interactive_shell</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.scripts.ebu_interactive_shell" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.ebu_interactive_shell.main">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.scripts.ebu_interactive_shell.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/scripts/ebu_interactive_shell.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.ebu_interactive_shell.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.scripts.ebu_simple_consumer">
+<span id="ebu-simple-consumer-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_consumer</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.scripts.ebu_simple_consumer" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.ebu_simple_consumer.main">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.scripts.ebu_simple_consumer.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/scripts/ebu_simple_consumer.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.ebu_simple_consumer.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.scripts.ebu_simple_producer">
+<span id="ebu-simple-producer-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_producer</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.scripts.ebu_simple_producer" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.ebu_simple_producer.main">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.scripts.ebu_simple_producer.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/scripts/ebu_simple_producer.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.ebu_simple_producer.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-ebu_tt_live.scripts.ebu_user_input_consumer">
+<span id="ebu-user-input-consumer-module"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_user_input_consumer</span></code> Module<a class="headerlink" href="#module-ebu_tt_live.scripts.ebu_user_input_consumer" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.ebu_user_input_consumer.main">
+<span class="sig-prename descclassname"><span class="pre">ebu_tt_live.scripts.ebu_user_input_consumer.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebu_tt_live/scripts/ebu_user_input_consumer.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.ebu_user_input_consumer.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ebu_tt_live.node.html" class="btn btn-neutral float-left" title="node Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ebu_tt_live.twisted.html" class="btn btn-neutral float-right" title="twisted Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

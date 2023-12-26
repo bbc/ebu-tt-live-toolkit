@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scripts and their functions &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration files and ebu-run" href="configurator.html" />
+    <link rel="prev" title="Direct Carriage Mechanism" href="direct_carriage_mechanism.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nodes_and_carriage_mechanisms.html">Nodes and Carriage Mechanisms</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Scripts and their functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-ebu-run-script">The ebu-run script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-producer">Simple Producer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-consumer">Simple consumer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-input-producer">User Input Producer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distributor">Distributor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handover-manager">Handover Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#buffer-delay-node">Buffer Delay Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deduplicator-node">DeDuplicator Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#denester-node">Denester Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resequencer-node">Resequencer Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#retiming-delay-node">Retiming Delay Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ebu-tt-1-producer">EBU-TT-1 Producer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ebu-tt-d-encoder">EBU-TT-D Encoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#element-remover">Element Remover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validator">Validator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configurator.html">Configuration files and <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation.html">Document and sequence validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_input_producer.html">User input producer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing_resolution.html">Timing resolution and consumer logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentation.html">Segmentation of EBU-TT-Live document sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deduplication.html">DeDuplication of EBU-TT-Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="denesting.html">Denesting of EBU-TT-Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_from_ebutt.html">Conversion of EBU-TT Part 1 documents to EBU-TT Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion_to_ebuttd.html">Conversion of EBU-TT-Live documents to EBU-TT-D documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
+      <li class="breadcrumb-item active">Scripts and their functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/scripts_and_their_functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scripts-and-their-functions">
+<h1>Scripts and their functions<a class="headerlink" href="#scripts-and-their-functions" title="Permalink to this heading"></a></h1>
+<section id="the-ebu-run-script">
+<h2>The ebu-run script<a class="headerlink" href="#the-ebu-run-script" title="Permalink to this heading"></a></h2>
+<p>This script is capable of picking up a structured configuration file and use
+that to create the nodes and carriage mechanism objects that we would like to
+use. They can be even wired in the same configuration file together so in the
+end a complex system can be modeled using a single json file. Please refer to
+<a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_run" title="ebu_tt_live.scripts.ebu_run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_tt_live.scripts.ebu_run</span></code></a> as well as <a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config" title="ebu_tt_live.config"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_tt_live.config</span></code></a> to
+learn more about the way the configuration logic works. To get help on permitted
+options for the specified node(s) run <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code> with a <code class="docutils literal notranslate"><span class="pre">--help</span></code>. See
+<a class="reference internal" href="configurator.html"><span class="doc">Configuration files and ebu-run</span></a>.</p>
+</section>
+<section id="simple-producer">
+<h2>Simple Producer<a class="headerlink" href="#simple-producer" title="Permalink to this heading"></a></h2>
+<p>This script loads static text from a file
+(<code class="docutils literal notranslate"><span class="pre">ebu-tt-live-toolkit/ebu_tt_live/examples/simple_producer.txt</span></code>) and breaks it
+into a sequence of EBU-TT Live documents using natural language processing. Use
+<code class="docutils literal notranslate"><span class="pre">ebu-run</span></code> to start it: <code class="docutils literal notranslate"><span class="pre">ebu-run</span>
+<span class="pre">--admin.conf=ebu_tt_live/examples/config/simple_producer.json</span></code></p>
+<p>The default carriage mechanism is WebSocket, so you will need to listen to
+<code class="docutils literal notranslate"><span class="pre">ws://127.0.0.1:9000</span></code>. Conveniently, we’ve created an HTML page that does just
+that. After you launch the Simple Producer, open <a class="reference external" href="../ui/test/index.html">docs/build/ui/test/index.html</a>
+or the <a class="reference external" href="http://ebu.github.io/ebu-tt-live-toolkit/ui/test/">current release pre-built test page</a> in your
+browser. The ‘Broadcast message’ field should be populated with the correct
+address (<code class="docutils literal notranslate"><span class="pre">ws://localhost:9000</span></code>). Click ‘Connect’ and then ‘Subscribe’. You can
+also change the identifier for the sequence. The documents should appear in the
+window below.</p>
+<p>Alternatively, the Simple Producer can use the file system as the carriage
+mechanism. To do this, create a configuration file and specify the carriage
+mechanism and output folder options as described in <a class="reference internal" href="configurator.html"><span class="doc">Configuration files and ebu-run</span></a> . This
+saves the documents in the specified output folder together with a manifest file
+that can be used by the Simple Consumer (below). See
+<a class="reference internal" href="filesystem_carriage_mechanism.html"><span class="doc">Filesystem Carriage Mechanism</span></a> for more details about the file system
+carriage mechanism.</p>
+</section>
+<section id="simple-consumer">
+<h2>Simple consumer<a class="headerlink" href="#simple-consumer" title="Permalink to this heading"></a></h2>
+<p>This script reads and validates documents in a sequence. It performs both
+semantic and syntactic validation of the XML. By default, it uses WebSocket and
+listens to <code class="docutils literal notranslate"><span class="pre">ws://localhost:9000</span></code>. To start this default configuration, run
+<code class="docutils literal notranslate"><span class="pre">ebu-run</span> <span class="pre">--admin.conf=ebu_tt_live/examples/config/simple_consumer.json</span></code>.
+You can also point the Simple Consumer to the file system. If you saved the documents
+in a folder (using the folder export configuration option
+of the Simple Producer), you can write a configuration file as
+described in <a class="reference internal" href="configurator.html"><span class="doc">Configuration files and ebu-run</span></a> and pass this file to <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code>.</p>
+</section>
+<section id="user-input-producer">
+<h2>User Input Producer<a class="headerlink" href="#user-input-producer" title="Permalink to this heading"></a></h2>
+<p>This is a web page that adds a user interface and various configurations to the
+Simple Producer. It needs to connect to a node that can receive incoming
+<code class="docutils literal notranslate"><span class="pre">/publish</span></code> style WebSocket connections, for example a Simple Consumer, a
+Distributor or a Handover Manager Node. First, with your virtual environment
+activated and the code built, start one, with a command line such as  <code class="docutils literal notranslate"><span class="pre">ebu-run</span>
+<span class="pre">--admin.conf</span> <span class="pre">ebu_tt_live/examples/config/user_input_producer_consumer.json</span></code> -
+this one runs a simple consumer. Then, in your browser, open
+<a class="reference external" href="../ui/user_input_producer/index.html">docs/build/ui/user_input_producer/index.html</a> or the
+<a class="reference external" href="http://ebu.github.io/ebu-tt-live-toolkit/ui/user_input_producer/">current release pre-built UIP page</a> and click
+‘Connect’. Select the sending mode (manual, scheduled or asynchronous). You
+should see the documents arriving in the command line window where the simple
+consumer is listening. See detailed instructions here:
+<a class="reference internal" href="user_input_producer.html"><span class="doc">User input producer</span></a>.</p>
+</section>
+<section id="distributor">
+<h2>Distributor<a class="headerlink" href="#distributor" title="Permalink to this heading"></a></h2>
+<p>This script mimics a distribution node. To see it forwarding documents from the
+Simple Producer to the Simple Consumer using Websocket, run <code class="docutils literal notranslate"><span class="pre">ebu-run</span>
+<span class="pre">--admin.conf=ebu_tt_live/examples/config/sproducer_dist_sconsumer_ws.json</span></code>. A
+more interesting scenario is distributing documents from the User Input Producer
+to two consumer nodes: <code class="docutils literal notranslate"><span class="pre">ebu-run</span>
+<span class="pre">--admin.conf=ebu_tt_live/examples/config/user_input_producer_dist_consumers.json</span></code>.</p>
+<p>Like the Simple Producer, the Distributor can also save the documents it
+receives to the file system. To do that, create you own configuration file as
+described in <a class="reference internal" href="configurator.html"><span class="doc">Configuration files and ebu-run</span></a> and pass this file to <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code>.</p>
+</section>
+<section id="handover-manager">
+<h2>Handover Manager<a class="headerlink" href="#handover-manager" title="Permalink to this heading"></a></h2>
+<p>This node implements the ‘Who claimed control most recently’ algorithm defined
+in the specification, with added functionality to allow messages to be broadcast
+between members of the authors group, which may be added to a future
+specification. This algorithm determines the output from multiple input
+sequences. The Handover Manager is a specialised case of the switching node that
+bases its decisions on handover-related attributes in the document and its
+previous decisions. There is no separate command to run this script. Start it
+with the <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code>, for example <code class="docutils literal notranslate"><span class="pre">ebu-run</span>
+<span class="pre">--admin.conf=ebu_tt_live/examples/config/user_input_producer_handover.json</span></code> for
+the default configuration. For detailed instruction on setting up the Handover
+Manager with the UIP see <a class="reference internal" href="user_input_producer.html"><span class="doc">User input producer</span></a>.</p>
+</section>
+<section id="buffer-delay-node">
+<h2>Buffer Delay Node<a class="headerlink" href="#buffer-delay-node" title="Permalink to this heading"></a></h2>
+<p>This script buffers each received Document and emits it after a fixed
+non-negative delay offset period. Since this is a passive node, essentially
+equivalent to a longer carriage latency, no modification to the documents is
+required. The Buffer Delay Node is primarily intended for delaying implicitly
+timed documents for resynchronisation. Use <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code> to start this script, for
+example <code class="docutils literal notranslate"><span class="pre">ebu-run</span> <span class="pre">--admin.conf=ebu_tt_live/examples/config/buffer_delay.json</span></code></p>
+</section>
+<section id="deduplicator-node">
+<h2>DeDuplicator Node<a class="headerlink" href="#deduplicator-node" title="Permalink to this heading"></a></h2>
+<p>This node addresses instances where <code class="docutils literal notranslate"><span class="pre">style</span></code> and <code class="docutils literal notranslate"><span class="pre">region</span></code> elements and
+attributes are duplicated, which can occur for example when sequences are
+resequenced.
+For the default configuration of the node, see:
+<code class="docutils literal notranslate"><span class="pre">ebu-run</span> <span class="pre">--admin.conf=ebu_tt_live/examples/config/deduplicator_fs.json</span></code></p>
+</section>
+<section id="denester-node">
+<h2>Denester Node<a class="headerlink" href="#denester-node" title="Permalink to this heading"></a></h2>
+<p>This node flattens nested <code class="docutils literal notranslate"><span class="pre">div</span></code> and <code class="docutils literal notranslate"><span class="pre">span</span></code> elements such that no
+<code class="docutils literal notranslate"><span class="pre">div</span></code> ends up containing a <code class="docutils literal notranslate"><span class="pre">div</span></code> and no <code class="docutils literal notranslate"><span class="pre">span</span></code> ends up containing
+a <code class="docutils literal notranslate"><span class="pre">span</span></code>. It also removes any <code class="docutils literal notranslate"><span class="pre">p</span></code> elements that specify a <code class="docutils literal notranslate"><span class="pre">region</span></code>
+attribute that differs from a specified region on an ancestor element.</p>
+<p>If nested <code class="docutils literal notranslate"><span class="pre">div</span></code> or <code class="docutils literal notranslate"><span class="pre">span</span></code> elements might be present in a document, the
+Denester node should be used to flatten them before passing them to the
+EBU-TT-D Encoder, because EBU-TT-D does not permit such nested elements.</p>
+</section>
+<section id="resequencer-node">
+<h2>Resequencer Node<a class="headerlink" href="#resequencer-node" title="Permalink to this heading"></a></h2>
+<p>This node consumes documents from one sequence and
+creates a new sequence of documents based on the content in that input sequence,
+where every document in the output sequence has the same duration. The
+resequencer repeatedly extracts and then outputs a document of the specified
+duration, then waits for a period equal to that
+duration before extracting the next document. It can be configured to begin
+extracting the first document immediately when it is run, or to wait until a
+specific time until extracting the first document.</p>
+<p>The resequencer is
+particularly useful upstream of an EBU-TT-D Encoder, to generate segmented
+EBU-TT-D, for example prior to wrapping in fragmented MPEG-4 and serving
+with a DASH or HLS manifest; those onward steps are not part of this project.
+This pattern effectively converts an asynchronous stream of input documents
+into something that can be delivered synchronously downstream, which is
+useful for distribution to media players.</p>
+<p>Note that the resequencer output can contain duplicated <code class="docutils literal notranslate"><span class="pre">style</span></code> and <code class="docutils literal notranslate"><span class="pre">region</span></code>
+elements. These can be cleaned up by passing the output to a DeDuplicator
+node before downstream encoding to other formats.</p>
+<p>In general the resequencer does not begin emitting any documents until it has received
+at least one input document. To immediately start to emit documents an
+initial document can be configured. Necessary initial parameters like
+language or sequence ID are retrieved from that document.</p>
+<p>Note that the resequencer accepts only input documents which all have the
+same sequence ID. This sequence ID is determined by the first received input
+document (or the configured initial document instead, if applicable).</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code> to start
+this script, for example <code class="docutils literal notranslate"><span class="pre">ebu-run</span> <span class="pre">--admin.conf=ebu_tt_live/examples/config/sproducer_resequencer_direct_ebuttd_encoder_fs.json</span></code></p>
+</section>
+<section id="retiming-delay-node">
+<h2>Retiming Delay Node<a class="headerlink" href="#retiming-delay-node" title="Permalink to this heading"></a></h2>
+<p>This script modifies the times within each Document and issues them without
+further emission delay as part of a new sequence with a new sequence identifier.
+The times are modified such that all of the computed begin and end times within
+the document are increased by a non-negative fixed delay offset period. The
+Retiming Delay Node is primarily intended for delaying explicitly timed
+documents. Use <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code> to start this script, for example <code class="docutils literal notranslate"><span class="pre">ebu-run</span>
+<span class="pre">--admin.conf=ebu_tt_live/examples/config/retiming_delay.json.</span></code></p>
+</section>
+<section id="ebu-tt-1-producer">
+<h2>EBU-TT-1 Producer<a class="headerlink" href="#ebu-tt-1-producer" title="Permalink to this heading"></a></h2>
+<p>This script produces an EBU-TT Part 3 document from an EBU-TT Part 1 source.
+If SMPTE timecode is used (<code class="docutils literal notranslate"><span class="pre">ttp:timeBase=&quot;smpte&quot;</span></code>) then the script looks for
+an <code class="docutils literal notranslate"><span class="pre">ebuttm:documentStartOfProgramme</span></code> element in the input document, and if
+present, maps that to the zero media time, and discards any elements that
+begin or end before that time. If that element is absent, then times are
+converted assuming that media time zero is SMPTE timecode <code class="docutils literal notranslate"><span class="pre">00:00:00:00</span></code>.
+Alternatively both of those values can be overridden by specifying a
+start of programme timecode to use with the <code class="docutils literal notranslate"><span class="pre">smpte_start_of_programme</span></code>
+configuration parameter.
+The timecode conversion currently assumes that
+the timecode is continuous.</p>
+<p>The default output sequence identifier can be specified. There is also a
+parameter to allow the value of the input <code class="docutils literal notranslate"><span class="pre">ebuttm:documentIdentifier</span></code> element
+to be used as the output sequence identifier, if present, overriding the
+specified default.</p>
+</section>
+<section id="ebu-tt-d-encoder">
+<h2>EBU-TT-D Encoder<a class="headerlink" href="#ebu-tt-d-encoder" title="Permalink to this heading"></a></h2>
+<p>This script is an extension of simple consumer and is responsible for
+converting the incoming EBU-TT Live documents into EBU-TT-D
+documents that can later be embedded in video streams for example by
+wrapping MPEG 4 (ISO BMFF) and serving with a manifest such as DASH or HLS,
+or for serving as a sidecar distribution subtitle file.</p>
+<p>There are configuration file options for controlling the media time conversion
+reference point and the output file name format; these are described in
+<a class="reference internal" href="configurator.html"><span class="doc">Configuration files and ebu-run</span></a>.</p>
+<p>To see the Encoder in action, using output from the Simple Producer and the
+‘direct’ carriage mechanism, run <code class="docutils literal notranslate"><span class="pre">ebu-run</span>
+<span class="pre">--admin.conf=ebu_tt_live/examples/config/sproducer_ebuttd_direct.json</span></code>.</p>
+<p>IMPORTANT: the Encoder depends on some features of its input document.
+In particular, EBU-TT-D does not permit nested <code class="docutils literal notranslate"><span class="pre">div</span></code> or <code class="docutils literal notranslate"><span class="pre">span</span></code> elements,
+and the Encoder cannot deal with input documents that have these. One way
+to avoid this is to pass the input file through the Denester before encoding.</p>
+<p>If segments of EBU-TT-D are needed, use the Resequencer upstream of the
+Encoder to generate documents
+corresponding to the desired periods on the timeline, prior to encoding.</p>
+</section>
+<section id="element-remover">
+<h2>Element Remover<a class="headerlink" href="#element-remover" title="Permalink to this heading"></a></h2>
+<p>This script iterates through the EBU-TT Part 3 and EBU-TT Metadata elements
+in the document and removes any whose element name matches one of the names
+in the <code class="docutils literal notranslate"><span class="pre">remove_list</span></code>, supplied as a configuration parameter. The elements
+are removed regardless of their location in the hierarchy.</p>
+<p>The list is a comma separated list of names, with optional white space.</p>
+<p>For example, to remove all elements called <code class="docutils literal notranslate"><span class="pre">documentReadingSpeed</span></code> or
+<code class="docutils literal notranslate"><span class="pre">binaryData</span></code> set the <code class="docutils literal notranslate"><span class="pre">remove_list</span></code> to <code class="docutils literal notranslate"><span class="pre">documentReadingSpeed,</span> <span class="pre">binaryData</span></code>.</p>
+</section>
+<section id="validator">
+<h2>Validator<a class="headerlink" href="#validator" title="Permalink to this heading"></a></h2>
+<p>This script loads a file from the file system and attempts to validate it
+as the specified format, either EBU-TT Part 1, EBU-TT Part 3 or EBU-TT-D.
+By default the expected format is EBU-TT-D.</p>
+<p>Example command lines:</p>
+<p><code class="docutils literal notranslate"><span class="pre">validator</span> <span class="pre">-i</span> <span class="pre">path/to/ebu-tt-1-file-to-test.xml</span> <span class="pre">-f</span> <span class="pre">1</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">validator</span> <span class="pre">-i</span> <span class="pre">path/to/ebu-tt-3-file-to-test.xml</span> <span class="pre">-f</span> <span class="pre">3</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">validator</span> <span class="pre">-i</span> <span class="pre">path/to/ebu-tt-d-file-to-test.xml</span> <span class="pre">-f</span> <span class="pre">D</span></code></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="direct_carriage_mechanism.html" class="btn btn-neutral float-left" title="Direct Carriage Mechanism" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configurator.html" class="btn btn-neutral float-right" title="Configuration files and ebu-run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

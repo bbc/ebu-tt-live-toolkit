@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ebu_tt_live.documents.base &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview of the EBU-TT live toolkit.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ebu_tt_live.documents.base</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ebu_tt_live.documents.base</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.utils</span> <span class="kn">import</span> <span class="n">ComparableMixin</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live</span> <span class="kn">import</span> <span class="n">bindings</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.bindings</span> <span class="kn">import</span> <span class="n">_ebuttlm</span> <span class="k">as</span> <span class="n">ebuttlm</span>
+
+<span class="c1"># NOTE: Some of the code below includes handling of SMPTE time base, which was removed from version 1.0 of the specification.</span>
+
+<div class="viewcode-block" id="TimeBase"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.TimeBase">[docs]</a><span class="k">class</span> <span class="nc">TimeBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">SMPTE</span> <span class="o">=</span> <span class="s1">&#39;smpte&#39;</span>
+    <span class="n">MEDIA</span> <span class="o">=</span> <span class="s1">&#39;media&#39;</span>
+    <span class="n">CLOCK</span> <span class="o">=</span> <span class="s1">&#39;clock&#39;</span></div>
+
+
+<div class="viewcode-block" id="SubtitleDocument"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.SubtitleDocument">[docs]</a><span class="k">class</span> <span class="nc">SubtitleDocument</span><span class="p">(</span><span class="n">ComparableMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;This is an abstract class&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SubtitleDocument.validate"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.SubtitleDocument.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="DocumentSequence"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.DocumentSequence">[docs]</a><span class="k">class</span> <span class="nc">DocumentSequence</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class that facilitates most production-related workflows.</span>
+<span class="sd">    The document stream should maintain the consistency across critical document attributes. It should maintain</span>
+<span class="sd">    all sorts of counters and static information. It plays a key role in the validation of an outgoing stream of</span>
+<span class="sd">    subtitle documents.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DocumentSequence.new_document"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.DocumentSequence.new_document">[docs]</a>    <span class="k">def</span> <span class="nf">new_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new document with the stream defaults</span>
+<span class="sd">        :param args:</span>
+<span class="sd">        :param kwargs: parameter override to constructor</span>
+<span class="sd">        :return: a new document</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DocumentSequence.add_document"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.DocumentSequence.add_document">[docs]</a>    <span class="k">def</span> <span class="nf">add_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add the document to the sequence on the consumer side of things. This will put the document on the timeline</span>
+<span class="sd">        and validate the sequence in terms of timing resolution.</span>
+<span class="sd">        :param document:</span>
+<span class="sd">        :raises IncompatibleSequenceError meaning that the document cannot be part of this sequence for</span>
+<span class="sd">        it does not match the semantics of the sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DocumentSequence.get_document"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.DocumentSequence.get_document">[docs]</a>    <span class="k">def</span> <span class="nf">get_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve document by sequence number</span>
+<span class="sd">        :param seq_id:</span>
+<span class="sd">        :return: a document</span>
+<span class="sd">        :raises: KeyError meaning the document is not in the sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_document</span><span class="p">(</span><span class="n">seq_id</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DocumentSequence.fork"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.DocumentSequence.fork">[docs]</a>    <span class="k">def</span> <span class="nf">fork</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new stream with modified arguments.</span>
+<span class="sd">        :param args:</span>
+<span class="sd">        :param kwargs: parameter override to constructor</span>
+<span class="sd">        :return: a new documentstream instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="CloningDocumentSequence"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.CloningDocumentSequence">[docs]</a><span class="k">class</span> <span class="nc">CloningDocumentSequence</span><span class="p">(</span><span class="n">DocumentSequence</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class that picks up a document and creates an appropriate stream based on it.</span>
+<span class="sd">    Bear in mind continuation/revision or reproduction of a received document stream.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CloningDocumentSequence.create_from_document"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.CloningDocumentSequence.create_from_document">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">create_from_document</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">document</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract data from document</span>
+<span class="sd">        :param document:</span>
+<span class="sd">        :param args:</span>
+<span class="sd">        :param kwargs: parameter override to constructor</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="EBUTTDocumentBase"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase">[docs]</a><span class="k">class</span> <span class="nc">EBUTTDocumentBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">message_type_mapping</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="EBUTTDocumentBase.get_xml"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.get_xml">[docs]</a>    <span class="k">def</span> <span class="nf">get_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EBUTTDocumentBase.get_dom"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.get_dom">[docs]</a>    <span class="k">def</span> <span class="nf">get_dom</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EBUTTDocumentBase.create_from_xml"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.create_from_xml">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">create_from_xml</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">xml</span><span class="p">):</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="n">bindings</span><span class="o">.</span><span class="n">CreateFromDocument</span><span class="p">(</span>
+            <span class="n">xml_text</span><span class="o">=</span><span class="n">xml</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">ebuttlm</span><span class="o">.</span><span class="n">message_type</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">message_type_mapping</span><span class="p">[</span><span class="n">instance</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">type</span><span class="p">]</span><span class="o">.</span><span class="n">create_from_raw_binding</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EBUTTDocumentBase.create_from_raw_binding"><a class="viewcode-back" href="../../../ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.create_from_raw_binding">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">create_from_raw_binding</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

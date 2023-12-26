@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ebu_tt_live.node.denester &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview of the EBU-TT live toolkit.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ebu_tt_live.node.denester</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ebu_tt_live.node.denester</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AbstractCombinedNode</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.documents.ebutt3</span> <span class="kn">import</span> <span class="n">EBUTT3Document</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.bindings</span> <span class="kn">import</span> <span class="n">div_type</span><span class="p">,</span> <span class="n">p_type</span><span class="p">,</span> <span class="n">span_type</span><span class="p">,</span> <span class="n">ebuttdt</span><span class="p">,</span> \
+    <span class="n">style_type</span><span class="p">,</span> <span class="n">styling</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.bindings._ebuttm</span> <span class="kn">import</span> <span class="n">divMetadata_type</span><span class="p">,</span> <span class="n">pMetadata_type</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.errors</span> <span class="kn">import</span> <span class="n">UnexpectedSequenceIdentifierError</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="n">ElementTimes</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;ElementTimes&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;begin&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">])</span>
+<span class="n">ELEMENT_TIMES_KEY</span> <span class="o">=</span> <span class="s1">&#39;element_times&#39;</span>
+
+
+<div class="viewcode-block" id="DenesterNode"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode">[docs]</a><span class="k">class</span> <span class="nc">DenesterNode</span><span class="p">(</span><span class="n">AbstractCombinedNode</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to denest div and span elements.</span>
+
+<span class="sd">    Whereas EBU-TT Part 1 and EBU-TT Part 3 permit div elements</span>
+<span class="sd">    as children of div elements, and span elements of children of</span>
+<span class="sd">    span elements, such nested elements are not permitted in other</span>
+<span class="sd">    profiles, such as EBU-TT-D. This class provides methods for</span>
+<span class="sd">    flattening such nested elements, for example for use prior to</span>
+<span class="sd">    conversion to EBU-TT-D.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_sequence_identifier</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_expects</span> <span class="o">=</span> <span class="n">EBUTT3Document</span>
+    <span class="n">_provides</span> <span class="o">=</span> <span class="n">EBUTT3Document</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">node_id</span><span class="p">,</span>
+                 <span class="n">sequence_identifier</span><span class="p">,</span>
+                 <span class="n">consumer_carriage</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">producer_carriage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DenesterNode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">node_id</span><span class="o">=</span><span class="n">node_id</span><span class="p">,</span>
+            <span class="n">producer_carriage</span><span class="o">=</span><span class="n">producer_carriage</span><span class="p">,</span>
+            <span class="n">consumer_carriage</span><span class="o">=</span><span class="n">consumer_carriage</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_identifier</span> <span class="o">=</span> <span class="n">sequence_identifier</span>
+
+<div class="viewcode-block" id="DenesterNode.process_document"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.process_document">[docs]</a>    <span class="k">def</span> <span class="nf">process_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_document</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">document</span><span class="o">.</span><span class="n">sequence_identifier</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_identifier</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">UnexpectedSequenceIdentifierError</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_if_document_seen</span><span class="p">(</span><span class="n">document</span><span class="o">=</span><span class="n">document</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">limit_sequence_to_one</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+                <span class="c1"># Change the sequence identifier</span>
+                <span class="n">document</span><span class="o">.</span><span class="n">sequence_identifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence_identifier</span>
+
+                <span class="c1"># Do the denesting</span>
+                <span class="n">document</span> <span class="o">=</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">denest</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+                <span class="n">document</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">producer_carriage</span><span class="o">.</span><span class="n">emit_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">document</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s1">&#39;Ignoring duplicate document: </span><span class="si">{}</span><span class="s1">__</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">document</span><span class="o">.</span><span class="n">sequence_identifier</span><span class="p">,</span>
+                        <span class="n">document</span><span class="o">.</span><span class="n">sequence_number</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">producer_carriage</span><span class="o">.</span><span class="n">emit_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">document</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DenesterNode.denest"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.denest">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">denest</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+        <span class="n">divs</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">div</span>
+        <span class="n">unnested_divs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">binding</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ElementTimes</span><span class="p">(</span>
+                <span class="n">begin</span><span class="o">=</span><span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">begin</span><span class="p">,</span>
+                <span class="n">end</span><span class="o">=</span><span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="k">for</span> <span class="n">div</span> <span class="ow">in</span> <span class="n">divs</span><span class="p">:</span>
+            <span class="n">unnested_divs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">recurse</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">dataset</span><span class="p">))</span>
+        <span class="n">unnested_divs</span> <span class="o">=</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">combine_divs</span><span class="p">(</span><span class="n">unnested_divs</span><span class="p">)</span>
+        <span class="n">unnested_divs</span> <span class="o">=</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">check_p_regions</span><span class="p">(</span><span class="n">unnested_divs</span><span class="p">)</span>
+        <span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">div</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="c1"># Remove the old divs from the body&#39;s ordered content, before</span>
+        <span class="c1"># adding the new divs. Note that, as is, this will remove only</span>
+        <span class="c1"># div elements from the body, and append new divs, so if there</span>
+        <span class="c1"># are foreign namespace elements interleaved with the div</span>
+        <span class="c1"># children, the interleaving will break.</span>
+        <span class="c1"># A better pattern for this is in `recurse_span`, but there</span>
+        <span class="c1"># wasn&#39;t enough time to implement that here.</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">div_type</span><span class="p">):</span>
+                <span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="c1"># If we extend body.div then the new elements don&#39;t get added</span>
+        <span class="c1"># to the body&#39;s ordered content list, but extending body, they do.</span>
+        <span class="n">document</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">unnested_divs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">document</span></div>
+
+<div class="viewcode-block" id="DenesterNode.check_p_regions"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.check_p_regions">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">check_p_regions</span><span class="p">(</span><span class="n">divs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Discard p elements not in parent&#39;s region.</span>
+
+<span class="sd">        Keeps only p elements where the region matches the parent</span>
+<span class="sd">        div region or is None.</span>
+
+<span class="sd">        Then removes region from remaining P elements as it will be</span>
+<span class="sd">        the same as the div region</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">div</span> <span class="ow">in</span> <span class="n">divs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">div</span><span class="o">.</span><span class="n">region</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">div</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">div</span><span class="o">.</span><span class="n">p</span>
+                         <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">region</span> <span class="ow">is</span> <span class="kc">None</span>
+                         <span class="ow">or</span> <span class="n">p</span><span class="o">.</span><span class="n">region</span> <span class="o">==</span> <span class="n">div</span><span class="o">.</span><span class="n">region</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">div</span><span class="o">.</span><span class="n">p</span><span class="p">:</span>
+                    <span class="n">p</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Removes divs that no longer contain any P elements</span>
+        <span class="n">divs</span> <span class="o">=</span> <span class="p">[</span><span class="n">div</span> <span class="k">for</span> <span class="n">div</span> <span class="ow">in</span> <span class="n">divs</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">div</span><span class="o">.</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">divs</span></div>
+
+<div class="viewcode-block" id="DenesterNode.combine_divs"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.combine_divs">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">combine_divs</span><span class="p">(</span><span class="n">divs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Combine the list of unnested divs.</span>
+
+<span class="sd">        Takes the list of unnested divs, where one was created to</span>
+<span class="sd">        contain each P element, and attempts to combine them.</span>
+
+<span class="sd">        A list of new divs is created, the first element being the</span>
+<span class="sd">        first div in the list of divs passed in.</span>
+<span class="sd">        Iterating through the passed in divs, where a div has the</span>
+<span class="sd">        same attributes as the previous one,</span>
+<span class="sd">        add its P list to the current new div&#39;s P list.</span>
+
+<span class="sd">        Where the current div does not match, add it to the list of</span>
+<span class="sd">        new divs and increment j, making it the current new div</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_divs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">divs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_divs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">divs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">divs</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">div_attr</span><span class="p">(</span><span class="n">divs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> \
+                   <span class="n">DenesterNode</span><span class="o">.</span><span class="n">div_attr</span><span class="p">(</span><span class="n">divs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">new_divs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">divs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">new_divs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">divs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">new_divs</span></div>
+
+<div class="viewcode-block" id="DenesterNode.div_attr"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.div_attr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">div_attr</span><span class="p">(</span><span class="n">div</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a specific subset of div attributes to a dict.&quot;&quot;&quot;</span>
+        <span class="n">div_attributes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">style</span>
+        <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">lang</span>
+        <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">region</span>
+        <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">begin</span>
+        <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">end</span>
+        <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">metadata</span>
+        <span class="k">return</span> <span class="n">div_attributes</span></div>
+
+<div class="viewcode-block" id="DenesterNode.merge_attr"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.merge_attr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">merge_attr</span><span class="p">(</span><span class="n">parent_attr</span><span class="p">,</span> <span class="n">div_attributes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merge two sets of attributes.</span>
+
+<span class="sd">        This ensures they are correctly</span>
+<span class="sd">        inherited in the final div.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">merged_attributes</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;styles&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;begin&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">],</span> <span class="n">timedelta</span><span class="p">)</span> \
+           <span class="ow">and</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">timedelta</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">],</span> <span class="n">timedelta</span><span class="p">)</span> \
+           <span class="ow">and</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">timedelta</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">],</span> <span class="n">timedelta</span><span class="p">)</span> \
+           <span class="ow">and</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">timedelta</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">],</span> <span class="n">timedelta</span><span class="p">)</span> \
+           <span class="ow">and</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">timedelta</span>
+
+        <span class="k">if</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+                <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+                <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> \
+                <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> \
+                <span class="k">if</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> \
+                <span class="k">else</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+                <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+                <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">DenesterNode</span><span class="o">.</span><span class="n">calculate_end_times</span><span class="p">(</span>
+                    <span class="n">parent_attr</span><span class="p">,</span>
+                    <span class="n">div_attributes</span><span class="p">,</span>
+                    <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> \
+                <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">merged_metadata</span> <span class="o">=</span> <span class="n">divMetadata_type</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">DenesterNode</span><span class="o">.</span><span class="n">_extend_element</span><span class="p">(</span>
+                    <span class="n">merged_metadata</span><span class="p">,</span>
+                    <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">DenesterNode</span><span class="o">.</span><span class="n">_extend_element</span><span class="p">(</span>
+                    <span class="n">merged_metadata</span><span class="p">,</span>
+                    <span class="n">div_attributes</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="n">merged_attributes</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_metadata</span>
+
+        <span class="k">return</span> <span class="n">merged_attributes</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_extend_element</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">ordered_content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append each new element to the target.</span>
+
+<span class="sd">        It seems like you should just be able to append each element</span>
+<span class="sd">        in the ordered_content, but that doesn&#39;t work for foreign namespace</span>
+<span class="sd">        content where there&#39;s no binding. Happily, appending the .value</span>
+<span class="sd">        of each element works for everything.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ordered_content</span><span class="p">:</span>
+            <span class="n">element</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DenesterNode.calculate_end_times"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.calculate_end_times">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">calculate_end_times</span><span class="p">(</span><span class="n">parent_attr</span><span class="p">,</span> <span class="n">child_attr</span><span class="p">,</span> <span class="n">time_sync</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">child_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> \
+           <span class="ow">and</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> \
+           <span class="ow">and</span> <span class="n">time_sync</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">time_sync</span><span class="o">+</span><span class="n">child_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">child_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">parent_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span><span class="o">-</span><span class="n">child_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">child_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="DenesterNode.create_compatible_time"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.create_compatible_time">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_compatible_time</span><span class="p">(</span><span class="n">timing_type</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">timing_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_timing_type</span><span class="p">(</span><span class="n">timing_type</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_calculate_pushed_end</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+        <span class="n">earliest_pushed_end</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">syncbase</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">])):</span>
+            <span class="n">this_end</span> <span class="o">=</span> <span class="n">earliest_pushed_end</span>
+            <span class="c1"># This end time is calculated relative to the parent</span>
+            <span class="c1"># (previous) element&#39;s</span>
+            <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">this_end</span> <span class="o">=</span> \
+                    <span class="n">syncbase</span> <span class="o">+</span> <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="o">.</span><span class="n">timedelta</span>
+
+            <span class="k">if</span> <span class="n">earliest_pushed_end</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">this_end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">earliest_pushed_end</span> <span class="o">=</span> <span class="n">this_end</span>
+            <span class="k">elif</span> <span class="n">earliest_pushed_end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">this_end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> \
+                    <span class="ow">and</span> <span class="n">this_end</span> <span class="o">&lt;</span> <span class="n">earliest_pushed_end</span><span class="p">:</span>
+                <span class="n">earliest_pushed_end</span> <span class="o">=</span> <span class="n">this_end</span>
+
+            <span class="c1"># calculate the sync base for the next end time</span>
+            <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">begin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">syncbase</span> <span class="o">+=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">begin</span><span class="o">.</span><span class="n">timedelta</span>
+
+        <span class="k">return</span> <span class="n">earliest_pushed_end</span>
+
+<div class="viewcode-block" id="DenesterNode.recurse"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.recurse">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">recurse</span><span class="p">(</span><span class="n">div</span><span class="p">,</span>
+                <span class="n">dataset</span><span class="p">,</span>
+                <span class="n">merged_attr</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;styles&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                    <span class="s2">&quot;begin&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="kc">None</span>
+                    <span class="p">}):</span>
+        <span class="n">merged_attr</span> <span class="o">=</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">merge_attr</span><span class="p">(</span>
+            <span class="n">merged_attr</span><span class="p">,</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">div_attr</span><span class="p">(</span><span class="n">div</span><span class="p">))</span>
+        <span class="n">new_div_ordered_content</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">ElementTimes</span><span class="p">(</span><span class="n">begin</span><span class="o">=</span><span class="n">div</span><span class="o">.</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">div</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">pushed_end_time</span> <span class="o">=</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">_calculate_pushed_end</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">div</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">div_type</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">div</span><span class="o">.</span><span class="n">region</span> <span class="o">!=</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">region</span> \
+                   <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">region</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> \
+                   <span class="ow">and</span> <span class="n">div</span><span class="o">.</span><span class="n">region</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">new_div_ordered_content</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                    <span class="n">DenesterNode</span><span class="o">.</span><span class="n">recurse</span><span class="p">(</span>
+                        <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">merged_attr</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">divMetadata_type</span><span class="p">):</span>
+                <span class="c1"># We handle metadata like an attribute and merge it, so</span>
+                <span class="c1"># we don&#39;t need to add it to new_div_ordered_content</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">p_type</span><span class="p">):</span>
+                <span class="c1"># We make a separate new div for every p, and later on,</span>
+                <span class="c1"># merge divs that look the same</span>
+                <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ElementTimes</span><span class="p">(</span><span class="n">begin</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">pushed_end_time</span> <span class="o">=</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">_calculate_pushed_end</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+                <span class="c1"># p elements can contain 0 or 1 metadata child elements, and</span>
+                <span class="c1"># then a sequence of character content, span elements or br</span>
+                <span class="c1"># elements, as well as any foreign elements.</span>
+                <span class="c1"># The way PyXB handles the metadata element is that it is in</span>
+                <span class="c1"># the orderedContent(), as the first element, but it cannot</span>
+                <span class="c1"># be added back to the element by extending the element with</span>
+                <span class="c1"># the metadata object in an ordered list of elements. Instead</span>
+                <span class="c1"># we need to look after it separately and set it before</span>
+                <span class="c1"># extending the element with the other ordered content.</span>
+                <span class="n">new_ordered_content</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">metadata</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">ic</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">span_type</span><span class="p">):</span>
+                        <span class="n">new_ordered_content</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                            <span class="n">DenesterNode</span><span class="o">.</span><span class="n">recurse_span</span><span class="p">(</span>
+                                <span class="n">ic</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">dataset</span><span class="p">))</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">pMetadata_type</span><span class="p">):</span>
+                        <span class="n">metadata</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">value</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">new_ordered_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                <span class="c1"># Removing elements has to be done in two places. pyxb</span>
+                <span class="c1"># maintains a list of elements of each plural type, as well as</span>
+                <span class="c1"># a list of ordered content that specifies the overall order</span>
+                <span class="c1"># of elements.</span>
+                <span class="c1"># We need to clear off both otherwise one or other will</span>
+                <span class="c1"># come back to haunt us later, for example generating orphan</span>
+                <span class="c1"># elements warnings for elements in the ordered content list</span>
+                <span class="c1"># but not in the plural binding list for their type.</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">span</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">br</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">()</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="c1"># If we have metadata we must set it before extending, because</span>
+                <span class="c1"># it has to be the first child element (as per the XSD)</span>
+                <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_ordered_content</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">span</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">span</span><span class="p">:</span>
+                    <span class="c1"># The following line fails if the parent p element&#39;s</span>
+                    <span class="c1"># computed begin time has been</span>
+                    <span class="c1"># advanced to its earliest child&#39;s computed begin time and</span>
+                    <span class="c1"># the p&#39;s parent div has a different computed begin time.</span>
+                    <span class="c1"># This situation arises especially when the body element</span>
+                    <span class="c1"># has a dur but no begin or end times. This may well be</span>
+                    <span class="c1"># some kind of bug or incorrect behaviour, but it&#39;s hard</span>
+                    <span class="c1"># to sort out without breaking a bunch of stuff.</span>
+                    <span class="n">p_begin_time</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">computed_begin_time</span>
+                    <span class="n">p_end_time</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">computed_end_time</span>
+
+                    <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">compBegin</span> <span class="o">!=</span> <span class="n">p_begin_time</span><span class="p">:</span>
+                        <span class="n">span</span><span class="o">.</span><span class="n">compBegin</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">compBegin</span> <span class="o">-</span> <span class="n">p_begin_time</span>
+                        <span class="n">span</span><span class="o">.</span><span class="n">begin</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_timing_type</span><span class="p">(</span>
+                            <span class="n">span</span><span class="o">.</span><span class="n">compBegin</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">span</span><span class="o">.</span><span class="n">compBegin</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">compBegin</span> <span class="o">-</span> <span class="n">p_begin_time</span>
+
+                    <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">compEnd</span> <span class="o">!=</span> <span class="n">p_end_time</span> <span class="ow">or</span> \
+                       <span class="n">span</span><span class="o">.</span><span class="n">compEnd</span> <span class="o">!=</span> <span class="n">pushed_end_time</span><span class="p">:</span>
+                        <span class="c1"># Two reasons we might be here.</span>
+                        <span class="c1"># Normal case - our span end time is different</span>
+                        <span class="c1"># from the parent&#39;s end time, so we&#39;d better specify.</span>
+                        <span class="c1"># OR</span>
+                        <span class="c1"># Special case - here we have the same computed time as</span>
+                        <span class="c1"># the parent, but the parent didn&#39;t push it onto us, so</span>
+                        <span class="c1"># we must be the source of it.</span>
+                        <span class="n">span</span><span class="o">.</span><span class="n">compEnd</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">compEnd</span> <span class="o">-</span> <span class="n">p_begin_time</span>
+                        <span class="n">span</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_timing_type</span><span class="p">(</span><span class="n">span</span><span class="o">.</span><span class="n">compEnd</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">span</span><span class="o">.</span><span class="n">compEnd</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">span</span><span class="o">.</span><span class="n">compEnd</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">compEnd</span> <span class="o">-</span> <span class="n">p_begin_time</span>
+
+                <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+                <span class="n">new_div</span> <span class="o">=</span> <span class="n">div_type</span><span class="p">(</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="n">div</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                    <span class="n">style</span><span class="o">=</span><span class="kc">None</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span>
+                    <span class="k">else</span> <span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;styles&quot;</span><span class="p">],</span>
+                    <span class="n">begin</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">create_compatible_time</span><span class="p">(</span>
+                        <span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">],</span>
+                        <span class="n">dataset</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                    <span class="k">else</span> <span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;begin&quot;</span><span class="p">],</span>
+                    <span class="n">end</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">create_compatible_time</span>
+                    <span class="p">(</span>
+                        <span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">],</span>
+                        <span class="n">dataset</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                    <span class="k">else</span> <span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">],</span>
+                    <span class="n">lang</span><span class="o">=</span><span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;lang&quot;</span><span class="p">],</span>
+                    <span class="n">region</span><span class="o">=</span><span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">],</span>
+                    <span class="n">metadata</span><span class="o">=</span><span class="n">merged_attr</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="n">new_div</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">new_div_ordered_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_div</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># some foreign type we don&#39;t recognise</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s1">&#39;[denester] Dropping an unexpected element </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+
+        <span class="n">dataset</span><span class="p">[</span><span class="n">ELEMENT_TIMES_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">new_div_ordered_content</span></div>
+
+<div class="viewcode-block" id="DenesterNode.recurse_span"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.recurse_span">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">recurse_span</span><span class="p">(</span><span class="n">span</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">span_styles</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">style</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">span_styles</span> <span class="o">=</span> <span class="n">span_styles</span><span class="o">+</span><span class="n">span</span><span class="o">.</span><span class="n">style</span>
+        <span class="c1"># We&#39;re going to create a new ordered list of content for this span,</span>
+        <span class="c1"># and return that. If any of the children is a span, we&#39;re going to</span>
+        <span class="c1"># extract its content and create a new span for it, appending it to</span>
+        <span class="c1"># the ordered list of content</span>
+        <span class="n">new_ordered_content</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># If the span contains a mix of content like character content and br</span>
+        <span class="c1"># elements we can simply append each of those within a single span,</span>
+        <span class="c1"># but we need to close that span if we encounter a child span.</span>
+        <span class="c1"># Maintain a working span to which we will append the non-span children</span>
+        <span class="c1"># in order. Start without one, and make it whenever we need it.</span>
+        <span class="n">working_span</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="n">span</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">span_type</span><span class="p">):</span>
+                <span class="c1"># Stash the current working span in the ordered content list</span>
+                <span class="k">if</span> <span class="n">working_span</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">new_ordered_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">working_span</span><span class="p">)</span>
+                    <span class="n">working_span</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="c1"># Extend the ordered content list recursively</span>
+                <span class="n">new_ordered_content</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                    <span class="n">DenesterNode</span><span class="o">.</span><span class="n">recurse_span</span><span class="p">(</span>
+                        <span class="n">sc</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">span_styles</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># We have a non-span child</span>
+                <span class="k">if</span> <span class="n">working_span</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">working_span</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># We have no working span, so make one, and set it up</span>
+                    <span class="c1"># with the right times and styles</span>
+                    <span class="n">working_span</span> <span class="o">=</span> <span class="n">span_type</span><span class="p">(</span>
+                        <span class="n">sc</span><span class="o">.</span><span class="n">value</span>
+                    <span class="p">)</span>
+
+                    <span class="n">working_span</span><span class="o">.</span><span class="n">compBegin</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">computed_begin_time</span>
+                    <span class="n">working_span</span><span class="o">.</span><span class="n">compEnd</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">computed_end_time</span>
+
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">span_styles</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">working_span</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> \
+                            <span class="n">DenesterNode</span><span class="o">.</span><span class="n">compute_span_merged_styles</span><span class="p">(</span>
+                                <span class="n">span_styles</span><span class="p">,</span>
+                                <span class="n">dataset</span><span class="p">)</span><span class="o">.</span><span class="n">id</span>
+                    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">span_styles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">working_span</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">span_styles</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">working_span</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># If we have a working span we haven&#39;t stopped working on, we</span>
+        <span class="c1"># won&#39;t have appended it to our ordered content list, so add it now.</span>
+        <span class="k">if</span> <span class="n">working_span</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_ordered_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">working_span</span><span class="p">)</span>
+
+        <span class="c1"># We&#39;re going to add new versions of the contents of this span later,</span>
+        <span class="c1"># so we don&#39;t need anything in it, so clear it down.</span>
+        <span class="n">span</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">new_ordered_content</span></div>
+
+<div class="viewcode-block" id="DenesterNode.compute_span_merged_styles"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.compute_span_merged_styles">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">compute_span_merged_styles</span><span class="p">(</span><span class="n">span_styles</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Combine all the nested styles of the span to create a new one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_style</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">styles</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">styling</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">style_name</span> <span class="ow">in</span> <span class="n">span_styles</span><span class="p">:</span>  <span class="c1"># go through styles in xml</span>
+                <span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">styling</span><span class="o">.</span><span class="n">style</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">style</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">style_name</span><span class="p">:</span>
+                        <span class="n">styles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+        <span class="n">new_style</span> <span class="o">=</span> <span class="n">style_type</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">span_styles</span><span class="p">),</span>
+            <span class="n">backgroundColor</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span>
+                <span class="n">styles</span><span class="p">,</span>
+                <span class="s2">&quot;backgroundColor&quot;</span><span class="p">),</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span>
+                <span class="n">styles</span><span class="p">,</span>
+                <span class="s2">&quot;color&quot;</span><span class="p">),</span>
+            <span class="n">fontFamily</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span>
+                <span class="n">styles</span><span class="p">,</span>
+                <span class="s2">&quot;fontFamily&quot;</span><span class="p">),</span>
+            <span class="n">fontSize</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">calculate_font_size</span><span class="p">(</span><span class="n">styles</span><span class="p">),</span>
+            <span class="n">fontWeight</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span><span class="n">styles</span><span class="p">,</span> <span class="s2">&quot;fontWeight&quot;</span><span class="p">),</span>
+            <span class="n">lineHeight</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span><span class="n">styles</span><span class="p">,</span> <span class="s2">&quot;lineHeight&quot;</span><span class="p">),</span>
+            <span class="n">linePadding</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span>
+                <span class="n">styles</span><span class="p">,</span>
+                <span class="s2">&quot;linePadding&quot;</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span><span class="n">styles</span><span class="p">,</span> <span class="s2">&quot;padding&quot;</span><span class="p">),</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span><span class="n">styles</span><span class="p">,</span> <span class="s2">&quot;style&quot;</span><span class="p">),</span>
+            <span class="n">textAlign</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span><span class="n">styles</span><span class="p">,</span> <span class="s2">&quot;textAlign&quot;</span><span class="p">),</span>
+            <span class="n">textDecoration</span><span class="o">=</span><span class="n">DenesterNode</span><span class="o">.</span><span class="n">get_value_from_style</span><span class="p">(</span>
+                <span class="n">styles</span><span class="p">,</span>
+                <span class="s2">&quot;textDecoration&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">new_style</span> <span class="o">=</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">create_new_style</span><span class="p">(</span><span class="n">new_style</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_style</span></div>
+
+<div class="viewcode-block" id="DenesterNode.create_new_style"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.create_new_style">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_new_style</span><span class="p">(</span><span class="n">new_style</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the style is the same as an existing style.</span>
+
+<span class="sd">        Comparison checks the attributes and the name.</span>
+<span class="sd">        A style is considered the same if either the attributes OR</span>
+<span class="sd">        the name are the same.</span>
+<span class="sd">        If not, a new style is created and added to the dataset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">styling</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># not sure how we can get here, but if so, make a styling</span>
+            <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">styling</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">styling</span><span class="o">.</span><span class="n">style</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">new_style</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">style</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">new_style</span>
+            <span class="k">if</span> <span class="n">new_style</span><span class="o">.</span><span class="n">check_equal</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+                <span class="n">new_style</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">id</span>
+                <span class="k">return</span> <span class="n">new_style</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;document&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">styling</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_style</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_style</span></div>
+
+<div class="viewcode-block" id="DenesterNode.calculate_font_size"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.calculate_font_size">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">calculate_font_size</span><span class="p">(</span><span class="n">styles</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the font size for a merged style.</span>
+
+<span class="sd">        Using the sizes of the styles it combines.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">font_size</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">styles</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">font_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># No existing font size</span>
+                <span class="n">font_size</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">fontSize</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span>
+                <span class="n">style</span><span class="o">.</span><span class="n">fontSize</span><span class="p">,</span>
+                <span class="n">ebuttdt</span><span class="o">.</span><span class="n">percentageFontSizeType</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span> \
+                    <span class="ow">and</span> <span class="n">style</span><span class="o">.</span><span class="n">fontSize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># Font size is in c/px</span>
+                <span class="n">font_size</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">fontSize</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span>
+                <span class="n">style</span><span class="o">.</span><span class="n">fontSize</span><span class="p">,</span>
+                <span class="n">ebuttdt</span><span class="o">.</span><span class="n">percentageFontSizeType</span><span class="p">)</span> \
+                    <span class="ow">and</span> <span class="n">font_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Font size in percent, there is an existing font size</span>
+                <span class="c1"># (may not be percent)</span>
+                <span class="n">font_size</span> <span class="o">=</span> <span class="n">DenesterNode</span><span class="o">.</span><span class="n">calculate_percentage_font_size</span><span class="p">(</span>
+                    <span class="n">font_size</span><span class="p">,</span> <span class="n">style</span><span class="o">.</span><span class="n">fontSize</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">font_size</span></div>
+
+<div class="viewcode-block" id="DenesterNode.calculate_percentage_font_size"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.calculate_percentage_font_size">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">calculate_percentage_font_size</span><span class="p">(</span><span class="n">current_font_size</span><span class="p">,</span> <span class="n">nested_font_size</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate percentage of another font size.</span>
+
+<span class="sd">        For example 50% of 25%, or 30% of 100px</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">current_font_size</span><span class="p">,</span> <span class="n">ebuttdt</span><span class="o">.</span><span class="n">percentageFontSizeType</span><span class="p">):</span>
+            <span class="n">stripped_current_font_size</span> <span class="o">=</span> <span class="n">current_font_size</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+            <span class="n">stripped_nested_font_size</span> <span class="o">=</span> <span class="n">nested_font_size</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+            <span class="n">calculated_font_size</span> <span class="o">=</span> \
+                <span class="nb">float</span><span class="p">(</span><span class="n">stripped_nested_font_size</span><span class="p">)</span> \
+                <span class="o">*</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stripped_current_font_size</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">ebuttdt</span><span class="o">.</span><span class="n">PercentageFontSizeType</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="si">{0:g}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calculated_font_size</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">current_font_size</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">current_font_size</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span>
+                <span class="n">stripped_current_font_size</span> <span class="o">=</span> <span class="n">current_font_size</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;px&quot;</span><span class="p">)</span>
+                <span class="n">stripped_nested_font_size</span> <span class="o">=</span> <span class="n">nested_font_size</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+                <span class="n">calculated_font_size</span> <span class="o">=</span> \
+                    <span class="nb">float</span><span class="p">(</span><span class="n">stripped_nested_font_size</span><span class="p">)</span> \
+                    <span class="o">*</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stripped_current_font_size</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0:g}</span><span class="s1">px&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calculated_font_size</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># current_font_size[-1:] == &quot;c&quot;:</span>
+                <span class="n">stripped_current_font_size</span> <span class="o">=</span> <span class="n">current_font_size</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+                <span class="n">stripped_nested_font_size</span> <span class="o">=</span> <span class="n">nested_font_size</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+                <span class="n">calculated_font_size</span> <span class="o">=</span> \
+                    <span class="nb">float</span><span class="p">(</span><span class="n">stripped_nested_font_size</span><span class="p">)</span> \
+                    <span class="o">*</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stripped_current_font_size</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0:g}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">calculated_font_size</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DenesterNode.get_value_from_style"><a class="viewcode-back" href="../../../ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.get_value_from_style">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_value_from_style</span><span class="p">(</span><span class="n">styles</span><span class="p">,</span> <span class="n">style_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the highest priority style from the styles of the span.</span>
+
+<span class="sd">        Iterates through the tyles, keeping the value from the deepest-nested</span>
+<span class="sd">        style (highest priority) for each attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># list in reverse-priority order, so last item (most important)</span>
+        <span class="c1"># values inherited</span>
+        <span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">styles</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">style_name</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">style_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

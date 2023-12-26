@@ -16,6 +16,18 @@ import pytest
 import os
 import unittest
 
+
+# if os.getenv('_PYTEST_RAISE', "0") != "0":
+#
+#     @pytest.hookimpl(tryfirst=True)
+#     def pytest_exception_interact(call):
+#         raise call.excinfo.value
+#
+#     @pytest.hookimpl(tryfirst=True)
+#     def pytest_internalerror(excinfo):
+#         raise excinfo.value
+
+
 denester_node = DenesterNode(
     node_id = "denester_node",
     sequence_identifier = "denestedSequenceT"
@@ -220,6 +232,11 @@ def when_converter_set_to_use_fixed_offset_smpte_converter(test_context):
             )
     else:
         print('tried making a FixedOffsetSMPTEConvverter but document timebase was not SMPTE')
+
+@when('the document\'s timeBase is set to <timebase>')
+def when_document_timebase(template_dict, timebase):
+    # timeBase in ebutt1_template.xml is 'media' by default
+    template_dict['timeBase'] = timebase
 
 @when('the EBU-TT-1 document is converted to EBU-TT-Live')
 def when_ebutt1_converted_to_ebutt3(test_context, template_file, template_dict):

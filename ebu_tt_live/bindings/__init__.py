@@ -1539,6 +1539,11 @@ class d_tt_type(SemanticDocumentMixin, raw.d_tt_type):
 
         super(d_tt_type, self)._validateBinding_vx()
 
+    def get_timing_type(self, timedelta_in):
+        if self.timeBase == 'media':
+            return ebuttdt.FullClockTimingType(timedelta_in)
+        else:
+            log.error('d_tt_type.get_timing_type() where self.timeBase == {}'.format(self.timeBase))
 
 raw.d_tt_type._SetSupersedingClass(d_tt_type)
 
@@ -1942,6 +1947,10 @@ class d_span_type(
             parent_binding=None):
         self._semantic_preprocess_timing(
              dataset=dataset, element_content=element_content)
+        self._semantic_collect_applicable_styles(
+            dataset=dataset,
+            style_type=style_type,
+            parent_binding=parent_binding)
 
     def _semantic_after_traversal(
             self,
@@ -2040,6 +2049,9 @@ _document_specific_types = {
         raw.head_type: head_type,
         raw.layout: layout,
         raw.body_type: body_type,
+        },
+    'ebuttd': {
+        raw.d_tt_type: d_tt_type,
         },
     }
 

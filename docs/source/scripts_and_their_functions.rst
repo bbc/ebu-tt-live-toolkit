@@ -226,6 +226,9 @@ This script loads a file from the file system and attempts to validate it
 as the specified format, either EBU-TT Part 1, EBU-TT Part 3 or EBU-TT-D.
 By default the expected format is EBU-TT-D.
 
+Additionally, EBU-TT-D documents can be validated against the
+`IMSC-HRM <https://www.w3.org/TR/imsc-hrm/>`_ by adding the ``--hrm`` flag.
+
 Example command lines:
 
 ``validator -i path/to/ebu-tt-1-file-to-test.xml -f 1``
@@ -233,3 +236,5 @@ Example command lines:
 ``validator -i path/to/ebu-tt-3-file-to-test.xml -f 3``
 
 ``validator -i path/to/ebu-tt-d-file-to-test.xml -f D``
+
+``validator -i path/to/ebu-tt-d-file-to-test.xml -f D --hrm``

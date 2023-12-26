@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt:tt ttp:timeBase="media" xml:lang="en-GB" xmlns:ebuttm="urn:ebu:tt:metadata" xmlns:ebuttp="urn:ebu:tt:parameters" xmlns:tt="http://www.w3.org/ns/ttml" xmlns:ttp="http://www.w3.org/ns/ttml#parameter" xmlns:tts="http://www.w3.org/ns/ttml#styling" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+    <tt:head>
+        <tt:metadata>
+            <ebuttm:documentMetadata/>
+        </tt:metadata>
+        <tt:styling>
+            <tt:style xml:id="s0"/>
+        </tt:styling>
+        <tt:layout>
+            <tt:region xml:id="r0" tts:origin="10% 10%" tts:extent="80% 80%"></tt:region>
+        </tt:layout>
+    </tt:head>
+    <tt:body>
+        <tt:div>
+            <tt:p xml:id="ID001" begin="01:23:45.670" end="01:23:45.890">It only took me six days.</tt:p>
+        </tt:div>
+    </tt:body>
+</tt:tt>
+

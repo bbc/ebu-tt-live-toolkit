@@ -70,7 +70,7 @@ class UserInputServerFactory(WebSocketServerFactory):
             self._clients.remove(client)
 
     def listen(self):
-        listenWS(self)
+        return listenWS(self)
 
 
 class EBUWebsocketProtocolMixin(object):
@@ -299,6 +299,7 @@ class BroadcastFactoryCommon(object):
 class BroadcastServerFactory(BroadcastFactoryCommon, WebSocketServerFactory):
 
     real_port_number = None
+    listener = None
 
     def __init__(self, url=None, producer=None, consumer=None):
         super(BroadcastServerFactory, self).__init__(url, protocols=[13])
@@ -331,11 +332,14 @@ class BroadcastServerFactory(BroadcastFactoryCommon, WebSocketServerFactory):
             self._consumer.unregister(client)
 
     def stopFactory(self):
+        if self.listener is not None:
+            self.listener.stopListening()
+            self.listener = None
         self._stop_producer()
 
     def listen(self):
-        listener = listenWS(self)
-        self.real_port_number = listener.getHost().port
+        self.listener = listenWS(self)
+        self.real_port_number = self.listener.getHost().port
         if self.producer:
             self.producer.real_port_number = self.real_port_number
         if self.consumer:
@@ -383,6 +387,7 @@ class BroadcastClientProtocol(EBUWebsocketProtocolMixin, WebSocketClientProtocol
 
     def connectionLost(self, reason):
         WebSocketClientProtocol.connectionLost(self, reason)
+        WebSocketClientProtocol.transport.stopListening()
         self.factory.unregister(self)
 
 
@@ -550,7 +555,7 @@ class LegacyBroadcastServerFactory(WebSocketServerFactory):
         self.unregisterProducer()
 
     def listen(self):
-        listenWS(self)
+        return listenWS(self)
 
 
 class LegacyBroadcastClientProtocol(WebSocketClientProtocol):

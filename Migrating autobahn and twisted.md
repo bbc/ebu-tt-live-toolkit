@@ -33,6 +33,12 @@ one used in the project is `^20.0.0`.
 The last version of Twisted to support Python 2.7 was 20.3.0. The current version is 24.3.0,
 and the one used in the project is `^23.8.0`.
 
+## Documentation
+
+TDD in Twisted: https://docs.twisted.org/en/stable/core/howto/trial.html
+
+WebSocket programming in Autobahn: https://autobahn.readthedocs.io/en/latest/websocket/programming.html
+
 ## Skipped tests
 
 The skipped tests are in `ebu_tt_live/twisted/test/test_twisted_websocket.py`.
@@ -89,6 +95,10 @@ successfully, but fails in this method, complaining of some kind of unexpected o
 ## What has changed, and what are the errors?
 
 ### First error
+
+The first error demonstrates that seemingly all the test steps passed until the call to `_disconnect()`.
+In fact there are only two more lines of test left, which are there to asset that `unregister()` methods
+on the consumer and the producer are called with the right objects.
 
 ```
 ebu_tt_live/twisted/test/test_twisted_websocket.py F
@@ -435,4 +445,5 @@ E   twisted.trial.unittest.FailTest: 3 != 0
 Which is right, because the server hasn't processed the close message, so it's not showing as STATE_CLOSED.
 
 Next step:
-* see if the mechanism for closing connections has closed somehow...
+* see if the mechanism for closing connections has changed somehow...
+* work out if the problem is with the code in `_disconnect()`, or the setup code before it, or something else entirely.

@@ -1,5 +1,5 @@
 [tool.poetry]
-version = '3.0.2'
+version = '3.0.3'
 name = 'ebu-tt-live'
 description = 'EBU-TT Part 3 library implementing Specification EBU-3370'
 license = "BSD3"

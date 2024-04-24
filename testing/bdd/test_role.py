@@ -1,6 +1,6 @@
 from pytest_bdd import scenarios, then
 
-
+from ebu_tt_live.bindings import div_type
 
 scenarios('features/metadata/rolemixin_feature.feature')
 
@@ -9,8 +9,8 @@ def then_computed_style_value_is(elem_id, computed_value, test_context):
     document = test_context['document']
     elem = document.get_element_by_id(elem_id)
     if computed_value == '':
-        assert elem.computed_role is None
+        assert elem.computed_roles is None
     else:
-        assert elem.computed_role == computed_value
+        assert elem.computed_roles == [computed_value]
 
 

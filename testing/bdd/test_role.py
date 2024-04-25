@@ -11,6 +11,7 @@ def then_computed_style_value_is(elem_id, computed_value, test_context):
     if computed_value == '':
         assert elem.computed_roles is None
     else:
-        assert elem.computed_roles == [computed_value]
+        expected_roles = set(computed_value.split(", "))
+        assert elem.computed_roles == expected_roles
 
 

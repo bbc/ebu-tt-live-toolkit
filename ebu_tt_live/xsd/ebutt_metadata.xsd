@@ -15,6 +15,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
     xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
 	<xs:import namespace="urn:ebu:tt:datatypes" schemaLocation="ebutt_datatypes.xsd"/>
 	<xs:import namespace="http://www.w3.org/ns/ttml#metadata" schemaLocation="metadata.xsd"/>
+	<xs:attribute name="role" type="xs:NMTOKENS"/>
 	<xs:complexType name="binaryData_type">
 		<xs:annotation>
 			<xs:documentation>Binary data of the input formats or associated documents used to
@@ -561,6 +562,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			<xs:element ref="ttm:title" minOccurs="0"/>
 			<xs:element ref="ttm:desc" minOccurs="0"/>
 		</xs:sequence>
+		<xs:attribute ref="ttm:role"/>
 	</xs:complexType>
 
 	<xs:complexType name="headMetadata_type">

@@ -580,24 +580,29 @@ class LiveStyledElementMixin(StyledElementMixin):
 # removed from version 1.0 of the specification.
 
 class RoleMixin(object):
-    _computed_roles = None
+    _computed_roles = set()
+
     def _semantic_compute_roles(self, dataset):
+        current_roles = set()
         if self.role is not None:
-            self._computed_roles = self.role
-        else:
-            if dataset.get('metadata_roles') is not None and len(dataset['metadata_roles']) > 0:
-                self._computed_roles = dataset['metadata_roles'][-1]
-            else:
-                self._computed_roles = None
+            current_roles.update(self.role)
+
+        if dataset.get('role_stack') and dataset['role_stack']:
+            current_roles.update(dataset['role_stack'][-1])
+
+        self._computed_roles = current_roles
 
     def _semantic_push_computed_roles(self, dataset):
-        if dataset.get('metadata_roles') is None:
-            dataset['metadata_roles'] = []
-        dataset['metadata_roles'].append(self._computed_roles)
+        if dataset.get('role_stack') is None:
+            dataset['role_stack'] = []
+        dataset['role_stack'].append(self._computed_roles)
 
     def _semantic_pop_computed_roles(self, dataset):
-        if dataset.get('metadata_roles') is not None and len(dataset['metadata_roles']) > 0:
-            dataset['metadata_roles'].pop()
+        if dataset.get('role_stack') and len(dataset['role_stack']) > 0:
+            dataset['role_stack'].pop()
+        if dataset.get('metadata_roles') and len(dataset['metadata_roles']) > 0:
+            self._computed_roles.update(dataset['metadata_roles'])
+            dataset['metadata_roles'].clear()
 
     @property
     def computed_roles(self):
@@ -2027,22 +2032,18 @@ d_span_type._compatible_style_type = d_style_type
 raw.d_span_type._SetSupersedingClass(d_span_type)
 
 
-class d_metadata_type(SemanticValidationMixin, RoleMixin, raw.d_metadata_type):
+class d_metadata_type(SemanticValidationMixin, raw.d_metadata_type):
 
     def _semantic_before_traversal(
             self,
             dataset,
             element_content=None,
             parent_binding=None):
-        self._semantic_compute_roles(dataset=dataset)
-        self._semantic_push_computed_roles(dataset=dataset)
+        if self.role is not None:
+            if 'metadata_roles' not in dataset:
+                dataset['metadata_roles'] = set()
+            dataset['metadata_roles'].add(self.role)
 
-    def _semantic_after_traversal(
-            self,
-            dataset,
-            element_content=None,
-            parent_binding=None):
-        self._semantic_pop_computed_roles(dataset=dataset)
 
 raw.d_metadata_type._SetSupersedingClass(d_metadata_type)
 

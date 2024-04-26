@@ -3,8 +3,9 @@ from unittest import TestCase
 from ebu_tt_live.bindings import d_div_type, d_br_type, d_body_type, d_p_type, d_span_type, div_type, \
     br_type, body_type, p_type, span_type
 
-from ebu_tt_live.bindings._ebuttm import pMetadata_type, divMetadata_type
-
+from ebu_tt_live.bindings._ebuttm import pMetadata_type, divMetadata_type, bodyMetadata_type, spanMetadata_type, \
+    anyMetadata_type
+from ebu_tt_live.bindings import d_metadata_type
 
 class TestElementRoleMixin(TestCase):
     class Metadata:
@@ -27,7 +28,10 @@ class TestElementRoleMixin(TestCase):
         self.dataset = {'role_stack': []}
         self.metadata_types = {
             'div': divMetadata_type,
-            'p': pMetadata_type
+            'p': pMetadata_type,
+            'br': anyMetadata_type,
+            'body': bodyMetadata_type,
+            'span': spanMetadata_type
         }
 
     def test_initial_computed_role(self):
@@ -73,14 +77,16 @@ class TestElementRoleMixin(TestCase):
                 element._semantic_pop_computed_roles(self.dataset)
                 self.assertEqual(len(self.dataset['role_stack']), initial_stack_length)
 
-    def test_metadata_role_merging_after_traversal(self):
-        """Metadata roles should merge with element roles after traversal."""
+    def test_metadata_role_merging(self):
+        """Metadata roles should merge with element roles."""
         for element_name, element in self.elements.items():
             if element_name in self.metadata_types:
                 with self.subTest(element=element_name):
                     metadata_instance = self.metadata_types[element_name]()
                     metadata_instance.role = 'description'
                     element.metadata = metadata_instance
+                    print(f"Before compute: {element.computed_roles}")  # Debugging
                     element._semantic_compute_roles(self.dataset)
+                    print(f"After compute: {element.computed_roles}")  # Debugging
                     self.assertIn('description', element.computed_roles)
 

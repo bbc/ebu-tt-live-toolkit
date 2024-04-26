@@ -587,11 +587,10 @@ class RoleMixin(object):
         if self.role is not None:
             current_roles.update(self.role)
 
-        if dataset.get('role_stack') and dataset['role_stack']:
+        if dataset.get('role_stack') is not None and len(dataset['role_stack']) > 0:
             current_roles.update(dataset['role_stack'][-1])
-        if dataset.get('metadata_roles') and dataset['metadata_roles']:
+        if dataset.get('metadata_roles') is not None and len(dataset['metadata_roles']) > 0:
             current_roles.update(dataset['metadata_roles'])
-            dataset['metadata_roles'].clear()
 
         self._computed_roles = current_roles
 
@@ -601,10 +600,9 @@ class RoleMixin(object):
         dataset['role_stack'].append(self._computed_roles)
 
     def _semantic_pop_computed_roles(self, dataset):
-        if dataset.get('role_stack') and dataset['role_stack']:
+        if dataset.get('role_stack') is not None and len(dataset['role_stack']) > 0:
             dataset['role_stack'].pop()
-        if dataset.get('metadata_roles') and dataset['metadata_roles']:
-            dataset['metadata_roles'].clear()
+        dataset.get('metadata_roles', set()).clear()
 
     @property
     def computed_roles(self):

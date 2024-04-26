@@ -586,11 +586,10 @@ class RoleMixin(object):
         current_roles = set()
         if self.role is not None:
             current_roles.update(self.role)
-
-        if dataset.get('role_stack') is not None and len(dataset['role_stack']) > 0:
+        if dataset.get('role_stack'):
             current_roles.update(dataset['role_stack'][-1])
-        if dataset.get('metadata_roles') is not None and len(dataset['metadata_roles']) > 0:
-            current_roles.update(dataset['metadata_roles'])
+        if self.metadata:
+            current_roles.update(self.metadata.role)
 
         self._computed_roles = current_roles
 
@@ -600,9 +599,8 @@ class RoleMixin(object):
         dataset['role_stack'].append(self._computed_roles)
 
     def _semantic_pop_computed_roles(self, dataset):
-        if dataset.get('role_stack') is not None and len(dataset['role_stack']) > 0:
+        if dataset.get('role_stack'):
             dataset['role_stack'].pop()
-        dataset.get('metadata_roles', set()).clear()
 
     @property
     def computed_roles(self):
@@ -2030,22 +2028,6 @@ class d_span_type(
 
 d_span_type._compatible_style_type = d_style_type
 raw.d_span_type._SetSupersedingClass(d_span_type)
-
-
-class d_metadata_type(SemanticValidationMixin, raw.d_metadata_type):
-
-    def _semantic_before_traversal(
-            self,
-            dataset,
-            element_content=None,
-            parent_binding=None):
-        if self.role is not None:
-            if 'metadata_roles' not in dataset:
-                dataset['metadata_roles'] = set()
-            dataset['metadata_roles'].update(self.role)
-
-
-raw.d_metadata_type._SetSupersedingClass(d_metadata_type)
 
 
 class d_br_type(SemanticValidationMixin, RoleMixin, raw.d_br_type):

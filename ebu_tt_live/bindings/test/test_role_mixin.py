@@ -31,7 +31,12 @@ class TestElementRoleMixin(TestCase):
             'p': pMetadata_type,
             'br': anyMetadata_type,
             'body': bodyMetadata_type,
-            'span': spanMetadata_type
+            'span': spanMetadata_type,
+            'd_div': d_metadata_type,
+            'd_br': d_metadata_type,
+            'd_body': d_metadata_type,
+            'd_p': d_metadata_type,
+            'd_span': d_metadata_type,
         }
 
     def test_initial_computed_role(self):
@@ -85,8 +90,6 @@ class TestElementRoleMixin(TestCase):
                     metadata_instance = self.metadata_types[element_name]()
                     metadata_instance.role = 'description'
                     element.metadata = metadata_instance
-                    print(f"Before compute: {element.computed_roles}")  # Debugging
                     element._semantic_compute_roles(self.dataset)
-                    print(f"After compute: {element.computed_roles}")  # Debugging
                     self.assertIn('description', element.computed_roles)
 

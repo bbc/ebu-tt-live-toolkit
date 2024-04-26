@@ -589,6 +589,9 @@ class RoleMixin(object):
 
         if dataset.get('role_stack') and dataset['role_stack']:
             current_roles.update(dataset['role_stack'][-1])
+        if dataset.get('metadata_roles') and dataset['metadata_roles']:
+            current_roles.update(dataset['metadata_roles'])
+            dataset['metadata_roles'].clear()
 
         self._computed_roles = current_roles
 
@@ -598,10 +601,9 @@ class RoleMixin(object):
         dataset['role_stack'].append(self._computed_roles)
 
     def _semantic_pop_computed_roles(self, dataset):
-        if dataset.get('role_stack') and len(dataset['role_stack']) > 0:
+        if dataset.get('role_stack') and dataset['role_stack']:
             dataset['role_stack'].pop()
-        if dataset.get('metadata_roles') and len(dataset['metadata_roles']) > 0:
-            self._computed_roles.update(dataset['metadata_roles'])
+        if dataset.get('metadata_roles') and dataset['metadata_roles']:
             dataset['metadata_roles'].clear()
 
     @property
@@ -2042,7 +2044,7 @@ class d_metadata_type(SemanticValidationMixin, raw.d_metadata_type):
         if self.role is not None:
             if 'metadata_roles' not in dataset:
                 dataset['metadata_roles'] = set()
-            dataset['metadata_roles'].add(self.role)
+            dataset['metadata_roles'].update(self.role)
 
 
 raw.d_metadata_type._SetSupersedingClass(d_metadata_type)

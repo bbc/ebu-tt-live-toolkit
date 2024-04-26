@@ -9,9 +9,9 @@ def then_computed_style_value_is(elem_id, computed_value, test_context):
     document = test_context['document']
     elem = document.get_element_by_id(elem_id)
     if computed_value == '':
-        assert elem.computed_roles is None
+        assert elem.computed_roles == set()
     else:
-        expected_roles = set(computed_value.split(", "))
+        expected_roles = set([cv.strip() for cv in computed_value.split(",")])
         assert elem.computed_roles == expected_roles
 
 

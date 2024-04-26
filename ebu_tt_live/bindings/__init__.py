@@ -584,7 +584,7 @@ class RoleMixin(object):
 
     def _semantic_compute_roles(self, dataset):
         current_roles = set()
-        if self.role is not None:
+        if self.role:
             current_roles.update(self.role)
         if dataset.get('role_stack'):
             current_roles.update(dataset['role_stack'][-1])

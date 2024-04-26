@@ -37,7 +37,7 @@ class TestElementRoleMixin(TestCase):
                 self.assertEqual(element.computed_roles, set(),
                                  f"Initial computed role should be None for {element_name}.")
 
-    def test_role_propagation(self):
+    def test_directly_specified_role(self):
         """Test proper propagation of directly set role to computed_role for different element types."""
         for element_name, element in self.elements.items():
             with self.subTest(element=element_name):

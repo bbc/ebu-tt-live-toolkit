@@ -588,7 +588,7 @@ class RoleMixin(object):
             current_roles.update(self.role)
         if dataset.get('role_stack'):
             current_roles.update(dataset['role_stack'][-1])
-        if self.metadata:
+        if self.metadata and self.metadata.role:
             current_roles.update(self.metadata.role)
 
         self._computed_roles = current_roles

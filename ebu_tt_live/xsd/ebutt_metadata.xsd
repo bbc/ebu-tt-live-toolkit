@@ -554,6 +554,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 		<xs:sequence>
 			<xs:any namespace="not http://www.w3.org/ns/ttml urn:ebu:tt" minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
 		</xs:sequence>
+		<xs:attribute ref="ttm:role"/>
 	</xs:complexType>
 
 	<xs:complexType name="metadataBase_type">
@@ -561,6 +562,7 @@ Please note that the EBU-TT XML Schema is a helping document and NOT normative b
 			<xs:element ref="ttm:title" minOccurs="0"/>
 			<xs:element ref="ttm:desc" minOccurs="0"/>
 		</xs:sequence>
+		<xs:attribute ref="ttm:role"/>
 	</xs:complexType>
 
 	<xs:complexType name="headMetadata_type">

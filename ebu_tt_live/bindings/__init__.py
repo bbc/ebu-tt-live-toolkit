@@ -579,6 +579,33 @@ class LiveStyledElementMixin(StyledElementMixin):
 # NOTE: Some of the code below includes handling of SMPTE time base, which was
 # removed from version 1.0 of the specification.
 
+class RoleMixin(object):
+    _computed_roles = set()
+
+    def _semantic_compute_roles(self, dataset):
+        current_roles = set()
+        if self.role:
+            current_roles.update(self.role)
+        if dataset.get('role_stack'):
+            current_roles.update(dataset['role_stack'][-1])
+        if self.metadata and self.metadata.role:
+            current_roles.update(self.metadata.role)
+
+        self._computed_roles = current_roles
+
+    def _semantic_push_computed_roles(self, dataset):
+        if dataset.get('role_stack') is None:
+            dataset['role_stack'] = []
+        dataset['role_stack'].append(self._computed_roles)
+
+    def _semantic_pop_computed_roles(self, dataset):
+        if dataset.get('role_stack'):
+            dataset['role_stack'].pop()
+
+    @property
+    def computed_roles(self):
+        return self._computed_roles
+
 
 class tt_type(SemanticDocumentMixin, raw.tt_type):
 
@@ -858,6 +885,7 @@ class p_type(
         RegionedElementMixin,
         LiveStyledElementMixin,
         SubtitleContentContainer,
+        RoleMixin,
         raw.p_type):
 
     _attr_en_pre = {
@@ -917,6 +945,8 @@ class p_type(
             style_type=style_type,
             parent_binding=parent_binding)
         self._semantic_push_styles(dataset=dataset)
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
 
     def _semantic_after_traversal(
             self,
@@ -929,6 +959,7 @@ class p_type(
             dataset=dataset, element_content=element_content)
         self._semantic_unset_region(dataset=dataset)
         self._semantic_pop_styles(dataset=dataset)
+        self._semantic_pop_computed_roles(dataset=dataset)
 
     def _semantic_before_copy(self, dataset, element_content=None):
         self._assert_in_segment(
@@ -960,6 +991,7 @@ raw.p_type._SetSupersedingClass(p_type)
 class span_type(
         LiveStyledElementMixin,
         SubtitleContentContainer,
+        RoleMixin,
         raw.span_type):
 
     _attr_en_pre = {
@@ -1015,6 +1047,8 @@ class span_type(
             style_type=style_type,
             parent_binding=parent_binding)
         self._semantic_push_styles(dataset=dataset)
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
 
     def _semantic_after_traversal(
             self,
@@ -1026,6 +1060,7 @@ class span_type(
         self._semantic_manage_timeline(
             dataset=dataset, element_content=element_content)
         self._semantic_pop_styles(dataset=dataset)
+        self._semantic_pop_computed_roles(dataset=dataset)
 
     def _semantic_before_copy(self, dataset, element_content=None):
         self._assert_in_segment(
@@ -1053,13 +1088,28 @@ class span_type(
 raw.span_type._SetSupersedingClass(span_type)
 
 
-class br_type(SemanticValidationMixin, raw.br_type):
+class br_type(SemanticValidationMixin, RoleMixin, raw.br_type):
 
     def __copy__(self):
         return br_type()
 
     def content_to_string(self, begin=None, end=None):
         return '<br />'
+
+    def _semantic_before_traversal(
+            self,
+            dataset,
+            element_content=None,
+            parent_binding=None):
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
+
+    def _semantic_after_traversal(
+            self,
+            dataset,
+            element_content=None,
+            parent_binding=None):
+        self._semantic_pop_computed_roles(dataset=dataset)
 
 
 raw.br_type._SetSupersedingClass(br_type)
@@ -1072,6 +1122,7 @@ class div_type(
         LiveStyledElementMixin,
         TimingValidationMixin,
         SemanticValidationMixin,
+        RoleMixin,
         raw.div_type):
 
     _attr_en_pre = {
@@ -1132,6 +1183,8 @@ class div_type(
             defer_font_size=True
         )
         self._semantic_push_styles(dataset=dataset)
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
 
     def _semantic_after_traversal(
             self,
@@ -1141,6 +1194,7 @@ class div_type(
         self._semantic_postprocess_timing(
             dataset=dataset, element_content=element_content)
         self._semantic_unset_region(dataset=dataset)
+        self._semantic_pop_computed_roles(dataset=dataset)
 
     def _semantic_before_copy(self, dataset, element_content=None):
         self._assert_in_segment(
@@ -1176,6 +1230,7 @@ class body_type(
         LiveStyledElementMixin,
         BodyTimingValidationMixin,
         SemanticValidationMixin,
+        RoleMixin,
         raw.body_type):
 
     _attr_en_pre = {
@@ -1281,6 +1336,8 @@ class body_type(
             defer_font_size=True
         )
         self._semantic_push_styles(dataset=dataset)
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
 
     def _semantic_after_traversal(
             self,
@@ -1290,6 +1347,7 @@ class body_type(
         self._semantic_postprocess_timing(
             dataset=dataset, element_content=element_content)
         self._semantic_pop_styles(dataset=dataset)
+        self._semantic_pop_computed_roles(dataset=dataset)
 
     def _semantic_before_copy(self, dataset, element_content=None):
         self._assert_in_segment(
@@ -1771,6 +1829,7 @@ raw.d_style_type._SetSupersedingClass(d_style_type)
 class d_body_type(
     StyledElementMixin,
     SemanticValidationMixin,
+    RoleMixin,
     raw.d_body_type):
 
     def _semantic_before_traversal(
@@ -1785,6 +1844,8 @@ class d_body_type(
             defer_font_size=True
         )
         self._semantic_push_styles(dataset=dataset)
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
 
     def _semantic_after_traversal(
             self,
@@ -1792,6 +1853,7 @@ class d_body_type(
             element_content=None,
             parent_binding=None):
         self._semantic_pop_styles(dataset=dataset)
+        self._semantic_pop_computed_roles(dataset=dataset)
 
     def _semantic_before_copy(self, dataset, element_content=None):
         self._assert_in_segment(
@@ -1821,6 +1883,7 @@ class d_div_type(
         StyledElementMixin,
         SemanticValidationMixin,
         RegionedElementMixin,
+        RoleMixin,
         raw.d_div_type):
 
     def _semantic_before_traversal(
@@ -1837,6 +1900,8 @@ class d_div_type(
             defer_font_size=True
         )
         self._semantic_push_styles(dataset=dataset)
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
 
     def _semantic_after_traversal(
             self,
@@ -1844,6 +1909,7 @@ class d_div_type(
             element_content=None,
             parent_binding=None):
         self._semantic_unset_region(dataset=dataset)
+        self._semantic_pop_computed_roles(dataset=dataset)
 
     def _semantic_before_copy(self, dataset, element_content=None):
         self._assert_in_segment(
@@ -1869,6 +1935,7 @@ class d_p_type(
         StyledElementMixin,
         SemanticValidationMixin,
         RegionedElementMixin,
+        RoleMixin,
         raw.d_p_type):
 
     _attr_en_pre = {
@@ -1898,6 +1965,8 @@ class d_p_type(
             style_type=style_type,
             parent_binding=parent_binding)
         self._semantic_push_styles(dataset=dataset)
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
 
     def _semantic_after_traversal(
             self,
@@ -1912,6 +1981,7 @@ class d_p_type(
             element_content=element_content)
         self._semantic_pop_styles(dataset=dataset)
         self._semantic_validate_ttd_active_areas(dataset=dataset)
+        self._semantic_pop_computed_roles(dataset=dataset)
 
 
 d_p_type._compatible_style_type = d_style_type
@@ -1924,6 +1994,7 @@ class d_span_type(
         StyledElementMixin,
         SemanticValidationMixin,
         RegionedElementMixin,
+        RoleMixin,
         raw.d_span_type):
 
     _attr_en_pre = {
@@ -1942,6 +2013,8 @@ class d_span_type(
             parent_binding=None):
         self._semantic_preprocess_timing(
              dataset=dataset, element_content=element_content)
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
 
     def _semantic_after_traversal(
             self,
@@ -1950,10 +2023,31 @@ class d_span_type(
             parent_binding=None):
         self._semantic_postprocess_timing(
                 dataset=dataset, element_content=element_content)
+        self._semantic_pop_computed_roles(dataset=dataset)
 
 
 d_span_type._compatible_style_type = d_style_type
 raw.d_span_type._SetSupersedingClass(d_span_type)
+
+
+class d_br_type(SemanticValidationMixin, RoleMixin, raw.d_br_type):
+
+    def _semantic_before_traversal(
+            self,
+            dataset,
+            element_content=None,
+            parent_binding=None):
+        self._semantic_compute_roles(dataset=dataset)
+        self._semantic_push_computed_roles(dataset=dataset)
+
+    def _semantic_after_traversal(
+            self,
+            dataset,
+            element_content=None,
+            parent_binding=None):
+        self._semantic_pop_computed_roles(dataset=dataset)
+
+raw.d_br_type._SetSupersedingClass(d_br_type)
 
 # EBU TT 1 classes
 # ================

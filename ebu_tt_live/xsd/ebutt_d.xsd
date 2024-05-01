@@ -47,7 +47,7 @@
 			<xs:any namespace="##other" processContents="lax" minOccurs="0"
 				maxOccurs="unbounded"/>
 		</xs:sequence>
-		
+		<xs:attribute ref="ttm:role"/>
 	</xs:complexType>
 	<xs:complexType name="d_styling_type">
 		<xs:annotation>

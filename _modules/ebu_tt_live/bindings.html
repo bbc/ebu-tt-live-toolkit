@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ebu_tt_live.bindings &mdash; EBU-TT-Live Toolkit 3.0.2 documentation</title>
+  <title>ebu_tt_live.bindings &mdash; EBU-TT-Live Toolkit 3.0.3 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -34,7 +34,7 @@
             EBU-TT-Live Toolkit
           </a>
               <div class="version">
-                3.0.2
+                3.0.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -655,6 +655,33 @@
 <span class="c1"># NOTE: Some of the code below includes handling of SMPTE time base, which was</span>
 <span class="c1"># removed from version 1.0 of the specification.</span>
 
+<div class="viewcode-block" id="RoleMixin"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin">[docs]</a><span class="k">class</span> <span class="nc">RoleMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">_computed_roles</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<div class="viewcode-block" id="RoleMixin._semantic_compute_roles"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin._semantic_compute_roles">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_compute_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="n">current_roles</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">role</span><span class="p">:</span>
+            <span class="n">current_roles</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">role</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;role_stack&#39;</span><span class="p">):</span>
+            <span class="n">current_roles</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;role_stack&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">role</span><span class="p">:</span>
+            <span class="n">current_roles</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">role</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_computed_roles</span> <span class="o">=</span> <span class="n">current_roles</span></div>
+
+<div class="viewcode-block" id="RoleMixin._semantic_push_computed_roles"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin._semantic_push_computed_roles">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_push_computed_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;role_stack&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;role_stack&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;role_stack&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_computed_roles</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RoleMixin._semantic_pop_computed_roles"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin._semantic_pop_computed_roles">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_pop_computed_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;role_stack&#39;</span><span class="p">):</span>
+            <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;role_stack&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">computed_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computed_roles</span></div>
+
 
 <div class="viewcode-block" id="tt_type"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type">[docs]</a><span class="k">class</span> <span class="nc">tt_type</span><span class="p">(</span><span class="n">SemanticDocumentMixin</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">tt_type</span><span class="p">):</span>
 
@@ -934,6 +961,7 @@
         <span class="n">RegionedElementMixin</span><span class="p">,</span>
         <span class="n">LiveStyledElementMixin</span><span class="p">,</span>
         <span class="n">SubtitleContentContainer</span><span class="p">,</span>
+        <span class="n">RoleMixin</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">p_type</span><span class="p">):</span>
 
     <span class="n">_attr_en_pre</span> <span class="o">=</span> <span class="p">{</span>
@@ -992,7 +1020,9 @@
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
             <span class="n">style_type</span><span class="o">=</span><span class="n">style_type</span><span class="p">,</span>
             <span class="n">parent_binding</span><span class="o">=</span><span class="n">parent_binding</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="p_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -1004,7 +1034,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_manage_timeline</span><span class="p">(</span>
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_unset_region</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="p_type._semantic_before_copy"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type._semantic_before_copy">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assert_in_segment</span><span class="p">(</span>
@@ -1036,6 +1067,7 @@
 <div class="viewcode-block" id="span_type"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type">[docs]</a><span class="k">class</span> <span class="nc">span_type</span><span class="p">(</span>
         <span class="n">LiveStyledElementMixin</span><span class="p">,</span>
         <span class="n">SubtitleContentContainer</span><span class="p">,</span>
+        <span class="n">RoleMixin</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">span_type</span><span class="p">):</span>
 
     <span class="n">_attr_en_pre</span> <span class="o">=</span> <span class="p">{</span>
@@ -1090,7 +1122,9 @@
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
             <span class="n">style_type</span><span class="o">=</span><span class="n">style_type</span><span class="p">,</span>
             <span class="n">parent_binding</span><span class="o">=</span><span class="n">parent_binding</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="span_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -1101,7 +1135,8 @@
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_manage_timeline</span><span class="p">(</span>
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="span_type._semantic_before_copy"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type._semantic_before_copy">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assert_in_segment</span><span class="p">(</span>
@@ -1129,13 +1164,28 @@
 <span class="n">raw</span><span class="o">.</span><span class="n">span_type</span><span class="o">.</span><span class="n">_SetSupersedingClass</span><span class="p">(</span><span class="n">span_type</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="br_type"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type">[docs]</a><span class="k">class</span> <span class="nc">br_type</span><span class="p">(</span><span class="n">SemanticValidationMixin</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">br_type</span><span class="p">):</span>
+<div class="viewcode-block" id="br_type"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type">[docs]</a><span class="k">class</span> <span class="nc">br_type</span><span class="p">(</span><span class="n">SemanticValidationMixin</span><span class="p">,</span> <span class="n">RoleMixin</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">br_type</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">br_type</span><span class="p">()</span>
 
 <div class="viewcode-block" id="br_type.content_to_string"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type.content_to_string">[docs]</a>    <span class="k">def</span> <span class="nf">content_to_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">begin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;br /&gt;&#39;</span></div></div>
+        <span class="k">return</span> <span class="s1">&#39;&lt;br /&gt;&#39;</span></div>
+
+<div class="viewcode-block" id="br_type._semantic_before_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type._semantic_before_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_traversal</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">dataset</span><span class="p">,</span>
+            <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="br_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">dataset</span><span class="p">,</span>
+            <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div></div>
 
 
 <span class="n">raw</span><span class="o">.</span><span class="n">br_type</span><span class="o">.</span><span class="n">_SetSupersedingClass</span><span class="p">(</span><span class="n">br_type</span><span class="p">)</span>
@@ -1148,6 +1198,7 @@
         <span class="n">LiveStyledElementMixin</span><span class="p">,</span>
         <span class="n">TimingValidationMixin</span><span class="p">,</span>
         <span class="n">SemanticValidationMixin</span><span class="p">,</span>
+        <span class="n">RoleMixin</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">div_type</span><span class="p">):</span>
 
     <span class="n">_attr_en_pre</span> <span class="o">=</span> <span class="p">{</span>
@@ -1207,7 +1258,9 @@
             <span class="n">parent_binding</span><span class="o">=</span><span class="n">parent_binding</span><span class="p">,</span>
             <span class="n">defer_font_size</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="div_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -1216,7 +1269,8 @@
             <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_postprocess_timing</span><span class="p">(</span>
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_unset_region</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_unset_region</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="div_type._semantic_before_copy"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type._semantic_before_copy">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assert_in_segment</span><span class="p">(</span>
@@ -1252,6 +1306,7 @@
         <span class="n">LiveStyledElementMixin</span><span class="p">,</span>
         <span class="n">BodyTimingValidationMixin</span><span class="p">,</span>
         <span class="n">SemanticValidationMixin</span><span class="p">,</span>
+        <span class="n">RoleMixin</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">body_type</span><span class="p">):</span>
 
     <span class="n">_attr_en_pre</span> <span class="o">=</span> <span class="p">{</span>
@@ -1356,7 +1411,9 @@
             <span class="n">parent_binding</span><span class="o">=</span><span class="n">parent_binding</span><span class="p">,</span>
             <span class="n">defer_font_size</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="body_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -1365,7 +1422,8 @@
             <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_postprocess_timing</span><span class="p">(</span>
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="body_type._semantic_before_copy"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._semantic_before_copy">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assert_in_segment</span><span class="p">(</span>
@@ -1847,6 +1905,7 @@
 <div class="viewcode-block" id="d_body_type"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type">[docs]</a><span class="k">class</span> <span class="nc">d_body_type</span><span class="p">(</span>
     <span class="n">StyledElementMixin</span><span class="p">,</span>
     <span class="n">SemanticValidationMixin</span><span class="p">,</span>
+    <span class="n">RoleMixin</span><span class="p">,</span>
     <span class="n">raw</span><span class="o">.</span><span class="n">d_body_type</span><span class="p">):</span>
 
 <div class="viewcode-block" id="d_body_type._semantic_before_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type._semantic_before_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_traversal</span><span class="p">(</span>
@@ -1860,14 +1919,17 @@
             <span class="n">parent_binding</span><span class="o">=</span><span class="n">parent_binding</span><span class="p">,</span>
             <span class="n">defer_font_size</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="d_body_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">dataset</span><span class="p">,</span>
             <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="d_body_type._semantic_before_copy"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type._semantic_before_copy">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assert_in_segment</span><span class="p">(</span>
@@ -1897,6 +1959,7 @@
         <span class="n">StyledElementMixin</span><span class="p">,</span>
         <span class="n">SemanticValidationMixin</span><span class="p">,</span>
         <span class="n">RegionedElementMixin</span><span class="p">,</span>
+        <span class="n">RoleMixin</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">d_div_type</span><span class="p">):</span>
 
 <div class="viewcode-block" id="d_div_type._semantic_before_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type._semantic_before_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_traversal</span><span class="p">(</span>
@@ -1912,14 +1975,17 @@
             <span class="n">parent_binding</span><span class="o">=</span><span class="n">parent_binding</span><span class="p">,</span>
             <span class="n">defer_font_size</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="d_div_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">dataset</span><span class="p">,</span>
             <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_unset_region</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_unset_region</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="d_div_type._semantic_before_copy"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type._semantic_before_copy">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assert_in_segment</span><span class="p">(</span>
@@ -1945,6 +2011,7 @@
         <span class="n">StyledElementMixin</span><span class="p">,</span>
         <span class="n">SemanticValidationMixin</span><span class="p">,</span>
         <span class="n">RegionedElementMixin</span><span class="p">,</span>
+        <span class="n">RoleMixin</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">d_p_type</span><span class="p">):</span>
 
     <span class="n">_attr_en_pre</span> <span class="o">=</span> <span class="p">{</span>
@@ -1973,7 +2040,9 @@
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
             <span class="n">style_type</span><span class="o">=</span><span class="n">style_type</span><span class="p">,</span>
             <span class="n">parent_binding</span><span class="o">=</span><span class="n">parent_binding</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="d_p_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_p_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -1987,7 +2056,8 @@
             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
             <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_styles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_validate_ttd_active_areas</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_validate_ttd_active_areas</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div></div>
 
 
 <span class="n">d_p_type</span><span class="o">.</span><span class="n">_compatible_style_type</span> <span class="o">=</span> <span class="n">d_style_type</span>
@@ -2000,6 +2070,7 @@
         <span class="n">StyledElementMixin</span><span class="p">,</span>
         <span class="n">SemanticValidationMixin</span><span class="p">,</span>
         <span class="n">RegionedElementMixin</span><span class="p">,</span>
+        <span class="n">RoleMixin</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">d_span_type</span><span class="p">):</span>
 
     <span class="n">_attr_en_pre</span> <span class="o">=</span> <span class="p">{</span>
@@ -2017,7 +2088,9 @@
             <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_preprocess_timing</span><span class="p">(</span>
-             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span></div>
+             <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="d_span_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_span_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -2025,11 +2098,32 @@
             <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_postprocess_timing</span><span class="p">(</span>
-                <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span></div></div>
+                <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div></div>
 
 
 <span class="n">d_span_type</span><span class="o">.</span><span class="n">_compatible_style_type</span> <span class="o">=</span> <span class="n">d_style_type</span>
 <span class="n">raw</span><span class="o">.</span><span class="n">d_span_type</span><span class="o">.</span><span class="n">_SetSupersedingClass</span><span class="p">(</span><span class="n">d_span_type</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="d_br_type"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_br_type">[docs]</a><span class="k">class</span> <span class="nc">d_br_type</span><span class="p">(</span><span class="n">SemanticValidationMixin</span><span class="p">,</span> <span class="n">RoleMixin</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">d_br_type</span><span class="p">):</span>
+
+<div class="viewcode-block" id="d_br_type._semantic_before_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_br_type._semantic_before_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_before_traversal</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">dataset</span><span class="p">,</span>
+            <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="d_br_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_br_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">dataset</span><span class="p">,</span>
+            <span class="n">element_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">parent_binding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_pop_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div></div>
+
+<span class="n">raw</span><span class="o">.</span><span class="n">d_br_type</span><span class="o">.</span><span class="n">_SetSupersedingClass</span><span class="p">(</span><span class="n">d_br_type</span><span class="p">)</span>
 
 <span class="c1"># EBU TT 1 classes</span>
 <span class="c1"># ================</span>

@@ -16,12 +16,6 @@ def when_document_body_contains_attribute(template_dict, attribute):
     template_dict[attribute] = True
 
 
-@when('the document\'s timeBase is set to <timebase>')
-def when_document_timebase(template_dict, timebase):
-    # timeBase in ebutt1_template.xml is 'media' by default
-    template_dict['timeBase'] = timebase
-
-
 @when('the document contains an ebuttp attribute <attribute>')
 def when_document_contains_ebuttp_attribute(template_dict, attribute):
     template_dict['ebuttp'] = True

@@ -18,6 +18,7 @@ class EBUTTDDocument(SubtitleDocument, TimelineUtilMixin):
     _encoding = 'UTF-8'
 
     def __init__(self, lang):
+        self.load_types_for_document()
         self._ebuttd_content = bindings.ttd(
             timeBase='media',
             head=bindings.d_head_type(
@@ -47,12 +48,17 @@ class EBUTTDDocument(SubtitleDocument, TimelineUtilMixin):
         )
 
     @classmethod
+    def load_types_for_document(cls):
+        bindings.load_types_for_document('ebuttd')
+
+    @classmethod
     def create_from_xml(cls, xml):
         # NOTE: This is a workaround to make the bindings accept separate root element identities
         # for the same name. tt comes in but we rename it to ttd to make the xsd validate.
+        cls.load_types_for_document()
         xml_dom = minidom.parseString(xml)
-        if xml_dom.documentElement.tagName == 'tt':
-            xml_dom.documentElement.tagName = 'ttd'
+        if xml_dom.documentElement.tagName == xml_dom.documentElement.prefix + ':tt':
+            xml_dom.documentElement.tagName = xml_dom.documentElement.prefix +  ':ttd'
         instance = cls.create_from_raw_binding(
             binding=bindings.CreateFromDOM(
                 xml_dom
@@ -62,6 +68,7 @@ class EBUTTDDocument(SubtitleDocument, TimelineUtilMixin):
 
     @classmethod
     def create_from_raw_binding(cls, binding):
+        cls.load_types_for_document()
         instance = cls.__new__(cls)
         instance._ebuttd_content = binding
         return instance

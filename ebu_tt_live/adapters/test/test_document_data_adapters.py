@@ -136,11 +136,49 @@ class TestXMLtoEBUTT3Adapter(TestCase):
 
 
 class TestXMLtoEBUTTDAdapter(TestCase):
-    _output_type = documents.EBUTTDDocument
     _adapter_class = document_data.XMLtoEBUTTDAdapter
-    _expected_keys = []
+    _test_xml_file = 'testEbuttd.xml'
+    _test_data_dir_path = os.path.join(os.path.dirname(__file__), 'test_data')
+    _test_xml_path = os.path.join(_test_data_dir_path, _test_xml_file)
+    _output_type = documents.EBUTTDDocument
+    _expected_keys = [
+        'raw_xml'
+    ]
+    instance = None
 
-    # TODO: Finish this once we have EBUTT-D parsing
+    def setUp(self):
+        self.instance = self._adapter_class()
+        self.assertIsInstance(self.instance, IDocumentDataAdapter)
+
+    def _assert_output_type(self, result):
+        self.assertIsInstance(result, self._output_type)
+
+    def _assert_kwargs_passtrough(self, result_kwargs, expected_keys):
+        self.assertEqual(set(result_kwargs.keys()), set(expected_keys))
+
+    def _get_xml(self):
+        with open(self._test_xml_path, 'r') as xml_file:
+            xml_data = xml_file.read()
+        return xml_data
+
+    def _get_input(self):
+        return self._get_xml()
+
+    def test_success(self):
+        expected_keys = []
+        expected_keys.extend(self._expected_keys)
+        result, res_kwargs = self.instance.convert_data(self._get_input())
+        self._assert_output_type(result)
+        self._assert_kwargs_passtrough(res_kwargs, expected_keys)
+
+    def test_kwargs_passthrough(self):
+        in_kwargs = {
+            'foo': 'bar'
+        }
+        expected_keys = ['foo']
+        expected_keys.extend(self._expected_keys)
+        result, res_kwargs = self.instance.convert_data(self._get_input(), **in_kwargs)
+        self._assert_kwargs_passtrough(res_kwargs, expected_keys)
 
 
 class TestEBUTT3toXMLAdapter(TestXMLtoEBUTT3Adapter):
@@ -164,19 +202,17 @@ class TestEBUTT3toXMLAdapter(TestXMLtoEBUTT3Adapter):
         pass
 
 
-class TestEBUTTDtoXMLAdapter(TestEBUTT3toXMLAdapter):
+class TestEBUTTDtoXMLAdapter(TestXMLtoEBUTTDAdapter):
+    _output_type = six.text_type
     _adapter_class = document_data.EBUTTDtoXMLAdapter
     _expected_keys = []
 
     def _get_input(self):
+        return documents.EBUTTDDocument.create_from_xml(self._get_xml())
+
+    def _get_input(self):
         input_doc = documents.EBUTTDDocument(lang='en-GB')
         return input_doc
-
-    def test_sequence_id_mismatch(self):
-        pass
-
-    def test_sequence_id_match(self):
-        pass
 
 
 class TestEBUTT3toEBUTTDAdapter(TestXMLtoEBUTT3Adapter):

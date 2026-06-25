@@ -145,8 +145,11 @@
         <span class="n">context</span> <span class="o">=</span> <span class="n">get_xml_parsing_context</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># This means we are in XML parsing context. There should be a timeBase and a timing_attribute_name in the</span>
-            <span class="c1"># context object.</span>
-            <span class="n">time_base</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;timeBase&#39;</span><span class="p">]</span>
+            <span class="c1"># context object. But if there&#39;s no timeBase, in the context</span>
+            <span class="c1"># of EBU-TT-D, we will assume media. Some files in the wild</span>
+            <span class="c1"># trigger this behaviour, for reasons not yet identified, i.e.</span>
+            <span class="c1"># we somehow get here without having a timeBase context set.</span>
+            <span class="n">time_base</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;timeBase&#39;</span><span class="p">,</span> <span class="s1">&#39;media&#39;</span><span class="p">)</span>
             <span class="c1"># It is possible for a timing type to exist as the value of an element not an attribute,</span>
             <span class="c1"># in which case no timing_attribute_name is in the context; in that case don&#39;t attempt</span>
             <span class="c1"># to validate the data against a timebase. At the moment this only affects the</span>
@@ -687,7 +690,10 @@
             <span class="k">return</span> <span class="bp">NotImplemented</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_eq</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_eq</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">horizontal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertical</span><span class="p">))</span></div>
 
 
 <span class="n">ebuttdt_raw</span><span class="o">.</span><span class="n">cellFontSizeType</span><span class="o">.</span><span class="n">_SetSupersedingClass</span><span class="p">(</span><span class="n">CellFontSizeType</span><span class="p">)</span>

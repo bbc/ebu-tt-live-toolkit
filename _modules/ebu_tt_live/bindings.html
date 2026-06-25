@@ -1671,8 +1671,13 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeBase</span> <span class="o">!=</span> <span class="s1">&#39;media&#39;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">SimpleTypeValueError</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeBase</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeBase</span><span class="p">)</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">d_tt_type</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_validateBinding_vx</span><span class="p">()</span></div></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">d_tt_type</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_validateBinding_vx</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="d_tt_type.get_timing_type"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type.get_timing_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_timing_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timedelta_in</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeBase</span> <span class="o">==</span> <span class="s1">&#39;media&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ebuttdt</span><span class="o">.</span><span class="n">FullClockTimingType</span><span class="p">(</span><span class="n">timedelta_in</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;d_tt_type.get_timing_type() where self.timeBase == </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeBase</span><span class="p">))</span></div></div>
 
 <span class="n">raw</span><span class="o">.</span><span class="n">d_tt_type</span><span class="o">.</span><span class="n">_SetSupersedingClass</span><span class="p">(</span><span class="n">d_tt_type</span><span class="p">)</span>
 
@@ -2090,7 +2095,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_preprocess_timing</span><span class="p">(</span>
              <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">element_content</span><span class="o">=</span><span class="n">element_content</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_compute_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_push_computed_roles</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_semantic_collect_applicable_styles</span><span class="p">(</span>
+            <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+            <span class="n">style_type</span><span class="o">=</span><span class="n">style_type</span><span class="p">,</span>
+            <span class="n">parent_binding</span><span class="o">=</span><span class="n">parent_binding</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="d_span_type._semantic_after_traversal"><a class="viewcode-back" href="../../ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_span_type._semantic_after_traversal">[docs]</a>    <span class="k">def</span> <span class="nf">_semantic_after_traversal</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -2210,6 +2219,9 @@
         <span class="n">raw</span><span class="o">.</span><span class="n">head_type</span><span class="p">:</span> <span class="n">head_type</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">layout</span><span class="p">:</span> <span class="n">layout</span><span class="p">,</span>
         <span class="n">raw</span><span class="o">.</span><span class="n">body_type</span><span class="p">:</span> <span class="n">body_type</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="s1">&#39;ebuttd&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">raw</span><span class="o">.</span><span class="n">d_tt_type</span><span class="p">:</span> <span class="n">d_tt_type</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">}</span>
 

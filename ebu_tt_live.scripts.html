@@ -67,6 +67,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_simple_consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_consumer</span></code> Module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_simple_producer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_producer</span></code> Module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-ebu_tt_live.scripts.ebu_user_input_consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_user_input_consumer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#imsc-hrm-validator-module"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imsc_hrm_validator</span></code> Module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.twisted.html">twisted Package</a></li>
@@ -195,6 +196,30 @@ interconnected set of nodes via various carriage mechanisms, events and timings.
 <dd></dd></dl>
 
 </section>
+<section id="imsc-hrm-validator-module">
+<h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">imsc_hrm_validator</span></code> Module<a class="headerlink" href="#imsc-hrm-validator-module" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebu_tt_live.scripts.imsc_hrm_validator.</span></span><span class="sig-name descname"><span class="pre">imscHrmValidator</span></span><a class="reference internal" href="_modules/ebu_tt_live/scripts/imsc_hrm_validator.html#imscHrmValidator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator" title="Permalink to this definition"></a></dt>
+<dd><p>Class for validating an EBU-TT-D document against the IMSC-HRM.</p>
+<p>IMSC-HRM is specified at <a class="reference external" href="https://www.w3.org/TR/imsc-hrm/">https://www.w3.org/TR/imsc-hrm/</a> .</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument" title="ebu_tt_live.documents.ebuttd.EBUTTDDocument"><span class="pre">EBUTTDDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/ebu_tt_live/scripts/imsc_hrm_validator.html#imscHrmValidator.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Validate the EBU-TT-D document against the IMSC-HRM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>EBUTTDDocument</strong> (<em>doc</em>) – a validated EBUTTDDocument object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the document is valid, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ebu_tt_live.scripts.imsc_hrm_validator"></span></section>
 </section>
 
 

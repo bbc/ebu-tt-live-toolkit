@@ -60,6 +60,10 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#semantic-parser-patch">Semantic parser patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation-outside-document-objects">Validation outside document objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#imsc-hrm-validation">IMSC-HRM validation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="user_input_producer.html">User input producer</a></li>
@@ -228,6 +232,20 @@ by using the context manager class and instead of the context being passed
 around as a parameter among functions the binding classes call the
 <a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.pyxb_utils.get_xml_parsing_context" title="ebu_tt_live.bindings.pyxb_utils.get_xml_parsing_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.bindings.pyxb_utils.get_xml_parsing_context()</span></code></a> function to
 gain access to the parsing context object.</p>
+</section>
+<section id="validation-outside-document-objects">
+<h1>Validation outside document objects<a class="headerlink" href="#validation-outside-document-objects" title="Permalink to this heading"></a></h1>
+<p>When constraints beyond the document specification need to be validated,
+validation code can be written outside the document and bindings objects themselves.</p>
+<section id="imsc-hrm-validation">
+<h2>IMSC-HRM validation<a class="headerlink" href="#imsc-hrm-validation" title="Permalink to this heading"></a></h2>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">ebu_tt_live.scripts.imscHrmValidator</span></code> class is an example
+of such out-of-document validation. It provides a single
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ebu_tt_live.scripts.imscHrmValidator.validate()</span></code> method that
+processes the provided validated EBU-TT-D document, according to the
+<a class="reference external" href="https://www.w3.org/TR/imsc-hrm/">IMSC-HRM</a> algorithm,
+and returns true or false as appropriate.</p>
+</section>
 </section>
 
 

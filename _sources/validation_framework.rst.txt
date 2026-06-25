@@ -146,3 +146,20 @@ by using the context manager class and instead of the context being passed
 around as a parameter among functions the binding classes call the
 :py:func:`ebu_tt_live.bindings.pyxb_utils.get_xml_parsing_context` function to
 gain access to the parsing context object.
+
+
+Validation outside document objects
+===================================
+
+When constraints beyond the document specification need to be validated,
+validation code can be written outside the document and bindings objects themselves.
+
+IMSC-HRM validation
+-------------------
+
+The :py:class:`ebu_tt_live.scripts.imscHrmValidator` class is an example
+of such out-of-document validation. It provides a single
+:py:func:`ebu_tt_live.scripts.imscHrmValidator.validate` method that
+processes the provided validated EBU-TT-D document, according to the
+`IMSC-HRM <https://www.w3.org/TR/imsc-hrm/>`_ algorithm,
+and returns true or false as appropriate.

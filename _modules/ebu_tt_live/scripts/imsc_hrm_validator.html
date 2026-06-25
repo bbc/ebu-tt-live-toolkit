@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ebu_tt_live.scripts.imsc_hrm_validator &mdash; EBU-TT-Live Toolkit 3.0.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            EBU-TT-Live Toolkit
+          </a>
+              <div class="version">
+                3.0.3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview of the EBU-TT live toolkit.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ebu_tt_live.html">Source code reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">EBU-TT-Live Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ebu_tt_live.scripts.imsc_hrm_validator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ebu_tt_live.scripts.imsc_hrm_validator</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.documents</span> <span class="kn">import</span> <span class="n">EBUTTDDocument</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.bindings</span> <span class="kn">import</span> <span class="n">d_p_type</span><span class="p">,</span> <span class="n">d_span_type</span>
+<span class="kn">from</span> <span class="nn">ebu_tt_live.bindings._ebuttdt</span> <span class="kn">import</span> <span class="n">CellFontSizeType</span><span class="p">,</span> <span class="n">PercentageOriginType</span><span class="p">,</span> <span class="n">PercentageExtentType</span><span class="p">,</span> <span class="n">rgbHexColorType</span><span class="p">,</span> <span class="n">rgbaHexColorType</span><span class="p">,</span> <span class="n">namedColorType</span><span class="p">,</span> <span class="n">named_color_to_rgba</span>
+<span class="kn">from</span> <span class="nn">pyxb.binding.basis</span> <span class="kn">import</span> <span class="n">NonElementContent</span><span class="p">,</span> <span class="n">ElementContent</span>
+<span class="kn">import</span> <span class="nn">ebu_tt_live.uax24</span> <span class="k">as</span> <span class="nn">uax24</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;imsc_hrm_validator&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="n">glyphStyles</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;color&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fontFamily&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fontStyle&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fontWeight&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;textDecoration&#39;</span><span class="p">,</span>
+    <span class="c1"># &#39;textOutline&#39;,  # textOutline is not permitted in EBU-TT-D</span>
+    <span class="c1"># &#39;textShadow&#39;,   # textShadow is not permitted in EBU-TT_D</span>
+<span class="p">]</span>
+
+<span class="n">glyph_tuple_fieldnames</span> <span class="o">=</span> <span class="n">glyphStyles</span><span class="p">[:]</span>  <span class="c1"># copy not reference</span>
+<span class="n">glyph_tuple_fieldnames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;characterCode&#39;</span><span class="p">)</span>
+<span class="n">glyph</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;glyph&#39;</span><span class="p">,</span> <span class="n">glyph_tuple_fieldnames</span><span class="p">)</span>  <span class="c1"># Tuple to represent a Glyph</span>
+
+
+<span class="n">GCpy12_chars</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Latin_list</span> <span class="o">+</span> 
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Greek_list</span> <span class="o">+</span> 
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Cyrillic_list</span> <span class="o">+</span>
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Hebrew_list</span> <span class="o">+</span>
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Common_list</span><span class="p">)</span>
+
+<span class="n">Ren0_6_chars</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Han_list</span> <span class="o">+</span>
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Katakana_list</span> <span class="o">+</span>
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Hiragana_list</span> <span class="o">+</span>
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Bopomofo_list</span> <span class="o">+</span>
+    <span class="n">uax24</span><span class="o">.</span><span class="n">Hangul_list</span>
+<span class="p">)</span>
+
+<div class="viewcode-block" id="imscHrmValidator"><a class="viewcode-back" href="../../../ebu_tt_live.scripts.html#ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator">[docs]</a><span class="k">class</span> <span class="nc">imscHrmValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for validating an EBU-TT-D document against the IMSC-HRM.</span>
+
+<span class="sd">    IMSC-HRM is specified at https://www.w3.org/TR/imsc-hrm/ .</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># IMSC HRM constants</span>
+    <span class="n">_ipd</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">_BDraw</span> <span class="o">=</span> <span class="mi">12</span>
+
+    <span class="c1"># Things we need</span>
+    <span class="n">_glyphCache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># Array of glyphs</span>
+    <span class="n">_doc</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_p_to_parent_div_with_background_color</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># _any_region_has_background_color_and_show_background_always = False</span>
+    <span class="n">_region_ids_with_always_background</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_cell_height</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">15</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_getIsdTimes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the set of ISD times.&quot;&quot;&quot;</span>
+        <span class="n">include_extra_times</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_region_ids_with_always_background</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># in EBU-TT-D region elements cannot have begin or end times,</span>
+            <span class="c1"># so if they have an opaque background colour and</span>
+            <span class="c1"># showBackground=&quot;always&quot; (the default) then there must</span>
+            <span class="c1"># be an ISD beginning at time zero, but the document&#39;s</span>
+            <span class="c1"># timeline may exclude it: force it to be present.</span>
+            <span class="n">include_extra_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">isd_times</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="o">*</span><span class="n">include_extra_times</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">when</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_doc</span><span class="o">.</span><span class="n">timeline</span><span class="p">]]))</span>
+        <span class="k">return</span> <span class="n">isd_times</span>
+
+    <span class="k">def</span> <span class="nf">_getIsd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isd_begin_time</span><span class="p">,</span> <span class="n">isd_end_time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the elements in the ISD for a particular time&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_doc</span><span class="o">.</span><span class="n">lookup_range_on_timeline</span><span class="p">(</span><span class="n">isd_begin_time</span><span class="p">,</span> <span class="n">isd_end_time</span> <span class="k">if</span> <span class="n">isd_end_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_isEmptyISD</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isd</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine if the ISD is empty or renders some text.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_region_ids_with_always_background</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">empty</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">isd</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">():</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">NonElementContent</span><span class="p">):</span>
+                    <span class="n">region</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">_validated_region</span>
+                    <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">region</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">_inherited_region</span>
+                    <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">continue</span>  <span class="c1"># prune content with no associated region</span>
+                    <span class="n">empty</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">d_span_type</span><span class="p">):</span>
+                    <span class="n">region</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">_validated_region</span>
+                    <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">region</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">_inherited_region</span>
+                    <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">continue</span>  <span class="c1"># prune content with no associated region</span>
+
+                    <span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">NonElementContent</span><span class="p">):</span>
+                            <span class="n">empty</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+                            <span class="k">break</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">empty</span>
+
+    <span class="k">def</span> <span class="nf">_hasBackgroundColor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">computed_style</span><span class="o">.</span><span class="n">backgroundColor</span>
+        <span class="k">if</span> <span class="n">backgroundColor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backgroundColor</span><span class="p">,</span> <span class="n">namedColorType</span><span class="p">):</span>
+                <span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">rgbaHexColorType</span><span class="p">(</span><span class="n">named_color_to_rgba</span><span class="p">(</span><span class="n">backgroundColor</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backgroundColor</span><span class="p">,</span> <span class="n">rgbaHexColorType</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">backgroundColor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+                <span class="n">opacity</span> <span class="o">=</span> <span class="n">backgroundColor</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+                <span class="n">rv</span> <span class="o">=</span> <span class="p">(</span><span class="n">opacity</span> <span class="o">!=</span> <span class="s1">&#39;00&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backgroundColor</span><span class="p">,</span> <span class="n">rgbHexColorType</span><span class="p">):</span>
+                <span class="n">rv</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;backgroundColor </span><span class="si">{}</span><span class="s1"> has opacity </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">backgroundColor</span><span class="p">,</span> <span class="n">rv</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">rv</span>
+
+    <span class="k">def</span> <span class="nf">_preprocess_regions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if any region has an opaque backgroundColor and showBackground set to always.</span>
+
+<span class="sd">        If this is the case, then no ISD is ever empty, because every ISD has to paint that</span>
+<span class="sd">        region&#39;s background.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># self._any_region_has_background_color_and_show_background_always = False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_region_ids_with_always_background</span>  <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_doc</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">region</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hasBackgroundColor</span><span class="p">(</span><span class="n">region</span><span class="p">)</span> <span class="ow">and</span> \
+               <span class="p">(</span><span class="n">region</span><span class="o">.</span><span class="n">showBackground</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">region</span><span class="o">.</span><span class="n">showBackground</span><span class="o">==</span><span class="s2">&quot;always&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_any_region_has_background_color_and_show_background_always</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="s1">&#39;Found region </span><span class="si">{}</span><span class="s1"> with opaque backgroundColor and showBackground=&quot;always&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_region_ids_with_always_background</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_preprocess_divs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For all divs with an opaque backgroundColor, record their p children</span>
+<span class="sd">        </span>
+<span class="sd">        This is so we can count divs in NGP: the timeline only gives us p elements.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_p_to_parent_div_with_background_color</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">div</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_doc</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">div</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hasBackgroundColor</span><span class="p">(</span><span class="n">div</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">div</span><span class="o">.</span><span class="n">p</span><span class="p">:</span>
+                    <span class="c1"># div elements might not have an id, so we need to map to the object</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_p_to_parent_div_with_background_color</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">div</span>
+
+    <span class="k">def</span> <span class="nf">_drawingAreaS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isd</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the drawing area of the active regions in the ISD.</span>
+
+<span class="sd">        We need to sum the product of region area and total number of elements</span>
+<span class="sd">        in the tree rooted at each region including body, div, p and span that</span>
+<span class="sd">        have a tts:backgroundColor whose opacity is not zero.</span>
+
+<span class="sd">        A feature of EBU-TT-D is that divs cannot contain divs and spans cannot</span>
+<span class="sd">        contain spans, so we can check the body&#39;s style once, for each region,</span>
+<span class="sd">        and need to traverse up to the div parent of each p to count the unique</span>
+<span class="sd">        divs too. We can ignore character content children because by definition</span>
+<span class="sd">        they cannot set the backgroundColor attribute,</span>
+<span class="sd">        whose default has opacity 0.&quot;&quot;&quot;</span>
+
+        <span class="n">region_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">region_to_element_count</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">region_to_div_map</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># will map all the divs selected into each region</span>
+        <span class="n">body_has_background_color</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_doc</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">body</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hasBackgroundColor</span><span class="p">(</span><span class="n">body</span><span class="p">):</span>
+            <span class="n">body_has_background_color</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;body has background color&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">region_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_region_ids_with_always_background</span><span class="p">:</span>
+            <span class="n">region_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_doc</span><span class="o">.</span><span class="n">get_element_by_id</span><span class="p">(</span><span class="n">region_id</span><span class="p">))</span>
+            <span class="n">region_to_element_count</span><span class="p">[</span><span class="n">region_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">body_has_background_color</span>
+            <span class="n">region_to_div_map</span><span class="p">[</span><span class="n">region_id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">isd</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">d_p_type</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;processing p id </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">_validated_region</span>
+                <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">region</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">_inherited_region</span>
+                <span class="k">if</span> <span class="n">region</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="c1"># It&#39;s possible to have a p with no associated region.</span>
+                    <span class="c1"># If this happens, then skip it as though it were pruned.</span>
+                    <span class="k">continue</span>
+                <span class="n">region_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">region_to_element_count</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;adding new region id </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+                    <span class="n">region_to_element_count</span><span class="p">[</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">body_has_background_color</span>
+                    <span class="n">region_to_div_map</span><span class="p">[</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hasBackgroundColor</span><span class="p">(</span><span class="n">region</span><span class="p">):</span>
+                        <span class="n">region_to_element_count</span><span class="p">[</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;region has a background color&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hasBackgroundColor</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                    <span class="n">region_to_element_count</span><span class="p">[</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;p has a background color&#39;</span><span class="p">)</span>
+                <span class="c1"># Make sure we count the div for this region if it has a backgroundColor</span>
+                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p_to_parent_div_with_background_color</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;this p is in a div with a background color&#39;</span><span class="p">)</span>
+                    <span class="n">region_to_div_map</span><span class="p">[</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_p_to_parent_div_with_background_color</span><span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;processing </span><span class="si">{}</span><span class="s1"> span children of p id </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">span</span><span class="p">),</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">span_child</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">span</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hasBackgroundColor</span><span class="p">(</span><span class="n">span_child</span><span class="p">):</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;span has background color&#39;</span><span class="p">)</span>
+                        <span class="n">region_to_element_count</span><span class="p">[</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;span with no background color&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">rid</span> <span class="ow">in</span> <span class="n">region_to_element_count</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">region_to_element_count</span><span class="p">[</span><span class="n">rid</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">region_to_div_map</span><span class="p">[</span><span class="n">rid</span><span class="p">])</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">region_to_element_count</span><span class="p">)</span>
+
+        <span class="n">PAINT</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">region_set</span><span class="p">:</span>
+            <span class="n">extent</span> <span class="o">=</span> <span class="n">PercentageExtentType</span><span class="p">(</span><span class="n">region</span><span class="o">.</span><span class="n">extent</span><span class="p">)</span>
+
+            <span class="n">NSIZE</span> <span class="o">=</span> <span class="n">extent</span><span class="o">.</span><span class="n">horizontal</span><span class="o">/</span><span class="mi">100</span> <span class="o">*</span> <span class="n">extent</span><span class="o">.</span><span class="n">vertical</span><span class="o">/</span><span class="mi">100</span>
+            <span class="n">PAINT</span> <span class="o">+=</span> <span class="n">NSIZE</span> <span class="o">*</span> <span class="n">region_to_element_count</span><span class="p">[</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Region </span><span class="si">{}</span><span class="s1"> has NSIZE = </span><span class="si">{}</span><span class="s1"> and NBG = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="n">NSIZE</span><span class="p">,</span>
+                <span class="n">region_to_element_count</span><span class="p">[</span><span class="n">region</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+            <span class="p">))</span>
+
+        <span class="n">S</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">PAINT</span>  <span class="c1"># CLEAR = 1</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;S = </span><span class="si">{}</span><span class="s1">, PAINT = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">PAINT</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">S</span>
+
+    <span class="k">def</span> <span class="nf">_getGlyphStyles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the set of glyph styles from the provided element.&quot;&quot;&quot;</span>
+
+        <span class="n">rv</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">glyphStyles</span><span class="p">)</span>
+        <span class="n">cs</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">computed_style</span>
+        <span class="k">for</span> <span class="n">style_attr</span> <span class="ow">in</span> <span class="n">glyphStyles</span><span class="p">:</span>
+            <span class="n">rv</span><span class="p">[</span><span class="n">style_attr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">style_attr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rv</span>
+
+    <span class="k">def</span> <span class="nf">_calc_NRGA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fontSize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fontSize</span><span class="p">,</span> <span class="n">CellFontSizeType</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">fontSize</span><span class="o">.</span><span class="n">vertical</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cell_height</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;unexpected fontSize </span><span class="si">{}</span><span class="s1"> of type </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">fontSize</span><span class="p">,</span>
+                <span class="nb">type</span><span class="p">(</span><span class="n">fontSize</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+            <span class="nb">breakpoint</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="mi">100</span>  <span class="c1"># silly big number</span>
+
+    <span class="k">def</span> <span class="nf">_GCpy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;char </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="s1">in GCpy12_chars&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">char</span><span class="p">,</span>
+            <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">GCpy12_chars</span> <span class="k">else</span> <span class="s1">&#39;not &#39;</span>
+        <span class="p">))</span>
+        <span class="k">return</span> <span class="mi">12</span> <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">GCpy12_chars</span> <span class="k">else</span> <span class="mi">3</span>
+
+    <span class="k">def</span> <span class="nf">_Ren</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;char </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="s1">in Ren0_6_chars&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">char</span><span class="p">,</span>
+            <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">Ren0_6_chars</span> <span class="k">else</span> <span class="s1">&#39;not &#39;</span>
+        <span class="p">))</span>
+        <span class="k">return</span> <span class="mf">0.6</span> <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">Ren0_6_chars</span> <span class="k">else</span> <span class="mf">1.2</span>
+
+    <span class="k">def</span> <span class="nf">_checkGlyphCacheSize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute sum of NRGA over all glyphs and check it is not largher than NGBS&quot;&quot;&quot;</span>
+        <span class="n">NGBS</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">NRGA_SUM</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_glyphCache</span><span class="p">:</span>
+            <span class="n">NRGA_SUM</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_NRGA</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fontSize</span><span class="p">)</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Glyph cache size check: NRGA_SUM = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">NRGA_SUM</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">NRGA_SUM</span> <span class="o">&lt;=</span> <span class="n">NGBS</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_textDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isd</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the painting duration for the text in the ISD.</span>
+<span class="sd">        </span>
+<span class="sd">        We will assume that the glyph cache is in a good state to start.&quot;&quot;&quot;</span>
+        <span class="n">this_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">this_style</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">glyphStyles</span><span class="p">)</span>
+        <span class="n">DURT</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">next_glyph_cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Calculating textDuration for isd&#39;</span><span class="p">)</span>
+
+        <span class="c1"># breakpoint()</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">isd</span><span class="p">:</span>
+            <span class="c1"># should be a p</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">d_p_type</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Processing p id=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">poci</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">poci</span><span class="p">,</span> <span class="n">NonElementContent</span><span class="p">):</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;processing character content child of p&#39;</span><span class="p">)</span>
+                        <span class="n">this_text</span> <span class="o">=</span> <span class="n">poci</span><span class="o">.</span><span class="n">value</span>
+                        <span class="n">this_style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getGlyphStyles</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">poci</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">d_span_type</span><span class="p">):</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;processing a span&#39;</span><span class="p">)</span>
+                        <span class="n">this_style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getGlyphStyles</span><span class="p">(</span><span class="n">poci</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                        <span class="n">this_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                        <span class="k">for</span> <span class="n">soci</span> <span class="ow">in</span> <span class="n">poci</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">orderedContent</span><span class="p">():</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">soci</span><span class="p">,</span> <span class="n">NonElementContent</span><span class="p">):</span>
+                                <span class="n">this_text</span> <span class="o">+=</span> <span class="n">soci</span><span class="o">.</span><span class="n">value</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">continue</span>
+
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;this_text: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">this_text</span><span class="p">))</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;this_style: </span><span class="si">{}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">this_style</span><span class="p">))</span>
+                    <span class="n">this_NRGA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_NRGA</span><span class="p">(</span><span class="n">this_style</span><span class="p">[</span><span class="s1">&#39;fontSize&#39;</span><span class="p">])</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;this_NRGA = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">this_NRGA</span><span class="p">))</span>
+                    <span class="c1"># iterate through text and style processing glyphs</span>
+                    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">this_text</span><span class="p">:</span>
+                        <span class="n">charCode</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+                        <span class="c1"># there must be a better way to make our glyph tuple</span>
+                        <span class="c1"># than the next 3 lines, but I haven&#39;t found it.</span>
+                        <span class="n">tsc</span> <span class="o">=</span> <span class="n">this_style</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                        <span class="n">tsc</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;characterCode&#39;</span><span class="p">:</span> <span class="n">charCode</span><span class="p">})</span>
+                        <span class="n">this_glyph</span> <span class="o">=</span> <span class="n">glyph</span><span class="p">(</span><span class="o">**</span><span class="n">tsc</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">this_glyph</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_glyphCache</span><span class="p">:</span>
+                            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;glyph for </span><span class="si">{}</span><span class="s1"> (</span><span class="si">{}</span><span class="s1">) is in the glyph cache&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">charCode</span><span class="p">))</span>
+                            <span class="n">DURT</span> <span class="o">+=</span> <span class="n">this_NRGA</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GCpy</span><span class="p">(</span><span class="n">charCode</span><span class="p">)</span>
+                            <span class="n">next_glyph_cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">this_glyph</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">this_glyph</span> <span class="ow">in</span> <span class="n">next_glyph_cache</span><span class="p">:</span>
+                            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;glyph for </span><span class="si">{}</span><span class="s1"> (</span><span class="si">{}</span><span class="s1">) already rendered in this ISD&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">charCode</span><span class="p">))</span>
+                            <span class="n">DURT</span> <span class="o">+=</span> <span class="n">this_NRGA</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GCpy</span><span class="p">(</span><span class="n">charCode</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;rendering glyph for </span><span class="si">{}</span><span class="s1"> (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">charCode</span><span class="p">))</span>
+                            <span class="n">DURT</span> <span class="o">+=</span> <span class="n">this_NRGA</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Ren</span><span class="p">(</span><span class="n">charCode</span><span class="p">)</span>
+                            <span class="n">next_glyph_cache</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">this_glyph</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># not a p</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Found non p element type </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_glyphCache</span> <span class="o">=</span> <span class="n">next_glyph_cache</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Returning DURT = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">DURT</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">DURT</span>
+
+    <span class="k">def</span> <span class="nf">_paintingDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isd</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the total painting duration for the ISD.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drawingAreaS</span><span class="p">(</span><span class="n">isd</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">_BDraw</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_textDuration</span><span class="p">(</span><span class="n">isd</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="n">EBUTTDDocument</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_glyphCache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_doc</span> <span class="o">=</span> <span class="n">doc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preprocess_divs</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preprocess_regions</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">doc</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">cellResolution</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cell_height</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">doc</span><span class="o">.</span><span class="n">binding</span><span class="o">.</span><span class="n">cellResolution</span><span class="o">.</span><span class="n">vertical</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cell_height</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">15</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Cell height = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cell_height</span><span class="p">))</span>
+
+<div class="viewcode-block" id="imscHrmValidator.validate"><a class="viewcode-back" href="../../../ebu_tt_live.scripts.html#ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="n">EBUTTDDocument</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the EBU-TT-D document against the IMSC-HRM.</span>
+
+<span class="sd">        :param doc EBUTTDDocument: a validated EBUTTDDocument object</span>
+
+<span class="sd">        :return: True if the document is valid, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setup</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+        <span class="n">last_nonzero_presentation_time</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ipd</span><span class="p">)</span>
+
+        <span class="n">rv</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">timeline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getIsdTimes</span><span class="p">();</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;timeline: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timeline</span><span class="p">))</span>
+
+        <span class="n">timeline_entries</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">timeline</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">timeline_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">timeline_entries</span><span class="p">):</span>
+            <span class="n">isd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getIsd</span><span class="p">(</span>
+                <span class="n">timeline</span><span class="p">[</span><span class="n">timeline_idx</span><span class="p">],</span>
+                <span class="n">timeline</span><span class="p">[</span><span class="n">timeline_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">timeline_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">timeline_entries</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_isEmptyISD</span><span class="p">(</span><span class="n">isd</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;ISD beginning at </span><span class="si">{}</span><span class="s1"> is empty&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timeline</span><span class="p">[</span><span class="n">timeline_idx</span><span class="p">]))</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;ISD beginning at </span><span class="si">{}</span><span class="s1"> is not empty&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timeline</span><span class="p">[</span><span class="n">timeline_idx</span><span class="p">]))</span>
+
+            <span class="c1"># Work out how long we have to draw this</span>
+            <span class="n">available_draw_time</span> <span class="o">=</span> \
+                <span class="p">(</span><span class="n">timeline</span><span class="p">[</span><span class="n">timeline_idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">last_nonzero_presentation_time</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">available_draw_time</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ipd</span><span class="p">:</span>
+                <span class="n">available_draw_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ipd</span>
+
+            <span class="c1"># remember for next time round the loop</span>
+            <span class="n">last_nonzero_presentation_time</span> <span class="o">=</span> <span class="n">timeline</span><span class="p">[</span><span class="n">timeline_idx</span><span class="p">]</span>
+
+            <span class="n">painting_dur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paintingDuration</span><span class="p">(</span><span class="n">isd</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s1">&#39;ISD beginning at </span><span class="si">{}</span><span class="s1"> has painting duration </span><span class="si">{}</span><span class="s1"> and available time </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">timeline</span><span class="p">[</span><span class="n">timeline_idx</span><span class="p">],</span>
+                    <span class="n">painting_dur</span><span class="p">,</span>
+                    <span class="n">available_draw_time</span>
+                <span class="p">))</span>
+            <span class="k">if</span> <span class="n">painting_dur</span> <span class="o">&gt;</span> <span class="n">available_draw_time</span><span class="p">:</span>
+                <span class="n">rv</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;ISD at </span><span class="si">{}</span><span class="s1"> fails validation&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timeline</span><span class="p">[</span><span class="n">timeline_idx</span><span class="p">]))</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checkGlyphCacheSize</span><span class="p">():</span>
+                <span class="n">rv</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Glyph cache total NRGA is larger than NGBS&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rv</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Document is valid&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Document is not valid&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rv</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017, European Broadcasting Union.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -317,10 +317,13 @@ are removed regardless of their location in the hierarchy.</p>
 <p>This script loads a file from the file system and attempts to validate it
 as the specified format, either EBU-TT Part 1, EBU-TT Part 3 or EBU-TT-D.
 By default the expected format is EBU-TT-D.</p>
+<p>Additionally, EBU-TT-D documents can be validated against the
+<a class="reference external" href="https://www.w3.org/TR/imsc-hrm/">IMSC-HRM</a> by adding the <code class="docutils literal notranslate"><span class="pre">--hrm</span></code> flag.</p>
 <p>Example command lines:</p>
 <p><code class="docutils literal notranslate"><span class="pre">validator</span> <span class="pre">-i</span> <span class="pre">path/to/ebu-tt-1-file-to-test.xml</span> <span class="pre">-f</span> <span class="pre">1</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">validator</span> <span class="pre">-i</span> <span class="pre">path/to/ebu-tt-3-file-to-test.xml</span> <span class="pre">-f</span> <span class="pre">3</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">validator</span> <span class="pre">-i</span> <span class="pre">path/to/ebu-tt-d-file-to-test.xml</span> <span class="pre">-f</span> <span class="pre">D</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">validator</span> <span class="pre">-i</span> <span class="pre">path/to/ebu-tt-d-file-to-test.xml</span> <span class="pre">-f</span> <span class="pre">D</span> <span class="pre">--hrm</span></code></p>
 </section>
 </section>
 

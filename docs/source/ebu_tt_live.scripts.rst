@@ -58,3 +58,12 @@ scripts Package
     :undoc-members:
     :show-inheritance:
 
+
+:mod:`imsc_hrm_validator` Module
+-------------------------------------
+
+.. autoclass:: ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator
+    :members:
+
+.. automodule:: ebu_tt_live.scripts.imsc_hrm_validator
+    :show-inheritance:

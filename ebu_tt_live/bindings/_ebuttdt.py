@@ -68,8 +68,11 @@ class _TimedeltaBindingMixin(object):
         context = get_xml_parsing_context()
         if context is not None:
             # This means we are in XML parsing context. There should be a timeBase and a timing_attribute_name in the
-            # context object.
-            time_base = context['timeBase']
+            # context object. But if there's no timeBase, in the context
+            # of EBU-TT-D, we will assume media. Some files in the wild
+            # trigger this behaviour, for reasons not yet identified, i.e.
+            # we somehow get here without having a timeBase context set.
+            time_base = context.get('timeBase', 'media')
             # It is possible for a timing type to exist as the value of an element not an attribute,
             # in which case no timing_attribute_name is in the context; in that case don't attempt
             # to validate the data against a timebase. At the moment this only affects the
@@ -611,6 +614,9 @@ class CellFontSizeType(TwoDimSizingMixin, ebuttdt_raw.cellFontSizeType):
 
     def __eq__(self, other):
         return self._do_eq(other)
+    
+    def __hash__(self):
+        return hash((self.horizontal, self.vertical))
 
 
 ebuttdt_raw.cellFontSizeType._SetSupersedingClass(CellFontSizeType)

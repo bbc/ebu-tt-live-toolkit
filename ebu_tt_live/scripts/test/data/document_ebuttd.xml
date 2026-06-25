@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  -->
+<tt xml:lang="en"
+    xmlns="http://www.w3.org/ns/ttml"
+    xmlns:tts="http://www.w3.org/ns/ttml#styling"
+    xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
+    ttp:timeBase="media">
+    <head>
+        <styling>
+            <style xml:id="s1" tts:backgroundColor="#ff0000" />
+            <style xml:id="s2" tts:backgroundColor="#ff000000" />
+            <style xml:id="s3" tts:color="#00ff00" tts:fontFamily="george" tts:fontSize="200%" tts:fontStyle="italic" tts:fontWeight="bold" tts:textDecoration="underline"/>
+        </styling>
+        <layout>
+            <region xml:id="r1" tts:origin="0% 0%" tts:extent="100% 100%" style="s1" tts:showBackground="whenActive"></region>
+        </layout>
+    </head>
+    <body>
+        <div>
+            <p xml:id="p0" begin="00:00:02.5" end="00:00:03">Empty ISD, no associated region</p>
+            <p xml:id="p1" region="r1" begin="00:00:03" end="00:00:04">Non-element content <span style="s1">a</span></p>
+            <p xml:id="p2" region="r1" begin="00:00:04" end="00:00:05"><span style="s3">a<br/>b</span></p>
+        </div>
+        <div style="s2">
+            <p xml:id="p3" region="r1" begin="00:00:05" end="00:00:06">div parent has background colour with no opacity</p>
+        </div>
+        <div style="s1">
+            <p xml:id="p4" region="r1" begin="00:00:07" end="00:00:08">div parent has opaque background colour</p>
+        </div>
+    </body>
+</tt>

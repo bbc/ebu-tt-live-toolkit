@@ -2,7 +2,7 @@ from ebu_tt_live.documents import EBUTT3Document
 from datetime import timedelta
 from pytest_bdd import scenarios, when, then
 
-scenarios('features/validation/time_regex_parsing.feature', example_converters=dict(trusted_timedeltas_index=int))
+scenarios('features/validation/time_regex_parsing.feature')
 
 trusted_timedeltas = [
     timedelta(hours=15),
@@ -28,4 +28,4 @@ def when_body_begin(body_begin, template_dict):
 def check_correct_parsing(template_file, template_dict, trusted_timedeltas_index):
     xml_file = template_file.render(template_dict)
     document = EBUTT3Document.create_from_xml(xml_file)
-    assert document._ebutt3_content.body.begin.timedelta == trusted_timedeltas[trusted_timedeltas_index]
+    assert document._ebutt3_content.body.begin.timedelta == trusted_timedeltas[int(trusted_timedeltas_index)]

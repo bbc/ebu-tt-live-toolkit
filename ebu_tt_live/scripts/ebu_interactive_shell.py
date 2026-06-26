@@ -20,5 +20,5 @@ def main():
         with open(args.input_file, 'r') as ifile:
             document = EBUTT3Document.create_from_xml(ifile.read())
 
-    import ipdb
-    ipdb.set_trace()
+    from IPython.core.debugger import set_trace
+    set_trace()

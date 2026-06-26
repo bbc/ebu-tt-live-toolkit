@@ -226,7 +226,7 @@ class TimecountTimingType(_TimedeltaBindingMixin, ebuttdt_raw.timecountTimingTyp
     """
 
     # NOTE: Update this regex should the spec change about this type
-    _groups_regex = re.compile('(?P<numerator>[0-9]+(?:\\.[0-9]+)?)(?P<unit>h|ms|s|m)')
+    _groups_regex = re.compile(r'(?P<numerator>[0-9]+(?:\\.[0-9]+)?)(?P<unit>h|ms|s|m)')
     # TODO: Consult and restrict this in an intuitive way to avoid awkward timing type combinations on the timing attributes.
     _compatible_timebases = {
         'begin': ['clock', 'media'],
@@ -304,7 +304,7 @@ class FullClockTimingType(SemanticValidationMixin, _TimedeltaBindingMixin, ebutt
         'dur': ['media'],
         'end': ['media']
     }
-    _groups_regex = re.compile('([0-9][0-9]+):([0-5][0-9]):([0-5][0-9]|60)(?:\.([0-9]+))?')
+    _groups_regex = re.compile(r'([0-9][0-9]+):([0-5][0-9]):([0-5][0-9]|60)(?:\.([0-9]+))?')
 
     @classmethod
     def compatible_timebases(cls):
@@ -360,7 +360,7 @@ class LimitedClockTimingType(_TimedeltaBindingMixin, ebuttdt_raw.limitedClockTim
         'dur': ['clock'],
         'end': ['clock']
     }
-    _groups_regex = re.compile('([0-9][0-9]):([0-5][0-9]):([0-5][0-9]|60)(?:\.([0-9]+))?')
+    _groups_regex = re.compile(r'([0-9][0-9]):([0-5][0-9]):([0-5][0-9]|60)(?:\.([0-9]+))?')
 
     @classmethod
     def as_timedelta(cls, instance):
@@ -438,7 +438,7 @@ ebuttdt_raw.smpteTimingType._SetSupersedingClass(SMPTETimingType)
 
 class PixelOriginType(TwoDimSizingMixin, SizingValidationMixin, ebuttdt_raw.pixelOriginType):
 
-    _groups_regex = re.compile('(?:[+-]?(?P<first>\d*\.?\d+)(?:px))\s(?:[+-]?(?P<second>\d*\.?\d+)(?:px))')
+    _groups_regex = re.compile(r'(?:[+-]?(?P<first>\d*\.?\d+)(?:px))\s(?:[+-]?(?P<second>\d*\.?\d+)(?:px))')
     _2dim_format = '{}px {}px'
 
     def _semantic_validate_sizing_context(self, dataset):
@@ -459,7 +459,7 @@ ebuttdt_raw.cellOriginType._SetSupersedingClass(CellOriginType)
 
 class PercentageOriginType(TwoDimSizingMixin, ebuttdt_raw.percentageOriginType):
 
-    _groups_regex = re.compile('(?:[+-]?(?P<first>\d*\.?\d+)(?:%))\s(?:[+-]?(?P<second>\d*\.?\d+)(?:%))')
+    _groups_regex = re.compile(r'(?:[+-]?(?P<first>\d*\.?\d+)(?:%))\s(?:[+-]?(?P<second>\d*\.?\d+)(?:%))')
     _2dim_format = '{}% {}%'
 
 ebuttdt_raw.percentageOriginType._SetSupersedingClass(PercentageOriginType)
@@ -467,7 +467,7 @@ ebuttdt_raw.percentageOriginType._SetSupersedingClass(PercentageOriginType)
 
 class PixelExtentType(TwoDimSizingMixin, SizingValidationMixin, ebuttdt_raw.pixelExtentType):
 
-    _groups_regex = re.compile('(?:[+]?(?P<first>\d*\.?\d+)(?:px))\s(?:[+]?(?P<second>\d*\.?\d+)(?:px))')
+    _groups_regex = re.compile(r'(?:[+]?(?P<first>\d*\.?\d+)(?:px))\s(?:[+]?(?P<second>\d*\.?\d+)(?:px))')
     _2dim_format = '{}px {}px'
 
     def _semantic_validate_sizing_context(self, dataset):
@@ -481,7 +481,7 @@ ebuttdt_raw.pixelExtentType._SetSupersedingClass(PixelExtentType)
 
 class CellExtentType(TwoDimSizingMixin, ebuttdt_raw.cellExtentType):
 
-    _groups_regex = re.compile('(?:[+]?(?P<first>\d*\.?\d+)(?:c))\s(?:[+]?(?P<second>\d*\.?\d+)(?:c))')
+    _groups_regex = re.compile(r'(?:[+]?(?P<first>\d*\.?\d+)(?:c))\s(?:[+]?(?P<second>\d*\.?\d+)(?:c))')
     _2dim_format = '{}c {}c'
 
 ebuttdt_raw.cellExtentType._SetSupersedingClass(CellExtentType)
@@ -489,7 +489,7 @@ ebuttdt_raw.cellExtentType._SetSupersedingClass(CellExtentType)
 
 class PercentageExtentType(TwoDimSizingMixin, ebuttdt_raw.percentageExtentType):
 
-    _groups_regex = re.compile('(?:[+]?(?P<first>\d*\.?\d+)(?:%))\s(?:[+]?(?P<second>\d*\.?\d+)(?:%))')
+    _groups_regex = re.compile(r'(?:[+]?(?P<first>\d*\.?\d+)(?:%))\s(?:[+]?(?P<second>\d*\.?\d+)(?:%))')
     _2dim_format = '{}% {}%'
 
 ebuttdt_raw.percentageExtentType._SetSupersedingClass(PercentageExtentType)
@@ -520,9 +520,23 @@ class CellLengthType(ebuttdt_raw.cellLengthType):
 ebuttdt_raw.cellLengthType._SetSupersedingClass(CellLengthType)
 
 
+class PaddingType(SizingValidationMixin, ebuttdt_raw.paddingType):
+    _groups_regex = re.compile(r'([+-]?\d*(\.\d+)?(px|c|%))(\s([+-]?\d*(\.\d+)?(px|c|%)))?(\s([+-]?\d*(\.\d+)?(px|c|%)))?(\s([+-]?\d*(\.\d+)?(px|c|%)))?')
+
+
+    def _semantic_validate_sizing_context(self, dataset):
+        if 'px' in self:
+            extent = dataset['tt_element'].extent
+            if not isinstance(extent, ebuttdt_raw.pixelExtentType):
+                raise ExtentMissingError(self)
+
+ebuttdt_raw.paddingType._SetSupersedingClass(PaddingType)
+
+
+
 class PixelFontSizeType(TwoDimSizingMixin, SizingValidationMixin, ebuttdt_raw.pixelFontSizeType):
 
-    _groups_regex = re.compile('(?:[+]?(?P<first>\d*\.?\d+)(?:px))(?:\s(?:[+]?(?P<second>\d*\.?\d+)(?:px)))?')
+    _groups_regex = re.compile(r'(?:[+]?(?P<first>\d*\.?\d+)(?:px))(?:\s(?:[+]?(?P<second>\d*\.?\d+)(?:px)))?')
 
     _1dim_format = '{}px'
     _2dim_format = '{}px {}px'
@@ -537,7 +551,7 @@ ebuttdt_raw.pixelFontSizeType._SetSupersedingClass(PixelFontSizeType)
 
 class CellFontSizeType(TwoDimSizingMixin, ebuttdt_raw.cellFontSizeType):
 
-    _groups_regex = re.compile('(?:[+]?(?P<first>\d*\.?\d+)(?:c))(?:\s(?:[+]?(?P<second>\d*\.?\d+)(?:c)))?')
+    _groups_regex = re.compile(r'(?:[+]?(?P<first>\d*\.?\d+)(?:c))(?:\s(?:[+]?(?P<second>\d*\.?\d+)(?:c)))?')
 
     _1dim_format = '{}c'
     _2dim_format = '{}c {}c'
@@ -590,7 +604,7 @@ ebuttdt_raw.cellFontSizeType._SetSupersedingClass(CellFontSizeType)
 
 class PercentageFontSizeType(TwoDimSizingMixin, ebuttdt_raw.percentageFontSizeType):
 
-    _groups_regex = re.compile('(?:[+]?(?P<first>\d*\.?\d+)(?:%))(?:\s(?:[+]?(?P<second>\d*\.?\d+)(?:%)))?')
+    _groups_regex = re.compile(r'(?:[+]?(?P<first>\d*\.?\d+)(?:%))(?:\s(?:[+]?(?P<second>\d*\.?\d+)(?:%)))?')
 
     _1dim_format = '{}%'
     _2dim_format = '{}% {}%'
@@ -639,7 +653,7 @@ ebuttdt_raw.percentageFontSizeType._SetSupersedingClass(PercentageFontSizeType)
 
 class CellResolutionType(TwoDimSizingMixin, ebuttdt_raw.cellResolutionType):
 
-    _groups_regex = re.compile('(?P<first>[0]*[1-9][0-9]*)\s(?P<second>[0]*[1-9][0-9]*)')
+    _groups_regex = re.compile(r'(?P<first>[0]*[1-9][0-9]*)\s(?P<second>[0]*[1-9][0-9]*)')
     _2dim_format = '{} {}'
 
 
@@ -648,7 +662,7 @@ ebuttdt_raw.cellResolutionType._SetSupersedingClass(CellResolutionType)
 
 class CellLineHeightType(TwoDimSizingMixin, ebuttdt_raw.cellLineHeightType):
 
-    _groups_regex = re.compile('(?P<first>\d*\.?\d+)c')
+    _groups_regex = re.compile(r'(?P<first>\d*\.?\d+)c')
     _1dim_format = '{}c'
 
 
@@ -657,7 +671,7 @@ ebuttdt_raw.cellLineHeightType._SetSupersedingClass(CellLineHeightType)
 
 class PercentageLineHeightType(TwoDimSizingMixin, ebuttdt_raw.percentageLineHeightType):
 
-    _groups_regex = re.compile('(?P<first>\d*\.?\d+)%')
+    _groups_regex = re.compile(r'(?P<first>\d*\.?\d+)%')
     _1dim_format = '{}%'
 
     def do_mul(self, other):
@@ -678,7 +692,7 @@ ebuttdt_raw.percentageLineHeightType._SetSupersedingClass(PercentageLineHeightTy
 
 class PixelLineHeightType(TwoDimSizingMixin, ebuttdt_raw.pixelLineHeightType):
 
-    _groups_regex = re.compile('(?P<first>\d*\.?\d+)px')
+    _groups_regex = re.compile(r'(?P<first>\d*\.?\d+)px')
     _1dim_format = '{}px'
 
 

@@ -255,7 +255,7 @@ def tokenize_english_document(input_text):
 def _assert_asm_is_defined(value, member_name, class_name):
     if value in (None, NotImplemented):
         raise TypeError(
-            'Abstract static member: \`{}.{}\` does not match the criteria'.format(
+            'Abstract static member: `{}.{}` does not match the criteria'.format(
                 class_name,
                 member_name
             )

@@ -2,6 +2,8 @@
 Feature: Configuration of websocket carriage
   # These examples hold a websocket carriage mechanism configuration for a producer-consumer pair of nodes
 
+  Scenario Outline:
+
   Examples:
   | config_file                    | xml_file            | sequence_identifier | time_base |
   | websocket_carriage_config.json | sequence_id_num.xml | test                | media     |

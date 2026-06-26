@@ -200,7 +200,7 @@ class IDMixin(object):
     Making sure the IDs are collected and maintained appropriately
     """
 
-    _re_ebu_id_deconflict = re.compile('SEQ([0-9]+)\.(.*)')
+    _re_ebu_id_deconflict = re.compile(r'SEQ([0-9]+)\.(.*)')
     _tp_ebu_id_deconflict = 'SEQ{sequence_number}.{original_id}'
 
     def deconflict_id(self, seq_num):

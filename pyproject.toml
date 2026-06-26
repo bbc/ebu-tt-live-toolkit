@@ -1,0 +1,63 @@
+[project]
+version = '3.0.4'
+name = 'ebu-tt-live'
+description = 'EBU-TT Part 3 library implementing Specification EBU-3370'
+license = "BSD-3-Clause"
+authors = []
+readme = "README.md"
+requires-python = "~=3.14.0"
+dependencies = [
+    "configobj ~= 5.0.9",
+    "pyyaml ~= 6.0.3",
+    "autobahn ~= 26.6.2",
+    "nltk ~= 3.9.4",
+    "sortedcontainers ~= 2.4.0",
+    "six ~= 1.17.0",
+    "sphinxcontrib-plantuml ~= 0.31",
+    "sphinx-rtd-theme ~= 3.1.0",
+    "pyxb-x ~= 1.2.6.3",
+    "configmanners @ git+https://github.com/twobraids/configmanners.git@bff28a98cb45dde1b75f52ba3a3ac572a96885eb",
+    "twisted ~= 26.4.0",
+]
+
+[tool.poetry]
+packages = [
+    { include = "ebu_tt_live" }
+    ]
+include = [
+    { path = "ebu_tt_live.examples/*.txt" },
+    { path = "ebu_tt_live.examples/*.json" }
+    ]
+
+[project.scripts]
+ebu-dummy-encoder = 'ebu_tt_live.scripts.ebu_dummy_encoder:main'
+ebu-interactive-shell = 'ebu_tt_live.scripts.ebu_interactive_shell:main'
+ebu-simple-consumer = 'ebu_tt_live.scripts.ebu_simple_consumer:main'
+ebu-simple-producer = 'ebu_tt_live.scripts.ebu_simple_producer:main'
+ebu-user-input-consumer = 'ebu_tt_live.scripts.ebu_user_input_consumer:main'
+ebu-user-input-forwarder = 'ebu_tt_live.scripts.ebu_user_input_forwarder:main'
+ebu-ebuttd-encoder = 'ebu_tt_live.scripts.ebu_ebuttd_encoder:main'
+ebu-run = 'ebu_tt_live.scripts.ebu_run:main'
+validator = 'ebu_tt_live.scripts.validator:main'
+
+[dependency-groups]
+dev = [
+    "ipython == 9.14.1",
+    "sphinx-autobuild ~= 2025.8.25",
+    "myst-parser == 5.1.0",
+    "pytest ~= 9.1.1",
+    "pytest-bdd == 8.1.0",
+    "pytest-cov ~= 7.1.0",
+    "pytest-mock ~= 3.15.1",
+    "pytest-subtests ~= 0.15.0",
+    "pytest-twisted ~= 1.14.3",
+    "pytest-runner ~= 6.0.1",
+    "Jinja2 ~= 3.1.6",
+    "mock ~= 5.2.0",
+    "sphinx ~= 9.1.0",
+]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

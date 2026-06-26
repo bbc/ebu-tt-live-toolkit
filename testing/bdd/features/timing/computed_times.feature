@@ -4,6 +4,8 @@ Feature: Computed times computation
   # This tests mostly operates on document computed begin and end times. It does not deal with active duration of
   # child elements.
 
+  Scenario Outline:
+
   Examples:
   | xml_file                             | sequence_identifier | sequence_number | no_body |
   | computed_resolved_time_semantics.xml | testSequence1       | 1               |         |

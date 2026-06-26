@@ -3,6 +3,8 @@ Feature: Computed element active begin and end times
   # Assuming that parent end = min(explicit end, begin+dur) where dur may exist, i.e. for body element.
 
 
+  Scenario Outline: 
+
   # Given a parent element with one child element, the computed active parent and child begin and active parent end times are valid:
   Examples:
   | xml_file                           | sequence_identifier | sequence_number | time_base |
@@ -159,3 +161,8 @@ Feature: Computed element active begin and end times
     |            | 00:01:00 |          |           |          |                   | 00:00:00          | 00:01:00        | 00:00:00         | 00:01:00       |
     |            | 00:01:00 |          |           |          | 00:00:05          | 00:00:05          | 00:01:05        | 00:00:05         | 00:01:05       |
     |            | 00:01:00 | 00:00:50 |           |          |                   | 00:00:00          | 00:00:50        | 00:00:00         | 00:00:50       |
+# @skip
+# Skipping tests where body has dur and there's a div with times because denester doesn't deal with them yet.
+    # |            | 00:00:05 |          | 01:00:00  |          |                   | 01:00:00          | 01:00:05        | 01:00:00         | 01:00:05       |
+    # |            | 00:00:05 |          | 00:00:05  | 00:00:12 |                   | 00:00:05          | 00:00:10        | 00:00:05         | 00:00:10       |
+    

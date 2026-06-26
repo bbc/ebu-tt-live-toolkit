@@ -27,8 +27,8 @@ Feature: SMPTE-related attribute constraints
     | smpte.xml  |            | media     | 1 1                   |           |               |
     | smpte.xml  |            | clock     |                       |           |               |
     | smpte.xml  |            | media     |                       |           |               |
-    @skip
-    | smpte.xml  | 20         | smpte     |                       | nonDrop   | discontinuous |
+    # @skip
+    # | smpte.xml  | 20         | smpte     |                       | nonDrop   | discontinuous |
     | smpte.xml  | 20         | smpte     |                       | nonDrop   | continuous    |
 
   # These tests are not all passing because of the missing semantic validation described in #52
@@ -57,8 +57,8 @@ Feature: SMPTE-related attribute constraints
     | smpte.xml  |            | smpte     | 1 1                   | nonDrop   | continuous    |
     | smpte.xml  | 25         | smpte     | 1.5 1                 | nonDrop   | continuous    |
     | smpte.xml  | 25         | smpte     | -1 1                  | nonDrop   | continuous    |
-    @skip
+    # @skip
     # dropPAL and 1 1 doesn't work together
-    | smpte.xml  | 25         | smpte     | 1 1                   | dropPAL   | continuous    |
+    # | smpte.xml  | 25         | smpte     | 1 1                   | dropPAL   | continuous    |
     # default value of frame rate multiplier
     | smpte.xml  | 25         | smpte     |                       | dropPAL   | continuous    |

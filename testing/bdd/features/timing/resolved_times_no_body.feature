@@ -1,6 +1,8 @@
 @timing @resolution @sequence
 Feature: Resolved times computation in sequence when there is no body
 
+  Scenario Outline: 
+
   Examples:
   | xml_file                             | sequence_identifier | time_base |
   | computed_resolved_time_semantics.xml | testSequence1       | clock     |
@@ -56,8 +58,5 @@ Feature: Resolved times computation in sequence when there is no body
     # See issue #429 
     | 00:00:00        | TRUE         |            |          |          | 00:00:01.0      | TRUE         |            |          |          | 00:00:03.0      | TRUE         |            |          |          | 00:00:00     |            | 00:00:01.0   | 00:00:01.0 | 00:00:03.0   | 00:00:03.0 |  
     #i.e., this fails:
-    @skip
-    | 00:00:00        | TRUE         |            |          |          | 00:00:01.0      | TRUE         |            |          |          | 00:00:03.0      | TRUE         |            |          |          | 00:00:00     | 00:00:00   | 00:00:01.0   | 00:00:01.0 | 00:00:03.0   | 00:00:03.0 |  
-   
-
-  
+    # @skip
+    # | 00:00:00        | TRUE         |            |          |          | 00:00:01.0      | TRUE         |            |          |          | 00:00:03.0      | TRUE         |            |          |          | 00:00:00     | 00:00:00   | 00:00:01.0   | 00:00:01.0 | 00:00:03.0   | 00:00:03.0 |  

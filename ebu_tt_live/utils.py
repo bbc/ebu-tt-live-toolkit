@@ -1,7 +1,7 @@
 import abc
 import collections
 import threading
-import Queue
+import queue
 import os
 import time
 import types
@@ -118,7 +118,7 @@ class RotatingFileBuffer(RingBufferWithCallback):
         super(RotatingFileBuffer, self).__init__(maxlen=maxlen, callback=self.delete_file)
         # In this case threads make sense since it is I/O we are going to be waiting for and that is releasing the GIL.
         # Deletion is the means for us to send down files for deletion to the other thread(maybe process later)....
-        self._deletion_queue = Queue.Queue()
+        self._deletion_queue = queue.Queue()
         if async_delete is True:
             self._deletion_thread = StoppableThread(
                 target=self._delete_thread_loop,
@@ -150,7 +150,7 @@ class RotatingFileBuffer(RingBufferWithCallback):
     def _do_consume(cls, q, files_waiting, default_wait):
         try:
             files_waiting.append(q.get(timeout=default_wait))
-        except Queue.Empty:
+        except queue.Empty:
             pass
 
         failed_files = cls._do_delete(files_waiting)

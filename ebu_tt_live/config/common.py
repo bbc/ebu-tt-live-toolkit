@@ -2,11 +2,11 @@ import re
 import six
 import logging
 import time
-from configman import RequiredConfig, Namespace, converters
+from configmanners import RequiredConfig, Namespace, converters
 from ebu_tt_live.strings import ERR_CONF_ONE_BACKEND_ONLY
 from ebu_tt_live.errors import ConfigurationError
 
-runtime_template_regex = re.compile(ur'[*]{2}.*?[*]{2}')
+runtime_template_regex = re.compile(r'[*]{2}.*?[*]{2}')
 converters = converters
 
 log = logging.getLogger(__name__)

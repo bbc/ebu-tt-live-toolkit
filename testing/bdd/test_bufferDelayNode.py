@@ -15,7 +15,7 @@ scenarios('features/timing/bufferDelayNode.feature')
 # functions for scenario: BufferDelayNode delays emission by no less than the delay period
 
 
-@fixture('module')
+@fixture(scope='module')
 def temp_dir():
     new_dir = mkdtemp()
     yield new_dir

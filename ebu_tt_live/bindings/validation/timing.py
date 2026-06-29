@@ -222,9 +222,11 @@ class TimingValidationMixin(object):
         if begin_timedelta is None:
 
             if children is None:
-                children = filter(lambda item: isinstance(item, TimingValidationMixin) \
-                                  and not item._element_badly_timed(value=None, element=item),
-                                  [x.value for x in self.orderedContent()])
+                children = [
+                    child.value for child in self.orderedContent()
+                    if isinstance(child, TimingValidationMixin)
+                    and not child._element_badly_timed(value=None, element=child)
+                    ]
 
             self._post_calculate_begin(children=children)
 

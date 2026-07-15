@@ -11,10 +11,10 @@ Feature: Computed element active begin and end times
 
 
   Scenario: Parent with no child element
-    Given an xml file <xml_file>
-    When it has sequenceIdentifier <sequence_identifier>
-    And it has sequenceNumber <sequence_number>
-    And it has timeBase <time_base>
+    Given an xml file elements_active_time_semantics_empty_body.xml
+    When it has sequenceIdentifier testSeq
+    And it has sequenceNumber 1
+    And it has timeBase media
     And it has body begin time <body_begin>
     And it has body end time <body_end>
     And the document is generated
@@ -33,10 +33,10 @@ Feature: Computed element active begin and end times
   # The code assumes availability_time to be 0 unless specified otherwise.
 
   Scenario: Body timing parameters affecting document without children
-    Given an xml file <xml_file>
-    When it has sequenceIdentifier <sequence_identifier>
-    And it has sequenceNumber <sequence_number>
-    And it has timeBase <time_base>
+    Given an xml file elements_active_time_semantics_empty_body.xml
+    When it has sequenceIdentifier testSeq
+    And it has sequenceNumber 1
+    And it has timeBase media
     And it has body begin time <body_begin>
     And it has body duration <body_dur>
     And it has body end time <body_end>

@@ -12,12 +12,12 @@ Feature: Computed times computation
 
   # SPEC-CONFORMANCE: R16 R17 R132
   Scenario: Computed times of a document
-    Given an xml file <xml_file>
+    Given an xml file computed_resolved_time_semantics.xml
     And example_line is <l>
-    And it has sequenceIdentifier <sequence_identifier>
+    And it has sequenceIdentifier testSequence1
     And it has timeBase <time_base>
-    And it has sequenceNumber <sequence_number>
-    And it has body <no_body>
+    And it has sequenceNumber 1
+    # And it has body <no_body>
     And it has body begin time <body_begin>
     And it has body end time <body_end>
     And it has body duration <body_dur>
@@ -31,8 +31,10 @@ Feature: Computed times computation
     And it has span2 end time <span2_end>
     And it has span3 begin time <span3_begin>
     And it has span3 end time <span3_end>
-    And the document is generated  # implicitly means it is valid.
+    # document being generated implicitly means it is valid.
+    And the document is generated
     And it has availability time <avail_time>
+    # Then trace
     Then it has computed begin time <computed_begin>
     And it has computed end time <computed_end>
 

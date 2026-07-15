@@ -104,7 +104,7 @@ class DeDuplicatorNode(AbstractCombinedNode):
         Replaces starting style and region elements with the unique ones identified in
         CollateUniqueVals
         """
-        for hash_val, new_id in hash_dict.iteritems():
+        for hash_val, new_id in hash_dict.items():
 
             for old_element in element_list:
                 if old_element.id is new_id.id:

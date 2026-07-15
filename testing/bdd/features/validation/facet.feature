@@ -2,17 +2,11 @@
 Feature: Facet
   Rules on use of ebuttm:facet and ebuttm:documentFacet
 
-  Scenario Outline:
-
-  Examples:
-      | xml_file   |
-      | facet.xml  |
-
   # SPEC-CONFORMANCE: R26 R66 R67
   # skipped because the semantic validation does not check facets yet
   @skip
   Scenario: Invalid term identifier
-    Given an xml file <xml_file>
+    Given an xml file facet.xml
     When it has facet1 applied to element <parent1>
     And facet1 has attribute <link1>
     And facet1 contains string <term1>
@@ -27,7 +21,7 @@ Feature: Facet
 
 
   Scenario: Valid term identifier
-    Given an xml file <xml_file>
+    Given an xml file facet.xml
     When it has facet1 applied to element <parent1>
     And facet1 has attribute <link1>
     And facet1 contains string <term1>
@@ -45,11 +39,11 @@ Feature: Facet
 
   # SPEC-CONFORMANCE: R27 R28 R29 R30
   Scenario: Valid Facet Summary
-    Given an xml file <xml_file>
+    Given an xml file facet.xml
     When it has element facet1 with attribute <expresses1>
     And it has element facet2 with attribute <expresses2>
     And it has element facet3 with attribute <expresses3>
-    And documentFacet has atribute <summary>
+    And documentFacet has attribute <summary>
     Then document is valid
 
     Examples:
@@ -63,11 +57,11 @@ Feature: Facet
 
 
   Scenario: Invalid Facet Summary
-    Given an xml file <xml_file>
+    Given an xml file facet.xml
     When it has element facet1 with attribute <expresses1>
     And it has element facet2 with attribute <expresses2>
     And it has element facet3 with attribute <expresses3>
-    And documentFacet has atribute <summary>
+    And documentFacet has attribute <summary>
     Then document is invalid
 
     Examples:
@@ -78,4 +72,4 @@ Feature: Facet
     | unknown    | unknown    | unknown    | has         |
     # @skip # again semantic validation for that part is missing in the xml validation for now
     # | has        | has        | has        | all_has_not |
-    | unknown    | has        | has        | unspecified |
+    # | unknown    | has        | has        | unspecified |

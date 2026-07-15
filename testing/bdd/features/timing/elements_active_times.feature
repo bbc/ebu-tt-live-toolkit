@@ -3,19 +3,11 @@ Feature: Computed element active begin and end times
   # Assuming that parent end = min(explicit end, begin+dur) where dur may exist, i.e. for body element.
 
 
-  Scenario Outline: 
-
-  # Given a parent element with one child element, the computed active parent and child begin and active parent end times are valid:
-  Examples:
-  | xml_file                           | sequence_identifier | sequence_number | time_base |
-  | elements_active_time_semantics.xml | testSeq             | 1               | media     |
-
-
-  Scenario: Parent with one child element
-    Given an xml file <xml_file>
-    When it has sequenceIdentifier <sequence_identifier>
-    And it has sequenceNumber <sequence_number>
-    And it has timeBase <time_base>
+   Scenario: Parent with one child element
+    Given an xml file elements_active_time_semantics.xml
+    When it has sequenceIdentifier testSeq
+    And it has sequenceNumber 1
+    And it has timeBase media
     And it has body begin time <body_begin>
     And it has body end time <body_end>
     And it has div begin time <div_begin>
@@ -48,10 +40,10 @@ Feature: Computed element active begin and end times
 
   # Given a parent element with two child elements, the computed active parent and child begin and active parent end times are valid:
   Scenario: Parent with two child elements
-    Given an xml file <xml_file>
-    When it has sequenceIdentifier <sequence_identifier>
-    And it has sequenceNumber <sequence_number>
-    And it has timeBase <time_base>
+    Given an xml file elements_active_time_semantics.xml
+    When it has sequenceIdentifier testSeq
+    And it has sequenceNumber 1
+    And it has timeBase media
     And it has p begin time <p_begin>
     And it has p end time <p_end>
     And it has span1 begin time <span1_begin>
@@ -138,10 +130,10 @@ Feature: Computed element active begin and end times
   # The code assumes availability_time to be 0 unless specified otherwise.
 
   Scenario: Body timing parameters affecting document
-    Given an xml file <xml_file>
-    When it has sequenceIdentifier <sequence_identifier>
-    And it has sequenceNumber <sequence_number>
-    And it has timeBase <time_base>
+    Given an xml file elements_active_time_semantics.xml
+    When it has sequenceIdentifier testSeq
+    And it has sequenceNumber 1
+    And it has timeBase media
     And it has body begin time <body_begin>
     And it has body duration <body_dur>
     And it has body end time <body_end>

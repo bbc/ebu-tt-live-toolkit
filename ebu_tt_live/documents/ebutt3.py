@@ -280,6 +280,16 @@ class EBUTT3Document(TimelineUtilMixin, SubtitleDocument, EBUTT3ObjectBase):
     # The sequence the document belongs to
     _sequence = None
 
+    # Expected use in the EBUTT3DocumentSequence, which puts this
+    # into a sortedset, requires that we are hashable, so define
+    # a very basic hash and eq function - the sortedset key function will
+    # define the actual sort key.
+    def __hash__(self):
+        return hash(id(self))
+
+    def __eq__(self, other):
+        return id(self) == id(other)
+
     def __init__(self, time_base, sequence_number, sequence_identifier, lang, clock_mode=None,
                  availability_time=None, authors_group_identifier=None):
         if not clock_mode and time_base is TimeBase.CLOCK:

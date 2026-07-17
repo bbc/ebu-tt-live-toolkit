@@ -1,9 +1,11 @@
 from pytest_bdd import when, given, then, parsers
 from jinja2 import Environment, FileSystemLoader
-from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence, EBUTTDDocument
+from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence, \
+    EBUTTDDocument
 from ebu_tt_live.clocks.local import LocalMachineClock
 from ebu_tt_live.clocks.media import MediaClock
-from ebu_tt_live.bindings._ebuttdt import FullClockTimingType, LimitedClockTimingType, CellFontSizeType, lineHeightType
+from ebu_tt_live.bindings._ebuttdt import FullClockTimingType, \
+    LimitedClockTimingType, CellFontSizeType, lineHeightType
 from datetime import timedelta
 from typing import Callable, TypeVar
 from typing_extensions import ParamSpec
@@ -122,11 +124,30 @@ def legacy_step(func: Callable[[Callable[P, T]], Callable[P, T]]) \
 @given(
     **legacy_name(name='an xml file <xml_file>'),
     target_fixture='template_file')
-def template_file(xml_file):
+@given(
+    name=parsers.parse(name='an xml file {xml_file}'),
+    target_fixture='template_file')
+def template_file(xml_file: str):
+    xml_file = xml_file.strip('"')
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     j2_env = Environment(loader=FileSystemLoader(os.path.join(cur_dir, 'templates')),
                          trim_blocks=True)
     return j2_env.get_template(xml_file)
+
+
+@given(name='it has the following template variables')
+@when(name='it has the following template variables')
+def template_file_with_variables(datatable, template_dict):
+    keys = datatable[0]
+    values = [empty_to_none(value=v) for v in datatable[1]]
+    # remove keys where the value is None
+    for i in range(len(keys)-1, 0, -1):
+        if values[i] is None:
+            del values[i]
+            del keys[i]
+    data = dict(zip(keys, values))
+    template_dict.update(data)
+    return
 
 
 # @pytest.fixture(name='template_file')
@@ -170,9 +191,14 @@ def template_file_two_fixture(xml_file_2):
 # NOTE: Some of the code below includes handling of SMPTE time base, which was removed from version 1.0 of the specification.
 
 
-# @legacy_step
-@given(**legacy_name(name='a sequence <sequence_identifier> with timeBase {time_base}'), target_fixture='sequence')
-def sequence(sequence_identifier, time_base):
+@given(**legacy_name(name='a sequence with the following identifier and timeBase'), target_fixture='sequence')
+def sequence(datatable):
+    # print(f"given a sequence with the following identifier and timeBase/ndatatable {datatable}")
+    keys = datatable[0]
+    values = datatable[1]
+    data = dict(zip(keys, values))
+    sequence_identifier = data['sequence_identifier']
+    time_base = data['time_base']
     ref_clock = None
     if time_base == 'clock':
         ref_clock = LocalMachineClock()
@@ -273,6 +299,7 @@ def then_ebuttd_document_valid(test_context):
 
 
 def timestr_to_timedelta(time_str, time_base):
+    print(f"timestr_to_timedelta time_str={time_str} time_base={time_base}")
     if time_base == 'clock':
         return LimitedClockTimingType(time_str).timedelta
     elif time_base == 'media':

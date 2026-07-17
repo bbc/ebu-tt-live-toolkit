@@ -4,7 +4,7 @@ Feature: Value types from 3350
 
   # SPEC-CONFORMANCE: R93
   Scenario: Valid colour values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has tts:color attribute with value <color>
     Then document is valid
 
@@ -17,7 +17,7 @@ Feature: Value types from 3350
     | #000000FF       |
 
   Scenario: Invalid colour values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has tts:color attribute with value <color>
     Then document is invalid
 
@@ -33,7 +33,7 @@ Feature: Value types from 3350
 
   # SPEC-CONFORMANCE: R94
   Scenario: Valid extent values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has region extent attribute with value <extent>
     Then document is valid
 
@@ -44,7 +44,7 @@ Feature: Value types from 3350
     | 1px 1px |
 
   Scenario: Invalid extent values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has region extent attribute with value <extent>
     Then document is invalid
 
@@ -56,7 +56,7 @@ Feature: Value types from 3350
 
   # SPEC-CONFORMANCE: R95
   Scenario: Valid font size values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has tts:fontSize attribute with value <font_size>
     Then document is valid
 
@@ -70,7 +70,7 @@ Feature: Value types from 3350
 
 
   Scenario: Invalid font size values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has tts:fontSize attribute with value <font_size>
     Then document is invalid
 
@@ -85,7 +85,7 @@ Feature: Value types from 3350
 
   # SPEC-CONFORMANCE: R97
   Scenario: Valid line padding values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has linePadding attribute with value <line_padding>
     Then document is valid
 
@@ -96,7 +96,7 @@ Feature: Value types from 3350
     | .5c         |
 
   Scenario: Invalid line padding values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has linePadding attribute with value <line_padding>
     Then document is invalid
 
@@ -109,7 +109,7 @@ Feature: Value types from 3350
 
   # SPEC-CONFORMANCE: R98
   Scenario: Valid line height values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has lineHeight attribute with value <line_height>
     Then document is valid
 
@@ -121,7 +121,7 @@ Feature: Value types from 3350
     | 1px         |
 
   Scenario: Invalid line height values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has lineHeight attribute with value <line_height>
     Then document is invalid
 
@@ -134,7 +134,7 @@ Feature: Value types from 3350
 
   # SPEC-CONFORMANCE: R99
   Scenario: Valid origin values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has origin attribute with value <origin>
     Then document is valid
 
@@ -147,7 +147,7 @@ Feature: Value types from 3350
     | 1px -1px |
 
   Scenario: Invalid origin values
-    Given an xml file 3350_value_types.xml
+    Given an xml file "3350_value_types.xml"
     When it has origin attribute with value <origin>
     Then document is invalid
 

@@ -4,7 +4,7 @@ Feature: Padding Element and Datatype testing
 
   ## Assumes that we can pass <tag> to the examples so that we test that the attribute is only applied to the elements that support it.
   ## If we can't, this restriction will be built into the template.
-  Scenario: Valid padding on element
+  Scenario Outline: Valid padding on element
     Given an xml file <xml_file>
     When <tag> has a padding attribute
     Then document is valid
@@ -31,10 +31,10 @@ Feature: Padding Element and Datatype testing
   Scenario: Valid padding datatype
     Given an xml file <xml_file>
     When it has a padding attribute
-    And the padding attribute has <value1>
-    And the padding attribute has <value2>
-    And the padding attribute has <value3>
-    And the padding attribute has <value4>
+    And the padding attribute component 1 is <value1>
+    And the padding attribute component 2 is <value2>
+    And the padding attribute component 3 is <value3>
+    And the padding attribute component 4 is <value4>
     Then document is valid
 
     Examples:
@@ -54,10 +54,10 @@ Feature: Padding Element and Datatype testing
   Scenario: Invalid padding datatype
     Given an xml file <xml_file>
     When it has a padding attribute
-    And the padding attribute has <value1>
-    And the padding attribute has <value2>
-    And the padding attribute has <value3>
-    And the padding attribute has <value4>
+    And the padding attribute component 1 is <value1>
+    And the padding attribute component 2 is <value2>
+    And the padding attribute component 3 is <value3>
+    And the padding attribute component 4 is <value4>
     Then document is invalid
 
     Examples:

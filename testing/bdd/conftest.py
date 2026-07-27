@@ -357,10 +357,10 @@ def then_computed_style_value_is(
         style_attribute, elem_id, computed_value, test_context):
     document = test_context['document']
     elem = document.get_element_by_id(elem_id)
-    if computed_value == '' or computed_value == None:
-        assert elem.computed_style.get_attribute_value(style_attribute) is None
-    else:
+    if computed_value:
         assert elem.computed_style.get_attribute_value(style_attribute) == computed_style_attribute_casting[style_attribute](computed_value)
+    else:
+        assert elem.computed_style.get_attribute_value(style_attribute) is None
 
 
 # @legacy_step

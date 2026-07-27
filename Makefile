@@ -3,7 +3,6 @@
 all: init ui
 	
 init:
-	uv install
 	uv run pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings
 
 initnpm:

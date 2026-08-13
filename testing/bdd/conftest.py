@@ -213,6 +213,7 @@ def sequence(datatable):
 @then('document is valid')
 def valid_doc(template_file, template_dict):
     xml_file = template_file.render(template_dict)
+    print(f"xml_file: \n{xml_file}")
     document = EBUTT3Document.create_from_xml(xml_file)
     assert isinstance(document, EBUTT3Document)
 

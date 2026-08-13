@@ -226,7 +226,7 @@ class TimecountTimingType(_TimedeltaBindingMixin, ebuttdt_raw.timecountTimingTyp
     """
 
     # NOTE: Update this regex should the spec change about this type
-    _groups_regex = re.compile(r'(?P<numerator>[0-9]+(?:\\.[0-9]+)?)(?P<unit>h|ms|s|m)')
+    _groups_regex = re.compile(r'(?P<numerator>[0-9]+(?:\.[0-9]+)?)(?P<unit>h|ms|s|m)')
     # TODO: Consult and restrict this in an intuitive way to avoid awkward timing type combinations on the timing attributes.
     _compatible_timebases = {
         'begin': ['clock', 'media'],
@@ -319,9 +319,9 @@ class FullClockTimingType(SemanticValidationMixin, _TimedeltaBindingMixin, ebutt
         """
         hours_str, minutes_str, seconds_str, seconds_fraction_str = [x for x in cls._groups_regex.match(instance).groups()]
         milliseconds = seconds_fraction_str and float('0.' + seconds_fraction_str) * 1000 or 0
-        return timedelta(hours=int(hours_str), 
-            minutes=int(minutes_str), 
-            seconds=int(seconds_str), 
+        return timedelta(hours=int(hours_str),
+            minutes=int(minutes_str),
+            seconds=int(seconds_str),
             milliseconds=milliseconds)
 
     @classmethod
@@ -371,11 +371,11 @@ class LimitedClockTimingType(_TimedeltaBindingMixin, ebuttdt_raw.limitedClockTim
         """
         hours_str, minutes_str, seconds_str, seconds_fraction_str = [x for x in cls._groups_regex.match(instance).groups()]
         milliseconds = seconds_fraction_str and float('0.' + seconds_fraction_str) * 1000 or 0
-        return timedelta(hours=int(hours_str), 
-            minutes=int(minutes_str), 
-            seconds=int(seconds_str), 
+        return timedelta(hours=int(hours_str),
+            minutes=int(minutes_str),
+            seconds=int(seconds_str),
             milliseconds=milliseconds)
-        
+
 
     @classmethod
     def from_timedelta(cls, instance):

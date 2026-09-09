@@ -1,15 +1,22 @@
-from .base import AbstractProducerCarriage, AbstractConsumerCarriage
-from ebu_tt_live.documents import EBUTT3Document
-from ebu_tt_live.errors import EndOfData
-from ebu_tt_live.clocks import get_clock
-from ebu_tt_live.utils import RotatingFileBuffer
-from ebu_tt_live.strings import FS_DEFAULT_CLOCK_USED, FS_MISSING_AVAILABILITY, CFG_FILENAME_PATTERN, CFG_MESSAGE_PATTERN, CFG_MANIFEST_FILENAME_PATTERN, CFG_MANIFEST_LINE_PATTERN
-from datetime import timedelta
 import logging
-import six
 import os
 import time
+from datetime import timedelta
 
+from ebu_tt_live.clocks import get_clock
+from ebu_tt_live.documents import EBUTT3Document
+from ebu_tt_live.errors import EndOfData
+from ebu_tt_live.strings import (
+        CFG_FILENAME_PATTERN,
+        CFG_MANIFEST_FILENAME_PATTERN,
+        CFG_MANIFEST_LINE_PATTERN,
+        CFG_MESSAGE_PATTERN,
+        FS_DEFAULT_CLOCK_USED,
+        FS_MISSING_AVAILABILITY,
+)
+from ebu_tt_live.utils import RotatingFileBuffer
+
+from .base import AbstractConsumerCarriage, AbstractProducerCarriage
 
 log = logging.getLogger(__name__)
 
@@ -63,7 +70,7 @@ class FilesystemProducerImpl(AbstractProducerCarriage):
     _circular_buf = None
     _counter = None
     _suppress_manifest = False
-    _expects = six.text_type
+    _expects = str
     _default_clocks = None
     _msg_counter = None
 
@@ -208,7 +215,7 @@ class FilesystemConsumerImpl(AbstractConsumerCarriage):
     The document is then sent to the node.
     """
 
-    _provides = six.text_type
+    _provides = str
 
     def on_new_data(self, data, **kwargs):
         availability_time_str, xml_content = data

@@ -1,10 +1,11 @@
-import re
-import six
 import logging
+import re
 import time
-from configmanners import RequiredConfig, Namespace, converters
-from ebu_tt_live.strings import ERR_CONF_ONE_BACKEND_ONLY
+
+from configmanners import Namespace, RequiredConfig, converters
+
 from ebu_tt_live.errors import ConfigurationError
+from ebu_tt_live.strings import ERR_CONF_ONE_BACKEND_ONLY
 
 runtime_template_regex = re.compile(r'[*]{2}.*?[*]{2}')
 converters = converters
@@ -64,8 +65,8 @@ class ConfigurableComponent(RequiredConfig):
             temp_result = getattr(result, attr_name)
             result = temp_result
 
-        if not isinstance(result, six.text_type):
-            result = six.text_type(result)
+        if not isinstance(result, str):
+            result = str(result)
         return result
 
     @classmethod

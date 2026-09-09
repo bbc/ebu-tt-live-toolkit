@@ -4,13 +4,15 @@ This file contains all the pyxb helpers needed for enabling a concise semantic v
 import copy
 import logging
 import re
-import six
 
+from pyxb.binding.basis import ElementContent, NonElementContent
 from pyxb.namespace import ExpandedName
 
 from ebu_tt_live.errors import SemanticValidationError
-from ebu_tt_live.strings import DOC_SYNTACTIC_VALIDATION_SUCCESSFUL, ERR_SEMANTIC_ID_UNIQUENESS
-from pyxb.binding.basis import NonElementContent, ElementContent
+from ebu_tt_live.strings import (
+    DOC_SYNTACTIC_VALIDATION_SUCCESSFUL,
+    ERR_SEMANTIC_ID_UNIQUENESS,
+)
 
 log = logging.getLogger(__name__)
 document_logger = logging.getLogger('document_logger')
@@ -138,7 +140,7 @@ class SemanticValidationMixin(object):
         if old_elem_ids is None:
             return None
 
-        if isinstance(old_elem_ids, six.text_type):
+        if isinstance(old_elem_ids, str):
             new_elem = self._find_deconflicted_elem_by_id(elem_id=old_elem_ids, dataset=dataset)
             return new_elem.id
         else:

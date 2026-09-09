@@ -12,7 +12,6 @@ dependencies = [
     "autobahn ~= 26.6.2",
     "nltk ~= 3.9.4",
     "sortedcontainers ~= 2.4.0",
-    "six ~= 1.17.0",
     "sphinxcontrib-plantuml ~= 0.31",
     "sphinx-rtd-theme ~= 3.1.0",
     "pyxb-x ~= 1.2.6.3",
@@ -42,7 +41,7 @@ validator = 'ebu_tt_live.scripts.validator:main'
 
 [dependency-groups]
 dev = [
-    "ipython == 9.14.1",
+    "ipython ==9.17.1",
     "sphinx-autobuild ~= 2025.8.25",
     "myst-parser == 5.1.0",
     "pytest ~= 9.1.1",

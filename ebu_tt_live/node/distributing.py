@@ -1,7 +1,8 @@
-from .base import AbstractCombinedNode
-from ebu_tt_live.documents import EBUTT3Document
 import logging
-import six
+
+from ebu_tt_live.documents import EBUTT3Document
+
+from .base import AbstractCombinedNode
 
 log = logging.getLogger(__name__)
 
@@ -10,7 +11,7 @@ class DistributingNode(AbstractCombinedNode):
 
     _reference_clock = None
     _expects = EBUTT3Document
-    _provides = six.text_type
+    _provides = str
 
     def __init__(self, node_id, producer_carriage=None, consumer_carriage=None, **kwargs):
         super(DistributingNode, self).__init__(

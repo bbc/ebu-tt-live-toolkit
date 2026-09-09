@@ -1,15 +1,14 @@
-
-import six
 import logging
-from .base import AbstractCombinedNode
-from datetime import timedelta, datetime
-from ebu_tt_live.bindings._ebuttdt import LimitedClockTimingType, FullClockTimingType
+from datetime import datetime, timedelta
+
 from ebu_tt_live.bindings import _ebuttm as metadata
-from ebu_tt_live.documents import EBUTT3Document
+from ebu_tt_live.bindings._ebuttdt import FullClockTimingType, LimitedClockTimingType
 from ebu_tt_live.bindings.pyxb_utils import RecursiveOperation, StopBranchIteration
 from ebu_tt_live.bindings.validation.timing import TimingValidationMixin
+from ebu_tt_live.documents import EBUTT3Document
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
 
+from .base import AbstractCombinedNode
 
 log = logging.getLogger(__name__)
 
@@ -82,8 +81,8 @@ class RetimingDelayNode(AbstractCombinedNode):
 class BufferDelayNode(AbstractCombinedNode):
 
     _fixed_delay = None
-    _expects = six.text_type
-    _provides = six.text_type
+    _expects = str
+    _provides = str
 
     def __init__(self, node_id, fixed_delay, consumer_carriage=None, producer_carriage=None):
         super(BufferDelayNode, self).__init__(

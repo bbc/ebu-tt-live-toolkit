@@ -1,19 +1,29 @@
 
-from autobahn.twisted.websocket import WebSocketClientProtocol, WebSocketServerFactory, WebSocketServerProtocol, \
-    listenWS, WebSocketClientFactory, connectWS
-
-from twisted.internet import interfaces, reactor
-from hyperlink import URL
-from zope.interface import implementer
-from logging import getLogger
 import json
-import six
-from ebu_tt_live.strings import ERR_WS_INVALID_ACTION, ERR_WS_NOT_CONSUMER, ERR_WS_NOT_PRODUCER, \
-    ERR_WS_RECEIVE_VIA_PRODUCER, ERR_WS_SEND_VIA_CONSUMER
+from logging import getLogger
+
+from autobahn.twisted.websocket import (
+    WebSocketClientFactory,
+    WebSocketClientProtocol,
+    WebSocketServerFactory,
+    WebSocketServerProtocol,
+    connectWS,
+    listenWS,
+)
+from hyperlink import URL
+from twisted.internet import interfaces, reactor
+from zope.interface import implementer
+
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
+from ebu_tt_live.strings import (
+    ERR_WS_INVALID_ACTION,
+    ERR_WS_NOT_CONSUMER,
+    ERR_WS_NOT_PRODUCER,
+    ERR_WS_RECEIVE_VIA_PRODUCER,
+    ERR_WS_SEND_VIA_CONSUMER,
+)
 
 from .base import IBroadcaster
-
 
 log = getLogger(__name__)
 
@@ -99,8 +109,8 @@ class EBUWebsocketProtocolMixin(object):
         self._consumer = value
 
     def _parse_path(self, full_url):
-        if not isinstance(full_url, six.text_type):
-            full_url = six.text_type(full_url)
+        if not isinstance(full_url, str):
+            full_url = str(full_url)
         result = URL.fromText(full_url).to_iri()
         sequence_identifier, action = result.path
         return sequence_identifier, action

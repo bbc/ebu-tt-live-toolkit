@@ -1,10 +1,16 @@
-from unittest import TestCase
-from datetime import timedelta, datetime
-from ebu_tt_live.documents import EBUTT3Document,EBUTT3ObjectBase, EBUTTLiveMessage, EBUTTAuthorsGroupControlRequest
 import os
-import six
-from ebu_tt_live.utils import compare_xml
+from datetime import datetime, timedelta
+from unittest import TestCase
+
 from pyxb.exceptions_ import SimpleFacetValueError
+
+from ebu_tt_live.documents import (
+    EBUTT3Document,
+    EBUTT3ObjectBase,
+    EBUTTAuthorsGroupControlRequest,
+    EBUTTLiveMessage,
+)
+from ebu_tt_live.utils import compare_xml
 
 
 class TestEBUTT3Document(TestCase):
@@ -79,7 +85,7 @@ class TestEBUTT3Document(TestCase):
 
         re_xml = instance.get_xml()
 
-        self.assertIsInstance(re_xml, six.text_type)
+        self.assertIsInstance(re_xml, str)
         self.assertTrue(compare_xml(xml, re_xml))
 
     def test_valid_authors_group_id(self):

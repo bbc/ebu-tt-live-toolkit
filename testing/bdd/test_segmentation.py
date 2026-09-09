@@ -1,12 +1,13 @@
-from ebu_tt_live.documents import EBUTT3Document
-from ebu_tt_live.bindings import style_type, region_type
+from unittest.mock import MagicMock
+
+from pytest_bdd import given, scenarios, then, when
+
+from ebu_tt_live.bindings import region_type, style_type
 from ebu_tt_live.bindings._ebuttdt import FullClockTimingType
+from ebu_tt_live.carriage.interface import IConsumerCarriage, IProducerCarriage
+from ebu_tt_live.documents import EBUTT3Document
 from ebu_tt_live.node.distributing import DistributingNode
-from ebu_tt_live.carriage.interface import IProducerCarriage, IConsumerCarriage
-from mock import MagicMock
-from pytest_bdd import scenarios, when, then, given
 from testing.bdd.conftest import legacy_name
-import six
 
 scenarios('features/segmentation/splitting_documents.feature')
 scenarios('features/segmentation/segmenting_sequence.feature')
@@ -73,7 +74,7 @@ def when_another_document_arrives(template_dict):
 @given(name='a processing node', target_fixture='given_processing_node')
 def given_processing_node(template_dict):
     producer_carriage = MagicMock(spec=IProducerCarriage)
-    producer_carriage.expects.return_value = six.text_type
+    producer_carriage.expects.return_value = str
     distributor = DistributingNode(
         node_id='test_distrib_processor',
         reference_clock=MagicMock(),

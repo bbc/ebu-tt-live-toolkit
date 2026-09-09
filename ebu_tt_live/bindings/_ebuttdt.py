@@ -1,15 +1,22 @@
 # -*- coding: utf-8 -*-
-from .raw._ebuttdt import *
-from .raw import _ebuttdt as ebuttdt_raw
+import logging
+import re
 from datetime import timedelta
 from decimal import Decimal
-import re, logging
-import six
-from pyxb.exceptions_ import SimpleTypeValueError, SimpleFacetValueError
-from ebu_tt_live.errors import TimeFormatOverflowError, ExtentMissingError
-from ebu_tt_live.strings import ERR_TIME_FORMAT_OVERFLOW, ERR_SEMANTIC_VALIDATION_TIMING_TYPE, ERR_1DIM_ONLY, \
-    ERR_2DIM_ONLY
+
+from pyxb.exceptions_ import SimpleFacetValueError, SimpleTypeValueError
+
+from ebu_tt_live.errors import ExtentMissingError, TimeFormatOverflowError
+from ebu_tt_live.strings import (
+    ERR_1DIM_ONLY,
+    ERR_2DIM_ONLY,
+    ERR_SEMANTIC_VALIDATION_TIMING_TYPE,
+    ERR_TIME_FORMAT_OVERFLOW,
+)
+
 from .pyxb_utils import get_xml_parsing_context
+from .raw import _ebuttdt as ebuttdt_raw
+from .raw._ebuttdt import *
 from .validation.base import SemanticValidationMixin
 from .validation.presentation import SizingValidationMixin
 
@@ -214,7 +221,7 @@ class TwoDimSizingMixin(object):
     def __eq__(self, other):
         if type(self) == type(other) and self.horizontal == other.horizontal and self.vertical == other.vertical:
             return True
-        elif isinstance(other, six.text_type):
+        elif isinstance(other, str):
             return str(self) == str(other)
         else:
             return NotImplemented
@@ -590,7 +597,7 @@ class CellFontSizeType(TwoDimSizingMixin, ebuttdt_raw.cellFontSizeType):
             else:
                 return self.vertical == other.vertical and \
                        self.horizontal == other.horizontal
-        elif isinstance(other, six.text_type):
+        elif isinstance(other, str):
             return str(self) == str(other)
         else:
             return NotImplemented

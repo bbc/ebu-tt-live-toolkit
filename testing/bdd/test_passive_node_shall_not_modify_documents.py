@@ -1,12 +1,12 @@
-from ebu_tt_live.node.distributing import DistributingNode
-from ebu_tt_live.carriage.interface import IProducerCarriage
-from ebu_tt_live.node.delay import BufferDelayNode
-from ebu_tt_live.utils import compare_xml
-from ebu_tt_live.documents import EBUTT3Document
-from mock import MagicMock
-from pytest_bdd import given, when, then, scenarios
-import six
+from unittest.mock import MagicMock
 
+from pytest_bdd import given, scenarios, then, when
+
+from ebu_tt_live.carriage.interface import IProducerCarriage
+from ebu_tt_live.documents import EBUTT3Document
+from ebu_tt_live.node.delay import BufferDelayNode
+from ebu_tt_live.node.distributing import DistributingNode
+from ebu_tt_live.utils import compare_xml
 
 scenarios('features/nodes/passive_nodes_shall_not_modify_document.feature')
 
@@ -15,7 +15,7 @@ scenarios('features/nodes/passive_nodes_shall_not_modify_document.feature')
 def distributing_node():
     reference_clock = MagicMock()
     prod_carriage = MagicMock(spec=IProducerCarriage)
-    prod_carriage.expects.return_value = six.text_type
+    prod_carriage.expects.return_value = str
     node = DistributingNode(
         'test_distributing',
         producer_carriage=prod_carriage,
@@ -28,7 +28,7 @@ def distributing_node():
 def buffer_delay_node():
     reference_clock = MagicMock()
     prod_carriage = MagicMock(spec=IProducerCarriage)
-    prod_carriage.expects.return_value = six.text_type
+    prod_carriage.expects.return_value = str
     node = BufferDelayNode(
         'test_buffer_delay',
         producer_carriage=prod_carriage,

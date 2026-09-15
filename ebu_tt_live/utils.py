@@ -71,7 +71,8 @@ class ComparableMixin:
 
 class RingBufferWithCallback(collections.deque):
     """
-    This class calls a callback when an item is falling out of the buffer due to removal.
+    This class calls a callback when an item is falling out of the buffer due
+    to removal.
     On manual removal it does not. That is the user's responsibility.
     """
 
@@ -202,10 +203,9 @@ class RotatingFileBuffer(RingBufferWithCallback):
         :param item: The file name
         :return:
         """
-        if self._deletion_thread is not None:
-            if self._deletion_thread.stopped():
-                raise RotatingFileBufferStopped(
-                    'File deletion thread is stopped!')
+        if self._deletion_thread and self._deletion_thread.stopped():
+            raise RotatingFileBufferStopped(
+                'File deletion thread is stopped!')
         super().append(item)
 
 
@@ -237,8 +237,9 @@ def tokenize_english_document(input_text):
             line_full = False
             while reverse_words:
                 word = reverse_words.pop()
-                longer_line = ' '.join([current_line, word]).strip()
-                if len(longer_line) > characters_per_line and len(current_line):
+                longer_line = f'{current_line} {word}'.strip()
+                if len(longer_line) > characters_per_line \
+                   and len(current_line):
                     # The longer line is overreaching boundaries
                     reverse_words.append(word)
                     line_full = True
@@ -344,14 +345,17 @@ class AutoRegisteringABCMeta(abc.ABCMeta):
             validated_members = set()
             for base in bases:
                 if isinstance(base, mcls):
-                    for base_member in getattr(base, '_abc_static_members', set()):
+                    for base_member in getattr(
+                            base, '_abc_static_members', set()):
                         if base_member in validated_members:
                             continue
                         value = getattr(cls, base_member, NotImplemented)
-                        if isinstance(value, AbstractStaticMember) or value is NotImplemented:
+                        if isinstance(value, AbstractStaticMember) \
+                           or value is NotImplemented:
                             abstract_members.add(base_member)
                         else:
-                            getattr(base, base_member).validate(value, base_member, name)
+                            getattr(base, base_member).validate(
+                                value, base_member, name)
                             validated_members.add(base_member)
 
                     base.auto_register_impl(cls)

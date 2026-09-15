@@ -83,7 +83,7 @@ class IDocumentDataAdapter(metaclass=AutoRegisteringABCMeta):
         raise NotImplementedError()
 
 
-class INodeCarriageAdapter:
+class INodeCarriageAdapter(metaclass=AutoRegisteringABCMeta):
     """
     This adapter wraps the DocumentDataAdapter conversion logic and shows a
     dual interface. It responsibility is to facilitate direct communication
@@ -92,7 +92,6 @@ class INodeCarriageAdapter:
     expects-provides interface contract.
     It works it out as it goes forward from the parameters.
     """
-    __metaclass__ = AutoRegisteringABCMeta
 
     @property
     @abstractmethod

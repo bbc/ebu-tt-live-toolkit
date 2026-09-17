@@ -18,14 +18,30 @@ class DummyDataTypeB:
 class TestABCs(TestCase):
 
     def test_interfaces(self):
-        self.assertRaises(TypeError, carriage_interface.ICarriageMechanism)
-        self.assertRaises(TypeError, carriage_interface.IProducerCarriage)
-        self.assertRaises(TypeError, carriage_interface.IConsumerCarriage)
+        for c in [
+            carriage_interface.ICarriageMechanism,
+            carriage_interface.IProducerCarriage,
+            carriage_interface.IConsumerCarriage,
+        ]:
+            with self.subTest(c=c):
+                try:
+                    c()
+                except TypeError as e:
+                    print(f'Exception {e!s}')
+                self.assertRaises(TypeError, c)
 
     def test_abstract_classes(self):
-        self.assertRaises(TypeError, carriage_base.AbstractProducerCarriage)
-        self.assertRaises(TypeError, carriage_base.AbstractConsumerCarriage)
-        self.assertRaises(TypeError, carriage_base.AbstractCombinedCarriage)
+        for c in [
+            carriage_base.AbstractProducerCarriage,
+            carriage_base.AbstractConsumerCarriage,
+            carriage_base.AbstractCombinedCarriage,
+        ]:
+            with self.subTest(c=c):
+                try:
+                    c()
+                except TypeError as e:
+                    print(f'Exception {e!s}')
+                self.assertRaises(TypeError, c)
 
 
 class TestDummyCarriages(TestCase):
@@ -102,7 +118,7 @@ class TestDummyCarriages(TestCase):
             producer_carriage.register_producer_node,
             self._producer_node)
         self.assertIsNone(producer_carriage.producer_node)
-        
+
     def test_dummy_consumer_success(self):
         consumer_carriage = self._get_dummy_consumer_carriage(DummyDataTypeA)
         consumer_carriage.register_consumer_node(self._consumer_node)
@@ -123,7 +139,7 @@ class TestDummyCarriages(TestCase):
             consumer_carriage.register_consumer_node,
             self._consumer_node)
         self.assertIsNone(consumer_carriage.consumer_node)
-        
+
     def test_dummy_combined_success_with_producer(self):
         combined_carriage = \
             self._get_dummy_combined_carriage(

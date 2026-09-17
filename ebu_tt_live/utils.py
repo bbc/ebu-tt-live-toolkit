@@ -1,3 +1,4 @@
+import inspect
 import abc
 import collections
 import os
@@ -368,7 +369,17 @@ class AutoRegisteringABCMeta(abc.ABCMeta):
         if namespace.get('auto_register_impl') is None:
             cls.auto_register_impl = classmethod(lambda x, y: None)
         cls._abc_static_members = frozenset(abstract_members)
-        cls._abc_interface = '__metaclass__' in namespace.keys()
+        # We can no longer inspect namespaces to see if __metaclass__ is present,
+        # as we could in Python2.x,
+        # but if we're here then we must be a metaclass, and if no other bases
+        # are present, then we should be an interface. If not, why bother
+        # using AutoRegisteringABCMeta?
+        # This works around the Python isabstract() test that returns False if the
+        # class has no members or properties at all, even if it is otherwise intended
+        # to be an abstract base class. It's only looking for the presence of any
+        # abstract members or properties.
+        cls._abc_interface = inspect.isabstract(cls) \
+            or not bases
         return cls
 
     def __call__(cls, *args, **kwargs):

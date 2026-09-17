@@ -12,7 +12,7 @@ from ebu_tt_live.utils import (
 
 class ICarriageMechanism(metaclass=AutoRegisteringABCMeta):
     """
-    Basic interface for the carrige mechanisms
+    Basic interface for the carriage mechanisms
     """
 
 

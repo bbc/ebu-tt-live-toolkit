@@ -8,9 +8,19 @@ from ebu_tt_live.documents import (
     EBUTT3Document,
     EBUTT3ObjectBase,
     EBUTTAuthorsGroupControlRequest,
-    EBUTTLiveMessage,
 )
 from ebu_tt_live.utils import compare_xml
+
+
+def _file_path(filename):
+    """
+    Helper function to get the path of a file located in
+    the data/ subfolder relative to this file.
+    """
+    return os.path.join(
+        os.path.dirname(__file__),
+        'data',
+        filename)
 
 
 class TestEBUTT3Document(TestCase):
@@ -42,8 +52,12 @@ class TestEBUTT3Document(TestCase):
         self.assertRaises(ValueError, lambda: document2 != document1)
 
     def test_availability_time(self):
-        now = datetime.now()
-        availability_time = timedelta(hours=now.hour, minutes=now.minute, seconds=now.second, microseconds=now.microsecond)
+        now = datetime.now()  # noqa: DTZ005
+        availability_time = timedelta(
+            hours=now.hour,
+            minutes=now.minute,
+            seconds=now.second,
+            microseconds=now.microsecond)
         document = EBUTT3Document("clock", 1, "testSeq1", "en-GB", "local")
         document.availability_time = availability_time
         self.assertEqual(document.availability_time, availability_time)
@@ -54,7 +68,7 @@ class TestEBUTT3Document(TestCase):
 
     def test_is_equal_dom(self):
         xml = ""
-        file_path = os.path.join(os.path.dirname(__file__), 'data', 'document.xml')
+        file_path = _file_path('document.xml')
         with open(file_path) as xml_file:
             xml = xml_file.read()
         document1 = EBUTT3Document.create_from_xml(xml)
@@ -65,7 +79,7 @@ class TestEBUTT3Document(TestCase):
 
     def test_live_message_instantiate(self):
         xml = ""
-        file_path = os.path.join(os.path.dirname(__file__), 'data', 'message.xml')
+        file_path = _file_path('message.xml')
         with open(file_path) as xml_file:
             xml = xml_file.read()
         instance = EBUTT3ObjectBase.create_from_xml(xml)
@@ -73,12 +87,16 @@ class TestEBUTT3Document(TestCase):
         self.assertIsInstance(instance, EBUTTAuthorsGroupControlRequest)
         self.assertEqual(instance.sequence_identifier, 'TestSequence')
         self.assertEqual(instance.sender, 'testsender')
-        self.assertEqual(instance.recipient, ['testrecipient1', 'testrecipient2'])
-        self.assertEqual(instance.payload, 'This is a message for unittesting this messaging class.')
+        self.assertEqual(
+            instance.recipient,
+            ['testrecipient1', 'testrecipient2'])
+        self.assertEqual(
+            instance.payload,
+            'This is a message for unittesting this messaging class.')
 
     def test_live_message_reserialize(self):
         xml = ""
-        file_path = os.path.join(os.path.dirname(__file__), 'data', 'message.xml')
+        file_path = _file_path('message.xml')
         with open(file_path) as xml_file:
             xml = xml_file.read()
         instance = EBUTT3ObjectBase.create_from_xml(xml)

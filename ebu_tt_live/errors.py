@@ -43,7 +43,9 @@ class SequenceNumberCollisionError(IncompatibleSequenceError):
 
 
 class DocumentDiscardedError(Exception):
-    offending_document = None
+
+    def __init__(self, offending_document):
+        self.offending_document = offending_document
 
 
 class SequenceOverridden(Exception):

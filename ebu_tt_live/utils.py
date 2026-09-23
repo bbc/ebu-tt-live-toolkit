@@ -101,11 +101,13 @@ class StoppableThread(threading.Thread):
         super().__init__(*args, **kwargs)
         self._stop = threading.Event()
 
-    def stop(self):
+    def stop(self, timeout: float | None = None):
         self._stop.set()
+        return self._stop.wait(timeout=timeout)
 
     def stopped(self):
-        return self._stop.is_set()
+        rv = self._stop.is_set()
+        return rv
 
 
 class RotatingFileBufferStopped(Exception):

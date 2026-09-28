@@ -1,6 +1,6 @@
-import inspect
 import abc
 import collections
+import inspect
 import os
 import queue
 import re
@@ -12,7 +12,7 @@ from nltk import (
     BlanklineTokenizer,
     PunktSentenceTokenizer,
     WhitespaceTokenizer,
-    )
+)
 
 
 class ComparableMixin:

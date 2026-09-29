@@ -1,6 +1,6 @@
-
 import json
 from logging import getLogger
+from typing import ClassVar
 
 from autobahn.twisted.websocket import (
     WebSocketClientFactory,
@@ -12,6 +12,8 @@ from autobahn.twisted.websocket import (
 )
 from hyperlink import URL
 from twisted.internet import interfaces, reactor
+from twisted.internet.protocol import connectionDone
+from twisted.python.failure import Failure
 from zope.interface import implementer
 
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
@@ -27,6 +29,7 @@ from .base import IBroadcaster
 
 log = getLogger(__name__)
 
+
 class UserInputServerProtocol(WebSocketServerProtocol):
     def onOpen(self):
         self.factory.register(self)
@@ -34,16 +37,22 @@ class UserInputServerProtocol(WebSocketServerProtocol):
     def onMessage(self, payload, isBinary):
         try:
             self.factory.write(payload)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             self.sendMessage("ERROR: " + str(e))
             return
         self.sendMessage('SUCCESS')
 
-    def connectionLost(self, reason):
+    def connectionLost(self, reason: Failure = connectionDone) -> None:
         WebSocketServerProtocol.connectionLost(self, reason)
 
-    def sendMessage(self, payload, isBinary=False, fragmentSize=None, sync=False, doNotCompress=False):
-        super(UserInputServerProtocol, self).sendMessage(
+    def sendMessage(
+            self,
+            payload,
+            isBinary=False,
+            fragmentSize=None,
+            sync=False,
+            doNotCompress=False):
+        super().sendMessage(
             payload=payload,
             isBinary=isBinary,
             fragmentSize=fragmentSize,
@@ -54,11 +63,9 @@ class UserInputServerProtocol(WebSocketServerProtocol):
 
 @implementer(IBroadcaster, interfaces.IConsumer)
 class UserInputServerFactory(WebSocketServerFactory):
-    _consumer = None
-    _clients = None
 
     def __init__(self, url, consumer):
-        super(UserInputServerFactory, self).__init__(url, protocols=[13])
+        super().__init__(url, protocols=[13])
         self._consumer = consumer
         self._consumer.registerProducer(self, True)
         self._clients = []
@@ -71,29 +78,31 @@ class UserInputServerFactory(WebSocketServerFactory):
 
     def register(self, client):
         if client not in self._clients:
-            log.info("registered client {}".format(client.peer))
+            log.info(f"registered client {client.peer}")
             self._clients.append(client)
 
     def unregister(self, client):
         if client in self._clients:
-            log.info("unregistered client {}".format(client.peer))
+            log.info(f"unregistered client {client.peer}")
             self._clients.remove(client)
 
     def listen(self):
         listenWS(self)
 
 
-class EBUWebsocketProtocolMixin(object):
+class EBUWebsocketProtocolMixin:
     """
-    This mixin exists because the WS protocol suggested in EBU-3370s1 is agnostic of client-server relationship
-    in the sense that data can be streamed from client to server or the other way around. Based on which action
-    a server/client is doing different functions should be available. This class holds the common logic.
+    This mixin exists because the WS protocol suggested in EBU-3370s1 is
+    agnostic of client-server relationship in the sense that data can be
+    streamed from client to server or the other way around. Based on which
+    action a server/client is doing different functions should be available.
+    This class holds the common logic.
     """
 
     _sequence_identifier = None
     _action = None
-    _path_format = u'{sequence_identifier}/{action}'
-    _valid_actions = [
+    _path_format = '{sequence_identifier}/{action}'
+    _valid_actions: ClassVar = [
         'publish',
         'subscribe'
     ]
@@ -121,8 +130,16 @@ class EBUWebsocketProtocolMixin(object):
         self.consumer.write(data, **kwargs)
 
     def _send_sequence_message(
-            self, sequence_identifier, payload, isBinary=False, fragmentSize=None, sync=False, doNotCompress=False
-        ):
+            self,
+            sequence_identifier,
+            payload, isBinary=False,
+            fragmentSize=None,
+            sync=False,
+            doNotCompress=False
+            ):
+        assert isinstance(
+            self,
+            (WebSocketClientProtocol, WebSocketServerProtocol))
         if sequence_identifier == self._sequence_identifier:
             self.sendMessage(
                 payload=payload,
@@ -131,7 +148,7 @@ class EBUWebsocketProtocolMixin(object):
                 sync=sync,
                 doNotCompress=doNotCompress
             )
-            log.info("message sent to {}".format(self.peer))
+            log.info(f"message sent to {self.peer}")
 
     @property
     def action(self):
@@ -149,14 +166,12 @@ class EBUWebsocketProtocolMixin(object):
 
 
 @implementer(interfaces.IPushProducer)
-class TwistedWSPushProducer(object):
+class TwistedWSPushProducer:
     """
-    This is a Twisted Push producer. The concept is related to twisted and it is not the same as our producer
-    and consumer nodes.
+    This is a Twisted Push producer. The concept is related to twisted and it
+    is not the same as our producer and consumer nodes.
     """
 
-    _custom_producer = None
-    _connections = None
     _callLater = reactor.callLater
     real_port_number = None
 
@@ -167,7 +182,11 @@ class TwistedWSPushProducer(object):
 
     def emit_data(self, sequence_identifier, data, delay=None):
         if delay is not None:
-            deferred = self._callLater(delay, self._do_write, sequence_identifier, data)
+            deferred = self._callLater(
+                delay,
+                self._do_write,
+                sequence_identifier,
+                data)
             return deferred
         else:
             self._do_write(sequence_identifier, data)
@@ -198,11 +217,10 @@ class TwistedWSPushProducer(object):
 
 
 @implementer(interfaces.IConsumer)
-class TwistedWSConsumer(object):
+class TwistedWSConsumer:
     """
     This class wraps the protocol objects.
     """
-    _custom_consumer = None
     real_port_number = None
 
     def __init__(self, custom_consumer):
@@ -224,19 +242,22 @@ class TwistedWSConsumer(object):
         pass
 
 
-class BroadcastServerProtocol(EBUWebsocketProtocolMixin, WebSocketServerProtocol):
+class BroadcastServerProtocol(
+        EBUWebsocketProtocolMixin,
+        WebSocketServerProtocol):
 
     def onOpen(self):
         try:
-            # Not that well documented in twisted but this being only a path segment gets picked up fine
+            # Not that well documented in twisted but this being only a path
+            # segment gets picked up fine
             self._sequence_identifier, self.action = self._parse_path(
                 full_url=self.http_request_path
             )
         except ValueError as err:
             log.error(err)
             self.dropConnection()
-        except Exception as err:
-            log.exception(err)
+        except Exception:
+            log.exception('Error encountered in onOpen')
             self.dropConnection()
 
         self.factory.register(self)
@@ -244,7 +265,9 @@ class BroadcastServerProtocol(EBUWebsocketProtocolMixin, WebSocketServerProtocol
     def onMessage(self, payload, isBinary):
         if self.action == 'publish':
             try:
-                self._write_to_consumer(payload, sequence_identifier=self._sequence_identifier)
+                self._write_to_consumer(
+                    payload,
+                    sequence_identifier=self._sequence_identifier)
             except UnexpectedSequenceIdentifierError:
                 self.dropConnection(abort=False)
         else:
@@ -252,7 +275,13 @@ class BroadcastServerProtocol(EBUWebsocketProtocolMixin, WebSocketServerProtocol
             self.dropConnection(abort=True)
 
     def sendSequenceMessage(
-            self, sequence_identifier, payload, isBinary=False, fragmentSize=None, sync=False, doNotCompress=False
+            self,
+            sequence_identifier,
+            payload,
+            isBinary=False,
+            fragmentSize=None,
+            sync=False,
+            doNotCompress=False
     ):
         if self.action == 'subscribe':
             self._send_sequence_message(
@@ -267,12 +296,12 @@ class BroadcastServerProtocol(EBUWebsocketProtocolMixin, WebSocketServerProtocol
             log.error(ERR_WS_SEND_VIA_CONSUMER)
             self.dropConnection(abort=True)
 
-    def connectionLost(self, reason):
+    def connectionLost(self, reason: Failure = connectionDone) -> None:
         WebSocketServerProtocol.connectionLost(self, reason)
         self.factory.unregister(self)
 
 
-class BroadcastFactoryCommon(object):
+class BroadcastFactoryCommon:
     _consumer = None
     _producer = None
 
@@ -300,9 +329,8 @@ class BroadcastFactoryCommon(object):
 
     @consumer.setter
     def consumer(self, value):
-        if value is not None:
-            if self._consumer is not None:
-                raise ValueError
+        if value is not None and self._consumer is not None:
+            raise ValueError
         self._consumer = value
 
 
@@ -311,7 +339,7 @@ class BroadcastServerFactory(BroadcastFactoryCommon, WebSocketServerFactory):
     real_port_number = None
 
     def __init__(self, url=None, producer=None, consumer=None):
-        super(BroadcastServerFactory, self).__init__(url, protocols=[13])
+        super().__init__(url, protocols=[13])
         self.producer = producer
         self.consumer = consumer
 
@@ -336,9 +364,9 @@ class BroadcastServerFactory(BroadcastFactoryCommon, WebSocketServerFactory):
 
     def unregister(self, client):
         if client.action == 'subscribe':
-            self._producer.unregister(client)
+            self.producer.unregister(client)
         if client.action == 'publish':
-            self._consumer.unregister(client)
+            self.consumer.unregister(client)
 
     def stopFactory(self):
         self._stop_producer()
@@ -352,16 +380,19 @@ class BroadcastServerFactory(BroadcastFactoryCommon, WebSocketServerFactory):
             self.consumer.real_port_number = self.real_port_number
 
 
-class BroadcastClientProtocol(EBUWebsocketProtocolMixin, WebSocketClientProtocol):
+class BroadcastClientProtocol(
+        EBUWebsocketProtocolMixin,
+        WebSocketClientProtocol):
 
     def onOpen(self):
         try:
-            self._sequence_identifier, self.action = self._parse_path(self.factory.url)
+            self._sequence_identifier, self.action = self._parse_path(
+                self.factory.url)
         except ValueError as err:
             log.error(err)
             self.dropConnection()
-        except Exception as err:
-            log.exception(err)
+        except Exception:
+            log.exception('Error encountered in onOpen')
             self.dropConnection()
 
         self.factory.register(self)
@@ -369,14 +400,22 @@ class BroadcastClientProtocol(EBUWebsocketProtocolMixin, WebSocketClientProtocol
     def onMessage(self, payload, isBinary):
         if self.action == 'subscribe':
             try:
-                self._write_to_consumer(payload, sequence_identifier=self._sequence_identifier)
+                self._write_to_consumer(
+                    payload,
+                    sequence_identifier=self._sequence_identifier)
             except UnexpectedSequenceIdentifierError:
                 self.dropConnection(abort=False)
         else:
             log.error(ERR_WS_RECEIVE_VIA_PRODUCER)
 
     def sendSequenceMessage(
-            self, sequence_identifier, payload, isBinary=False, fragmentSize=None, sync=False, doNotCompress=False
+            self,
+            sequence_identifier,
+            payload,
+            isBinary=False,
+            fragmentSize=None,
+            sync=False,
+            doNotCompress=False
     ):
         if self.action == 'publish':
             self._send_sequence_message(
@@ -391,7 +430,7 @@ class BroadcastClientProtocol(EBUWebsocketProtocolMixin, WebSocketClientProtocol
             log.error(ERR_WS_SEND_VIA_CONSUMER)
             self.dropConnection(abort=True)
 
-    def connectionLost(self, reason):
+    def connectionLost(self, reason: Failure = connectionDone) -> None:
         WebSocketClientProtocol.connectionLost(self, reason)
         self.factory.unregister(self)
 
@@ -399,7 +438,7 @@ class BroadcastClientProtocol(EBUWebsocketProtocolMixin, WebSocketClientProtocol
 class BroadcastClientFactory(BroadcastFactoryCommon, WebSocketClientFactory):
 
     def __init__(self, url, consumer=None, producer=None, *args, **kwargs):
-        super(BroadcastClientFactory, self).__init__(url=url, *args, **kwargs)
+        super().__init__(*args, url=url, **kwargs)
         self.producer = producer
         self.consumer = consumer
 
@@ -424,17 +463,14 @@ class BroadcastClientFactory(BroadcastFactoryCommon, WebSocketClientFactory):
             self.producer.unregister(client)
 
     def connect(self):
-        log.info('Connecting to {}'.format(self.url))
+        log.info(f'Connecting to {self.url}')
         connectWS(self)
 
 
 # Here comes the legacy ws protocol
 # =================================
 @implementer(interfaces.IPullProducer)
-class TwistedPullProducer(object):
-
-    _custom_producer = None
-    _consumer = None
+class TwistedPullProducer:
 
     def __init__(self, consumer, custom_producer):
         self._custom_producer = custom_producer
@@ -444,7 +480,11 @@ class TwistedPullProducer(object):
 
     def emit_data(self, channel, data, delay=None):
         if delay is not None:
-            reactor.callLater(delay, self._consumer.write, channel, data)
+            reactor.callLater(
+                delay,
+                self._consumer.write,
+                channel,
+                data)
         else:
             self._consumer.write(channel, data)
 
@@ -456,9 +496,8 @@ class TwistedPullProducer(object):
 
 
 @implementer(interfaces.IConsumer)
-class TwistedConsumer(object):
+class TwistedConsumer:
 
-    _custom_consumer = None
     _producer = None
 
     def __init__(self, custom_consumer):
@@ -470,6 +509,7 @@ class TwistedConsumer(object):
             self._producer.resumeProducing()
 
     def unregisterProducer(self):
+        assert self._producer is not None
         self._producer.stopProducing()
         self._producer = None
 
@@ -486,33 +526,42 @@ class LegacyBroadcastServerProtocol(WebSocketServerProtocol):
         self._channels = set()
 
     def onMessage(self, payload, isBinary):
+        assert self._channels is not None
         if not isBinary:
             try:
                 data = json.loads(payload)
                 if 'subscribe' in data:
-                    log.info('{} subscibes to {}'.format(self.peer, data['subscribe']))
+                    log.info(f'{self.peer} subscibes to {data['subscribe']}')
                     self._channels.add(data['subscribe'])
                 if 'unsubscribe' in data:
-                    log.info('{} unsubscribes from {}'.format(self.peer, data['unsubscribe']))
+                    log.info(
+                        f'{self.peer} unsubscribes from {data['unsubscribe']}')
                     self._channels.remove(data['unsubscribe'])
             except Exception:
-                pass
+                log.exception('Error encountered in onMessage')
 
-    def connectionLost(self, reason):
+    def connectionLost(self, reason: Failure = connectionDone) -> None:
         WebSocketServerProtocol.connectionLost(self, reason)
         self.factory.unregister(self)
 
-    def sendMessageOnChannel(self, channel, payload, isBinary=False, fragmentSize=None, sync=False,
-                             doNotCompress=False):
+    def sendMessageOnChannel(
+            self,
+            channel,
+            payload,
+            isBinary=False,
+            fragmentSize=None,
+            sync=False,
+            doNotCompress=False):
+        assert self._channels is not None
         if channel in self._channels:
-            super(LegacyBroadcastServerProtocol, self).sendMessage(
+            super().sendMessage(
                 payload=payload,
                 isBinary=isBinary,
                 fragmentSize=fragmentSize,
                 sync=sync,
                 doNotCompress=doNotCompress
             )
-            log.info("message sent to {}".format(self.peer))
+            log.info(f"message sent to {self.peer}")
 
 
 @implementer(IBroadcaster, interfaces.IConsumer)
@@ -522,7 +571,7 @@ class LegacyBroadcastServerFactory(WebSocketServerFactory):
     _push_producer = None
 
     def __init__(self, url):
-        super(LegacyBroadcastServerFactory, self).__init__(url, protocols=[13])
+        super().__init__(url, protocols=[13])
         self._clients = []
 
     def registerProducer(self, producer, streaming):
@@ -530,6 +579,7 @@ class LegacyBroadcastServerFactory(WebSocketServerFactory):
         self._push_producer = streaming
 
     def unregisterProducer(self):
+        assert self._producer is not None
         self._producer.stopProducing()
         self._producer = None
 
@@ -537,13 +587,15 @@ class LegacyBroadcastServerFactory(WebSocketServerFactory):
         self.broadcast(channel, data)
 
     def register(self, client):
+        assert self._clients is not None
         if client not in self._clients:
-            log.info("registered client {}".format(client.peer))
+            log.info(f"registered client {client.peer}")
             self._clients.append(client)
 
     def unregister(self, client):
+        assert self._clients is not None
         if client in self._clients:
-            log.info("unregistered client {}".format(client.peer))
+            log.info(f"unregistered client {client.peer}")
             self._clients.remove(client)
 
     def pull(self):
@@ -553,8 +605,14 @@ class LegacyBroadcastServerFactory(WebSocketServerFactory):
     def broadcast(self, channel, msg):
         log.info("broadcasting message...")
 
+        assert self._clients is not None
         for c in self._clients:
-            c.sendMessageOnChannel(channel, msg.encode("utf-8"), isBinary=False, doNotCompress=False, sync=False)
+            c.sendMessageOnChannel(
+                channel,
+                msg.encode("utf-8"),
+                isBinary=False,
+                doNotCompress=False,
+                sync=False)
 
     def stopFactory(self):
         self.unregisterProducer()
@@ -589,11 +647,10 @@ class LegacyBroadcastClientProtocol(WebSocketClientProtocol):
 class LegacyBroadcastClientFactory(WebSocketClientFactory):
 
     _channels = None
-    _consumer = None
     _stopped = None
 
     def __init__(self, url, consumer, channels=None, *args, **kwargs):
-        super(LegacyBroadcastClientFactory, self).__init__(url=url, *args, **kwargs)
+        super().__init__(*args, url=url, **kwargs)
 
         if not channels:
             self._channels = []
@@ -625,5 +682,5 @@ class LegacyBroadcastClientFactory(WebSocketClientFactory):
         self._stopped = True
 
     def connect(self):
-        log.info('Connecting to {}'.format(self.url))
+        log.info(f'Connecting to {self.url}')
         connectWS(self)

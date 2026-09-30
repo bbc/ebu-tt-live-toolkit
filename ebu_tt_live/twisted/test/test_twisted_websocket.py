@@ -222,11 +222,11 @@ class TestProdServerToConsClientProtocols(_NewWSCommon, TestCase):
     def test_url_encoded_components(self):
         # This test is about getting percent encoded characters work in
         # sequenceId or hostname
-        sequence_id = 'sequence/ünicödé?/Name'
+        sequence_id = 'sequence/ünicödé?%3F/Name'
         self._create_server(url='ws://localhost:9006', producer=self.prod)
         self._create_client(
             url='ws://localhost:9006/'
-                'sequence%2F%C3%BCnic%C3%B6d%C3%A9%3F%2FName/subscribe',
+                'sequence%2F%C3%BCnic%C3%B6d%C3%A9%3F%253F%2FName/subscribe',
             consumer=self.cons
         )
 
@@ -234,8 +234,12 @@ class TestProdServerToConsClientProtocols(_NewWSCommon, TestCase):
 
         self._connect()
 
-        self.assertEqual(sequence_id, self.cproto._sequence_identifier)
-        self.assertEqual(sequence_id, self.sproto._sequence_identifier)
+        self.assertEqual(
+            sequence_id,
+            self.cproto._sequence_identifier)
+        self.assertEqual(
+            sequence_id,
+            self.sproto._sequence_identifier)
 
     def tearDown(self):
         self.ctr.loseConnection()

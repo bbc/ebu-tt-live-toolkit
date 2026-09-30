@@ -1,3 +1,4 @@
+import urllib.parse
 import json
 from logging import getLogger
 from typing import ClassVar
@@ -122,6 +123,9 @@ class EBUWebsocketProtocolMixin:
             full_url = str(full_url)
         result = URL.fromText(full_url).to_iri()
         sequence_identifier, action = result.path
+        # If the sequence identifier includes % encoded / or ? they
+        # will need to be decoded.
+        sequence_identifier = urllib.parse.unquote(sequence_identifier)
         return sequence_identifier, action
 
     def _write_to_consumer(self, data, **kwargs):

@@ -1,17 +1,24 @@
-from pytest_bdd import when, given, then, parsers
+import os
+from collections.abc import Callable
+from typing import ParamSpec, TypeVar
+
+import pytest
 from jinja2 import Environment, FileSystemLoader
-from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence, \
-    EBUTTDDocument
+from pytest_bdd import given, parsers, then, when
+
+from ebu_tt_live.bindings._ebuttdt import (
+    CellFontSizeType,
+    FullClockTimingType,
+    LimitedClockTimingType,
+    lineHeightType,
+)
 from ebu_tt_live.clocks.local import LocalMachineClock
 from ebu_tt_live.clocks.media import MediaClock
-from ebu_tt_live.bindings._ebuttdt import FullClockTimingType, \
-    LimitedClockTimingType, CellFontSizeType, lineHeightType
-from datetime import timedelta
-from typing import Callable, TypeVar
-from typing_extensions import ParamSpec
-import pytest
-import os
-
+from ebu_tt_live.documents import (
+    EBUTT3Document,
+    EBUTT3DocumentSequence,
+    EBUTTDDocument
+)
 
 P = ParamSpec("P")
 T = TypeVar("T")
@@ -98,7 +105,7 @@ def legacy_step(func: Callable[[Callable[P, T]], Callable[P, T]]) \
 
     def wrapper(*args, **kwargs):  # name is the first arg in args
         name = args[0]
-        print(f"wrapper called with args {args}")
+        # print(f"wrapper called with args {args}")
         variables, step = \
             name_to_variables_and_re_parser(name)
         args = (step, *args[1:])
@@ -107,11 +114,11 @@ def legacy_step(func: Callable[[Callable[P, T]], Callable[P, T]]) \
             converters[variable] = empty_to_none
         kwargs['converters'] = converters
 
-        print(f"returning args {args}")
+        # print(f"returning args {args}")
         rv = func(*args, **kwargs)
         return rv
 
-    print(f'wrapping {getattr(func, "__name__", "unknown function")}')
+    # print(f'wrapping {getattr(func, "__name__", "unknown function")}')
     return wrapper
 
 
@@ -213,7 +220,7 @@ def sequence(datatable):
 @then('document is valid')
 def valid_doc(template_file, template_dict):
     xml_file = template_file.render(template_dict)
-    print(f"xml_file: \n{xml_file}")
+    # print(f"xml_file: \n{xml_file}")
     document = EBUTT3Document.create_from_xml(xml_file)
     assert isinstance(document, EBUTT3Document)
 
@@ -221,7 +228,7 @@ def valid_doc(template_file, template_dict):
 @then('the first document is valid')
 def valid_first_doc(template_file_one, template_dict):
     xml_file_1 = template_file_one.render(template_dict)
-    print(f"xml_file_1: \n{xml_file_1}")
+    # print(f"xml_file_1: \n{xml_file_1}")
     document = EBUTT3Document.create_from_xml(xml_file_1)
     assert isinstance(document, EBUTT3Document)
 
@@ -236,7 +243,7 @@ def valid_second_doc(template_file_two, template_dict):
 @then('document is invalid')
 def invalid_doc(template_file, template_dict):
     xml_file = template_file.render(template_dict)
-    print(f"xml_file: \n{xml_file}")
+    # print(f"xml_file: \n{xml_file}")
     with pytest.raises(Exception):
         EBUTT3Document.create_from_xml(xml_file)
 
@@ -244,11 +251,11 @@ def invalid_doc(template_file, template_dict):
 @given('the document is generated', target_fixture='gen_document')
 def gen_document(template_file, template_dict):
     # TODO: This is legacy and to be removed when tests are refactored
-    print('the document is generated')
-    print('template dict: {}'.format(template_dict))
+    # print('the document is generated')
+    # print('template dict: {}'.format(template_dict))
     xml_file = template_file.render(template_dict)
-    print('xml_file:')
-    print(xml_file)
+    # print('xml_file:')
+    # print(xml_file)
     document = EBUTT3Document.create_from_xml(xml_file)
     document.validate()
     return document
@@ -257,11 +264,11 @@ def gen_document(template_file, template_dict):
 @when('the document is generated')
 def when_doc_generated(test_context, template_dict, template_file):
     # This is a more standard-compliant way to do this
-    print('when the document is generated')
-    print('template dict: {}'.format(template_dict))
+    # print('when the document is generated')
+    # print('template dict: {}'.format(template_dict))
     xml_file = template_file.render(template_dict)
-    print('xml_file:')
-    print(xml_file)
+    # print('xml_file:')
+    # print(xml_file)
     document = EBUTT3Document.create_from_xml(xml_file)
     test_context['document'] = document
 
@@ -300,7 +307,7 @@ def then_ebuttd_document_valid(test_context):
 
 
 def timestr_to_timedelta(time_str, time_base):
-    print(f"timestr_to_timedelta time_str={time_str} time_base={time_base}")
+    # print(f"timestr_to_timedelta time_str={time_str} time_base={time_base}")
     if time_base == 'clock':
         return LimitedClockTimingType(time_str).timedelta
     elif time_base == 'media':

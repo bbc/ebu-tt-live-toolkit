@@ -1,5 +1,5 @@
 [project]
-version = '3.0.4'
+version = '3.1.0'
 name = 'ebu-tt-live'
 description = 'EBU-TT Part 3 library implementing Specification EBU-3370'
 license = "BSD-3-Clause"

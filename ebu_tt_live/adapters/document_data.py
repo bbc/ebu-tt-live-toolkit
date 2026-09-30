@@ -39,7 +39,7 @@ class XMLtoEBUTT3Adapter(IDocumentDataAdapter):
 
         if sequence_identifier is not None and sequence_identifier != doc.sequence_identifier:
             log.error(
-                'Sequence identifier mismatch found: {} != {}'.format(sequence_identifier, doc.sequence_identifier)
+                f'Sequence identifier mismatch found: {sequence_identifier} != {doc.sequence_identifier}'
             )
             raise UnexpectedSequenceIdentifierError()
         kwargs.update(dict(

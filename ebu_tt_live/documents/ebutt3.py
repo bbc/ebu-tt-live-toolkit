@@ -1,6 +1,6 @@
-from typing import ClassVar
 import logging
 from datetime import timedelta
+from typing import ClassVar
 
 from pyxb import BIND
 from sortedcontainers import sortedlist, sortedset
@@ -24,12 +24,15 @@ from ebu_tt_live.strings import (
     DOC_SEQ_REQ_SEGMENT,
     DOC_TRIMMED,
     ERR_AUTHORS_GROUP_MISMATCH,
+    ERR_DOCUMENT_NO_TT_CONTENT,
     ERR_DOCUMENT_NOT_COMPATIBLE,
     ERR_DOCUMENT_NOT_PART_OF_SEQUENCE,
     ERR_DOCUMENT_SEQUENCE_INCONSISTENCY,
     ERR_DOCUMENT_SEQUENCE_MISMATCH,
+    ERR_DOCUMENT_SEQUENCE_NO_DOCSET,
+    ERR_DOCUMENT_SEQUENCE_NO_REF_CLOCK,
     ERR_DOCUMENT_SEQUENCENUMBER_COLLISION,
-    ERR_SEQUENCE_FROM_DOCUMENT, ERR_DOCUMENT_NO_TT_CONTENT, ERR_DOCUMENT_SEQUENCE_NO_REF_CLOCK, ERR_DOCUMENT_SEQUENCE_NO_DOCSET,
+    ERR_SEQUENCE_FROM_DOCUMENT,
 )
 
 from .base import CloningDocumentSequence, SubtitleDocument, TimeBase

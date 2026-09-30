@@ -1,4 +1,5 @@
-from pytest_bdd import scenarios, given
+from pytest_bdd import given, scenarios
+
 from testing.bdd.conftest import legacy_name
 
 scenarios('features/timing/computed_times.feature')
@@ -32,7 +33,7 @@ def given_sequence_number(sequence_number, template_dict):
 
 @given(**legacy_name(name='it has body begin time <body_begin>'))
 def given_body_begin(body_begin, template_dict):
-    print('assigning body begin time of <>'.format(body_begin))
+    # print(f'assigning body begin time of <{body_begin}>')
     template_dict['body_begin'] = body_begin
 
 

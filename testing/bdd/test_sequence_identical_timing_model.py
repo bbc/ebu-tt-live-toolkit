@@ -1,8 +1,8 @@
-from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence
-from pytest_bdd import given, when, then, scenarios, parsers
-from testing.bdd.conftest import legacy_name
 import pytest
+from pytest_bdd import given, parsers, scenarios, then, when
 
+from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence
+from testing.bdd.conftest import legacy_name
 
 scenarios('features/validation/sequence_identical_timing_model.feature')
 

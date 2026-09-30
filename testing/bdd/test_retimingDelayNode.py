@@ -1,13 +1,15 @@
-from ebu_tt_live.node.delay import RetimingDelayNode
-from ebu_tt_live.clocks.local import LocalMachineClock
+from unittest.mock import MagicMock
+
+import pytest
+from pytest_bdd import given, scenarios, then, when
+
 from ebu_tt_live.bindings._ebuttdt import LimitedClockTimingType
 from ebu_tt_live.carriage.interface import IProducerCarriage
+from ebu_tt_live.clocks.local import LocalMachineClock
 from ebu_tt_live.documents import EBUTT3Document
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
-from mock import MagicMock
-from pytest_bdd import scenarios, given, when, then
+from ebu_tt_live.node.delay import RetimingDelayNode
 from testing.bdd.conftest import legacy_name
-import pytest
 
 scenarios('features/timing/retimingDelayNode.feature')
 

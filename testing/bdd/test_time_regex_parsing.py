@@ -1,7 +1,9 @@
-from ebu_tt_live.documents import EBUTT3Document
 from datetime import timedelta
+
+from pytest_bdd import scenarios, then, when
+
+from ebu_tt_live.documents import EBUTT3Document
 from testing.bdd.conftest import legacy_name
-from pytest_bdd import scenarios, when, then
 
 scenarios('features/validation/time_regex_parsing.feature')
 

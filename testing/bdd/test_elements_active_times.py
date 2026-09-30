@@ -1,7 +1,7 @@
-from ebu_tt_live.bindings._ebuttdt import FullClockTimingType
-from pytest_bdd import scenarios, when, then
-from testing.bdd.conftest import legacy_name
+from pytest_bdd import scenarios, then, when
 
+from ebu_tt_live.bindings._ebuttdt import FullClockTimingType
+from testing.bdd.conftest import legacy_name
 
 scenarios('features/timing/elements_active_times.feature')
 scenarios('features/timing/elements_active_times_empty_body.feature')

@@ -1,12 +1,13 @@
 
-import pytest
-from pytest_bdd import scenarios, given, when, then
-from ebu_tt_live.node import handover as handover_node
-from ebu_tt_live.documents import EBUTT3Document
-from ebu_tt_live.carriage.interface import IProducerCarriage
-from mock import MagicMock
-from testing.bdd.conftest import legacy_name
+from unittest.mock import MagicMock
 
+import pytest
+from pytest_bdd import given, scenarios, then, when
+
+from ebu_tt_live.carriage.interface import IProducerCarriage
+from ebu_tt_live.documents import EBUTT3Document
+from ebu_tt_live.node import handover as handover_node
+from testing.bdd.conftest import legacy_name
 
 scenarios('features/handover/handover_algorithm.feature')
 scenarios('features/handover/handover.feature')

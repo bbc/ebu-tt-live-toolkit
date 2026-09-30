@@ -2,7 +2,7 @@ import os
 import shutil
 import tempfile
 from datetime import timedelta
-from unittest import TestCase, skip
+from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from ebu_tt_live.carriage.filesystem import (
@@ -13,8 +13,7 @@ from ebu_tt_live.carriage.filesystem import (
     timestr_manifest_to_timedelta,
 )
 from ebu_tt_live.clocks.base import Clock
-from ebu_tt_live.documents import EBUTT3Document
-from ebu_tt_live.errors import EndOfData, XMLParsingFailed
+from ebu_tt_live.errors import EndOfData
 from ebu_tt_live.node.interface import IConsumerNode, IProducerNode
 
 

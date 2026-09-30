@@ -14,11 +14,7 @@ from ebu_tt_live.bindings._ebuttdt import (
 )
 from ebu_tt_live.clocks.local import LocalMachineClock
 from ebu_tt_live.clocks.media import MediaClock
-from ebu_tt_live.documents import (
-    EBUTT3Document,
-    EBUTT3DocumentSequence,
-    EBUTTDDocument
-)
+from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence, EBUTTDDocument
 
 P = ParamSpec("P")
 T = TypeVar("T")
@@ -154,7 +150,6 @@ def template_file_with_variables(datatable, template_dict):
             del keys[i]
     data = dict(zip(keys, values))
     template_dict.update(data)
-    return
 
 
 # @pytest.fixture(name='template_file')

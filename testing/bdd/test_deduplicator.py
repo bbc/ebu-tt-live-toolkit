@@ -1,10 +1,10 @@
-from ebu_tt_live.node.deduplicator import DeDuplicatorNode
-from ebu_tt_live.node.base import AbstractCombinedNode
+from unittest.mock import MagicMock
+
+from pytest_bdd import given, scenarios, then, when
+
+from ebu_tt_live.carriage.interface import IProducerCarriage
 from ebu_tt_live.documents import EBUTT3Document
-from ebu_tt_live.bindings import style_type, region_type
-from ebu_tt_live.carriage.interface import IProducerCarriage, IConsumerCarriage
-from mock import MagicMock
-from pytest_bdd import scenarios, when, then, given
+from ebu_tt_live.node.deduplicator import DeDuplicatorNode
 from testing.bdd.conftest import legacy_name
 
 scenarios('features/deduplicator/deduplicator.feature')

@@ -1,5 +1,4 @@
-from pytest_bdd import when, scenarios, parsers
-
+from pytest_bdd import parsers, scenarios, when
 
 scenarios('features/validation/body_element_content.feature')
 

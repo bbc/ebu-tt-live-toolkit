@@ -1,5 +1,5 @@
-import urllib.parse
 import json
+import urllib.parse
 from logging import getLogger
 from typing import ClassVar
 

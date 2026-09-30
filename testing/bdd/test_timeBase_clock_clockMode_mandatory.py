@@ -1,6 +1,6 @@
-from pytest_bdd import when, scenarios
-from testing.bdd.conftest import legacy_name
+from pytest_bdd import scenarios, when
 
+from testing.bdd.conftest import legacy_name
 
 scenarios('features/validation/timeBase_clock_clockMode_mandatory.feature')
 

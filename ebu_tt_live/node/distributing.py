@@ -14,7 +14,7 @@ class DistributingNode(AbstractCombinedNode):
     _provides = str
 
     def __init__(self, node_id, producer_carriage=None, consumer_carriage=None, **kwargs):
-        super(DistributingNode, self).__init__(
+        super().__init__(
             node_id=node_id,
             consumer_carriage=consumer_carriage,
             producer_carriage=producer_carriage,
@@ -42,10 +42,7 @@ class DistributingNode(AbstractCombinedNode):
                 )
             else:
                 log.warning(
-                    'Ignoring duplicate document: {}__{}'.format(
-                        document.sequence_identifier,
-                        document.sequence_number
-                    )
+                    f'Ignoring duplicate document: {document.sequence_identifier}__{document.sequence_number}'
                 )
         else:
             kwargs.update(dict(

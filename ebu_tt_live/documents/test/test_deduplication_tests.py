@@ -1,22 +1,13 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from ebu_tt_live import bindings
 from ebu_tt_live.bindings import (
-    br_type,
-    div_type,
-    ebuttdt,
-    p_type,
-    region_type,
-    span_type,
     style_type,
 )
 from ebu_tt_live.carriage.interface import IProducerCarriage
 from ebu_tt_live.documents.ebutt3 import EBUTT3Document
 from ebu_tt_live.node.deduplicator import (
     DeDuplicatorNode,
-    ReplaceNone,
-    ReplaceStylesAndRegions,
 )
 
 

@@ -32,7 +32,7 @@ class AbstractNodeCarriageAdapter(INodeCarriageAdapter):
                 )]
                 # It managed to find an adapter :)
                 success = True
-            except ValueError as exc:
+            except ValueError:
                 success = False
                 data_adapters = []
         else:

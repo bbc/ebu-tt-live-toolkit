@@ -2,9 +2,8 @@ from unittest.mock import MagicMock
 
 from pytest_bdd import given, scenarios, then, when
 
-from ebu_tt_live.bindings import region_type, style_type
 from ebu_tt_live.bindings._ebuttdt import FullClockTimingType
-from ebu_tt_live.carriage.interface import IConsumerCarriage, IProducerCarriage
+from ebu_tt_live.carriage.interface import IProducerCarriage
 from ebu_tt_live.documents import EBUTT3Document
 from ebu_tt_live.node.distributing import DistributingNode
 from testing.bdd.conftest import legacy_name

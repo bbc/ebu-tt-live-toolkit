@@ -21,7 +21,7 @@ class RetimingDelayNode(AbstractCombinedNode):
     _provides = EBUTT3Document
 
     def __init__(self, node_id, fixed_delay, document_sequence, consumer_carriage=None, producer_carriage=None):
-        super(RetimingDelayNode, self).__init__(
+        super().__init__(
             node_id=node_id,
             producer_carriage=producer_carriage,
             consumer_carriage=consumer_carriage
@@ -69,10 +69,7 @@ class RetimingDelayNode(AbstractCombinedNode):
                 self.producer_carriage.emit_data(data=document, **kwargs)
             else:
                 log.warning(
-                    'Ignoring duplicate document: {}__{}'.format(
-                        document.sequence_identifier,
-                        document.sequence_number
-                    )
+                    f'Ignoring duplicate document: {document.sequence_identifier}__{document.sequence_number}'
                 )
         else:
             self.producer_carriage.emit_data(data=document, **kwargs)
@@ -85,7 +82,7 @@ class BufferDelayNode(AbstractCombinedNode):
     _provides = str
 
     def __init__(self, node_id, fixed_delay, consumer_carriage=None, producer_carriage=None):
-        super(BufferDelayNode, self).__init__(
+        super().__init__(
             node_id=node_id,
             producer_carriage=producer_carriage,
             consumer_carriage=consumer_carriage
@@ -180,7 +177,7 @@ class UntimedPathFinder(RecursiveOperation):
 
     def __init__(self, root_element):
         self._timed_element_stack = []
-        super(UntimedPathFinder, self).__init__(
+        super().__init__(
             root_element,
             filter=lambda value, element: isinstance(value, TimingValidationMixin)
         )

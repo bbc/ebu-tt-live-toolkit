@@ -9,5 +9,8 @@ from .interface import ICarriageMechanism, IConsumerCarriage, IProducerCarriage
 from .websocket import WebsocketConsumerCarriage, WebsocketProducerCarriage
 
 __all__ = [
-   'interface', 'base', 'filesystem', 'twisted'
+   'base',
+   'filesystem',
+   'interface',
+   'twisted'
 ]

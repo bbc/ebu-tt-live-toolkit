@@ -1,14 +1,15 @@
-from .base import AbstractCombinedNode
-from ebu_tt_live.documents import EBUTT3DocumentSequence, EBUTT3Document
-from ebu_tt_live.bindings.pyxb_utils import RecursiveOperation, StopBranchIteration
-from ebu_tt_live.strings import DOC_RECEIVED
-from ebu_tt_live.errors import SequenceNumberCollisionError, UnexpectedSequenceIdentifierError
-from pyxb.binding.basis import ElementContent, complexTypeDefinition
-from pyxb import BIND
-from pyxb.namespace import ExpandedName
-from ebu_tt_live import bindings
 import logging
 
+from pyxb.namespace import ExpandedName
+
+from ebu_tt_live import bindings
+from ebu_tt_live.bindings.pyxb_utils import RecursiveOperation
+from ebu_tt_live.documents import EBUTT3Document
+from ebu_tt_live.errors import (
+    UnexpectedSequenceIdentifierError,
+)
+
+from .base import AbstractCombinedNode
 
 log = logging.getLogger(__name__)
 document_logger = logging.getLogger('document_logger')
@@ -24,7 +25,7 @@ class DeDuplicatorNode(AbstractCombinedNode):
 
     def __init__(self, node_id, sequence_identifier, consumer_carriage=None, \
                  producer_carriage=None):
-        super(DeDuplicatorNode, self).__init__(
+        super().__init__(
             node_id=node_id,
             consumer_carriage=consumer_carriage,
             producer_carriage=producer_carriage
@@ -139,7 +140,7 @@ class ComparableElement:
         # attributes the values are put into the hash string in the same order
         sortedDict = sorted(attributeDict.items(), key=lambda t: t[0])
 
-        concatenatedStyleString = u''
+        concatenatedStyleString = ''
         for key,val in sortedDict:
             styleValue = ReplaceNone(val.value(value))
             concatenatedStyleString += str(styleValue) + '%'
@@ -167,7 +168,7 @@ class ReplaceStylesAndRegions(RecursiveOperation):
     new_id_dict = None
 
     def __init__(self, root_element, old_id_dict, new_id_dict):
-            super(ReplaceStylesAndRegions, self).__init__(
+            super().__init__(
                 root_element
             )
 

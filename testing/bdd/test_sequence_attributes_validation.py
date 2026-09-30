@@ -1,4 +1,5 @@
-from pytest_bdd import when, scenarios
+from pytest_bdd import scenarios, when
+
 from testing.bdd.conftest import legacy_name
 
 scenarios('features/validation/sequence_id_num.feature')

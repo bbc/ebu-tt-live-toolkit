@@ -2,10 +2,7 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from ebu_tt_live.carriage.interface import IProducerCarriage
-from ebu_tt_live.documents import (
-    EBUTT3Document,
-    EBUTTAuthorsGroupControlRequest
-)
+from ebu_tt_live.documents import EBUTT3Document, EBUTTAuthorsGroupControlRequest
 from ebu_tt_live.node.distributing import DistributingNode
 
 

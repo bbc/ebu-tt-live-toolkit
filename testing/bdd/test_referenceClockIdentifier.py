@@ -1,6 +1,6 @@
 from pytest_bdd import scenarios, when
-from testing.bdd.conftest import legacy_name
 
+from testing.bdd.conftest import legacy_name
 
 scenarios('features/validation/referenceClockIdentifier_constraints.feature')
 

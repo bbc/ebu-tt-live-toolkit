@@ -1,11 +1,11 @@
 from datetime import timedelta
 
 from ebu_tt_live.bindings import get_xml_parsing_context
-from ebu_tt_live.errors import LogicError, SemanticValidationError, OutsideSegmentError
+from ebu_tt_live.errors import LogicError, OutsideSegmentError, SemanticValidationError
 from ebu_tt_live.strings import ERR_SEMANTIC_VALIDATION_TIMING_TYPE
 
 
-class TimingValidationMixin(object):
+class TimingValidationMixin:
     """
     This mixin is meant to be applied to timed elements (body, div, p, span)
     and provides parser hooks for timing attributes as well as a generic
@@ -331,8 +331,7 @@ class TimingValidationMixin(object):
             segment_begin = dataset['segment_begin']
             segment_end = dataset['segment_end']
             if segment_begin is not None:
-                if segment_begin > trimmed_begin:
-                    trimmed_begin = segment_begin
+                trimmed_begin = max(trimmed_begin, segment_begin)
             if segment_end is not None:
                 if trimmed_end is None or trimmed_end > segment_end:
                     trimmed_end = segment_end
@@ -351,13 +350,13 @@ class BodyTimingValidationMixin(TimingValidationMixin):
     """
 
     def _pre_init_variables(self, dataset, element_content):
-        super(BodyTimingValidationMixin, self)._pre_init_variables(
+        super()._pre_init_variables(
             dataset, element_content)
         self._dur_timedelta = self.dur and self.dur.timedelta or None
 
     def _post_cleanup_variables(self):
         del self._dur_timedelta
-        super(BodyTimingValidationMixin, self)._post_cleanup_variables()
+        super()._post_cleanup_variables()
 
     def _pre_calculate_end(self):
         # This is all for the body element because of the dur attribute
@@ -384,7 +383,7 @@ class BodyTimingValidationMixin(TimingValidationMixin):
         else:
             # Fallback case if there is no duration specified the same as the
             # other containers
-            super(BodyTimingValidationMixin, self)._pre_calculate_end()
+            super()._pre_calculate_end()
             # WARNING this assigns it so we are done
             return
         # If one of our special ifs worked let's assign the value here.
@@ -404,7 +403,7 @@ class BodyTimingValidationMixin(TimingValidationMixin):
 
     def _semantic_timebase_validation(self, dataset, element_content):
 
-        super(BodyTimingValidationMixin, self)._semantic_timebase_validation(
+        super()._semantic_timebase_validation(
             dataset, element_content)
         time_base = dataset['tt_element'].timeBase
 

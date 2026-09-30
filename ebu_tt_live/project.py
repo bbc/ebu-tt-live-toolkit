@@ -1,9 +1,8 @@
 """
 Expose project variables into python code and documentation
 """
-import tomllib
 import os
-import pathlib
+import tomllib
 
 # When building documentation, don't assume we're in the root folder
 path = os.path.dirname(__file__)

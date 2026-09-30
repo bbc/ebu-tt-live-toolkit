@@ -4,7 +4,7 @@ from pytest import fixture, raises
 import ebu_tt_live.config.carriage as carriage_config
 import ebu_tt_live.config.node as node_config
 import ebu_tt_live.node as processing_node
-from ebu_tt_live.config import AppConfig, UniversalNodes
+from ebu_tt_live.config import AppConfig
 from ebu_tt_live.config.common import ConfigurableComponent
 from ebu_tt_live.errors import ConfigurationError
 

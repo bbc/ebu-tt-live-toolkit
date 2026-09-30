@@ -1,9 +1,7 @@
-from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence
-from ebu_tt_live.clocks.local import LocalMachineClock
-from ebu_tt_live.clocks.media import MediaClock
-from pytest_bdd import scenarios, given, then, when, parsers
-from testing.bdd.conftest import legacy_name, timestr_to_timedelta
+from pytest_bdd import given, parsers, scenarios, then, when
 
+from ebu_tt_live.documents import EBUTT3Document
+from testing.bdd.conftest import legacy_name, timestr_to_timedelta
 
 scenarios('features/timing/resolved_times.feature')
 scenarios('features/timing/resolved_times_no_body.feature')

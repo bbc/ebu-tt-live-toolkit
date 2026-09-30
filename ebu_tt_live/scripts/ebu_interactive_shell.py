@@ -1,9 +1,10 @@
 
 import logging
 from argparse import ArgumentParser
-from common import create_loggers
-from ebu_tt_live.documents import EBUTT3Document
 
+from common import create_loggers
+
+from ebu_tt_live.documents import EBUTT3Document
 
 log = logging.getLogger('ebu_interactive_shell')
 parser = ArgumentParser()

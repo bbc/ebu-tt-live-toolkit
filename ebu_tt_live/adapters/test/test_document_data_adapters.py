@@ -9,11 +9,11 @@ from ebu_tt_live.adapters.base import IDocumentDataAdapter
 from ebu_tt_live.errors import UnexpectedSequenceIdentifierError
 
 
-class DummyDataTypeA(object):
+class DummyDataTypeA:
     pass
 
 
-class DummyDataTypeB(object):
+class DummyDataTypeB:
     pass
 
 

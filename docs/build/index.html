@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to EBU-TT-Live Toolkit’s documentation! &mdash; EBU-TT-Live Toolkit 3.0.4 documentation</title>
+  <title>Welcome to EBU-TT-Live Toolkit’s documentation! &mdash; EBU-TT-Live Toolkit 3.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -14,7 +14,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=50b65552"></script>
+      <script src="_static/documentation_options.js?v=dd1205ac"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -99,13 +99,9 @@
 <li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#handover-manager">Handover Manager</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#buffer-delay-node">Buffer Delay Node</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#deduplicator-node">DeDuplicator Node</a></li>
-<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#denester-node">Denester Node</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#resequencer-node">Resequencer Node</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#retiming-delay-node">Retiming Delay Node</a></li>
-<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#ebu-tt-1-producer">EBU-TT-1 Producer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#ebu-tt-d-encoder">EBU-TT-D Encoder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#element-remover">Element Remover</a></li>
-<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#validator">Validator</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="configurator.html">Configuration files and <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code></a><ul>
@@ -114,16 +110,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="validation.html">Document and sequence validation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="validation_framework.html">Validation framework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="validation_framework.html#ebu-tt-part-1-ebu-tt-part-3-and-ebu-tt-d-constraints">EBU-TT Part 1, EBU-TT Part 3 and EBU-TT-D constraints</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="validation_framework.html#ebu-tt-part-1-and-ebu-tt-part-3">EBU-TT Part 1 and EBU-TT Part 3</a></li>
-<li class="toctree-l4"><a class="reference internal" href="validation_framework.html#ebu-tt-part-3-and-ebu-tt-d">EBU-TT Part 3 and EBU-TT-D</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="validation_framework.html#semantic-parser-patch">Semantic parser patch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="validation_framework.html#validation-outside-document-objects">Validation outside document objects</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="validation_framework.html#imsc-hrm-validation">IMSC-HRM validation</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="user_input_producer.html">User input producer</a><ul>
@@ -138,22 +125,12 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="segmentation.html">Segmentation of EBU-TT-Live document sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deduplication.html">DeDuplication of EBU-TT-Live documents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="denesting.html">Denesting of EBU-TT-Live documents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="denesting.html#merging-metadata">Merging metadata</a></li>
-<li class="toctree-l3"><a class="reference internal" href="denesting.html#implementation-details">Implementation details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="denesting.html#removing-elements-from-their-parent-in-pyxb">Removing elements from their parent in pyxb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion.html">Conversion of EBU-TT-Live documents to EBU-TT-D documents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="conversion.html#the-problem">The problem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="conversion.html#percentages-and-the-em-square">Percentages and the EM square</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="conversion_from_ebutt.html">Conversion of EBU-TT Part 1 documents to EBU-TT Live documents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="conversion_from_ebutt.html#the-problem">The problem</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="conversion_to_ebuttd.html">Conversion of EBU-TT-Live documents to EBU-TT-D documents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="conversion_to_ebuttd.html#the-problem">The problem</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="conversion_to_ebuttd.html#percentages-and-the-em-square">Percentages and the EM square</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="conversion_to_ebuttd.html#the-solution">The solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conversion.html#the-solution">The solution</a></li>
 </ul>
 </li>
 </ul>
@@ -165,138 +142,38 @@
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bindings</span></code> Package</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.CreateFromDOM"><code class="docutils literal notranslate"><span class="pre">CreateFromDOM()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.CreateFromDocument"><code class="docutils literal notranslate"><span class="pre">CreateFromDocument()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.LiveStyledElementMixin"><code class="docutils literal notranslate"><span class="pre">LiveStyledElementMixin</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.LiveStyledElementMixin._compatible_style_type"><code class="docutils literal notranslate"><span class="pre">LiveStyledElementMixin._compatible_style_type</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin"><code class="docutils literal notranslate"><span class="pre">RoleMixin</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin._computed_roles"><code class="docutils literal notranslate"><span class="pre">RoleMixin._computed_roles</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin._semantic_compute_roles"><code class="docutils literal notranslate"><span class="pre">RoleMixin._semantic_compute_roles()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin._semantic_pop_computed_roles"><code class="docutils literal notranslate"><span class="pre">RoleMixin._semantic_pop_computed_roles()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin._semantic_push_computed_roles"><code class="docutils literal notranslate"><span class="pre">RoleMixin._semantic_push_computed_roles()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.RoleMixin.computed_roles"><code class="docutils literal notranslate"><span class="pre">RoleMixin.computed_roles</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin._default_attrs"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin._default_attrs</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin._inherited_attr_defaults"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin._inherited_attr_defaults</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.add"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.add()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.compute_font_size"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.compute_font_size()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.compute_inherited_attribute"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.compute_inherited_attribute()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.compute_line_height"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.compute_line_height()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.compute_simple_attribute"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.compute_simple_attribute()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.compute_style"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.compute_style()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.default_attrs"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.default_attrs</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.resolve_styles"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.resolve_styles()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.StyleTypeMixin.set_default_value"><code class="docutils literal notranslate"><span class="pre">StyleTypeMixin.set_default_value()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.LiveStyledElementMixin"><code class="docutils literal notranslate"><span class="pre">LiveStyledElementMixin</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type"><code class="docutils literal notranslate"><span class="pre">body_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._attr_en_pre"><code class="docutils literal notranslate"><span class="pre">body_type._attr_en_pre</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._merge_deconflict_ids"><code class="docutils literal notranslate"><span class="pre">body_type._merge_deconflict_ids()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">body_type._semantic_after_subtree_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">body_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">body_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">body_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type._semantic_copy"><code class="docutils literal notranslate"><span class="pre">body_type._semantic_copy()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.body_type.merge"><code class="docutils literal notranslate"><span class="pre">body_type.merge()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type"><code class="docutils literal notranslate"><span class="pre">br_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">br_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">br_type._semantic_before_traversal()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.br_type.content_to_string"><code class="docutils literal notranslate"><span class="pre">br_type.content_to_string()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type"><code class="docutils literal notranslate"><span class="pre">d_body_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type._compatible_style_type"><code class="docutils literal notranslate"><span class="pre">d_body_type._compatible_style_type</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">d_body_type._semantic_after_subtree_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">d_body_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">d_body_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_body_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">d_body_type._semantic_before_traversal()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_br_type"><code class="docutils literal notranslate"><span class="pre">d_br_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_br_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">d_br_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_br_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">d_br_type._semantic_before_traversal()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type"><code class="docutils literal notranslate"><span class="pre">d_div_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type._compatible_style_type"><code class="docutils literal notranslate"><span class="pre">d_div_type._compatible_style_type</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">d_div_type._semantic_after_subtree_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">d_div_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">d_div_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_div_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">d_div_type._semantic_before_traversal()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_head_type"><code class="docutils literal notranslate"><span class="pre">d_head_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_layout_type"><code class="docutils literal notranslate"><span class="pre">d_layout_type</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_layout_type.create_default_value"><code class="docutils literal notranslate"><span class="pre">d_layout_type.create_default_value()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_p_type"><code class="docutils literal notranslate"><span class="pre">d_p_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_p_type._attr_en_pre"><code class="docutils literal notranslate"><span class="pre">d_p_type._attr_en_pre</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_p_type._compatible_style_type"><code class="docutils literal notranslate"><span class="pre">d_p_type._compatible_style_type</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_p_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">d_p_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_p_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">d_p_type._semantic_before_traversal()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_region_type"><code class="docutils literal notranslate"><span class="pre">d_region_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_region_type._compatible_style_type"><code class="docutils literal notranslate"><span class="pre">d_region_type._compatible_style_type</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_region_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">d_region_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_region_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">d_region_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_region_type._validateBinding_vx"><code class="docutils literal notranslate"><span class="pre">d_region_type._validateBinding_vx()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_region_type.create_default_value"><code class="docutils literal notranslate"><span class="pre">d_region_type.create_default_value()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_region_type.overlaps"><code class="docutils literal notranslate"><span class="pre">d_region_type.overlaps()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_span_type"><code class="docutils literal notranslate"><span class="pre">d_span_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_span_type._attr_en_pre"><code class="docutils literal notranslate"><span class="pre">d_span_type._attr_en_pre</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_span_type._compatible_style_type"><code class="docutils literal notranslate"><span class="pre">d_span_type._compatible_style_type</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_span_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">d_span_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_span_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">d_span_type._semantic_before_traversal()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type"><code class="docutils literal notranslate"><span class="pre">d_style_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type._compatible_style_type"><code class="docutils literal notranslate"><span class="pre">d_style_type._compatible_style_type</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type._ordered_styles"><code class="docutils literal notranslate"><span class="pre">d_style_type._ordered_styles</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">d_style_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type._simple_attr_defaults"><code class="docutils literal notranslate"><span class="pre">d_style_type._simple_attr_defaults</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type._styling_lock"><code class="docutils literal notranslate"><span class="pre">d_style_type._styling_lock</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type.add"><code class="docutils literal notranslate"><span class="pre">d_style_type.add()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type.create_default_value"><code class="docutils literal notranslate"><span class="pre">d_style_type.create_default_value()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_style_type.ordered_styles"><code class="docutils literal notranslate"><span class="pre">d_style_type.ordered_styles()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_styling_type"><code class="docutils literal notranslate"><span class="pre">d_styling_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_styling_type._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">d_styling_type._semantic_after_subtree_copy()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_styling_type.create_default_value"><code class="docutils literal notranslate"><span class="pre">d_styling_type.create_default_value()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type"><code class="docutils literal notranslate"><span class="pre">d_tt_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type.__check_bds"><code class="docutils literal notranslate"><span class="pre">d_tt_type.__check_bds()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type.__post_time_base_set_attribute"><code class="docutils literal notranslate"><span class="pre">d_tt_type.__post_time_base_set_attribute()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type._attr_en_post"><code class="docutils literal notranslate"><span class="pre">d_tt_type._attr_en_post</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type._elements_by_id"><code class="docutils literal notranslate"><span class="pre">d_tt_type._elements_by_id</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">d_tt_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">d_tt_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type._validateBinding_vx"><code class="docutils literal notranslate"><span class="pre">d_tt_type._validateBinding_vx()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type._validator_class"><code class="docutils literal notranslate"><span class="pre">d_tt_type._validator_class</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type.get_element_by_id"><code class="docutils literal notranslate"><span class="pre">d_tt_type.get_element_by_id()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type.get_timing_type"><code class="docutils literal notranslate"><span class="pre">d_tt_type.get_timing_type()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type.toDOM"><code class="docutils literal notranslate"><span class="pre">d_tt_type.toDOM()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.d_tt_type.toxml"><code class="docutils literal notranslate"><span class="pre">d_tt_type.toxml()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type"><code class="docutils literal notranslate"><span class="pre">div_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type._attr_en_pre"><code class="docutils literal notranslate"><span class="pre">div_type._attr_en_pre</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">div_type._semantic_after_subtree_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">div_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">div_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">div_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type._semantic_copy"><code class="docutils literal notranslate"><span class="pre">div_type._semantic_copy()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type.is_empty"><code class="docutils literal notranslate"><span class="pre">div_type.is_empty()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.div_type.merge"><code class="docutils literal notranslate"><span class="pre">div_type.merge()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.head_type"><code class="docutils literal notranslate"><span class="pre">head_type</span></code></a><ul>
@@ -307,84 +184,34 @@
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.layout.merge"><code class="docutils literal notranslate"><span class="pre">layout.merge()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.load_types_for_document"><code class="docutils literal notranslate"><span class="pre">load_types_for_document()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type"><code class="docutils literal notranslate"><span class="pre">p_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type._attr_en_pre"><code class="docutils literal notranslate"><span class="pre">p_type._attr_en_pre</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">p_type._semantic_after_subtree_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">p_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">p_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">p_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type._semantic_copy"><code class="docutils literal notranslate"><span class="pre">p_type._semantic_copy()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.p_type.is_timed_leaf"><code class="docutils literal notranslate"><span class="pre">p_type.is_timed_leaf()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.region_type"><code class="docutils literal notranslate"><span class="pre">region_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.region_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">region_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.region_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">region_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.region_type._semantic_copy"><code class="docutils literal notranslate"><span class="pre">region_type._semantic_copy()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.region_type"><code class="docutils literal notranslate"><span class="pre">region_type</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type"><code class="docutils literal notranslate"><span class="pre">span_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type._attr_en_pre"><code class="docutils literal notranslate"><span class="pre">span_type._attr_en_pre</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">span_type._semantic_after_subtree_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">span_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">span_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">span_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type._semantic_copy"><code class="docutils literal notranslate"><span class="pre">span_type._semantic_copy()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.span_type.is_timed_leaf"><code class="docutils literal notranslate"><span class="pre">span_type.is_timed_leaf()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type"><code class="docutils literal notranslate"><span class="pre">style_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type._compatible_style_type"><code class="docutils literal notranslate"><span class="pre">style_type._compatible_style_type</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type._ordered_styles"><code class="docutils literal notranslate"><span class="pre">style_type._ordered_styles</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type._semantic_before_copy"><code class="docutils literal notranslate"><span class="pre">style_type._semantic_before_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">style_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type._semantic_copy"><code class="docutils literal notranslate"><span class="pre">style_type._semantic_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type._simple_attr_defaults"><code class="docutils literal notranslate"><span class="pre">style_type._simple_attr_defaults</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type._styling_lock"><code class="docutils literal notranslate"><span class="pre">style_type._styling_lock</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.add"><code class="docutils literal notranslate"><span class="pre">style_type.add()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.check_equal"><code class="docutils literal notranslate"><span class="pre">style_type.check_equal()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.compute_font_size"><code class="docutils literal notranslate"><span class="pre">style_type.compute_font_size()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.compute_inherited_attribute"><code class="docutils literal notranslate"><span class="pre">style_type.compute_inherited_attribute()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.compute_line_height"><code class="docutils literal notranslate"><span class="pre">style_type.compute_line_height()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.compute_simple_attribute"><code class="docutils literal notranslate"><span class="pre">style_type.compute_simple_attribute()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.compute_style"><code class="docutils literal notranslate"><span class="pre">style_type.compute_style()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.default_attrs"><code class="docutils literal notranslate"><span class="pre">style_type.default_attrs</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.ordered_styles"><code class="docutils literal notranslate"><span class="pre">style_type.ordered_styles()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.resolve_styles"><code class="docutils literal notranslate"><span class="pre">style_type.resolve_styles()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.set_default_value"><code class="docutils literal notranslate"><span class="pre">style_type.set_default_value()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.style_type.validated_styles"><code class="docutils literal notranslate"><span class="pre">style_type.validated_styles</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.styling"><code class="docutils literal notranslate"><span class="pre">styling</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.styling._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">styling._semantic_after_subtree_copy()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.styling.merge"><code class="docutils literal notranslate"><span class="pre">styling.merge()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_body_type"><code class="docutils literal notranslate"><span class="pre">tt1_body_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_body_type._validateBinding_vx"><code class="docutils literal notranslate"><span class="pre">tt1_body_type._validateBinding_vx()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_head_type"><code class="docutils literal notranslate"><span class="pre">tt1_head_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_head_type._validateBinding_vx"><code class="docutils literal notranslate"><span class="pre">tt1_head_type._validateBinding_vx()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_layout_type"><code class="docutils literal notranslate"><span class="pre">tt1_layout_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_layout_type._validateBinding_vx"><code class="docutils literal notranslate"><span class="pre">tt1_layout_type._validateBinding_vx()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_tt_type"><code class="docutils literal notranslate"><span class="pre">tt1_tt_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt1_tt_type._validateBinding_vx"><code class="docutils literal notranslate"><span class="pre">tt1_tt_type._validateBinding_vx()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type"><code class="docutils literal notranslate"><span class="pre">tt_type</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.__check_bds"><code class="docutils literal notranslate"><span class="pre">tt_type.__check_bds()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.__post_time_base_set_attribute"><code class="docutils literal notranslate"><span class="pre">tt_type.__post_time_base_set_attribute()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.__semantic_test_smpte_attr_combinations"><code class="docutils literal notranslate"><span class="pre">tt_type.__semantic_test_smpte_attr_combinations()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.__semantic_test_smpte_attrs_absent"><code class="docutils literal notranslate"><span class="pre">tt_type.__semantic_test_smpte_attrs_absent()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.__semantic_test_smpte_attrs_present"><code class="docutils literal notranslate"><span class="pre">tt_type.__semantic_test_smpte_attrs_present()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.__semantic_test_time_base_clock_attrs_absent"><code class="docutils literal notranslate"><span class="pre">tt_type.__semantic_test_time_base_clock_attrs_absent()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.__semantic_test_time_base_clock_attrs_present"><code class="docutils literal notranslate"><span class="pre">tt_type.__semantic_test_time_base_clock_attrs_present()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._attr_en_post"><code class="docutils literal notranslate"><span class="pre">tt_type._attr_en_post</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._elements_by_id"><code class="docutils literal notranslate"><span class="pre">tt_type._elements_by_id</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._semantic_after_subtree_copy"><code class="docutils literal notranslate"><span class="pre">tt_type._semantic_after_subtree_copy()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._semantic_after_traversal"><code class="docutils literal notranslate"><span class="pre">tt_type._semantic_after_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._semantic_before_traversal"><code class="docutils literal notranslate"><span class="pre">tt_type._semantic_before_traversal()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._semantic_before_validation"><code class="docutils literal notranslate"><span class="pre">tt_type._semantic_before_validation()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._validateBinding_vx"><code class="docutils literal notranslate"><span class="pre">tt_type._validateBinding_vx()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type._validator_class"><code class="docutils literal notranslate"><span class="pre">tt_type._validator_class</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.get_element_by_id"><code class="docutils literal notranslate"><span class="pre">tt_type.get_element_by_id()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.get_timing_type"><code class="docutils literal notranslate"><span class="pre">tt_type.get_timing_type()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.tt_type.merge"><code class="docutils literal notranslate"><span class="pre">tt_type.merge()</span></code></a></li>
@@ -448,7 +275,6 @@
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings._ebuttdt.cells_to_pixels"><code class="docutils literal notranslate"><span class="pre">cells_to_pixels()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings._ebuttdt.convert_cell_region_to_percentage"><code class="docutils literal notranslate"><span class="pre">convert_cell_region_to_percentage()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings._ebuttdt.convert_pixel_region_to_percentage"><code class="docutils literal notranslate"><span class="pre">convert_pixel_region_to_percentage()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings._ebuttdt.named_color_to_rgba"><code class="docutils literal notranslate"><span class="pre">named_color_to_rgba()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings._ebuttdt.pixels_to_cells"><code class="docutils literal notranslate"><span class="pre">pixels_to_cells()</span></code></a></li>
 </ul>
@@ -459,8 +285,6 @@
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ttm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ttm</span></code> Module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ttp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ttp</span></code> Module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._tts"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_tts</span></code> Module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ittp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ittp</span></code> Module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._itts"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_itts</span></code> Module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings.pyxb_utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyxb_utils</span></code> Module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.pyxb_utils.RecursiveOperation"><code class="docutils literal notranslate"><span class="pre">RecursiveOperation</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.html#ebu_tt_live.bindings.pyxb_utils.RecursiveOperation.proceed"><code class="docutils literal notranslate"><span class="pre">RecursiveOperation.proceed()</span></code></a></li>
@@ -528,10 +352,7 @@
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_layout_type.region"><code class="docutils literal notranslate"><span class="pre">d_layout_type.region</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_metadata_type"><code class="docutils literal notranslate"><span class="pre">d_metadata_type</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_metadata_type.role"><code class="docutils literal notranslate"><span class="pre">d_metadata_type.role</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_metadata_type"><code class="docutils literal notranslate"><span class="pre">d_metadata_type</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_p_type"><code class="docutils literal notranslate"><span class="pre">d_p_type</span></code></a><ul>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_p_type.agent"><code class="docutils literal notranslate"><span class="pre">d_p_type.agent</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_p_type.begin"><code class="docutils literal notranslate"><span class="pre">d_p_type.begin</span></code></a></li>
@@ -577,7 +398,6 @@
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_style_type.backgroundColor"><code class="docutils literal notranslate"><span class="pre">d_style_type.backgroundColor</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_style_type.color"><code class="docutils literal notranslate"><span class="pre">d_style_type.color</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_style_type.direction"><code class="docutils literal notranslate"><span class="pre">d_style_type.direction</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_style_type.fillLineGap"><code class="docutils literal notranslate"><span class="pre">d_style_type.fillLineGap</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_style_type.fontFamily"><code class="docutils literal notranslate"><span class="pre">d_style_type.fontFamily</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_style_type.fontSize"><code class="docutils literal notranslate"><span class="pre">d_style_type.fontSize</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_style_type.fontStyle"><code class="docutils literal notranslate"><span class="pre">d_style_type.fontStyle</span></code></a></li>
@@ -599,7 +419,6 @@
 </ul>
 </li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_tt_type"><code class="docutils literal notranslate"><span class="pre">d_tt_type</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_tt_type.activeArea"><code class="docutils literal notranslate"><span class="pre">d_tt_type.activeArea</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_tt_type.body"><code class="docutils literal notranslate"><span class="pre">d_tt_type.body</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_tt_type.cellResolution"><code class="docutils literal notranslate"><span class="pre">d_tt_type.cellResolution</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.d_tt_type.head"><code class="docutils literal notranslate"><span class="pre">d_tt_type.head</span></code></a></li>
@@ -614,7 +433,6 @@
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.div_type.div"><code class="docutils literal notranslate"><span class="pre">div_type.div</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.div_type.end"><code class="docutils literal notranslate"><span class="pre">div_type.end</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.div_type.id"><code class="docutils literal notranslate"><span class="pre">div_type.id</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.div_type.lang"><code class="docutils literal notranslate"><span class="pre">div_type.lang</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.div_type.metadata"><code class="docutils literal notranslate"><span class="pre">div_type.metadata</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.div_type.p"><code class="docutils literal notranslate"><span class="pre">div_type.p</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.div_type.region"><code class="docutils literal notranslate"><span class="pre">div_type.region</span></code></a></li>
@@ -680,7 +498,6 @@
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.style.backgroundColor"><code class="docutils literal notranslate"><span class="pre">style.backgroundColor</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.style.color"><code class="docutils literal notranslate"><span class="pre">style.color</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.style.direction"><code class="docutils literal notranslate"><span class="pre">style.direction</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.style.fillLineGap"><code class="docutils literal notranslate"><span class="pre">style.fillLineGap</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.style.fontFamily"><code class="docutils literal notranslate"><span class="pre">style.fontFamily</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.style.fontSize"><code class="docutils literal notranslate"><span class="pre">style.fontSize</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.style.fontStyle"><code class="docutils literal notranslate"><span class="pre">style.fontStyle</span></code></a></li>
@@ -704,7 +521,6 @@
 </ul>
 </li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.tt_type"><code class="docutils literal notranslate"><span class="pre">tt_type</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.tt_type.activeArea"><code class="docutils literal notranslate"><span class="pre">tt_type.activeArea</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.tt_type.authoringDelay"><code class="docutils literal notranslate"><span class="pre">tt_type.authoringDelay</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.tt_type.authorsGroupControlToken"><code class="docutils literal notranslate"><span class="pre">tt_type.authorsGroupControlToken</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw.tt_type.authorsGroupIdentifier"><code class="docutils literal notranslate"><span class="pre">tt_type.authorsGroupIdentifier</span></code></a></li>
@@ -743,7 +559,28 @@
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.cellOriginType"><code class="docutils literal notranslate"><span class="pre">cellOriginType</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.cellResolutionType"><code class="docutils literal notranslate"><span class="pre">cellResolutionType</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.clockTimingType"><code class="docutils literal notranslate"><span class="pre">clockTimingType</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType"><code class="docutils literal notranslate"><span class="pre">colorType</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType"><code class="docutils literal notranslate"><span class="pre">colorType</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.aqua"><code class="docutils literal notranslate"><span class="pre">colorType.aqua</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.black"><code class="docutils literal notranslate"><span class="pre">colorType.black</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.blue"><code class="docutils literal notranslate"><span class="pre">colorType.blue</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.cyan"><code class="docutils literal notranslate"><span class="pre">colorType.cyan</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.fuchsia"><code class="docutils literal notranslate"><span class="pre">colorType.fuchsia</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.gray"><code class="docutils literal notranslate"><span class="pre">colorType.gray</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.green"><code class="docutils literal notranslate"><span class="pre">colorType.green</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.lime"><code class="docutils literal notranslate"><span class="pre">colorType.lime</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.magenta"><code class="docutils literal notranslate"><span class="pre">colorType.magenta</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.maroon"><code class="docutils literal notranslate"><span class="pre">colorType.maroon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.navy"><code class="docutils literal notranslate"><span class="pre">colorType.navy</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.olive"><code class="docutils literal notranslate"><span class="pre">colorType.olive</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.purple"><code class="docutils literal notranslate"><span class="pre">colorType.purple</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.red"><code class="docutils literal notranslate"><span class="pre">colorType.red</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.silver"><code class="docutils literal notranslate"><span class="pre">colorType.silver</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.teal"><code class="docutils literal notranslate"><span class="pre">colorType.teal</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.transparent"><code class="docutils literal notranslate"><span class="pre">colorType.transparent</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.white"><code class="docutils literal notranslate"><span class="pre">colorType.white</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.colorType.yellow"><code class="docutils literal notranslate"><span class="pre">colorType.yellow</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.durationTimingType"><code class="docutils literal notranslate"><span class="pre">durationTimingType</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.extentType"><code class="docutils literal notranslate"><span class="pre">extentType</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.fontFamilyType"><code class="docutils literal notranslate"><span class="pre">fontFamilyType</span></code></a></li>
@@ -767,7 +604,28 @@
 </ul>
 </li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.mediaTimingType"><code class="docutils literal notranslate"><span class="pre">mediaTimingType</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType"><code class="docutils literal notranslate"><span class="pre">namedColorType</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType"><code class="docutils literal notranslate"><span class="pre">namedColorType</span></code></a><ul>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.aqua"><code class="docutils literal notranslate"><span class="pre">namedColorType.aqua</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.black"><code class="docutils literal notranslate"><span class="pre">namedColorType.black</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.blue"><code class="docutils literal notranslate"><span class="pre">namedColorType.blue</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.cyan"><code class="docutils literal notranslate"><span class="pre">namedColorType.cyan</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.fuchsia"><code class="docutils literal notranslate"><span class="pre">namedColorType.fuchsia</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.gray"><code class="docutils literal notranslate"><span class="pre">namedColorType.gray</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.green"><code class="docutils literal notranslate"><span class="pre">namedColorType.green</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.lime"><code class="docutils literal notranslate"><span class="pre">namedColorType.lime</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.magenta"><code class="docutils literal notranslate"><span class="pre">namedColorType.magenta</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.maroon"><code class="docutils literal notranslate"><span class="pre">namedColorType.maroon</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.navy"><code class="docutils literal notranslate"><span class="pre">namedColorType.navy</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.olive"><code class="docutils literal notranslate"><span class="pre">namedColorType.olive</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.purple"><code class="docutils literal notranslate"><span class="pre">namedColorType.purple</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.red"><code class="docutils literal notranslate"><span class="pre">namedColorType.red</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.silver"><code class="docutils literal notranslate"><span class="pre">namedColorType.silver</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.teal"><code class="docutils literal notranslate"><span class="pre">namedColorType.teal</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.transparent"><code class="docutils literal notranslate"><span class="pre">namedColorType.transparent</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.white"><code class="docutils literal notranslate"><span class="pre">namedColorType.white</span></code></a></li>
+<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.namedColorType.yellow"><code class="docutils literal notranslate"><span class="pre">namedColorType.yellow</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.originType"><code class="docutils literal notranslate"><span class="pre">originType</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.paddingType"><code class="docutils literal notranslate"><span class="pre">paddingType</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttdt.percentageExtentType"><code class="docutils literal notranslate"><span class="pre">percentageExtentType</span></code></a></li>
@@ -858,10 +716,7 @@
 </ul>
 </li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.STD_ANON_6"><code class="docutils literal notranslate"><span class="pre">STD_ANON_6</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.anyMetadata_type"><code class="docutils literal notranslate"><span class="pre">anyMetadata_type</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.anyMetadata_type.role"><code class="docutils literal notranslate"><span class="pre">anyMetadata_type.role</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.anyMetadata_type"><code class="docutils literal notranslate"><span class="pre">anyMetadata_type</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.appliedProcessing_type"><code class="docutils literal notranslate"><span class="pre">appliedProcessing_type</span></code></a><ul>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.appliedProcessing_type.appliedDateTime"><code class="docutils literal notranslate"><span class="pre">appliedProcessing_type.appliedDateTime</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.appliedProcessing_type.generatedBy"><code class="docutils literal notranslate"><span class="pre">appliedProcessing_type.generatedBy</span></code></a></li>
@@ -976,7 +831,6 @@
 </li>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.metadataBase_type"><code class="docutils literal notranslate"><span class="pre">metadataBase_type</span></code></a><ul>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.metadataBase_type.desc"><code class="docutils literal notranslate"><span class="pre">metadataBase_type.desc</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.metadataBase_type.role"><code class="docutils literal notranslate"><span class="pre">metadataBase_type.role</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ebuttm.metadataBase_type.title"><code class="docutils literal notranslate"><span class="pre">metadataBase_type.title</span></code></a></li>
 </ul>
 </li>
@@ -1164,126 +1018,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#module-ebu_tt_live.bindings.raw._ittp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ittp</span></code> Module</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ittp.CreateFromDOM"><code class="docutils literal notranslate"><span class="pre">CreateFromDOM()</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ittp.CreateFromDocument"><code class="docutils literal notranslate"><span class="pre">CreateFromDocument()</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ittp.STD_ANON"><code class="docutils literal notranslate"><span class="pre">STD_ANON</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ittp.STD_ANON_"><code class="docutils literal notranslate"><span class="pre">STD_ANON_</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._ittp.STD_ANON_2"><code class="docutils literal notranslate"><span class="pre">STD_ANON_2</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#module-ebu_tt_live.bindings.raw._itts"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_itts</span></code> Module</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._itts.CreateFromDOM"><code class="docutils literal notranslate"><span class="pre">CreateFromDOM()</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._itts.CreateFromDocument"><code class="docutils literal notranslate"><span class="pre">CreateFromDocument()</span></code></a></li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._itts.STD_ANON"><code class="docutils literal notranslate"><span class="pre">STD_ANON</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._itts.STD_ANON.false"><code class="docutils literal notranslate"><span class="pre">STD_ANON.false</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.raw.html#ebu_tt_live.bindings.raw._itts.STD_ANON.true"><code class="docutils literal notranslate"><span class="pre">STD_ANON.true</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.converters.html">converters package</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">converters</span></code> Package</a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#module-ebu_tt_live.bindings.converters.ebutt3_ebuttd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_ebuttd</span></code> Module</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._activeArea_max_dp"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._activeArea_max_dp</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._adjusted_font_style_map"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._adjusted_font_style_map()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._calculate_active_area"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._calculate_active_area()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._child_spans_specify_times"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._child_spans_specify_times()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._children_contain"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._children_contain()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._dataset_key_for_font_styles"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._dataset_key_for_font_styles</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._decode_origin_and_extent"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._decode_origin_and_extent()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._fix_fontsize"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._fix_fontsize()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._fontSize_max_dp"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._fontSize_max_dp</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._font_size_style_template"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._font_size_style_template</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._get_font_size_style"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._get_font_size_style()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._link_adjusted_fonts_styling"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._link_adjusted_fonts_styling()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._media_clock"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._media_clock</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._process_timing_from_timedelta"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._process_timing_from_timedelta()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._process_timing_type"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._process_timing_type()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._semantic_dataset"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._semantic_dataset</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_body"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_body()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_br"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_br()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_children"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_children()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_div"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_div()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_document"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_document()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_element"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_element()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_head"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_head()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_layout"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_layout()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_p"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_p()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_region"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_region()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_span"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_span()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_style"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_style()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_styling"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_styling()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_tt"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_tt()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_unknown"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_unknown()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.map_type"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.map_type()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.roundAndStrip"><code class="docutils literal notranslate"><span class="pre">roundAndStrip()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#module-ebu_tt_live.bindings.converters.ebutt1_ebutt3"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt1_ebutt3</span></code> Module</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._rememberDocumentIdentifier"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter._rememberDocumentIdentifier()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._semantic_dataset"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter._semantic_dataset</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._sequenceIdentifier"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter._sequenceIdentifier</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter._use_doc_id_as_seq_id"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter._use_doc_id_as_seq_id</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.calculate_times"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.calculate_times()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_body"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_body()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_bodyMetadata"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_bodyMetadata()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_br"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_br()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_children"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_children()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_div"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_div()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_divMetadata"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_divMetadata()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_document"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_document()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_element"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_element()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_head"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_head()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_headMetadata"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_headMetadata()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_layout"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_layout()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_metadata"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_metadata()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_p"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_p()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_pMetadata"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_pMetadata()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_region"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_region()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_span"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_span()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_spanMetadata"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_spanMetadata()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_style"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_style()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_styling"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_styling()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_tt"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_tt()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.convert_unknown"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.convert_unknown()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.map_type"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.map_type()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.pop_syncbase"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.pop_syncbase()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.ebutt1_ebutt3.EBUTT1EBUTT3Converter.push_syncbase"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3Converter.push_syncbase()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#module-ebu_tt_live.bindings.converters.timedelta_converter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">timedelta_converter</span></code> Module</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._calc_effective_frame_rate"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._calc_effective_frame_rate()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._calculate_s"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._calculate_s()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._counted_frames"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._counted_frames()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._dropMode"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._dropMode</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._dropped_frames"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._dropped_frames()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._effectiveFrameRate"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._effectiveFrameRate</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._frameRate"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._frameRate</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._frm_regex"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._frm_regex</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._is_dropped_frame"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._is_dropped_frame()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._smpteReferenceS"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._smpteReferenceS</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter._tc_regex"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter._tc_regex</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.can_convert"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter.can_convert()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.FixedOffsetSMPTEtoTimedeltaConverter.timedelta"><code class="docutils literal notranslate"><span class="pre">FixedOffsetSMPTEtoTimedeltaConverter.timedelta()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter"><code class="docutils literal notranslate"><span class="pre">ISMPTEtoTimedeltaConverter</span></code></a><ul>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter.can_convert"><code class="docutils literal notranslate"><span class="pre">ISMPTEtoTimedeltaConverter.can_convert()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.converters.html#ebu_tt_live.bindings.converters.timedelta_converter.ISMPTEtoTimedeltaConverter.timedelta"><code class="docutils literal notranslate"><span class="pre">ISMPTEtoTimedeltaConverter.timedelta()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.bindings.validation.html">validation package</a><ul>
@@ -1367,7 +1101,6 @@
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.timing.TimingValidationMixin._semantic_postprocess_timing"><code class="docutils literal notranslate"><span class="pre">TimingValidationMixin._semantic_postprocess_timing()</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.timing.TimingValidationMixin._semantic_preprocess_timing"><code class="docutils literal notranslate"><span class="pre">TimingValidationMixin._semantic_preprocess_timing()</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.timing.TimingValidationMixin._semantic_timebase_validation"><code class="docutils literal notranslate"><span class="pre">TimingValidationMixin._semantic_timebase_validation()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.timing.TimingValidationMixin._semantic_validate_ttd_active_areas"><code class="docutils literal notranslate"><span class="pre">TimingValidationMixin._semantic_validate_ttd_active_areas()</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.timing.TimingValidationMixin.computed_begin_time"><code class="docutils literal notranslate"><span class="pre">TimingValidationMixin.computed_begin_time</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.timing.TimingValidationMixin.computed_end_time"><code class="docutils literal notranslate"><span class="pre">TimingValidationMixin.computed_end_time</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.timing.TimingValidationMixin.is_in_segment"><code class="docutils literal notranslate"><span class="pre">TimingValidationMixin.is_in_segment()</span></code></a></li>
@@ -1379,7 +1112,6 @@
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#module-ebu_tt_live.bindings.validation.presentation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">presentation</span></code> Module</a><ul>
 <li class="toctree-l7"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.RegionedElementMixin"><code class="docutils literal notranslate"><span class="pre">RegionedElementMixin</span></code></a><ul>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.RegionedElementMixin._semantic_copy_verify_referenced_region"><code class="docutils literal notranslate"><span class="pre">RegionedElementMixin._semantic_copy_verify_referenced_region()</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.RegionedElementMixin._semantic_set_d_region"><code class="docutils literal notranslate"><span class="pre">RegionedElementMixin._semantic_set_d_region()</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.RegionedElementMixin._semantic_set_region"><code class="docutils literal notranslate"><span class="pre">RegionedElementMixin._semantic_set_region()</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.RegionedElementMixin._semantic_unset_region"><code class="docutils literal notranslate"><span class="pre">RegionedElementMixin._semantic_unset_region()</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.RegionedElementMixin._validated_region"><code class="docutils literal notranslate"><span class="pre">RegionedElementMixin._validated_region</span></code></a></li>
@@ -1395,7 +1127,6 @@
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.StyledElementMixin._computed_style"><code class="docutils literal notranslate"><span class="pre">StyledElementMixin._computed_style</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.StyledElementMixin._inherited_region"><code class="docutils literal notranslate"><span class="pre">StyledElementMixin._inherited_region</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.StyledElementMixin._inherited_styles"><code class="docutils literal notranslate"><span class="pre">StyledElementMixin._inherited_styles</span></code></a></li>
-<li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.StyledElementMixin._referenced_divs"><code class="docutils literal notranslate"><span class="pre">StyledElementMixin._referenced_divs</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.StyledElementMixin._referenced_styles"><code class="docutils literal notranslate"><span class="pre">StyledElementMixin._referenced_styles</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.StyledElementMixin._region_styles"><code class="docutils literal notranslate"><span class="pre">StyledElementMixin._region_styles</span></code></a></li>
 <li class="toctree-l8"><a class="reference internal" href="ebu_tt_live.bindings.validation.html#ebu_tt_live.bindings.validation.presentation.StyledElementMixin._semantic_collect_applicable_styles"><code class="docutils literal notranslate"><span class="pre">StyledElementMixin._semantic_collect_applicable_styles()</span></code></a></li>
@@ -1571,7 +1302,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.config.html">config Package - Component configurators</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#config-package"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code> Package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">backend</span></code> module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.backend.BackendBase"><code class="docutils literal notranslate"><span class="pre">BackendBase</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.backend.BackendBase.call_once"><code class="docutils literal notranslate"><span class="pre">BackendBase.call_once()</span></code></a></li>
@@ -1605,7 +1336,78 @@
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.backend.get_backend"><code class="docutils literal notranslate"><span class="pre">get_backend()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#node-module"><code class="xref py py-mod docutils literal notranslate"><span class="pre">node</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.node"><code class="xref py py-mod docutils literal notranslate"><span class="pre">node</span></code> module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.BufferDelay"><code class="docutils literal notranslate"><span class="pre">BufferDelay</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.BufferDelay.required_config"><code class="docutils literal notranslate"><span class="pre">BufferDelay.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.ConsumerMixin"><code class="docutils literal notranslate"><span class="pre">ConsumerMixin</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.ConsumerMixin.required_config"><code class="docutils literal notranslate"><span class="pre">ConsumerMixin.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.DeDuplicator"><code class="docutils literal notranslate"><span class="pre">DeDuplicator</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.DeDuplicator.required_config"><code class="docutils literal notranslate"><span class="pre">DeDuplicator.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.Distributor"><code class="docutils literal notranslate"><span class="pre">Distributor</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.EBUTTDEncoder"><code class="docutils literal notranslate"><span class="pre">EBUTTDEncoder</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.EBUTTDEncoder.required_config"><code class="docutils literal notranslate"><span class="pre">EBUTTDEncoder.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.Handover"><code class="docutils literal notranslate"><span class="pre">Handover</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.Handover.required_config"><code class="docutils literal notranslate"><span class="pre">Handover.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.NodeBase"><code class="docutils literal notranslate"><span class="pre">NodeBase</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.NodeBase.required_config"><code class="docutils literal notranslate"><span class="pre">NodeBase.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.ProducerMixin"><code class="docutils literal notranslate"><span class="pre">ProducerMixin</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.ProducerMixin.output"><code class="docutils literal notranslate"><span class="pre">ProducerMixin.output</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.ProducerMixin.required_config"><code class="docutils literal notranslate"><span class="pre">ProducerMixin.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.ReSequencer"><code class="docutils literal notranslate"><span class="pre">ReSequencer</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.ReSequencer.required_config"><code class="docutils literal notranslate"><span class="pre">ReSequencer.required_config</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.ReSequencer.start"><code class="docutils literal notranslate"><span class="pre">ReSequencer.start()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.RetimingDelay"><code class="docutils literal notranslate"><span class="pre">RetimingDelay</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.RetimingDelay.required_config"><code class="docutils literal notranslate"><span class="pre">RetimingDelay.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.SimpleConsumer"><code class="docutils literal notranslate"><span class="pre">SimpleConsumer</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.SimpleConsumer.required_config"><code class="docutils literal notranslate"><span class="pre">SimpleConsumer.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.SimpleProducer"><code class="docutils literal notranslate"><span class="pre">SimpleProducer</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.SimpleProducer.required_config"><code class="docutils literal notranslate"><span class="pre">SimpleProducer.required_config</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.SimpleProducer.start"><code class="docutils literal notranslate"><span class="pre">SimpleProducer.start()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNode"><code class="docutils literal notranslate"><span class="pre">UniversalNode</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNode.required_config"><code class="docutils literal notranslate"><span class="pre">UniversalNode.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.configure_component"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.configure_component()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.node1"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.node1</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.node2"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.node2</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.node3"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.node3</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.node4"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.node4</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.node5"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.node5</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.node6"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.node6</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.node7"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.node7</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodeList.required_config"><code class="docutils literal notranslate"><span class="pre">UniversalNodeList.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodes"><code class="docutils literal notranslate"><span class="pre">UniversalNodes</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.UniversalNodes.required_config"><code class="docutils literal notranslate"><span class="pre">UniversalNodes.required_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.node.get_node"><code class="docutils literal notranslate"><span class="pre">get_node()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.carriage"><code class="xref py py-mod docutils literal notranslate"><span class="pre">carriage</span></code> Package</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.carriage.DirectCommon"><code class="docutils literal notranslate"><span class="pre">DirectCommon</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.carriage.DirectCommon.configure_component"><code class="docutils literal notranslate"><span class="pre">DirectCommon.configure_component()</span></code></a></li>
@@ -1657,7 +1459,18 @@
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.carriage.str_to_url_converter"><code class="docutils literal notranslate"><span class="pre">str_to_url_converter()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#adapters-module"><code class="xref py py-mod docutils literal notranslate"><span class="pre">adapters</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.adapters"><code class="xref py py-mod docutils literal notranslate"><span class="pre">adapters</span></code> module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.adapters.ConsumerNodeCarriageAdapter"><code class="docutils literal notranslate"><span class="pre">ConsumerNodeCarriageAdapter</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.adapters.ConsumerNodeCarriageAdapter.configure_component"><code class="docutils literal notranslate"><span class="pre">ConsumerNodeCarriageAdapter.configure_component()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.adapters.ProducerNodeCarriageAdapter"><code class="docutils literal notranslate"><span class="pre">ProducerNodeCarriageAdapter</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.adapters.ProducerNodeCarriageAdapter.configure_component"><code class="docutils literal notranslate"><span class="pre">ProducerNodeCarriageAdapter.configure_component()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.adapters.parse_adapter_list"><code class="docutils literal notranslate"><span class="pre">parse_adapter_list()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.clocks"><code class="xref py py-mod docutils literal notranslate"><span class="pre">clocks</span></code> module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.clocks.DummyClock"><code class="docutils literal notranslate"><span class="pre">DummyClock</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.config.html#ebu_tt_live.config.clocks.DummyClock.component"><code class="docutils literal notranslate"><span class="pre">DummyClock.component</span></code></a></li>
@@ -1699,14 +1512,6 @@
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.DocumentSequence.new_document"><code class="docutils literal notranslate"><span class="pre">DocumentSequence.new_document()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase"><code class="docutils literal notranslate"><span class="pre">EBUTTDocumentBase</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.create_from_raw_binding"><code class="docutils literal notranslate"><span class="pre">EBUTTDocumentBase.create_from_raw_binding()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.create_from_xml"><code class="docutils literal notranslate"><span class="pre">EBUTTDocumentBase.create_from_xml()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.get_dom"><code class="docutils literal notranslate"><span class="pre">EBUTTDocumentBase.get_dom()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.get_xml"><code class="docutils literal notranslate"><span class="pre">EBUTTDocumentBase.get_xml()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.EBUTTDocumentBase.message_type_mapping"><code class="docutils literal notranslate"><span class="pre">EBUTTDocumentBase.message_type_mapping</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.SubtitleDocument"><code class="docutils literal notranslate"><span class="pre">SubtitleDocument</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.base.SubtitleDocument.validate"><code class="docutils literal notranslate"><span class="pre">SubtitleDocument.validate()</span></code></a></li>
 </ul>
@@ -1727,9 +1532,6 @@
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._computed_begin_time"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._computed_begin_time</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._computed_end_time"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._computed_end_time</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._ebutt3_content"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._ebutt3_content</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._encoding"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._encoding</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._get_bds"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._get_bds()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._implicit_ns"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._implicit_ns</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._resolved_begin_time"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._resolved_begin_time</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._resolved_end_time"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._resolved_end_time</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document._sequence"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document._sequence</span></code></a></li>
@@ -1752,9 +1554,7 @@
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.get_dom"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.get_dom()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.get_element_by_id"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.get_element_by_id()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.get_xml"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.get_xml()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.implicit_ns"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.implicit_ns</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.lang"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.lang</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.load_types_for_document"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.load_types_for_document()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.resolved_begin_time"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.resolved_begin_time</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.resolved_end_time"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.resolved_end_time</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3Document.sequence"><code class="docutils literal notranslate"><span class="pre">EBUTT3Document.sequence</span></code></a></li>
@@ -1801,6 +1601,14 @@
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3DocumentSequence.sequence_identifier"><code class="docutils literal notranslate"><span class="pre">EBUTT3DocumentSequence.sequence_identifier</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3ObjectBase"><code class="docutils literal notranslate"><span class="pre">EBUTT3ObjectBase</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3ObjectBase.create_from_raw_binding"><code class="docutils literal notranslate"><span class="pre">EBUTT3ObjectBase.create_from_raw_binding()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3ObjectBase.create_from_xml"><code class="docutils literal notranslate"><span class="pre">EBUTT3ObjectBase.create_from_xml()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3ObjectBase.get_dom"><code class="docutils literal notranslate"><span class="pre">EBUTT3ObjectBase.get_dom()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3ObjectBase.get_xml"><code class="docutils literal notranslate"><span class="pre">EBUTT3ObjectBase.get_xml()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTT3ObjectBase.message_type_mapping"><code class="docutils literal notranslate"><span class="pre">EBUTT3ObjectBase.message_type_mapping</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest"><code class="docutils literal notranslate"><span class="pre">EBUTTAuthorsGroupControlRequest</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest._create_binding"><code class="docutils literal notranslate"><span class="pre">EBUTTAuthorsGroupControlRequest._create_binding()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTTAuthorsGroupControlRequest.create_from_raw_binding"><code class="docutils literal notranslate"><span class="pre">EBUTTAuthorsGroupControlRequest.create_from_raw_binding()</span></code></a></li>
@@ -1822,6 +1630,25 @@
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.EBUTTLiveMessage.sequence_identifier"><code class="docutils literal notranslate"><span class="pre">EBUTTLiveMessage.sequence_identifier</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimelineUtilMixin"><code class="docutils literal notranslate"><span class="pre">TimelineUtilMixin</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimelineUtilMixin._timeline"><code class="docutils literal notranslate"><span class="pre">TimelineUtilMixin._timeline</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimelineUtilMixin.add_to_timeline"><code class="docutils literal notranslate"><span class="pre">TimelineUtilMixin.add_to_timeline()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimelineUtilMixin.locate_element_begin"><code class="docutils literal notranslate"><span class="pre">TimelineUtilMixin.locate_element_begin()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimelineUtilMixin.locate_element_end"><code class="docutils literal notranslate"><span class="pre">TimelineUtilMixin.locate_element_end()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimelineUtilMixin.lookup_range_on_timeline"><code class="docutils literal notranslate"><span class="pre">TimelineUtilMixin.lookup_range_on_timeline()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimelineUtilMixin.reset_timeline"><code class="docutils literal notranslate"><span class="pre">TimelineUtilMixin.reset_timeline()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimelineUtilMixin.timeline"><code class="docutils literal notranslate"><span class="pre">TimelineUtilMixin.timeline</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimingEvent"><code class="docutils literal notranslate"><span class="pre">TimingEvent</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimingEvent._element"><code class="docutils literal notranslate"><span class="pre">TimingEvent._element</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimingEvent._when"><code class="docutils literal notranslate"><span class="pre">TimingEvent._when</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimingEvent.element"><code class="docutils literal notranslate"><span class="pre">TimingEvent.element</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimingEvent.when"><code class="docutils literal notranslate"><span class="pre">TimingEvent.when</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimingEventBegin"><code class="docutils literal notranslate"><span class="pre">TimingEventBegin</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt3.TimingEventEnd"><code class="docutils literal notranslate"><span class="pre">TimingEventEnd</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.ebutt3_segmentation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_segmentation</span></code> Module</a><ul>
@@ -1865,46 +1692,52 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.bindings.converters.ebutt3_ebuttd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bindings_converters</span></code> Module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._adjusted_font_style_map"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._adjusted_font_style_map()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._children_contain"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._children_contain()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._dataset_key_for_font_styles"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._dataset_key_for_font_styles</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._fix_fontsize"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._fix_fontsize()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._font_size_style_template"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._font_size_style_template</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._get_font_size_style"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._get_font_size_style()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._link_adjusted_fonts_styling"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._link_adjusted_fonts_styling()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._media_clock"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._media_clock</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._process_timing_type"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._process_timing_type()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter._semantic_dataset"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter._semantic_dataset</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_body"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_body()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_br"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_br()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_children"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_children()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_div"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_div()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_document"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_document()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_element"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_element()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_head"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_head()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_layout"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_layout()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_p"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_p()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_region"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_region()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_span"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_span()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_style"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_style()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_styling"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_styling()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_tt"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_tt()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.convert_unknown"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.convert_unknown()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.bindings.converters.ebutt3_ebuttd.EBUTT3EBUTTDConverter.map_type"><code class="docutils literal notranslate"><span class="pre">EBUTT3EBUTTDConverter.map_type()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.converters"><code class="xref py py-mod docutils literal notranslate"><span class="pre">document_converters</span></code> Module</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.converters.ebutt1_to_ebutt3"><code class="docutils literal notranslate"><span class="pre">ebutt1_to_ebutt3()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.converters.ebutt3_to_ebuttd"><code class="docutils literal notranslate"><span class="pre">ebutt3_to_ebuttd()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.ebutt1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt1</span></code> Module</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document._cmp_key"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document._cmp_key()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document._ebutt1_content"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document._ebutt1_content</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.add_div"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.add_div()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.binding"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.binding</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.clock_mode"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.clock_mode</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.create_from_raw_binding"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.create_from_raw_binding()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.create_from_xml"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.create_from_xml()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.get_dom"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.get_dom()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.get_element_by_id"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.get_element_by_id()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.get_xml"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.get_xml()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.lang"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.lang</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.load_types_for_document"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.load_types_for_document()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.set_begin"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.set_begin()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.set_end"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.set_end()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebutt1.EBUTT1Document.validate"><code class="docutils literal notranslate"><span class="pre">EBUTT1Document.validate()</span></code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.ebuttd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebuttd</span></code> Module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument._ebuttd_content"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument._ebuttd_content</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument._encoding"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument._encoding</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument._get_bds"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument._get_bds()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument._implicit_ns"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument._implicit_ns</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.binding"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.binding</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.create_from_raw_binding"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.create_from_raw_binding()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.create_from_xml"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.create_from_xml()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_dom"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.get_dom()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_element_by_id"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.get_element_by_id()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.get_xml"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.get_xml()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.implicit_ns"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.implicit_ns</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.load_types_for_document"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.load_types_for_document()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.set_implicit_ns"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.set_implicit_ns()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.documents.html#ebu_tt_live.documents.ebuttd.EBUTTDDocument.validate"><code class="docutils literal notranslate"><span class="pre">EBUTTDDocument.validate()</span></code></a></li>
 </ul>
 </li>
@@ -1913,7 +1746,10 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.examples.html">examples Package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.examples.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">examples</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.examples.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">examples</span></code> Package</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.examples.html#ebu_tt_live.examples.get_example_data"><code class="docutils literal notranslate"><span class="pre">get_example_data()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.node.html">node Package</a><ul>
@@ -1994,19 +1830,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.ebutt1_ebutt3_producer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt1_ebutt3_producer</span></code> Module</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3ProducerNode</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode.auto_register_impl"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3ProducerNode.auto_register_impl()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode.convert_document"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3ProducerNode.convert_document()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.ebutt1_ebutt3_producer.EBUTT1EBUTT3ProducerNode.process_document"><code class="docutils literal notranslate"><span class="pre">EBUTT1EBUTT3ProducerNode.process_document()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.encoder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">encoder</span></code> Module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.encoder.EBUTTDEncoder"><code class="docutils literal notranslate"><span class="pre">EBUTTDEncoder</span></code></a><ul>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.encoder.EBUTTDEncoder.auto_register_impl"><code class="docutils literal notranslate"><span class="pre">EBUTTDEncoder.auto_register_impl()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.encoder.EBUTTDEncoder.convert_document"><code class="docutils literal notranslate"><span class="pre">EBUTTDEncoder.convert_document()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.encoder.EBUTTDEncoder.process_document"><code class="docutils literal notranslate"><span class="pre">EBUTTDEncoder.process_document()</span></code></a></li>
 </ul>
 </li>
@@ -2067,43 +1893,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.denester"><code class="xref py py-mod docutils literal notranslate"><span class="pre">denester</span></code> Module</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode"><code class="docutils literal notranslate"><span class="pre">DenesterNode</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.auto_register_impl"><code class="docutils literal notranslate"><span class="pre">DenesterNode.auto_register_impl()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.calculate_end_times"><code class="docutils literal notranslate"><span class="pre">DenesterNode.calculate_end_times()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.calculate_font_size"><code class="docutils literal notranslate"><span class="pre">DenesterNode.calculate_font_size()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.calculate_percentage_font_size"><code class="docutils literal notranslate"><span class="pre">DenesterNode.calculate_percentage_font_size()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.check_p_regions"><code class="docutils literal notranslate"><span class="pre">DenesterNode.check_p_regions()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.combine_divs"><code class="docutils literal notranslate"><span class="pre">DenesterNode.combine_divs()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.compute_span_merged_styles"><code class="docutils literal notranslate"><span class="pre">DenesterNode.compute_span_merged_styles()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.create_compatible_time"><code class="docutils literal notranslate"><span class="pre">DenesterNode.create_compatible_time()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.create_new_style"><code class="docutils literal notranslate"><span class="pre">DenesterNode.create_new_style()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.denest"><code class="docutils literal notranslate"><span class="pre">DenesterNode.denest()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.div_attr"><code class="docutils literal notranslate"><span class="pre">DenesterNode.div_attr()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.get_value_from_style"><code class="docutils literal notranslate"><span class="pre">DenesterNode.get_value_from_style()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.merge_attr"><code class="docutils literal notranslate"><span class="pre">DenesterNode.merge_attr()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.process_document"><code class="docutils literal notranslate"><span class="pre">DenesterNode.process_document()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.recurse"><code class="docutils literal notranslate"><span class="pre">DenesterNode.recurse()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.DenesterNode.recurse_span"><code class="docutils literal notranslate"><span class="pre">DenesterNode.recurse_span()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.ElementTimes"><code class="docutils literal notranslate"><span class="pre">ElementTimes</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.ElementTimes.begin"><code class="docutils literal notranslate"><span class="pre">ElementTimes.begin</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.denester.ElementTimes.end"><code class="docutils literal notranslate"><span class="pre">ElementTimes.end</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.element_remover"><code class="xref py py-mod docutils literal notranslate"><span class="pre">element_remover</span></code> Module</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.element_remover.ElementRemoverNode"><code class="docutils literal notranslate"><span class="pre">ElementRemoverNode</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.element_remover.ElementRemoverNode.auto_register_impl"><code class="docutils literal notranslate"><span class="pre">ElementRemoverNode.auto_register_impl()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.element_remover.ElementRemoverNode.process_document"><code class="docutils literal notranslate"><span class="pre">ElementRemoverNode.process_document()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.element_remover.ElementRemoverNode.remove_unwanted_elements"><code class="docutils literal notranslate"><span class="pre">ElementRemoverNode.remove_unwanted_elements()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.node.html#ebu_tt_live.node.element_remover.ElementRemoverNode.remove_unwanted_elements_from_document"><code class="docutils literal notranslate"><span class="pre">ElementRemoverNode.remove_unwanted_elements_from_document()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.scripts.html">scripts Package</a><ul>
@@ -2111,29 +1900,28 @@
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.common.create_loggers"><code class="docutils literal notranslate"><span class="pre">create_loggers()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu-run-module"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_run</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_run</span></code> Module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#basic-usage">Basic usage:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#adjust-existing-config-file">Adjust existing config file:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#help">Help:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.ebu_run.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_dummy_encoder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_dummy_encoder</span></code> Module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.ebu_dummy_encoder.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_interactive_shell"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_interactive_shell</span></code> Module</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.ebu_interactive_shell.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu-interactive-shell-module"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_interactive_shell</span></code> Module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_simple_consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_consumer</span></code> Module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.ebu_simple_consumer.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu-simple-producer-module"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_producer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_simple_producer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_producer</span></code> Module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.ebu_simple_producer.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_user_input_consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_user_input_consumer</span></code> Module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.ebu_user_input_consumer.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#imsc-hrm-validator-module"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imsc_hrm_validator</span></code> Module</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator"><code class="docutils literal notranslate"><span class="pre">imscHrmValidator</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="ebu_tt_live.scripts.html#ebu_tt_live.scripts.imsc_hrm_validator.imscHrmValidator.validate"><code class="docutils literal notranslate"><span class="pre">imscHrmValidator.validate()</span></code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -2273,29 +2061,24 @@
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.ConfigurationError"><code class="docutils literal notranslate"><span class="pre">ConfigurationError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DataCompatError"><code class="docutils literal notranslate"><span class="pre">DataCompatError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DiscardElement"><code class="docutils literal notranslate"><span class="pre">DiscardElement</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DocumentDiscardedError"><code class="docutils literal notranslate"><span class="pre">DocumentDiscardedError</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DocumentDiscardedError.offending_document"><code class="docutils literal notranslate"><span class="pre">DocumentDiscardedError.offending_document</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DocumentDiscardedError"><code class="docutils literal notranslate"><span class="pre">DocumentDiscardedError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DocumentNotLoadedError"><code class="docutils literal notranslate"><span class="pre">DocumentNotLoadedError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.EndOfData"><code class="docutils literal notranslate"><span class="pre">EndOfData</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.ExtentMissingError"><code class="docutils literal notranslate"><span class="pre">ExtentMissingError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.IncompatibleSequenceError"><code class="docutils literal notranslate"><span class="pre">IncompatibleSequenceError</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.InvalidRegionExtentType"><code class="docutils literal notranslate"><span class="pre">InvalidRegionExtentType</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.InvalidRegionOriginType"><code class="docutils literal notranslate"><span class="pre">InvalidRegionOriginType</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.LogicError"><code class="docutils literal notranslate"><span class="pre">LogicError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.OutsideSegmentError"><code class="docutils literal notranslate"><span class="pre">OutsideSegmentError</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.OverlappingActiveElementsError"><code class="docutils literal notranslate"><span class="pre">OverlappingActiveElementsError</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.RegionExtendingOutsideDocumentError"><code class="docutils literal notranslate"><span class="pre">RegionExtendingOutsideDocumentError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.SemanticValidationError"><code class="docutils literal notranslate"><span class="pre">SemanticValidationError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.SequenceNumberCollisionError"><code class="docutils literal notranslate"><span class="pre">SequenceNumberCollisionError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.SequenceOverridden"><code class="docutils literal notranslate"><span class="pre">SequenceOverridden</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.StopBranchIteration"><code class="docutils literal notranslate"><span class="pre">StopBranchIteration</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeFormatError"><code class="docutils literal notranslate"><span class="pre">TimeFormatError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeFormatOverflowError"><code class="docutils literal notranslate"><span class="pre">TimeFormatOverflowError</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeNegativeError"><code class="docutils literal notranslate"><span class="pre">TimeNegativeError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.UnexpectedAuthorsGroupError"><code class="docutils literal notranslate"><span class="pre">UnexpectedAuthorsGroupError</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.UnexpectedSequenceIdentifierError"><code class="docutils literal notranslate"><span class="pre">UnexpectedSequenceIdentifierError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.UnexpectedSequenceIdentifierError"><code class="docutils literal notranslate"><span class="pre">UnexpectedSequenceIdentifierError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.UnexpectedSequenceIdentifierError.message"><code class="docutils literal notranslate"><span class="pre">UnexpectedSequenceIdentifierError.message</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.XMLParsingFailed"><code class="docutils literal notranslate"><span class="pre">XMLParsingFailed</span></code></a></li>
 </ul>
 </li>

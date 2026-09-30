@@ -1014,6 +1014,7 @@ class EBUTT3DocumentSequence(TimelineUtilMixin, CloningDocumentSequence):
         """
         This function gets rid of old documents we do not wish to keep any
         longer.
+
         :param document: The document up to which we would like to discard
                          things
         :return:

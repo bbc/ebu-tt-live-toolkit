@@ -28,6 +28,23 @@ include = [
     { path = "ebu_tt_live.examples/*.json" }
     ]
 
+[tool.setuptools]
+packages = [
+    "ebu_tt_live",
+    "ebu_tt_live.bindings",
+    "ebu_tt_live.clocks",
+    "ebu_tt_live.scripts",
+    "ebu_tt_live.twisted",
+    "ebu_tt_live.node",
+    "ebu_tt_live.documents",
+    "ebu_tt_live.examples",
+    "testing"
+    ]
+include-package-data = true
+
+[tool.setuptools.package-data]
+    "ebu_tt_live.examples" = ['*.txt', '*.json', 'config/*.json']
+
 [project.scripts]
 ebu-dummy-encoder = 'ebu_tt_live.scripts.ebu_dummy_encoder:main'
 ebu-interactive-shell = 'ebu_tt_live.scripts.ebu_interactive_shell:main'
@@ -55,9 +72,10 @@ dev = [
     "mock ~= 5.2.0",
     "sphinx ~= 9.1.0",
     "ruff == 0.16.9",
+    "setuptools == 84.0.0",
 ]
 
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

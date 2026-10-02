@@ -1,16 +1,12 @@
 
-try:
-    from setuptools import setup
-    extra = dict(
-        include_package_data=True,
-        # setup_requires=['pytest-runner']
-    )
-except ImportError:
-    from distutils.core import setup
-    extra = {}
+from setuptools import setup
 
+extra = {
+    "include_package_data": True,
+    # setup_requires=['pytest-runner']
+}
 
-packages=[
+packages =[
     "ebu_tt_live",
     "ebu_tt_live.bindings",
     "ebu_tt_live.clocks",
@@ -23,21 +19,19 @@ packages=[
 
 setup(
     name="ebu-tt-live",
-    version="2.1.3",
+    version="3.1.0",
     description="EBU-TT Part 3 library implementing Specification EBU-3370",
     install_requires=[
-        "PyXB",
+        "pyxb-x=1.2.6.3",
         "ipdb>=0.10.1,<0.10.3",  # This will eventually be removed from here
-        "configobj",
-        "pyyaml",
-        "service_identity",
-        "twisted",
-        "autobahn<18",
-        "nltk<3.5",
-        "sortedcontainers",
-        "configman",
-        "six",
-        "hyperlink<17.2.0"  # This should be removed if https://github.com/python-hyper/hyperlink/issues/16 is fixed
+        "configobj=5.0.9",
+        "pyyaml~=6.0.3",
+        # "service_identity",
+        "twisted~=26.4.0",
+        "autobahn~=26.7.1",
+        "nltk~=3.10.3",
+        # "sortedcontainers",
+        "configmanners @ git+https://github.com/twobraids/configmanners.git@bff28a98cb45dde1b75f52ba3a3ac572a96885eb",
     ],
     license="BSD3",
     packages=packages,

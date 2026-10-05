@@ -10,6 +10,8 @@ jobs:
   docs_and_ui:
     name: Build the Documentation and UI
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
       - name: Skip publishing to GitHub Pages
         env:
@@ -74,7 +76,7 @@ jobs:
           echo "This is NOT a push to master branch, not pushing to github-pages"
           echo "ref is ${{ env.GITHUB_REF }}"
       - name: Build notification
-        if: always()
+        if: always() && env.SLACK_WEBHOOK_URL != ''
         uses: edge/simple-slack-notify@v1.1.2
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

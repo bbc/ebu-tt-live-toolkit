@@ -16,7 +16,7 @@ test:
 	uv run pytest
 
 docs:
-	uv run sphinx-build -b docs/source docs/build
+	uv run sphinx-build -b html docs/source docs/build
 
 bindings:
 	uv run pyxbgen --binding-root=. -m __init__ --schema-root=./ebu_tt_live/xsd/ -r -u ebutt_all.xsd --module-prefix=ebu_tt_live.bindings

@@ -38,6 +38,7 @@ packages = [
     "ebu_tt_live.node",
     "ebu_tt_live.documents",
     "ebu_tt_live.examples",
+    "ebu_tt_live.examples.config",
     "testing"
     ]
 include-package-data = true

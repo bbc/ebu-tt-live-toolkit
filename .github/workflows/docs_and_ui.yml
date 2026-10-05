@@ -56,7 +56,7 @@ jobs:
           uv build
       - name: Build the documentation
         run: |
-          uv run sphinx-build -a docs/source docs/build
+          uv run sphinx-build -b docs/source docs/build
       - name: Publish to GitHub Pages
         env:
           GITHUB_REF: ${{ github.ref }}

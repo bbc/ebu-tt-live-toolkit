@@ -30,6 +30,10 @@ jobs:
         run:
           uv run pytest
         shell: bash
+      - name: Create coverage file
+        run:
+          uv run coverage xml
+        shell: bash
       - name: Install coveralls
         run: |
           pip install "coveralls<2"

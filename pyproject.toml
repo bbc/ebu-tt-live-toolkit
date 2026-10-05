@@ -59,7 +59,7 @@ validator = 'ebu_tt_live.scripts.validator:main'
 [dependency-groups]
 dev = [
     "coverage == 7.16.2",
-    "coveralls>=4.1.0",
+    "coveralls >= 4.1.0",
     "ipython == 9.17.1",
     "Jinja2 ~= 3.1.6",
     "mock ~= 5.2.0",

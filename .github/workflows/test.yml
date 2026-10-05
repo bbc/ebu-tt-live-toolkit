@@ -30,10 +30,6 @@ jobs:
         run:
           uv run pytest
         shell: bash
-      # - name: Create coverage file
-      #   run:
-      #     uv run coverage xml
-      #   shell: bash
       - name: Coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

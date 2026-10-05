@@ -3,7 +3,7 @@
 Feature: Value types from 3350
 
   # SPEC-CONFORMANCE: R93
-  Scenario: Valid colour values
+  Scenario Outline: Valid colour values
     Given an xml file "3350_value_types.xml"
     When it has tts:color attribute with value <color>
     Then document is valid
@@ -16,7 +16,7 @@ Feature: Value types from 3350
     | #000000         |
     | #000000FF       |
 
-  Scenario: Invalid colour values
+  Scenario Outline: Invalid colour values
     Given an xml file "3350_value_types.xml"
     When it has tts:color attribute with value <color>
     Then document is invalid

@@ -2,8 +2,6 @@
 
 Feature: Segmentation of document sequence
 
-  Examples:
-
   Scenario Outline: Get parts of sequence
     Given an xml file "segmentation_short.xml"
     And a sequence with the following identifier and timeBase

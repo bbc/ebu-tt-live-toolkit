@@ -8,8 +8,8 @@ Feature: BufferDelayNode
   # carriage delay would be added. This would not be correct.
   # BufferDelay.emission_time - BufferDelay.availability_time >= delay_offset
 
-  Scenario: BufferDelayNode delays emission by no less than the delay period
-    Given an xml file delayNode.xml
+  Scenario Outline: BufferDelayNode delays emission by no less than the delay period
+    Given an xml file "delayNode.xml"
     And the document is generated
     And the buffer delay node delays it by <delay_offset>
     And the document is emitted

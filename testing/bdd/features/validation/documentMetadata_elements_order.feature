@@ -4,8 +4,8 @@ Feature: Document metadata elements order
   ebuttm:intendedDestinationServiceIdentifier, ebuttm:documentFacet, ebuttm:trace
 
   # SPEC-CONFORMANCE: R38 R39
-  Scenario: Valid documentMetadata elements order
-    Given an xml file documentMetadata_elements_order.xml
+  Scenario Outline: Valid documentMetadata elements order
+    Given an xml file "documentMetadata_elements_order.xml"
     When it has documentMetadata 1 <document_metadata_1>
     And it has documentMetadata 2 <document_metadata_2>
     And it has documentMetadata 3 <document_metadata_3>
@@ -22,8 +22,8 @@ Feature: Document metadata elements order
 
 
   # SPEC-CONFORMANCE: R38 R39
-  Scenario: Invalid documentMetadata elements order
-    Given an xml file documentMetadata_elements_order.xml
+  Scenario Outline: Invalid documentMetadata elements order
+    Given an xml file "documentMetadata_elements_order.xml"
     When it has documentMetadata 1 <document_metadata_1>
     And it has documentMetadata 2 <document_metadata_2>
     And it has documentMetadata 3 <document_metadata_3>

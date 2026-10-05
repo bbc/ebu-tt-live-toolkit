@@ -7,7 +7,7 @@ Feature: ttp:timeBase attribute is mandatory
 
   # SPEC-CONFORMANCE: R32
   Scenario Outline: Invalid ttp:timeBase
-    Given an xml file timeBase_attribute_mandatory.xml
+    Given an xml file "timeBase_attribute_mandatory.xml"
     When it has ttp:timeBase attribute <time_base>
     Then document is invalid
 
@@ -21,7 +21,7 @@ Feature: ttp:timeBase attribute is mandatory
 
   # SPEC-CONFORMANCE: R32
   Scenario Outline: Valid ttp:timeBase
-    Given an xml file timeBase_attribute_mandatory.xml
+    Given an xml file "timeBase_attribute_mandatory.xml"
     When it has ttp:timeBase attribute <time_base>
     Then document is valid
 

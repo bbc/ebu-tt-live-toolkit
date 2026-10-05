@@ -5,8 +5,8 @@ Feature: Facet
   # SPEC-CONFORMANCE: R26 R66 R67
   # skipped because the semantic validation does not check facets yet
   @skip
-  Scenario: Invalid term identifier
-    Given an xml file facet.xml
+  Scenario Outline: Invalid term identifier
+    Given an xml file "facet.xml"
     When it has facet1 applied to element <parent1>
     And facet1 has attribute <link1>
     And facet1 contains string <term1>
@@ -20,8 +20,8 @@ Feature: Facet
     | body    | http://link1.com | string1 | body    | http://link1.com | string1 |
 
 
-  Scenario: Valid term identifier
-    Given an xml file facet.xml
+  Scenario Outline: Valid term identifier
+    Given an xml file "facet.xml"
     When it has facet1 applied to element <parent1>
     And facet1 has attribute <link1>
     And facet1 contains string <term1>
@@ -38,8 +38,8 @@ Feature: Facet
 
 
   # SPEC-CONFORMANCE: R27 R28 R29 R30
-  Scenario: Valid Facet Summary
-    Given an xml file facet.xml
+  Scenario Outline: Valid Facet Summary
+    Given an xml file "facet.xml"
     When it has element facet1 with attribute <expresses1>
     And it has element facet2 with attribute <expresses2>
     And it has element facet3 with attribute <expresses3>
@@ -56,8 +56,8 @@ Feature: Facet
     | unknown    | unknown    | unknown    | unspecified |
 
 
-  Scenario: Invalid Facet Summary
-    Given an xml file facet.xml
+  Scenario Outline: Invalid Facet Summary
+    Given an xml file "facet.xml"
     When it has element facet1 with attribute <expresses1>
     And it has element facet2 with attribute <expresses2>
     And it has element facet3 with attribute <expresses3>

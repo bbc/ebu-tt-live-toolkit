@@ -4,19 +4,12 @@ Feature: Computed times computation
   # This tests mostly operates on document computed begin and end times. It does not deal with active duration of
   # child elements.
 
-  Scenario Outline:
-
-  Examples:
-  | xml_file                                       | sequence_identifier | sequence_number |  
-  | computed_resolved_time_semantics_empty_doc.xml | testSequence1       | 1               |  
-
-
-  # A document without <body>. This means no timings at all in the document since the <body> is the topmost element that accepts timing attributes.  
+  # A document without <body> means no timings at all in the document since the <body> is the topmost element that accepts timing attributes.  
   # From TTML1: 
   # "The Root Temporal Extent, i.e., the time interval over which a Document Instance is active, 
   # has an implicit duration that is equal to ... zero if the body element is absent." 
-  Scenario: Computed times of a document with empty body
-    Given an xml file computed_resolved_time_semantics_empty_doc.xml
+  Scenario Outline: Computed times of a document with empty body
+    Given an xml file "computed_resolved_time_semantics_empty_doc.xml"
     And it has sequenceIdentifier testSequence1
     And it has timeBase <time_base>
     And it has sequenceNumber 1

@@ -22,7 +22,7 @@ Feature: Discard document with already seen pair of sequence identifier and sequ
     | 1        | 1       | 1        | 1       |  
 
 
-  Scenario: Do not discard document
+  Scenario Outline: Do not discard document
     Given an xml file "sequence_id_num.xml"
     And a processing node
     When it has sequence identifier <seq_id_1>
@@ -42,7 +42,7 @@ Feature: Discard document with already seen pair of sequence identifier and sequ
 
 
   # SPEC-CONFORMANCE: R108
-  Scenario: Availability time unchanged when discarding
+  Scenario Outline: Availability time unchanged when discarding
     Given an xml file "sequence_id_num.xml"
     And a processing node
     When it has sequence identifier <seq_id_1>

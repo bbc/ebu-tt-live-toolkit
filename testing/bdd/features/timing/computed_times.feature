@@ -4,15 +4,9 @@ Feature: Computed times computation
   # This tests mostly operates on document computed begin and end times. It does not deal with active duration of
   # child elements.
 
-  Scenario Outline:
-
-  Examples:
-  | xml_file                             | sequence_identifier | sequence_number | no_body |
-  | computed_resolved_time_semantics.xml | testSequence1       | 1               |         |
-
   # SPEC-CONFORMANCE: R16 R17 R132
-  Scenario: Computed times of a document
-    Given an xml file computed_resolved_time_semantics.xml
+  Scenario Outline: Computed times of a document
+    Given an xml file "computed_resolved_time_semantics.xml"
     And example_line is <l>
     And it has sequenceIdentifier testSequence1
     And it has timeBase <time_base>

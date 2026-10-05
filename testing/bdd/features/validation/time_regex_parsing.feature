@@ -4,7 +4,7 @@ Feature: Regex parsing TimecountTimingType values
 
   # SPEC-CONFORMANCE:
   Scenario Outline: Valid times according to timeBase
-    Given an xml file time_regex_parsing.xml
+    Given an xml file "time_regex_parsing.xml"
     When it has timeBase <time_base>
     And it has body begin time <body_begin>
     Then timedelta value given when reading body.begin should be <h> <m> <s> <ms>

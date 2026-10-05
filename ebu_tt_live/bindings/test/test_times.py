@@ -43,9 +43,10 @@ class TestTimecountTimingType(TestCase):
 
     def test_as_timedelta(self):
         for t, td in self._test_cases.items():
-            test_instance = self._type_class(t)
-            self.assertEqual(test_instance.timedelta, td)
-            assert test_instance == t
+            with self.subTest(t=t, td=td):
+                test_instance = self._type_class(t)
+                self.assertEqual(test_instance.timedelta, td)
+                assert test_instance == t
 
 
 class TestFullClockTimingType(TestCase):
@@ -72,9 +73,10 @@ class TestFullClockTimingType(TestCase):
 
     def test_as_timedelta(self):
         for t, td in self._test_cases.items():
-            test_instance = self._type_class(t)
-            self.assertEqual(test_instance.timedelta, td)
-            assert test_instance == t
+            with self.subTest(t=t, td=td):
+                test_instance = self._type_class(t)
+                self.assertEqual(test_instance.timedelta, td)
+                assert test_instance == t
 
 
 class TestLimitedClockTimingType(TestCase):
@@ -101,6 +103,7 @@ class TestLimitedClockTimingType(TestCase):
 
     def test_as_timedelta(self):
         for t, td in self._test_cases.items():
-            test_instance = self._type_class(t)
-            self.assertEqual(test_instance.timedelta, td)
-            assert test_instance == t
+            with self.subTest(t=t, td=td):
+                test_instance = self._type_class(t)
+                self.assertEqual(test_instance.timedelta, td)
+                assert test_instance == t

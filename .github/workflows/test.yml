@@ -30,19 +30,16 @@ jobs:
         run:
           uv run pytest
         shell: bash
-      - name: Create coverage file
-        run:
-          uv run coverage xml
-        shell: bash
-      - name: Install coveralls
-        run: |
-          pip install "coveralls<2"
-        shell: bash
+      # - name: Create coverage file
+      #   run:
+      #     uv run coverage xml
+      #   shell: bash
       - name: Coveralls
-        uses: coverallsapp/github-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: |
+          uv run coveralls
       - name: Build notification
         if: always() && env.SLACK_WEBHOOK_URL != ''
         uses: edge/simple-slack-notify@v1.1.2

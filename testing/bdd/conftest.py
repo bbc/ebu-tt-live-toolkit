@@ -1,6 +1,4 @@
 import os
-from collections.abc import Callable
-from typing import ParamSpec, TypeVar
 
 import pytest
 from jinja2 import Environment, FileSystemLoader
@@ -14,13 +12,14 @@ from ebu_tt_live.bindings._ebuttdt import (
 )
 from ebu_tt_live.clocks.local import LocalMachineClock
 from ebu_tt_live.clocks.media import MediaClock
-from ebu_tt_live.documents import EBUTT3Document, EBUTT3DocumentSequence, EBUTTDDocument
-
-P = ParamSpec("P")
-T = TypeVar("T")
-
+from ebu_tt_live.documents import (
+    EBUTT3Document,
+    EBUTT3DocumentSequence,
+    EBUTTDDocument,
+)
 
 # Utility functions
+
 
 def empty_to_none(value):
     """
@@ -72,58 +71,6 @@ def legacy_name(
         }
 
 
-def legacy_step(func: Callable[[Callable[P, T]], Callable[P, T]]) \
-        -> Callable[[Callable[P, T]], Callable[P, T]]:
-    """ Legacy step decorator for converting old style step definitions
-    into ones that will work with new style ones """
-    def name_to_variables_and_re_parser(
-            name: str) -> tuple[list[str], parsers.StepParser]:
-        # Gather the variables and
-        # convert from "the <x> and the <y>" to
-        # parsers.re("the (?P<x>.*?) and the (?P<y>.*?)")
-        variables: list[str] = []
-        start_pos: int = name.find('<') + 1
-        while start_pos != 0:
-            end_pos = name.find('>', start_pos)
-            if end_pos == -1:
-                break
-            variable = name[start_pos:end_pos]
-            variables.append(variable)
-
-            start_pos = name.find('<', end_pos) + 1
-
-        for variable in variables:
-            name = name.replace(
-                f'<{variable}>',
-                f'[<]?(?P<{variable}>[^<>]*)[>]?')
-
-        return variables, parsers.re(name=name)
-
-    def wrapper(*args, **kwargs):  # name is the first arg in args
-        name = args[0]
-        # print(f"wrapper called with args {args}")
-        variables, step = \
-            name_to_variables_and_re_parser(name)
-        args = (step, *args[1:])
-        converters = kwargs.get('converters', {})
-        for variable in variables:
-            converters[variable] = empty_to_none
-        kwargs['converters'] = converters
-
-        # print(f"returning args {args}")
-        rv = func(*args, **kwargs)
-        return rv
-
-    # print(f'wrapping {getattr(func, "__name__", "unknown function")}')
-    return wrapper
-
-
-# @legacy_step
-# @given(parsers.parse('an xml file <xml_file>'), target_fixture='template_file')
-# @given(
-#     name=parsers.re('an xml file [<]?(?P<xml_file>[^<>]*)[>]?'),
-#     converters={'xml_file': empty_to_none},
-#     target_fixture='template_file')
 @given(
     **legacy_name(name='an xml file <xml_file>'),
     target_fixture='template_file')
@@ -133,8 +80,9 @@ def legacy_step(func: Callable[[Callable[P, T]], Callable[P, T]]) \
 def template_file(xml_file: str):
     xml_file = xml_file.strip('"')
     cur_dir = os.path.dirname(os.path.abspath(__file__))
-    j2_env = Environment(loader=FileSystemLoader(os.path.join(cur_dir, 'templates')),
-                         trim_blocks=True)
+    j2_env = Environment(
+        loader=FileSystemLoader(os.path.join(cur_dir, 'templates')),
+        trim_blocks=True)
     return j2_env.get_template(xml_file)
 
 
@@ -152,50 +100,45 @@ def template_file_with_variables(datatable, template_dict):
     template_dict.update(data)
 
 
-# @pytest.fixture(name='template_file')
-# def template_file_fixture(xml_file):
-#     """
-#     The XML file to use as a template for the scenario
-#     """
-#     return template_file(xml_file)
-
-
-# @legacy_step
 @given(
     **legacy_name(name='a first xml file <xml_file_1>'),
     target_fixture='template_file_one')
 def template_file_one(xml_file_1):
     cur_dir = os.path.dirname(os.path.abspath(__file__))
-    j2_env = Environment(loader=FileSystemLoader(os.path.join(cur_dir, 'templates')),
-                         trim_blocks=True)
+    j2_env = Environment(
+        loader=FileSystemLoader(os.path.join(cur_dir, 'templates')),
+        trim_blocks=True)
     return j2_env.get_template(xml_file_1)
 
 
-# @legacy_step
 @then(
     **legacy_name(name='a second xml file <xml_file_2>'),
     target_fixture='template_file_two')
 def template_file_two(xml_file_2):
     cur_dir = os.path.dirname(os.path.abspath(__file__))
-    j2_env = Environment(loader=FileSystemLoader(os.path.join(cur_dir, 'templates')),
-                         trim_blocks=True)
+    j2_env = Environment(
+        loader=FileSystemLoader(os.path.join(cur_dir, 'templates')),
+        trim_blocks=True)
     return j2_env.get_template(xml_file_2)
+
 
 # Calling fixtures directly is deprecated, this solution described at
 # https://docs.pytest.org/en/latest/deprecations.html#calling-fixtures-directly
 # seems to work, creating a named fixture rather than defining the "then"
 # step as a fixture directly.
-# NM commented out 2026-06-29 to see if the above target_fixture allows this to work without the additional fixture definition
 @pytest.fixture(name='template_file_two')
 def template_file_two_fixture(xml_file_2):
     return template_file_two(xml_file_2)
 
-# NOTE: Some of the code below includes handling of SMPTE time base, which was removed from version 1.0 of the specification.
+# NOTE: Some of the code below includes handling of SMPTE time base, which was
+# removed from version 1.0 of the specification.
 
 
-@given(**legacy_name(name='a sequence with the following identifier and timeBase'), target_fixture='sequence')
+@given(
+    **legacy_name(
+        name='a sequence with the following identifier and timeBase'),
+    target_fixture='sequence')
 def sequence(datatable):
-    # print(f"given a sequence with the following identifier and timeBase/ndatatable {datatable}")
     keys = datatable[0]
     values = datatable[1]
     data = dict(zip(keys, values))
@@ -208,7 +151,11 @@ def sequence(datatable):
         ref_clock = MediaClock()
     elif time_base == 'smpte':
         raise NotImplementedError()
-    sequence = EBUTT3DocumentSequence(sequence_identifier, ref_clock, 'en-GB', verbose=True)
+    sequence = EBUTT3DocumentSequence(
+        sequence_identifier,
+        ref_clock,
+        'en-GB',
+        verbose=True)
     return sequence
 
 
@@ -239,7 +186,7 @@ def valid_second_doc(template_file_two, template_dict):
 def invalid_doc(template_file, template_dict):
     xml_file = template_file.render(template_dict)
     # print(f"xml_file: \n{xml_file}")
-    with pytest.raises(Exception):
+    with pytest.raises(Exception):  # noqa: B017
         EBUTT3Document.create_from_xml(xml_file)
 
 
@@ -276,6 +223,7 @@ def gen_first_document(test_context, template_dict, template_file_one):
     document1.validate()
     return document1
 
+
 @then('the second document is generated', target_fixture='gen_second_document')
 def gen_second_document(test_context, template_dict, template_file_two):
     xml_file_2 = template_file_two.render(template_dict)
@@ -290,7 +238,10 @@ def gen_second_document(test_context, template_dict, template_file_two):
 # seems to work, creating a named fixture rather than defining the "then"
 # step as a fixture directly.
 @pytest.fixture(name='gen_second_document')
-def gen_second_document_fixture(test_context, template_dict, template_file_two):
+def gen_second_document_fixture(
+        test_context,
+        template_dict,
+        template_file_two):
     return gen_second_document(test_context, template_dict, template_file_two)
 
 
@@ -311,18 +262,20 @@ def timestr_to_timedelta(time_str, time_base):
         raise NotImplementedError('SMPTE needs implementation')
 
 
-# @legacy_step
 @then(**legacy_name(name='it has computed begin time <computed_begin>'))
 def valid_computed_begin_time(computed_begin, gen_document):
-    computed_begin_timedelta = timestr_to_timedelta(computed_begin, gen_document.time_base)
+    computed_begin_timedelta = timestr_to_timedelta(
+        computed_begin,
+        gen_document.time_base)
     assert gen_document.computed_begin_time == computed_begin_timedelta
 
 
-# @legacy_step
 @then(**legacy_name(name='it has computed end time <computed_end>'))
 def valid_computed_end_time(computed_end, gen_document):
     if computed_end:
-        computed_end_timedelta = timestr_to_timedelta(computed_end, gen_document.time_base)
+        computed_end_timedelta = timestr_to_timedelta(
+            computed_end,
+            gen_document.time_base)
     else:
         computed_end_timedelta = None
     assert gen_document.computed_end_time == computed_end_timedelta
@@ -336,7 +289,8 @@ def valid_computed_end_time(computed_end, gen_document):
 
 computed_style_attribute_casting = {
     'tts:fontSize': CellFontSizeType,
-    'tts:direction': str,  # String is good enough PyXB is smart and figures out the types for us
+    'tts:direction': str,  # String is good enough PyXB is smart and figures
+                           # out the types for us
     'tts:color': str,
     'tts:fontFamily': str,
     'tts:fontStyle': str,
@@ -353,7 +307,6 @@ computed_style_attribute_casting = {
 }
 
 
-# @legacy_step
 @then(**legacy_name(
     name='the computed <style_attribute> in <elem_id> is <computed_value>'))
 def then_computed_style_value_is(
@@ -361,24 +314,26 @@ def then_computed_style_value_is(
     document = test_context['document']
     elem = document.get_element_by_id(elem_id)
     if computed_value:
-        assert elem.computed_style.get_attribute_value(style_attribute) == computed_style_attribute_casting[style_attribute](computed_value)
+        assert elem.computed_style.get_attribute_value(style_attribute) == \
+            computed_style_attribute_casting[style_attribute](computed_value)
     else:
         assert elem.computed_style.get_attribute_value(style_attribute) is None
 
 
-# @legacy_step
 @given(
     **legacy_name(name='it has availability time <avail_time>'),
     target_fixture='given_avail_time')
 def given_avail_time(avail_time, template_dict, gen_document):
-    gen_document.availability_time = timestr_to_timedelta(avail_time, gen_document.time_base)
+    gen_document.availability_time = timestr_to_timedelta(
+        avail_time,
+        gen_document.time_base)
 
 
 @pytest.fixture
 def template_dict():
-    return dict()
+    return {}
 
 
 @pytest.fixture
 def test_context():
-    return dict()
+    return {}

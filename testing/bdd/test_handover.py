@@ -13,21 +13,9 @@ scenarios('features/handover/handover_algorithm.feature')
 scenarios('features/handover/handover.feature')
 
 
-# @given(**legacy_name(
-#     name='a handover node with <authors_group_identifier> and <sequence_identifier>'))
-# def given_handover_node(authors_group_identifier, sequence_identifier):
-#     carriage = MagicMock(spec=IProducerCarriage)
-#     carriage.expects.return_value = EBUTT3Document
-#     instance = handover_node.HandoverNode(
-#         node_id='testHandoverNode',
-#         authors_group_identifier=authors_group_identifier,
-#         sequence_identifier=sequence_identifier,
-#         producer_carriage=carriage
-#     )
-#     return instance
-
-
-@given('a handover node with the following details:', target_fixture='given_handover_node')
+@given(
+    'a handover node with the following details:',
+    target_fixture='given_handover_node')
 # def given_handover_node(authors_group_identifier, sequence_identifier):
 def _(datatable):
     keys = datatable[0]
@@ -65,38 +53,26 @@ def when_authors_group_id(template_dict, given_handover_node, authors_group_iden
     # <authors_group_identifier> was provided in the earlier data table
     template_dict['authors_group_identifier'] = \
         given_handover_node['authors_group_identifier']
-    print(f"it has <authors_group_identifier> with authors_group_identifier = '{authors_group_identifier}'")
-    print(f"template_dict = {template_dict}")
-    print(f"given_handover_node = {given_handover_node}")
+    # print(f"it has <authors_group_identifier> with authors_group_identifier = '{authors_group_identifier}'")
+    # print(f"template_dict = {template_dict}")
+    # print(f"given_handover_node = {given_handover_node}")
 
 
 @when(**legacy_name(name='it has new authors group identifier <authors_group_identifier>'))
 def when_authors_group_id1(template_dict, authors_group_identifier):
-    print(f'when it has new authors group identifier <authors_group_identifier> with value "{authors_group_identifier}')
+    # print(f'when it has new authors group identifier <authors_group_identifier> with value "{authors_group_identifier}')
     template_dict['authors_group_identifier'] = authors_group_identifier
-
-
-# @when(**legacy_name(name='it has authors group identifier <authors_group_identifier2>'))
-# def when_authors_group_id2(template_dict, authors_group_identifier2):
-#     print(f'when it has authors group identifier <authors_group_identifier2> with value "{authors_group_identifier2}')
-#     template_dict['authors_group_identifier'] = authors_group_identifier2
 
 
 @when(**legacy_name(name='it has authors group control token <authors_group_control_token1>'))
 def when_authors_group_token1(template_dict, authors_group_control_token1):
-    print(f'when it has <authors_group_control_token1> with value "{authors_group_control_token1}')
+    # print(f'when it has <authors_group_control_token1> with value "{authors_group_control_token1}')
     template_dict['authors_group_control_token'] = authors_group_control_token1
-
-
-# @when(**legacy_name(name='it has authors group control token <authors_group_control_token2>'))
-# def when_authors_group_token2(template_dict, authors_group_control_token2):
-#     print(f'when it has authors group control token <authors_group_control_token2> with value "{authors_group_control_token2}')
-#     template_dict['authors_group_control_token'] = authors_group_control_token2
 
 
 @when('new document is created')
 def new_doc_created(template_dict):
-    print('new document is created')
+    # print('new document is created')
     template_dict.clear()
 
 
@@ -107,14 +83,14 @@ def new_document(test_context, given_handover_node):
 
 @then(**legacy_name(name='handover node emits <emitted_documents> documents'))
 def then_handover_node_emits(given_handover_node, emitted_documents):
-    print("then_handover_node_emits()")
-    print(f"given_handover_node = {given_handover_node}")
+    # print("then_handover_node_emits()")
+    # print(f"given_handover_node = {given_handover_node}")
     assert given_handover_node['node'].producer_carriage.emit_data.call_count == int(emitted_documents)
 
 
 @then('handover node errors when processing document')
 def then_handover_node_errors(given_handover_node, test_context):
-    with pytest.raises(Exception):
+    with pytest.raises(Exception):  # noqa: B017
         given_handover_node['node'].process_document(test_context['document'])
 
 

@@ -43,7 +43,7 @@ extensions = [
 ]
 
 # Tell Sphinx where plantUML is:
-plantuml = 'java -jar ../contrib/plantuml.jar'
+plantuml = 'java -jar ../contrib/plantuml-mit-1.2026.8.jar'
 plantuml_output_format = 'png'
 
 # Add any paths that contain templates here, relative to this directory.

@@ -207,7 +207,7 @@ class TwistedWSPushProducer:
         for conn in self._connections:
             conn.sendSequenceMessage(
                 sequence_identifier=sequence_identifier,
-                payload=data.encode("utf-8")
+                payload=data
             )
 
     def resumeProducing(self):

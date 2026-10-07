@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to EBU-TT-Live Toolkit’s documentation! &mdash; EBU-TT-Live Toolkit 3.1.0 documentation</title>
+  <title>Welcome to EBU-TT-Live Toolkit’s documentation! &mdash; EBU-TT-Live Toolkit v3.1.0  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -14,7 +14,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=dd1205ac"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -32,7 +32,7 @@
           
           
           <a href="#" class="icon icon-home">
-            EBU-TT-Live Toolkit
+            EBU-TT-Live Toolkit v3.1.0
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -42,9 +42,209 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nodes_and_carriage_mechanisms.html">Nodes and Carriage Mechanisms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nodes_and_carriage_mechanisms.html#processing-nodes">Processing Nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nodes_and_carriage_mechanisms.html#carriage-mechanisms">Carriage mechanisms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filesystem_carriage_mechanism.html">Filesystem Carriage Mechanism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="websocket_carriage_mechanism.html">WebSocket Carriage Mechanism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="direct_carriage_mechanism.html">Direct Carriage Mechanism</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scripts_and_their_functions.html">Scripts and their functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#the-ebu-run-script">The ebu-run script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#simple-producer">Simple Producer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#simple-consumer">Simple consumer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#user-input-producer">User Input Producer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#distributor">Distributor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#handover-manager">Handover Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#buffer-delay-node">Buffer Delay Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#deduplicator-node">DeDuplicator Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#resequencer-node">Resequencer Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#retiming-delay-node">Retiming Delay Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts_and_their_functions.html#ebu-tt-d-encoder">EBU-TT-D Encoder</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configurator.html">Configuration files and <code class="docutils literal notranslate"><span class="pre">ebu-run</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configurator.html#the-configuration-file-structure">The configuration file structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="validation.html">Document and sequence validation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="validation_framework.html">Validation framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_framework.html#semantic-parser-patch">Semantic parser patch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_input_producer.html">User input producer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_input_producer.html#demo">Demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_input_producer.html#handover-manager">Handover Manager</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="timing_resolution.html">Timing resolution and consumer logic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="timing_resolution.html#document-timings">Document Timings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timing_resolution.html#sequence-timings">Sequence Timings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="segmentation.html">Segmentation of EBU-TT-Live document sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deduplication.html">DeDuplication of EBU-TT-Live documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion.html">Conversion of EBU-TT-Live documents to EBU-TT-D documents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="conversion.html#the-problem">The problem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="conversion.html#percentages-and-the-em-square">Percentages and the EM square</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="conversion.html#the-solution">The solution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebu_tt_live.html">Source code reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#layout-of-the-source-files">Layout of the source files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.bindings.html">bindings Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bindings</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ebuttdt"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ebuttdt</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ebuttm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ebuttm</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ebuttp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ebuttp</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ebutts"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ebutts</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ttm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ttm</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._ttp"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_ttp</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings._tts"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_tts</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#module-ebu_tt_live.bindings.pyxb_utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyxb_utils</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.bindings.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.carriage.html">carriage Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.carriage.html#module-ebu_tt_live.carriage.interface"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interface</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.carriage.html#module-ebu_tt_live.carriage.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">base</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.carriage.html#module-ebu_tt_live.carriage.direct"><code class="xref py py-mod docutils literal notranslate"><span class="pre">direct</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.carriage.html#module-ebu_tt_live.carriage.filesystem"><code class="xref py py-mod docutils literal notranslate"><span class="pre">filesystem</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.carriage.html#module-ebu_tt_live.carriage.websocket"><code class="xref py py-mod docutils literal notranslate"><span class="pre">websocket</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.clocks.html">clocks Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.clocks.html#module-ebu_tt_live.clocks.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">base</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.clocks.html#module-ebu_tt_live.clocks.local"><code class="xref py py-mod docutils literal notranslate"><span class="pre">local</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.clocks.html#module-ebu_tt_live.clocks.media"><code class="xref py py-mod docutils literal notranslate"><span class="pre">media</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.config.html">config Package - Component configurators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.backend"><code class="xref py py-mod docutils literal notranslate"><span class="pre">backend</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.node"><code class="xref py py-mod docutils literal notranslate"><span class="pre">node</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.carriage"><code class="xref py py-mod docutils literal notranslate"><span class="pre">carriage</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.adapters"><code class="xref py py-mod docutils literal notranslate"><span class="pre">adapters</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.clocks"><code class="xref py py-mod docutils literal notranslate"><span class="pre">clocks</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.config.html#module-ebu_tt_live.config.common"><code class="xref py py-mod docutils literal notranslate"><span class="pre">common</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.documents.html">documents Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">documents</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">base</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.ebutt3"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.ebutt3_segmentation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_segmentation</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.ebutt3_splicer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebutt3_splicer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.bindings.converters.ebutt3_ebuttd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bindings_converters</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.converters"><code class="xref py py-mod docutils literal notranslate"><span class="pre">document_converters</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.documents.html#module-ebu_tt_live.documents.ebuttd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebuttd</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.examples.html">examples Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.examples.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">examples</span></code> Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.node.html">node Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">node</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.interface"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interface</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">base</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">consumer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.producer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">producer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.encoder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">encoder</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.delay"><code class="xref py py-mod docutils literal notranslate"><span class="pre">delay</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.distributing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">distributing</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.handover"><code class="xref py py-mod docutils literal notranslate"><span class="pre">handover</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.node.html#module-ebu_tt_live.node.deduplicator"><code class="xref py py-mod docutils literal notranslate"><span class="pre">deduplicator</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.scripts.html">scripts Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.common"><code class="xref py py-mod docutils literal notranslate"><span class="pre">common</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_run</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_dummy_encoder"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_dummy_encoder</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_interactive_shell"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_interactive_shell</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_simple_consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_consumer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_simple_producer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_simple_producer</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.scripts.html#module-ebu_tt_live.scripts.ebu_user_input_consumer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ebu_user_input_consumer</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.twisted.html">twisted Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.twisted.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">twisted</span></code> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.twisted.html#module-ebu_tt_live.twisted.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">base</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.twisted.html#module-ebu_tt_live.twisted.node"><code class="xref py py-mod docutils literal notranslate"><span class="pre">node</span></code> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.twisted.html#module-ebu_tt_live.twisted.websocket"><code class="xref py py-mod docutils literal notranslate"><span class="pre">websocket</span></code> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.errors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errors</span></code> Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.ComponentCompatError"><code class="docutils literal notranslate"><span class="pre">ComponentCompatError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.ConfigurationError"><code class="docutils literal notranslate"><span class="pre">ConfigurationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DataCompatError"><code class="docutils literal notranslate"><span class="pre">DataCompatError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DiscardElement"><code class="docutils literal notranslate"><span class="pre">DiscardElement</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DocumentDiscardedError"><code class="docutils literal notranslate"><span class="pre">DocumentDiscardedError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.DocumentNotLoadedError"><code class="docutils literal notranslate"><span class="pre">DocumentNotLoadedError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.EndOfData"><code class="docutils literal notranslate"><span class="pre">EndOfData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.ExtentMissingError"><code class="docutils literal notranslate"><span class="pre">ExtentMissingError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.IncompatibleSequenceError"><code class="docutils literal notranslate"><span class="pre">IncompatibleSequenceError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.LogicError"><code class="docutils literal notranslate"><span class="pre">LogicError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.OutsideSegmentError"><code class="docutils literal notranslate"><span class="pre">OutsideSegmentError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.SemanticValidationError"><code class="docutils literal notranslate"><span class="pre">SemanticValidationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.SequenceNumberCollisionError"><code class="docutils literal notranslate"><span class="pre">SequenceNumberCollisionError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.SequenceOverridden"><code class="docutils literal notranslate"><span class="pre">SequenceOverridden</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.StopBranchIteration"><code class="docutils literal notranslate"><span class="pre">StopBranchIteration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeFormatError"><code class="docutils literal notranslate"><span class="pre">TimeFormatError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.TimeFormatOverflowError"><code class="docutils literal notranslate"><span class="pre">TimeFormatOverflowError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.UnexpectedAuthorsGroupError"><code class="docutils literal notranslate"><span class="pre">UnexpectedAuthorsGroupError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.UnexpectedSequenceIdentifierError"><code class="docutils literal notranslate"><span class="pre">UnexpectedSequenceIdentifierError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.UnexpectedSequenceIdentifierError.message"><code class="docutils literal notranslate"><span class="pre">UnexpectedSequenceIdentifierError.message</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.errors.XMLParsingFailed"><code class="docutils literal notranslate"><span class="pre">XMLParsingFailed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.strings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">strings</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebu_tt_live.html#module-ebu_tt_live.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code> Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.AbstractStaticMember"><code class="docutils literal notranslate"><span class="pre">AbstractStaticMember</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.AbstractStaticMember.validate"><code class="docutils literal notranslate"><span class="pre">AbstractStaticMember.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.AnyType"><code class="docutils literal notranslate"><span class="pre">AnyType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.AutoRegisteringABCMeta"><code class="docutils literal notranslate"><span class="pre">AutoRegisteringABCMeta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.ComparableMixin"><code class="docutils literal notranslate"><span class="pre">ComparableMixin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.RingBufferWithCallback"><code class="docutils literal notranslate"><span class="pre">RingBufferWithCallback</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.RingBufferWithCallback.append"><code class="docutils literal notranslate"><span class="pre">RingBufferWithCallback.append()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.RotatingFileBuffer"><code class="docutils literal notranslate"><span class="pre">RotatingFileBuffer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.RotatingFileBuffer.append"><code class="docutils literal notranslate"><span class="pre">RotatingFileBuffer.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.RotatingFileBuffer.delete_file"><code class="docutils literal notranslate"><span class="pre">RotatingFileBuffer.delete_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.RotatingFileBufferStopped"><code class="docutils literal notranslate"><span class="pre">RotatingFileBufferStopped</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.StoppableThread"><code class="docutils literal notranslate"><span class="pre">StoppableThread</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.StoppableThread.stop"><code class="docutils literal notranslate"><span class="pre">StoppableThread.stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.StoppableThread.stopped"><code class="docutils literal notranslate"><span class="pre">StoppableThread.stopped()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.compare_xml"><code class="docutils literal notranslate"><span class="pre">compare_xml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.strip_quotes"><code class="docutils literal notranslate"><span class="pre">strip_quotes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.tokenize_english_document"><code class="docutils literal notranslate"><span class="pre">tokenize_english_document()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ebu_tt_live.html#ebu_tt_live.utils.validate_types_only"><code class="docutils literal notranslate"><span class="pre">validate_types_only()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -53,7 +253,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">EBU-TT-Live Toolkit</a>
+          <a href="#">EBU-TT-Live Toolkit v3.1.0</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -65,7 +265,9 @@
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
-  </ul>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="overview.html" class="btn btn-neutral float-right" title="Overview of the EBU-TT live toolkit." accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -75,6 +277,7 @@
 <h1>Welcome to EBU-TT-Live Toolkit’s documentation!<a class="headerlink" href="#welcome-to-ebu-tt-live-toolkit-s-documentation" title="Link to this heading"></a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview of the EBU-TT live toolkit.</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="nodes_and_carriage_mechanisms.html">Nodes and Carriage Mechanisms</a><ul>

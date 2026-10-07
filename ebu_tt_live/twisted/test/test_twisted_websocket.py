@@ -408,11 +408,11 @@ class TestWSProducerCarriage(TestCase):
         )
         self.protocol1.sendSequenceMessage.assert_called_with(
             sequence_identifier=self.sequence_identifier,
-            payload=doc.encode()
+            payload=doc
         )
         self.protocol2.sendSequenceMessage.assert_called_with(
             sequence_identifier=self.sequence_identifier,
-            payload=doc.encode()
+            payload=doc
         )
 
         self.protocol1.reset_mock()
@@ -426,7 +426,7 @@ class TestWSProducerCarriage(TestCase):
         )
         self.protocol1.sendSequenceMessage.assert_called_with(
             sequence_identifier=self.sequence_identifier,
-            payload=doc.encode()
+            payload=doc
         )
         # However protocol2 should be empty
         self.protocol2.sendSequenceMessage.assert_not_called()
@@ -450,7 +450,7 @@ class TestWSProducerCarriage(TestCase):
 
         self.protocol1.sendSequenceMessage.assert_called_with(
             sequence_identifier=self.sequence_identifier,
-            payload=doc.encode()
+            payload=doc
         )
 
     def test_interface_implementation(self):
